@@ -1,62 +1,78 @@
 /* theme.css */
 :root {
-    /* Base colors - only these need to change */
-    --primary-hue: 270;    /* Purple */
-    --secondary-hue: 180;  /* Teal */
+    --primary-color: rebeccapurple;
+    // --primary-color: royalblue;
+    // --primary-color: seagreen;
+    --secondary-color: seagreen;
+
+    --neutral-100: oklch(from var(--primary-color) 0.97 0.01 h);
+    --neutral-200: oklch(from var(--primary-color) 0.92 0.02 h);
+    --neutral-300: oklch(from var(--primary-color) 0.80 0.03 h);
+    --neutral-400: oklch(from var(--primary-color) 0.60 0.03 h);
+    --neutral-500: oklch(from var(--primary-color) 0.50 0.03 h);
+    --neutral-600: oklch(from var(--primary-color) 0.45 0.03 h);
+    --neutral-700: oklch(from var(--primary-color) 0.37 0.03 h);
+    --neutral-800: oklch(from var(--primary-color) 0.26 0.02 h);
+    --neutral-900: oklch(from var(--primary-color) 0.20 0.015 h);
+
+    --primary-100: hsl(from var(--primary-color) h s calc(l/100*160));
+    --primary-200: hsl(from var(--primary-color) h s calc(l/100*150));
+    --primary-300: hsl(from var(--primary-color) h s calc(l/100*140));
+    --primary-400: hsl(from var(--primary-color) h s calc(l/100*120));
+    --primary-500: hsl(from var(--primary-color) h s l);
+    --primary-600: hsl(from var(--primary-color) h s calc(l/100*70));
+    --primary-700: hsl(from var(--primary-color) h s calc(l/100*50));
+    --primary-800: hsl(from var(--primary-color) h s calc(l/100*30));
+    --primary-900: hsl(from var(--primary-color) h s calc(l/100*20));
     
-    /* Primary color spectrum */
-    --primary: oklch(65% 0.25 var(--primary-hue));
-    --primary-light: oklch(85% 0.2 var(--primary-hue));
-    --primary-dark: oklch(45% 0.25 var(--primary-hue));
-    
-    /* Secondary color spectrum */
-    --secondary: oklch(70% 0.2 var(--secondary-hue));
-    --secondary-light: oklch(85% 0.15 var(--secondary-hue));
-    --secondary-dark: oklch(55% 0.2 var(--secondary-hue));
-  
-    /* Auto-generated neutrals (based on primary hue) */
-    --neutral-100: oklch(98% 0.02 var(--primary-hue));
-    --neutral-200: oklch(90% 0.03 var(--primary-hue));
-    --neutral-300: oklch(80% 0.04 var(--primary-hue));
-    --neutral-400: oklch(70% 0.05 var(--primary-hue));
-    --neutral-500: oklch(60% 0.06 var(--primary-hue));
-    --neutral-600: oklch(50% 0.06 var(--primary-hue));
-    --neutral-700: oklch(40% 0.05 var(--primary-hue));
-    --neutral-800: oklch(30% 0.04 var(--primary-hue));
-    --neutral-900: oklch(20% 0.03 var(--primary-hue));
-  
-    /* Text colors */
-    --text-primary: oklch(20% 0.01 var(--primary-hue));
-    --text-inverse: oklch(98% 0.01 var(--primary-hue));
-  
-    /* Backgrounds */
-    --bg-primary: var(--neutral-100);
-    --bg-secondary: var(--neutral-200);
+    --secondary-100: hsl(from var(--secondary-color) h s calc(l/100*160));
+    --secondary-200: hsl(from var(--secondary-color) h s calc(l/100*150));
+    --secondary-300: hsl(from var(--secondary-color) h s calc(l/100*140));
+    --secondary-400: hsl(from var(--secondary-color) h s calc(l/100*120));
+    --secondary-500: hsl(from var(--secondary-color) h s calc(l/100*100));
+    --secondary-600: hsl(from var(--secondary-color) h s calc(l/100*70));
+    --secondary-700: hsl(from var(--secondary-color) h s calc(l/100*50));
+    --secondary-800: hsl(from var(--secondary-color) h s calc(l/100*30));
+    --secondary-900: hsl(from var(--secondary-color) h s calc(l/100*20));
   }
-  
-  /* Dark mode */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --text-primary: var(--text-inverse);
-      --bg-primary: var(--neutral-900);
-      --bg-secondary: var(--neutral-800);
-      
-      /* Flip lightness values */
-      --primary: oklch(45% 0.2 var(--primary-hue));
-      --primary-light: oklch(55% 0.15 var(--primary-hue));
-      --primary-dark: oklch(35% 0.2 var(--primary-hue));
-    }
+ 
+  .light-mode {
+    --background-color: var(--neutral-100);
+    --foreground-color: var(--neutral-200);
+
+    --text-color: var(--neutral-800);
+    --text-color-inverted: var(--neutral-200);
+
+    --border-color: var(--neutral-600);
+    --hover-color: var(--primary-300);
+
+    --transition: ease .25s;
+
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  } 
+
+  * {
+    transition: var(--transition);
+    border: none!important;
   }
-  
-  /* Component example */
-  .button {
-    background: var(--primary);
-    color: var(--text-inverse);
-    border: 1px solid oklch(50% 0.1 var(--primary-hue));
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    
-    &:hover {
-      background: oklch(from var(--primary) calc(l - 5) c h);
-    }
+
+  .dark-mode {
+    --background-color: var(--neutral-900);
+    --foreground-color: var(--neutral-800);
+
+    --text-color: var(--neutral-200);
+    --text-color-inverted: var(--neutral-200);
+
+    --border-color: var(--neutral-400);
+    --hover-color: var(--primary-600);
+
+    --transition: ease .25s;
+
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
   }
