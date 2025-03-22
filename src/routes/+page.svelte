@@ -1,5 +1,5 @@
 <script>
-	import Button from '$lib/Button.svelte';
+	import Button from '$lib/components/Button.svelte';
 	const variations = ['neutral', 'primary'];
 </script>
 
@@ -9,7 +9,9 @@
 <div class="container">
 	<h2>Test Container</h2>
 	<p>Dies ist ein Test-Container mit den definierten CSS-Variablen.</p>
-	<button>Test Button</button>
+	<button style="border-radius: var(--border-radius-l)">TEST BUTTON</button>
+    <button style="border-radius: var(--border-radius-m)">Another Test Button</button>
+    <button style="border-radius: var(--border-radius-s)">aaaand another test button</button>
 </div>
 
 <div class="variable-display" id="variableDisplay"></div>
@@ -68,9 +70,10 @@
 
 	.container {
 		background-color: var(--foreground-color);
-		padding: 20px;
+		padding: 16px;
 		border: 1px solid var(--border-color);
-		margin-bottom: 20px;
+		margin: 16px;
+        border-radius: var(--border-radius-xl);
 	}
 
 	button {

@@ -2,7 +2,6 @@
 
 <script lang="ts">
     import { Button } from "bits-ui";
-    import "../styles/button.scss";
 </script>
 
 <Button.Root>
