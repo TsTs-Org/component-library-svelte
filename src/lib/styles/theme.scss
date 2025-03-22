@@ -10,11 +10,11 @@
 
     --neutral-100: oklch(from var(--primary-color) 0.97 0.01 h);
     --neutral-200: oklch(from var(--primary-color) 0.92 0.02 h);
-    --neutral-300: oklch(from var(--primary-color) 0.80 0.03 h);
+    --neutral-300: oklch(from var(--primary-color) 0.87 0.02 h);
     --neutral-400: oklch(from var(--primary-color) 0.60 0.03 h);
     --neutral-500: oklch(from var(--primary-color) 0.50 0.03 h);
     --neutral-600: oklch(from var(--primary-color) 0.45 0.03 h);
-    --neutral-700: oklch(from var(--primary-color) 0.37 0.03 h);
+    --neutral-700: oklch(from var(--primary-color) 0.32 0.03 h);
     --neutral-800: oklch(from var(--primary-color) 0.26 0.02 h);
     --neutral-900: oklch(from var(--primary-color) 0.20 0.015 h);
 
@@ -47,21 +47,6 @@
     --padding-m: 0.5rem;
     --padding-l: 0.75rem;
     --padding-xl: 1rem;
-
-    // Default to light mode
-
-    --background-color: var(--neutral-100);
-    --foreground-color: var(--neutral-200);
-  
-    --text-color: var(--neutral-800);
-    --text-color-inverted: var(--neutral-200);
-  
-    --border-color: var(--neutral-300);
-    --hover-color: var(--primary-300);
-  
-    --transition: ease .25s;
-  
-    background-color: var(--background-color);
   }
   
   
@@ -82,6 +67,7 @@
   
     --border-color: var(--neutral-300);
     --hover-color: var(--primary-300);
+    --neutral-hover-color: var(--neutral-300);
   
     --transition: ease .25s;
   
@@ -97,6 +83,7 @@
 
     --border-color: var(--neutral-600);
     --hover-color: var(--primary-600);
+    --neutral-hover-color: var(--neutral-700);
 
     --transition: ease .25s;
     background-color: var(--background-color);
