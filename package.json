@@ -50,6 +50,7 @@
 		"svelte"
 	],
 	"dependencies": {
-		"bits-ui": "^1.3.13"
+		"bits-ui": "^1.3.13",
+		"sass-embedded-linux-x64": "^1.86.0"
 	}
 }
