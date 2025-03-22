@@ -12,6 +12,7 @@
     <NavigationBar>
         <div>
             <Link href="/">Home</Link>
+            <Link href="/colors">Colors</Link>
             <Link href="/components">Components</Link>
         </div>
         <div>
@@ -29,3 +30,18 @@
         {@render children()}
     </div>
 </div>
+
+<style>
+.page {
+    position: relative;
+    height: 100vh;
+    overflow: auto;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+}
+
+.content {
+    height: 100%;
+}
+
+</style>
