@@ -56,7 +56,7 @@
     --text-color: var(--neutral-800);
     --text-color-inverted: var(--neutral-200);
   
-    --border-color: var(--neutral-600);
+    --border-color: var(--neutral-300);
     --hover-color: var(--primary-300);
   
     --transition: ease .25s;
@@ -72,6 +72,22 @@
     padding: 0;
   }
 
+  .light-mode {
+
+    --background-color: var(--neutral-100);
+    --foreground-color: var(--neutral-200);
+  
+    --text-color: var(--neutral-800);
+    --text-color-inverted: var(--neutral-200);
+  
+    --border-color: var(--neutral-300);
+    --hover-color: var(--primary-300);
+  
+    --transition: ease .25s;
+  
+    background-color: var(--background-color);
+  }
+
   .dark-mode {
     --background-color: var(--neutral-900);
     --foreground-color: var(--neutral-800);
@@ -79,7 +95,7 @@
     --text-color: var(--neutral-200);
     --text-color-inverted: var(--neutral-200);
 
-    --border-color: var(--neutral-400);
+    --border-color: var(--neutral-600);
     --hover-color: var(--primary-600);
 
     --transition: ease .25s;

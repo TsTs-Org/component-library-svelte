@@ -4,7 +4,7 @@
 
 <div class="mockup-page">
 
-	<div class="ligh-mode">
+	<div class="light-mode" style="padding: var(--padding-xl)">
 		<h1>CSS Variablen Test - Light Mode</h1>
 		
 		<div class="container">
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	
-	<div class="dark-mode">
+	<div class="dark-mode" style="padding: var(--padding-xl)">
 		<h1>CSS Variablen Test - Dark Mode</h1>
 		
 		<div class="container">

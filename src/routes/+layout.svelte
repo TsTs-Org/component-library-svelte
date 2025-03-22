@@ -3,4 +3,9 @@
     import '$lib/styles/theme.scss';
 </script>
 
-{@render children()}
+<div class="page dark-mode">
+    
+    <div class="content">
+        {@render children()}
+    </div>
+</div>
