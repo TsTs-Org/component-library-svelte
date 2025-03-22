@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Link from '$lib/components/Link.svelte';
+import NavigationBar from '$lib/components/NavigationBar.svelte';
     import Showcase from '$lib/components/Showcase.svelte';
 </script>
 
@@ -11,6 +13,17 @@
     </Showcase>
     <Showcase name="Ghost Button">
         <button>Test button</button>
+    </Showcase>
+    <Showcase name="Navigation Bar">
+        <NavigationBar>
+            <div>
+                <Link href="#">Mock</Link>
+                <Link href="#">Mock</Link>
+            </div>
+        </NavigationBar>
+    </Showcase>
+    <Showcase name="Link">
+        <Link href="#">Mock Link</Link>
     </Showcase>
 </div>
 

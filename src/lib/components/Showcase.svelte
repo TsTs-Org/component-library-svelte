@@ -20,9 +20,11 @@
 <style lang="scss">
 
     .Showcase {
+        box-sizing: border-box;
         width: 100%;
         height: 100%;
         display: flex;
+        padding: var(--padding-xl);
         justify-content: center;
         align-items: center;
         background-color: var(--foreground-color);
