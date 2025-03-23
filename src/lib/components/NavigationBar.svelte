@@ -31,7 +31,7 @@
             background: var(--background-color);
         }
         &.glass {
-            background: transparent;
+            background: rgba($color: #000000, $alpha: .35);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
