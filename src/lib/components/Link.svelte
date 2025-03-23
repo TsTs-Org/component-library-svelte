@@ -51,6 +51,7 @@ a {
     &.colored{
         border: none;
         background-color: var(--primary-color);
+        color: var(--text-color-inverted);
         &:hover {
             background-color: var(--hover-color);
         }

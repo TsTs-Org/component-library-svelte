@@ -1,6 +1,7 @@
 <script lang="ts">
+	import Input from '$lib/components/Input.svelte';
 	import Link from '$lib/components/Link.svelte';
-import NavigationBar from '$lib/components/NavigationBar.svelte';
+    import NavigationBar from '$lib/components/NavigationBar.svelte';
     import Showcase from '$lib/components/Showcase.svelte';
 </script>
 
@@ -45,6 +46,12 @@ import NavigationBar from '$lib/components/NavigationBar.svelte';
             <Link href="#" variant="ghost">Ghost</Link>
             <Link href="#" variant="bordered">Bordered</Link>
             <Link href="#" variant="colored">Colored</Link>
+        </div>
+    </Showcase>
+
+    <Showcase name="Input">
+        <div class="mock-grid">
+            <Input type="text" placeholder="Username" label="Username" description="The name to identify the user"/>
         </div>
     </Showcase>
 </div>

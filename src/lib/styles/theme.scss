@@ -11,7 +11,7 @@
     --neutral-100: oklch(from var(--primary-color) 0.97 0.01 h);
     --neutral-200: oklch(from var(--primary-color) 0.92 0.02 h);
     --neutral-300: oklch(from var(--primary-color) 0.87 0.02 h);
-    --neutral-400: oklch(from var(--primary-color) 0.60 0.03 h);
+    --neutral-400: oklch(from var(--primary-color) 0.70 0.03 h);
     --neutral-500: oklch(from var(--primary-color) 0.50 0.03 h);
     --neutral-600: oklch(from var(--primary-color) 0.45 0.03 h);
     --neutral-700: oklch(from var(--primary-color) 0.32 0.03 h);
@@ -43,6 +43,7 @@
     --border-radius-l: calc(var(--border-radius-s) * 3);
     --border-radius-xl: calc(var(--border-radius-s) * 4);
 
+    --padding-xs: calc(var(--padding-s) / 2); 
     --padding-s: 0.5rem;
     --padding-m: calc(var(--padding-s) * 2);
     --padding-l: calc(var(--padding-s) * 3);
@@ -63,11 +64,12 @@
     --foreground-color: var(--neutral-200);
   
     --text-color: var(--neutral-800);
+    --text-color-muted: var(--neutral-500);
     --text-color-inverted: var(--neutral-200);
   
-    --border-color: var(--neutral-300);
+    --border-color: var(--neutral-400);
     --hover-color: var(--primary-300);
-    --neutral-hover-color: var(--neutral-300);
+    --neutral-hover-color: var(--neutral-400);
   
     --transition: ease .25s;
   
@@ -79,6 +81,7 @@
     --foreground-color: var(--neutral-800);
 
     --text-color: var(--neutral-200);
+    --text-color-muted: var(--neutral-400);
     --text-color-inverted: var(--neutral-200);
 
     --border-color: var(--neutral-600);
