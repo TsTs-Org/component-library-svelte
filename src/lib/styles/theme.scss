@@ -5,7 +5,7 @@
     // --primary-color: rebeccapurple;
     // --primary-color: royalblue;
     --primary-color: seagreen;
-    --secondary-color: seagreen;
+    --secondary-color: royalblue;
 
 
     --neutral-100: oklch(from var(--primary-color) 0.97 0.01 h);
@@ -48,6 +48,11 @@
     --padding-m: calc(var(--padding-s) * 2);
     --padding-l: calc(var(--padding-s) * 3);
     --padding-xl: calc(var(--padding-s) * 4);
+
+    --text-size-s: 1rem;
+    --text-size-m: 1.25rem;
+    --text-size-l: 1.75rem;
+    --text-size-xl: 2.5rem;
   }
   
   

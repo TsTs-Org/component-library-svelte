@@ -21,16 +21,21 @@
 svg {
     fill: var(--text-color);
     &.s {
-        height: 1.25rem;
-        width: 1.25rem;
+        height: var(--text-size-s);
+        width: var(--text-size-s);
     }
+
     &.m {
-        height: 1.75rem;
-        width: 1.75rem;
+        height: var(--text-size-m);
+        width: var(--text-size-m);
     }
     &.l {
-        height: 2.5rem;
-        width: 2.5rem;
+        height: var(--text-size-l);
+        width: var(--text-size-l);
+    }
+    &.xl {
+        height: var(--text-size-xl);
+        width: var(--text-size-xl);
     }
 }
 </style>
