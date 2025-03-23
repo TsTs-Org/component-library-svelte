@@ -28,6 +28,8 @@
         align-items: center;
         background-color: var(--foreground-color);
         padding: var(--padding-l);
+        // Adjust a bit to make the spacing look a bit more natural as the header does not take up space
+        padding-top: calc(var(--padding-l) * 2);
         border-radius: var(--border-radius-l);
         border: 1px solid var(--border-color);
         position: relative;
