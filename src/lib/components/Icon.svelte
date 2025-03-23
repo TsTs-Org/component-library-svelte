@@ -24,7 +24,9 @@
 
 <style lang="scss">
 	svg {
-    	pointer-events: none;
+		pointer-events: none;
+		display: block;
+
 		&.s {
 			height: var(--text-size-s);
 			width: var(--text-size-s);

@@ -40,7 +40,6 @@
 
 		& .icon {
 			width: fit-content;
-			display: contents;
 		}
 		& .content {
 			margin-left: auto;
