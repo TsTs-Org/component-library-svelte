@@ -1,20 +1,63 @@
 <script lang="ts">
-    let { href, children } = $props();
+	import type { Snippet } from "svelte";
+	import type { HTMLAnchorAttributes } from "svelte/elements";
+
+
+    type Variant = 'ghost' | 'bordered' | "colored";
+	type Size = 's' | 'm' | 'l';
+    type Props = { variant?: Variant; size?: Size; icon?: Snippet; children: Snippet } & HTMLAnchorAttributes;
+
+    let {
+        variant = 'ghost',
+        size = 'm',
+        icon,
+        children,
+        ...restProps
+    }: Props = $props();
 </script>
 
-<a href={href}>
+<a class={[variant, size]} {...restProps}>
     {@render children?.()}
 </a>
 
-<style>
-    a {
-        text-decoration: none;
-        color: var(--text-color);
+<style lang="scss">
+a {
+    text-align: center;
+    text-decoration: none;
+    height: fit-content;
+    color: var(--text-color);
+    padding: var(--padding-m);
+    border-radius: var(--border-radius-m);
+    font-size: .9rem;
+    &.s {
         padding: var(--padding-s);
-        font-size: .9rem;
         border-radius: var(--border-radius-s);
     }
-    a:hover {
-        background-color: var(--neutral-hover-color);
+    &.l {
+        padding: var(--padding-l);
+        font-size: 1rem;
+        border-radius: var(--border-radius-l);
     }
+
+    &.ghost{
+        background-color: none;
+        border: none;
+    }
+
+    &.bordered{
+        border: 1px solid var(--border-color);
+    }
+    
+    &.colored{
+        border: none;
+        background-color: var(--primary-color);
+        &:hover {
+            background-color: var(--hover-color);
+        }
+    }
+}
+a:hover {
+    background-color: var(--neutral-hover-color);
+    cursor: pointer;
+}
 </style>

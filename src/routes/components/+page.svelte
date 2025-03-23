@@ -26,14 +26,26 @@ import NavigationBar from '$lib/components/NavigationBar.svelte';
     <Showcase name="Navigation Bar">
         <NavigationBar>
             <div>
-                <Link href="#">Mock</Link>
-                <Link href="#">Mock</Link>
+                <Link href="#" size="s">Mock</Link>
+                <Link href="#" size="s">Mock</Link>
             </div>
         </NavigationBar>
     </Showcase>
 
-    <Showcase name="Link">
-        <Link href="#">Mock Link</Link>
+    <Showcase name="Link sizes">
+        <div class="mock-grid">
+            <Link href="#" size="s" variant="colored">Link S</Link>
+            <Link href="#" size="m" variant="colored">Link M</Link>
+            <Link href="#" size="l" variant="colored">Link L</Link>
+        </div>
+    </Showcase>
+
+    <Showcase name="Link variants">
+        <div class="mock-grid">
+            <Link href="#" variant="ghost">Ghost</Link>
+            <Link href="#" variant="bordered">Bordered</Link>
+            <Link href="#" variant="colored">Colored</Link>
+        </div>
     </Showcase>
 </div>
 
@@ -52,7 +64,6 @@ import NavigationBar from '$lib/components/NavigationBar.svelte';
     display: grid;
     width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-    grid-auto-rows: 5rem;
     gap: var(--padding-m);
 }
 
