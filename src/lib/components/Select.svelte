@@ -134,6 +134,7 @@ button:focus {
     position: absolute;
     background-color: var(--foreground-color);
     width: 100%;
+    min-width: fit-content;
     box-sizing: border-box;
     padding: var(--padding-xs);
     border-radius: var(--border-radius-s);

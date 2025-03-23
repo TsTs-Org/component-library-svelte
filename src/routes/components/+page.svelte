@@ -125,8 +125,8 @@
 		height: 100vh;
 		box-sizing: border-box;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-		grid-auto-rows: 15rem;
+		grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+		grid-auto-rows: 20rem;
 		gap: var(--padding-l);
 		padding: var(--padding-l);
 	}
@@ -134,7 +134,7 @@
 	.mock-grid {
 		display: grid;
 		width: 100%;
-		grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 		gap: var(--padding-m);
 		place-items: center;
 	}
