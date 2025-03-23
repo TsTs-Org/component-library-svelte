@@ -66,13 +66,9 @@
         {/if}
     
         {#if open}
-            <Icon size="s" style="fill: var(--text-color-muted)">
-                <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/>
-            </Icon>
+            <Icon iconName="arrowUp" size="s" style="fill: var(--text-color-muted)" />
         {:else}
-            <Icon size="s" style="fill: var(--text-color-muted)">
-                <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/>
-            </Icon>
+            <Icon iconName="arrowDown" size="s" style="fill: var(--text-color-muted)" />
         {/if}
     </button>
 
