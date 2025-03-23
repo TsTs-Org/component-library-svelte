@@ -10,7 +10,7 @@
     a {
         text-decoration: none;
         color: var(--text-color);
-        padding: var(--padding-m);
+        padding: var(--padding-s);
         font-size: .9rem;
         border-radius: var(--border-radius-s);
     }

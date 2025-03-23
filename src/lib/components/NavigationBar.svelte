@@ -16,7 +16,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: var(--padding-l) var(--padding-xl);
+        padding: var(--padding-m) var(--padding-l);
         background: var(--background-color);
         border-bottom: 1px solid var(--border-color);
     }

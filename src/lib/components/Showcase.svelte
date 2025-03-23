@@ -24,10 +24,10 @@
         width: 100%;
         height: 100%;
         display: flex;
-        padding: var(--padding-xl);
         justify-content: center;
         align-items: center;
         background-color: var(--foreground-color);
+        padding: var(--padding-l);
         border-radius: var(--border-radius-l);
         border: 1px solid var(--border-color);
         position: relative;
@@ -35,11 +35,11 @@
 
     .header {
         position: absolute;
-        top: var(--padding-xl);
-        left: var(--padding-xl);
+        top: var(--padding-l);
+        left: var(--padding-l);
         display: flex;
         justify-content: space-between;
-        width: calc(100% - var(--padding-xl) * 2);
+        width: calc(100% - var(--padding-l) * 2);
         button {
             background-color: transparent;
             border: none;

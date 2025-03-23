@@ -38,15 +38,15 @@
     --secondary-800: hsl(from var(--secondary-color) h s calc(l/100*30));
     --secondary-900: hsl(from var(--secondary-color) h s calc(l/100*20));
 
-    --border-radius-s: 0.25rem;
-    --border-radius-m: 0.375rem;
-    --border-radius-l: 0.5rem;
-    --border-radius-xl: 0.75rem;
+    --border-radius-s: 0.5rem;
+    --border-radius-m: calc(var(--border-radius-s) * 2);
+    --border-radius-l: calc(var(--border-radius-s) * 3);
+    --border-radius-xl: calc(var(--border-radius-s) * 4);
 
-    --padding-s: 0.25rem;
-    --padding-m: 0.5rem;
-    --padding-l: 0.75rem;
-    --padding-xl: 1rem;
+    --padding-s: 0.5rem;
+    --padding-m: calc(var(--padding-s) * 2);
+    --padding-l: calc(var(--padding-s) * 3);
+    --padding-xl: calc(var(--padding-s) * 4);
   }
   
   

@@ -34,7 +34,7 @@ import NavigationBar from '$lib/components/NavigationBar.svelte';
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     grid-auto-rows: 15rem;
-    gap: var(--padding-xl);
-    padding: var(--padding-xl);
+    gap: var(--padding-l);
+    padding: var(--padding-l);
 }
 </style>
