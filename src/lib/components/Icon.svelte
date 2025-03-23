@@ -1,37 +1,47 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import type { SVGAttributes } from "svelte/elements";
+	import type { BuiltinIcon } from "$lib/utils/builtinIcons.ts";
+	import { getIcon } from "$lib/utils/builtinIcons.js";
 
-	type Size = 's' | 'm' | 'l';
-    type Props = { size?: Size; icon?: Snippet; children: Snippet } & SVGAttributes<any>;
+	type Size = "s" | "m" | "l";
 
-    let {
-        size = 'm',
-        icon,
-        children,
-        ...restProps
-    }: Props = $props();
+	type EitherChildrenOrBuiltinIcon =
+		| { children: Snippet; iconName?: never }
+		| { children?: never; iconName: BuiltinIcon };
+	type Props = { size?: Size } & EitherChildrenOrBuiltinIcon & SVGAttributes<any>;
+
+	let { size = "m", iconName, children, ...restProps }: Props = $props();
 </script>
 
 <svg class={[size]} {...restProps} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-    {@render children?.()}
+	{#if !!children}
+		{@render children?.()}
+	{:else if !!iconName}
+		{@html getIcon(iconName)}
+	{/if}
 </svg>
 
-<style lang="scss">
-svg {
+<style>
+	svg {
+		fill: var(--text-color);
     pointer-events: none;
-    fill: var(--text-color);
-    &.s {
-        height: 1.25rem;
-        width: 1.25rem;
-    }
-    &.m {
-        height: 1.75rem;
-        width: 1.75rem;
-    }
-    &.l {
-        height: 2.5rem;
-        width: 2.5rem;
-    }
-}
+		&.s {
+			height: var(--text-size-s);
+			width: var(--text-size-s);
+		}
+
+		&.m {
+			height: var(--text-size-m);
+			width: var(--text-size-m);
+		}
+		&.l {
+			height: var(--text-size-l);
+			width: var(--text-size-l);
+		}
+		&.xl {
+			height: var(--text-size-xl);
+			width: var(--text-size-xl);
+		}
+	}
 </style>
