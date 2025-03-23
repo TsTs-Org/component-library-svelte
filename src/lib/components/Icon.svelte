@@ -19,6 +19,7 @@
 
 <style lang="scss">
 svg {
+    pointer-events: none;
     fill: var(--text-color);
     &.s {
         height: 1.25rem;
