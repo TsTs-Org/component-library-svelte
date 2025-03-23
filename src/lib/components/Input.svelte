@@ -2,7 +2,6 @@
 	import type { Snippet } from "svelte";
 	import type { HTMLInputAttributes } from "svelte/elements";
 
-
     type Variant = 'ghost' | 'bordered' | "colored";
     type Props = { variant?: Variant; label?: string, description?: string, icon?: Snippet; } & HTMLInputAttributes;
 

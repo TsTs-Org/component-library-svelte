@@ -25,10 +25,11 @@
     </Showcase>
 
     <Showcase name="Navigation Bar">
-        <NavigationBar>
+        <NavigationBar style="z-index: 1;">
             <div>
-                <Link href="#" size="s">Mock</Link>
-                <Link href="#" size="s">Mock</Link>
+                <Link href="#" size="s">Home</Link>
+                <Link href="#" size="s">Components</Link>
+                <Link href="#" size="s">About</Link>
             </div>
         </NavigationBar>
     </Showcase>

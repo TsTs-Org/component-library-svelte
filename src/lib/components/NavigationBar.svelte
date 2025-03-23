@@ -1,12 +1,21 @@
 <script lang="ts">
-    let { children } = $props();
+	import type { Snippet } from "svelte";
+	import type { HTMLAttributes } from "svelte/elements";
+
+    type Variant = 'background' | 'glass';
+    type Props = { variant?: Variant, children?: Snippet } & HTMLAttributes<any>;
+    let { 
+        variant = 'background',
+        children,
+        ...restProps
+    }: Props = $props();
 </script>
 
-<nav>
+<nav class={[variant]} {...restProps}>
     {@render children?.()}
 </nav>
 
-<style>
+<style lang="scss">
     nav {
         position: sticky;
         top: 0;
@@ -17,7 +26,14 @@
         align-items: center;
         justify-content: space-between;
         padding: var(--padding-m) var(--padding-l);
-        background: var(--background-color);
         border-bottom: 1px solid var(--border-color);
+        &.background {
+            background: var(--background-color);
+        }
+        &.glass {
+            background: transparent;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
     }
 </style>

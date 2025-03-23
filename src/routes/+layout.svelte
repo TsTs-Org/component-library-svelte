@@ -9,7 +9,7 @@
 
 <div class={getMode() + "-mode page"}>
     
-    <NavigationBar>
+    <NavigationBar variant="glass">
         <div>
             <Link href="/">Home</Link>
             <Link href="/colors">Colors</Link>
