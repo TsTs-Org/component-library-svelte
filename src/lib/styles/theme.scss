@@ -1,98 +1,95 @@
 /* theme.css */
 :root {
-    font-family: sans-serif;
+	font-family: sans-serif;
 
-    // --primary-color: rebeccapurple;
-    // --primary-color: royalblue;
-    --primary-color: seagreen;
-    --secondary-color: royalblue;
+	// --primary-color: rebeccapurple;
+	// --primary-color: royalblue;
+	--primary-color: seagreen;
+	--secondary-color: royalblue;
 
+	--neutral-100: oklch(from var(--primary-color) 0.97 0.01 h);
+	--neutral-200: oklch(from var(--primary-color) 0.92 0.02 h);
+	--neutral-300: oklch(from var(--primary-color) 0.87 0.02 h);
+	--neutral-400: oklch(from var(--primary-color) 0.7 0.03 h);
+	--neutral-500: oklch(from var(--primary-color) 0.5 0.03 h);
+	--neutral-600: oklch(from var(--primary-color) 0.45 0.03 h);
+	--neutral-700: oklch(from var(--primary-color) 0.32 0.03 h);
+	--neutral-800: oklch(from var(--primary-color) 0.26 0.02 h);
+	--neutral-900: oklch(from var(--primary-color) 0.2 0.015 h);
 
-    --neutral-100: oklch(from var(--primary-color) 0.97 0.01 h);
-    --neutral-200: oklch(from var(--primary-color) 0.92 0.02 h);
-    --neutral-300: oklch(from var(--primary-color) 0.87 0.02 h);
-    --neutral-400: oklch(from var(--primary-color) 0.70 0.03 h);
-    --neutral-500: oklch(from var(--primary-color) 0.50 0.03 h);
-    --neutral-600: oklch(from var(--primary-color) 0.45 0.03 h);
-    --neutral-700: oklch(from var(--primary-color) 0.32 0.03 h);
-    --neutral-800: oklch(from var(--primary-color) 0.26 0.02 h);
-    --neutral-900: oklch(from var(--primary-color) 0.20 0.015 h);
+	--primary-100: hsl(from var(--primary-color) h s calc(l/100 * 160));
+	--primary-200: hsl(from var(--primary-color) h s calc(l/100 * 150));
+	--primary-300: hsl(from var(--primary-color) h s calc(l/100 * 140));
+	--primary-400: hsl(from var(--primary-color) h s calc(l/100 * 120));
+	--primary-500: hsl(from var(--primary-color) h s l);
+	--primary-600: hsl(from var(--primary-color) h s calc(l/100 * 70));
+	--primary-700: hsl(from var(--primary-color) h s calc(l/100 * 50));
+	--primary-800: hsl(from var(--primary-color) h s calc(l/100 * 30));
+	--primary-900: hsl(from var(--primary-color) h s calc(l/100 * 20));
 
-    --primary-100: hsl(from var(--primary-color) h s calc(l/100*160));
-    --primary-200: hsl(from var(--primary-color) h s calc(l/100*150));
-    --primary-300: hsl(from var(--primary-color) h s calc(l/100*140));
-    --primary-400: hsl(from var(--primary-color) h s calc(l/100*120));
-    --primary-500: hsl(from var(--primary-color) h s l);
-    --primary-600: hsl(from var(--primary-color) h s calc(l/100*70));
-    --primary-700: hsl(from var(--primary-color) h s calc(l/100*50));
-    --primary-800: hsl(from var(--primary-color) h s calc(l/100*30));
-    --primary-900: hsl(from var(--primary-color) h s calc(l/100*20));
-    
-    --secondary-100: hsl(from var(--secondary-color) h s calc(l/100*160));
-    --secondary-200: hsl(from var(--secondary-color) h s calc(l/100*150));
-    --secondary-300: hsl(from var(--secondary-color) h s calc(l/100*140));
-    --secondary-400: hsl(from var(--secondary-color) h s calc(l/100*120));
-    --secondary-500: hsl(from var(--secondary-color) h s l);
-    --secondary-600: hsl(from var(--secondary-color) h s calc(l/100*70));
-    --secondary-700: hsl(from var(--secondary-color) h s calc(l/100*50));
-    --secondary-800: hsl(from var(--secondary-color) h s calc(l/100*30));
-    --secondary-900: hsl(from var(--secondary-color) h s calc(l/100*20));
+	--secondary-100: hsl(from var(--secondary-color) h s calc(l/100 * 160));
+	--secondary-200: hsl(from var(--secondary-color) h s calc(l/100 * 150));
+	--secondary-300: hsl(from var(--secondary-color) h s calc(l/100 * 140));
+	--secondary-400: hsl(from var(--secondary-color) h s calc(l/100 * 120));
+	--secondary-500: hsl(from var(--secondary-color) h s l);
+	--secondary-600: hsl(from var(--secondary-color) h s calc(l/100 * 70));
+	--secondary-700: hsl(from var(--secondary-color) h s calc(l/100 * 50));
+	--secondary-800: hsl(from var(--secondary-color) h s calc(l/100 * 30));
+	--secondary-900: hsl(from var(--secondary-color) h s calc(l/100 * 20));
 
-    --border-radius-s: 0.5rem;
-    --border-radius-m: calc(var(--border-radius-s) * 2);
-    --border-radius-l: calc(var(--border-radius-s) * 3);
-    --border-radius-xl: calc(var(--border-radius-s) * 4);
+	--border-radius-s: 0.5rem;
+	--border-radius-m: calc(var(--border-radius-s) * 2);
+	--border-radius-l: calc(var(--border-radius-s) * 3);
+	--border-radius-xl: calc(var(--border-radius-s) * 4);
 
-    --padding-xs: calc(var(--padding-s) / 2); 
-    --padding-s: 0.5rem;
-    --padding-m: calc(var(--padding-s) * 2);
-    --padding-l: calc(var(--padding-s) * 3);
-    --padding-xl: calc(var(--padding-s) * 4);
+	--padding-xs: calc(var(--padding-s) / 2);
+	--padding-s: 0.5rem;
+	--padding-m: calc(var(--padding-s) * 2);
+	--padding-l: calc(var(--padding-s) * 3);
+	--padding-xl: calc(var(--padding-s) * 4);
 
-    --text-size-s: 1rem;
-    --text-size-m: 1.25rem;
-    --text-size-l: 1.75rem;
-    --text-size-xl: 2.5rem;
-  }
-  
-  
-  * {
-    transition: var(--transition);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-  }
+	--text-size-s: 1rem;
+	--text-size-m: 1.25rem;
+	--text-size-l: 1.75rem;
+	--text-size-xl: 2.5rem;
+}
 
-  .light-mode {
+* {
+	transition: var(--transition);
+	color: var(--text-color);
+	margin: 0;
+	padding: 0;
+}
 
-    --background-color: var(--neutral-100);
-    --foreground-color: var(--neutral-200);
-  
-    --text-color: var(--neutral-800);
-    --text-color-muted: var(--neutral-500);
-    --text-color-inverted: var(--neutral-200);
-  
-    --border-color: var(--neutral-400);
-    --hover-color: var(--primary-300);
-    --neutral-hover-color: var(--neutral-400);
-  
-    --transition: ease .25s;
-  
-    background-color: var(--background-color);
-  }
+.light-mode {
+	--background-color: var(--neutral-100);
+	--foreground-color: var(--neutral-200);
 
-  .dark-mode {
-    --background-color: var(--neutral-900);
-    --foreground-color: var(--neutral-800);
+	--text-color: var(--neutral-800);
+	--text-color-muted: var(--neutral-500);
+	--text-color-inverted: var(--neutral-200);
 
-    --text-color: var(--neutral-200);
-    --text-color-muted: var(--neutral-400);
-    --text-color-inverted: var(--neutral-200);
+	--border-color: var(--neutral-400);
+	--hover-color: var(--primary-300);
+	--neutral-hover-color: var(--neutral-400);
 
-    --border-color: var(--neutral-600);
-    --hover-color: var(--primary-600);
-    --neutral-hover-color: var(--neutral-700);
+	--transition: ease 0.25s;
 
-    --transition: ease .25s;
-    background-color: var(--background-color);
-  }
+	background-color: var(--background-color);
+}
+
+.dark-mode {
+	--background-color: var(--neutral-900);
+	--foreground-color: var(--neutral-800);
+
+	--text-color: var(--neutral-200);
+	--text-color-muted: var(--neutral-400);
+	--text-color-inverted: var(--neutral-200);
+
+	--border-color: var(--neutral-600);
+	--hover-color: var(--primary-600);
+	--neutral-hover-color: var(--neutral-700);
+
+	--transition: ease 0.25s;
+	background-color: var(--background-color);
+}

@@ -1,125 +1,136 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import Icon from '$lib/components/Icon.svelte';
-	import Input from '$lib/components/Input.svelte';
-	import Link from '$lib/components/Link.svelte';
-    import NavigationBar from '$lib/components/NavigationBar.svelte';
-    import Showcase from '$lib/components/Showcase.svelte';
+	import Button from "$lib/components/Button.svelte";
+	import Icon from "$lib/components/Icon.svelte";
+	import Input from "$lib/components/Input.svelte";
+	import Link from "$lib/components/Link.svelte";
+	import NavigationBar from "$lib/components/NavigationBar.svelte";
+	import Showcase from "$lib/components/Showcase.svelte";
 </script>
 
-<div class="components-page" >
-    <Showcase name="Border Radius">
-        <div class="mock-grid">
-            <div class="mock-box fixed-size" style="border-radius: var(--border-radius-s);">S</div>
-            <div class="mock-box fixed-size" style="border-radius: var(--border-radius-m);">M</div>
-            <div class="mock-box fixed-size" style="border-radius: var(--border-radius-l);">L</div>
-            <div class="mock-box fixed-size" style="border-radius: var(--border-radius-xl);">XL</div>
-        </div>
-    </Showcase>
+<div class="components-page">
+	<Showcase name="Border Radius">
+		<div class="mock-grid">
+			<div class="mock-box fixed-size" style="border-radius: var(--border-radius-s);">S</div>
+			<div class="mock-box fixed-size" style="border-radius: var(--border-radius-m);">M</div>
+			<div class="mock-box fixed-size" style="border-radius: var(--border-radius-l);">L</div>
+			<div class="mock-box fixed-size" style="border-radius: var(--border-radius-xl);">XL</div>
+		</div>
+	</Showcase>
 
-    <Showcase name="Padding">
-        <div class="mock-grid">
-            <div class="mock-box" style="padding: var(--padding-s)">S</div>
-            <div class="mock-box" style="padding: var(--padding-m)">M</div>
-            <div class="mock-box" style="padding: var(--padding-l)">L</div>
-            <div class="mock-box" style="padding: var(--padding-xl)">XL</div>
-        </div>
-    </Showcase>
+	<Showcase name="Padding">
+		<div class="mock-grid">
+			<div class="mock-box" style="padding: var(--padding-s)">S</div>
+			<div class="mock-box" style="padding: var(--padding-m)">M</div>
+			<div class="mock-box" style="padding: var(--padding-l)">L</div>
+			<div class="mock-box" style="padding: var(--padding-xl)">XL</div>
+		</div>
+	</Showcase>
 
-    <Showcase name="Navigation Bar">
-        <NavigationBar style="z-index: 1;">
-            <div>
-                <Link href="#" size="s">Home</Link>
-                <Link href="#" size="s">Components</Link>
-                <Link href="#" size="s">About</Link>
-            </div>
-        </NavigationBar>
-    </Showcase>
+	<Showcase name="Navigation Bar">
+		<NavigationBar style="z-index: 1;">
+			<div>
+				<Link href="#" size="s">Home</Link>
+				<Link href="#" size="s">Components</Link>
+				<Link href="#" size="s">About</Link>
+			</div>
+		</NavigationBar>
+	</Showcase>
 
-    <Showcase name="Link sizes">
-        <div class="mock-grid">
-            <Link href="#" size="s" variant="colored">Link S</Link>
-            <Link href="#" size="m" variant="colored">Link M</Link>
-            <Link href="#" size="l" variant="colored">Link L</Link>
-        </div>
-    </Showcase>
+	<Showcase name="Link sizes">
+		<div class="mock-grid">
+			<Link href="#" size="s" variant="colored">Link S</Link>
+			<Link href="#" size="m" variant="colored">Link M</Link>
+			<Link href="#" size="l" variant="colored">Link L</Link>
+		</div>
+	</Showcase>
 
-    <Showcase name="Link variants">
-        <div class="mock-grid">
-            <Link href="#" variant="ghost">Ghost</Link>
-            <Link href="#" variant="bordered">Bordered</Link>
-            <Link href="#" variant="colored">Colored</Link>
-        </div>
-    </Showcase>
+	<Showcase name="Link variants">
+		<div class="mock-grid">
+			<Link href="#" variant="ghost">Ghost</Link>
+			<Link href="#" variant="bordered">Bordered</Link>
+			<Link href="#" variant="colored">Colored</Link>
+		</div>
+	</Showcase>
 
-    <Showcase name="Input">
-        <div class="mock-grid">
-            <Input type="text" placeholder="Username" label="Username" description="The name to identify the user"/>
-        </div>
-    </Showcase>
+	<Showcase name="Input">
+		<div class="mock-grid">
+			<Input
+				type="text"
+				placeholder="Username"
+				label="Username"
+				description="The name to identify the user"
+			/>
+		</div>
+	</Showcase>
 
-    <Showcase name="Icons">
-        <div class="mock-grid">
-            <Icon size="s">
-                <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
-            </Icon>
-            <Icon size="m">
-                <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
-            </Icon>
-            <Icon size="l">
-                <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
-            </Icon>
-            <Icon size="s" iconName="x"></Icon>
-        </div>
-    </Showcase>
+	<Showcase name="Icons">
+		<div class="mock-grid">
+			<Icon size="s">
+				<path
+					d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
+				/>
+			</Icon>
+			<Icon size="m">
+				<path
+					d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
+				/>
+			</Icon>
+			<Icon size="l">
+				<path
+					d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
+				/>
+			</Icon>
+			<Icon size="s" iconName="x"></Icon>
+		</div>
+	</Showcase>
 
-    <Showcase name="Buttons">
-        <div class="mock-grid">
-            <Button variant="primary" size="s">Primary</Button>
-            <Button variant="bordered" size="m">Secondary</Button>
-            <Button size="l">
-                {#snippet icon()}
-                <Icon size="l">
-                    <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
-                </Icon>
-                {/snippet}
-                With Icon
-            </Button>
-        </div>
-    </Showcase>
-
+	<Showcase name="Buttons">
+		<div class="mock-grid">
+			<Button variant="primary" size="s">Primary</Button>
+			<Button variant="bordered" size="m">Secondary</Button>
+			<Button size="l">
+				{#snippet icon()}
+					<Icon size="l">
+						<path
+							d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
+						/>
+					</Icon>
+				{/snippet}
+				With Icon
+			</Button>
+		</div>
+	</Showcase>
 </div>
 
 <style lang="scss">
-.components-page {
-    height: 100vh;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    grid-auto-rows: 15rem;
-    gap: var(--padding-l);
-    padding: var(--padding-l);
-}
+	.components-page {
+		height: 100vh;
+		box-sizing: border-box;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+		grid-auto-rows: 15rem;
+		gap: var(--padding-l);
+		padding: var(--padding-l);
+	}
 
-.mock-grid {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-    gap: var(--padding-m);
-    place-items: center;
-}
+	.mock-grid {
+		display: grid;
+		width: 100%;
+		grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+		gap: var(--padding-m);
+		place-items: center;
+	}
 
-.mock-box {
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-m);
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &.fixed-size {
-        width: 5rem;
-        height: 5rem;
-    }
-}
-
+	.mock-box {
+		border: 1px solid var(--border-color);
+		border-radius: var(--border-radius-m);
+		margin: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		&.fixed-size {
+			width: 5rem;
+			height: 5rem;
+		}
+	}
 </style>

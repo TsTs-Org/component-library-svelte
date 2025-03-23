@@ -1,19 +1,18 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import type { Snippet } from "svelte";
+	import type { HTMLButtonAttributes } from "svelte/elements";
 
-	type Variant = 'primary' | 'bordered';
-	type Size = 's' | 'm' | 'l';
+	type Variant = "primary" | "bordered";
+	type Size = "s" | "m" | "l";
 
-	type Props = { variant?: Variant; size?: Size; icon?: Snippet; children: Snippet } & HTMLButtonAttributes;
+	type Props = {
+		variant?: Variant;
+		size?: Size;
+		icon?: Snippet;
+		children: Snippet;
+	} & HTMLButtonAttributes;
 
-	let {
-		variant = 'primary',
-		size = 'm',
-		icon,
-		children,
-		...restProps
-	}: Props = $props();
+	let { variant = "primary", size = "m", icon, children, ...restProps }: Props = $props();
 </script>
 
 <button class={[variant, size]} {...restProps}>
@@ -26,7 +25,6 @@
 </button>
 
 <style lang="scss">
-
 	button {
 		width: 100%;
 		min-width: fit-content;

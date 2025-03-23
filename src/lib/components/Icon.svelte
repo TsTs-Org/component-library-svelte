@@ -1,17 +1,17 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
-	import type { SVGAttributes } from 'svelte/elements';
-	import type { BuiltinIcon } from '$lib/utils/builtinIcons.ts';
-	import { getIcon } from '$lib/utils/builtinIcons.js';
+	import type { Snippet } from "svelte";
+	import type { SVGAttributes } from "svelte/elements";
+	import type { BuiltinIcon } from "$lib/utils/builtinIcons.ts";
+	import { getIcon } from "$lib/utils/builtinIcons.js";
 
-	type Size = 's' | 'm' | 'l';
+	type Size = "s" | "m" | "l";
 
 	type EitherChildrenOrBuiltinIcon =
 		| { children: Snippet; iconName?: never }
 		| { children?: never; iconName: BuiltinIcon };
 	type Props = { size?: Size } & EitherChildrenOrBuiltinIcon & SVGAttributes<any>;
 
-	let { size = 'm', iconName, children, ...restProps }: Props = $props();
+	let { size = "m", iconName, children, ...restProps }: Props = $props();
 </script>
 
 <svg class={[size]} {...restProps} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
