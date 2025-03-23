@@ -22,9 +22,10 @@
 	{/if}
 </svg>
 
-<style lang="scss">
+<style>
 	svg {
 		fill: var(--text-color);
+    pointer-events: none;
 		&.s {
 			height: var(--text-size-s);
 			width: var(--text-size-s);

@@ -5,6 +5,7 @@
 	import Link from "$lib/components/Link.svelte";
 	import NavigationBar from "$lib/components/NavigationBar.svelte";
 	import Showcase from "$lib/components/Showcase.svelte";
+  import Select from '$lib/components/Select.svelte';
 </script>
 
 <div class="components-page">
@@ -62,6 +63,23 @@
 			/>
 		</div>
 	</Showcase>
+
+  <Showcase name="Select">
+      <div class="mock-grid">
+          <Select 
+              placeholder="Select a fruit..." 
+              label="Fruits" 
+              description="Dropdown to select a fruit" 
+              options={[
+                  { value: 'apple', label: 'Apple' },
+                  { value: 'banana', label: 'Banana' },
+                  { value: 'orange', label: 'Orange' },
+                  { value: 'grape', label: 'Grape' },
+                  { value: 'kiwi', label: 'Kiwi' },
+              ]}
+          />
+      </div>
+  </Showcase>
 
 	<Showcase name="Icons">
 		<div class="mock-grid">
