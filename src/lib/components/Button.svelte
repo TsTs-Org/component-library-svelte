@@ -44,6 +44,7 @@
 		}
 		& .content {
 			margin-left: auto;
+			color: var(--text-color-inverted);
 		}
 
 		&.s {
@@ -57,9 +58,8 @@
 			gap: var(--padding-m);
 		}
 		&.l {
-			padding: var(--padding-l);
-			border-radius: var(--border-radius-m);
 			padding: var(--padding-m);
+			border-radius: var(--border-radius-m);
 			gap: var(--padding-m);
 			font-size: var(--text-size-m);
 			font-weight: 600;
@@ -73,6 +73,9 @@
 			border: 1px solid var(--border-color);
 			&:hover {
 				background-color: var(--neutral-hover-color);
+			}
+			.content {
+				color: var(--text-color);
 			}
 		}
 

@@ -50,9 +50,6 @@
 			background-color: transparent;
 			border: none;
 			cursor: pointer;
-			svg {
-				fill: var(--text-color);
-			}
 		}
 	}
 </style>
