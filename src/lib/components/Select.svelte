@@ -3,8 +3,7 @@
 	import type { HTMLAttributes } from "svelte/elements";
 	import Icon from "./Icon.svelte";
 
-    let open = $state(false);
-
+    type Variant = "ghost" | "bordered";
     type Option = {
         value: string,
         label: string
@@ -14,6 +13,7 @@
         value?: string,
         label?: string,
         description?: string,
+        variant?: Variant,
         options: Option[],
         placeholder: string 
     } & HTMLAttributes<any>
@@ -21,17 +21,25 @@
             value = $bindable(),
             label,
             description,
+            variant = "bordered",
             options,
             placeholder,
             children,
             ...restProps
         }: Props = $props();
         
+    let open = $state(false);
     let selectedOption = $state(options.find(option => option.value === value));
 
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
+    
+    
     const selectOption = (option: Option) => {
         selectedOption = option;
         value = option.value;
+        dispatch('change', { value });
         open = false;
     }
 
@@ -50,7 +58,7 @@
         <label>{label}</label>
     {/if}
 
-    <button {...restProps} onclick="{() => open = !open}" class="trigger">
+    <button class={["Trigger", variant]} {...restProps} onclick="{() => open = !open}">
         {#if selectedOption}
             {selectedOption.label}
         {:else}
@@ -66,7 +74,6 @@
                 <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/>
             </Icon>
         {/if}
-
     </button>
 
     {#if open}
@@ -98,7 +105,7 @@ p {
     color: var(--text-color-muted);
     margin-left: var(--padding-xs);
 }
-.trigger {
+.Trigger {
     background-color: transparent;
     outline: none;
     width: 100%;
@@ -109,10 +116,15 @@ p {
     align-items: center;
     justify-content: space-between;
     color: var(--text-color);
-    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-s);
     padding: var(--padding-m);
     margin-block: var(--padding-xs);
+    &.bordered {
+        border: 1px solid var(--border-color);
+    }
+    &.ghost {
+        border: none;
+    }
 }
 button:focus {
     border-color: var(--primary-color);
