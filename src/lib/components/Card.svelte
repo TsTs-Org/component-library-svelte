@@ -1,0 +1,109 @@
+<script lang="ts">
+	import type { Snippet } from "svelte";
+
+	type Size = "s" | "m" | "l";
+
+	type Props = {
+		size?: Size;
+		title?: Snippet;
+		iconLeft?: Snippet<[Size]>;
+		iconRight?: Snippet<[Size]>;
+		children?: Snippet;
+	};
+
+	let { size = "m", title, iconLeft, iconRight, children }: Props = $props();
+</script>
+
+<!-- TODO: min-width that is calculated from header-gap -->
+<div class="card-container">
+	<div class={["card", size]}>
+		<div class="header">
+			<!-- TODO: create component to hover ellipsed text to show full text 
+			 & fix for buggy ellipsis (for example when setting width of card to 6rem with title and icon on the right)
+			-->
+			{#if !!iconLeft}
+				<div>
+					{@render iconLeft?.(size)}
+				</div>
+			{/if}
+			<span class="title">{@render title?.()}</span>
+			{#if !!iconRight}
+				<div class="icon-wrapper--right">
+					{@render iconRight?.(size)}
+				</div>
+			{/if}
+		</div>
+		{@render children?.()}
+	</div>
+</div>
+
+<style lang="scss">
+	.card-container {
+		container-type: size;
+		width: 100%;
+		height: 100%;
+	}
+
+	.card {
+		width: 100%;
+		height: 100%;
+		border: 1px solid var(--border-color);
+		box-sizing: border-box;
+		background-color: var(--foreground-color);
+
+		/* TODO: xs variant */
+
+		/* FIXME: title-font-size */
+		&.s {
+			border-radius: var(--border-radius-s);
+			padding: var(--padding-s);
+			& .header {
+				gap: var(--padding-xs);
+				margin-bottom: var(--padding-xs);
+				& .title {
+					font-size: var(--text-size-s);
+				}
+			}
+		}
+
+		&.m {
+			border-radius: var(--border-radius-m);
+			padding: var(--padding-m);
+			& .header {
+				gap: var(--padding-s);
+				margin-bottom: var(--padding-s);
+				& .title {
+					font-size: var(--text-size-m);
+				}
+			}
+		}
+
+		&.l {
+			border-radius: var(--border-radius-l);
+			padding: var(--padding-l);
+			& .header {
+				gap: var(--padding-m);
+				margin-bottom: var(--padding-m);
+				& .title {
+					font-size: var(--text-size-l);
+				}
+			}
+		}
+
+		& .header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+
+			& .title {
+				min-width: 0;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				text-wrap: nowrap;
+				text-align: left;
+				flex-grow: 1;
+			}
+		}
+	}
+</style>

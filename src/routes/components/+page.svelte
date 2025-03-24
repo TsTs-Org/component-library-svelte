@@ -1,14 +1,51 @@
 <script lang="ts">
 	import Button from "$lib/components/Button.svelte";
+	import Card from "$lib/components/Card.svelte";
 	import Icon from "$lib/components/Icon.svelte";
 	import Input from "$lib/components/Input.svelte";
 	import Link from "$lib/components/Link.svelte";
 	import NavigationBar from "$lib/components/NavigationBar.svelte";
 	import Showcase from "$lib/components/Showcase.svelte";
-  import Select from '$lib/components/Select.svelte';
+	import Select from "$lib/components/Select.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="Card">
+		<div style="width: 4rem; height: 4rem">
+			<Card size="s">
+				{#snippet title()}
+					Title text
+				{/snippet}
+				{#snippet iconRight(size)}
+					<Icon {size} iconName="x"></Icon>
+				{/snippet}
+			</Card>
+		</div>
+		<div style="width: 7rem; height: 6rem">
+			<Card size="m">
+				{#snippet title()}
+					Title text
+				{/snippet}
+				{#snippet iconRight(size)}
+					<Icon {size} iconName="x"></Icon>
+				{/snippet}
+			</Card>
+		</div>
+		<div style="width: 20rem; height: 10rem">
+			<Card size="l">
+				{#snippet iconLeft(size)}
+					<Icon {size} iconName="sun"></Icon>
+				{/snippet}
+				{#snippet title()}
+					Title text
+				{/snippet}
+				{#snippet iconRight(size)}
+					<Icon {size} iconName="x"></Icon>
+				{/snippet}
+			</Card>
+		</div>
+	</Showcase>
+
 	<Showcase name="Border Radius">
 		<div class="mock-grid">
 			<div class="mock-box fixed-size" style="border-radius: var(--border-radius-s);">S</div>
@@ -64,22 +101,22 @@
 		</div>
 	</Showcase>
 
-  <Showcase name="Select">
-      <div class="mock-grid">
-          <Select 
-              placeholder="Select a fruit..." 
-              label="Fruits" 
-              description="Dropdown to select a fruit" 
-              options={[
-                  { value: 'apple', label: 'Apple' },
-                  { value: 'banana', label: 'Banana' },
-                  { value: 'orange', label: 'Orange' },
-                  { value: 'grape', label: 'Grape' },
-                  { value: 'kiwi', label: 'Kiwi' },
-              ]}
-          />
-      </div>
-  </Showcase>
+	<Showcase name="Select">
+		<div class="mock-grid">
+			<Select
+				placeholder="Select a fruit..."
+				label="Fruits"
+				description="Dropdown to select a fruit"
+				options={[
+					{ value: "apple", label: "Apple" },
+					{ value: "banana", label: "Banana" },
+					{ value: "orange", label: "Orange" },
+					{ value: "grape", label: "Grape" },
+					{ value: "kiwi", label: "Kiwi" },
+				]}
+			/>
+		</div>
+	</Showcase>
 
 	<Showcase name="Icons">
 		<div class="mock-grid">
