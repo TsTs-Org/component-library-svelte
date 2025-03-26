@@ -11,21 +11,23 @@
 </script>
 
 <div class="components-page">
-	<!-- <Showcase name="Scroll Container"> -->
-	<ScrollContainer>
-		<p>some text1</p>
-		<p>some text2</p>
-		<p>some text3</p>
-		<p>some text4</p>
-		<p>some text5</p>
-		<p>some text6</p>
-		<p>some text7</p>
-		<p>some text8</p>
-		<p>some text9</p>
-		<p>some text10</p>
-		<p>some text11</p>
-	</ScrollContainer>
-	<!-- </Showcase> -->
+	<Showcase name="Scroll Container">
+		<div style="height: 6rem">
+			<ScrollContainer>
+				<p>some text1</p>
+				<p>some text2</p>
+				<p>some text3</p>
+				<p>some text4</p>
+				<p>some text5</p>
+				<p>some text6</p>
+				<p>some text7</p>
+				<p>some text8</p>
+				<p>some text9</p>
+				<p>some text10</p>
+				<p>some text11</p>
+			</ScrollContainer>
+		</div>
+	</Showcase>
 	<Showcase name="Card">
 		<div style="width: 4rem; height: 4rem">
 			<Card size="s">

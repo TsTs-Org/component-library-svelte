@@ -12,7 +12,7 @@
 	let scrollbar: HTMLDivElement;
 	let scrollbarThumb: HTMLDivElement;
 
-	let needsScrollbar: boolean = false;
+	let needsScrollbar: boolean = $state(false);
 
 	let isDragging: boolean = false;
 	let lastingThumbPosition = 0;
@@ -51,7 +51,8 @@
 		const ratio = wrapperHeight / contentHeight;
 
 		let newHeight;
-		if (ratio < 1) {
+		console.log(ratio);
+		if (ratio <= 1) {
 			newHeight = 100;
 			needsScrollbar = false;
 		} else {
@@ -144,9 +145,10 @@
 
 <style lang="scss">
 	.custom-scroll-container-wrapper {
-		width: fit-content;
-		height: 8rem;
+		width: 100%;
+		height: 100%;
 		display: flex;
+		justify-content: space-between;
 
 		&:has(.thumb:active) {
 			& > .content-overflow-hider > .content-wrapper {
@@ -189,11 +191,13 @@
 		&:has(> .thumb:hover),
 		&:has(> .thumb:active) {
 			visibility: visible;
+			// fade out transition -> background-color with alpha
 		}
 
 		&--needed {
 			& > .thumb {
 				visibility: visible;
+				transition: none;
 			}
 		}
 	}
@@ -204,7 +208,7 @@
 		height: var(--thumb-height);
 		left: 0px;
 		border-radius: 4px;
-		background-color: #d9d9d9;
+		background-color: var(--text-color);
 		top: var(--thumb-position);
 
 		&:hover,
