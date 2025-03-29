@@ -4,14 +4,16 @@
 	import Link from "$lib/components/Link.svelte";
 	import NavigationBar from "$lib/components/NavigationBar.svelte";
 	import Select from "$lib/components/Select.svelte";
-	import "$lib/styles/main.scss";
-	import "$lib/styles/theme.scss";
+	import Theme from "$lib/components/Theme.svelte";
+	// import "$lib/styles/main.scss";
 	import { getMode, setMode } from "../lib/states.svelte.js";
 	import { setPrimaryColor } from "$lib/utils/themeManager.js";
 
 	let primaryColor = $state("seagreen");
 
 </script>
+
+<Theme/>
 
 <div class={getMode() + "-mode page"}>
 	<NavigationBar variant="glass">

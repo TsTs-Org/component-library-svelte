@@ -1,10 +1,6 @@
 {
-	"name": "@TsTs-Org/component-library-svelte",
-	"version": "0.0.1",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/TsTs-Org/component-library-svelte/settings.git"
-	},
+	"name": "@tsts-org/component-library-svelte",
+	"version": "0.1.0",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
 	},
@@ -38,9 +34,6 @@
 			"svelte": "./dist/index.js"
 		}
 	},
-	"peerDependencies": {
-		"svelte": "^5.0.0"
-	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^4.0.0",
 		"@sveltejs/kit": "^2.16.0",
@@ -50,7 +43,6 @@
 		"prettier-plugin-svelte": "^3.3.3",
 		"publint": "^0.3.2",
 		"sass": "^1.86.0",
-		"sass-embedded": "^1.86.0",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"svelte-preprocess": "^6.0.3",
@@ -61,6 +53,6 @@
 		"svelte"
 	],
 	"dependencies": {
-		"sass-embedded-linux-x64": "^1.86.0"
+		"svelte": "^5.0.0"
 	}
 }
