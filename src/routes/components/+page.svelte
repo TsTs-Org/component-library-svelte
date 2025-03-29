@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Accordion from "$lib/components/Accordion/Accordion.svelte";
+	import AccordionItem from "$lib/components/Accordion/AccordionItem.svelte";
 	import Button from "$lib/components/Button.svelte";
 	import Card from "$lib/components/Card.svelte";
 	import Icon from "$lib/components/Icon.svelte";
@@ -10,6 +12,18 @@
 </script>
 
 <div class="components-page">
+	<Showcase name="Accordion">
+		<Accordion>
+			<AccordionItem title="Item 1">
+				<p>Content for item 1</p>
+			</AccordionItem>
+
+			<AccordionItem title="Item 2">
+				<p>Content for item 2</p>
+			</AccordionItem>
+		</Accordion>
+	</Showcase>
+
 	<Showcase name="Card">
 		<div style="width: 4rem; height: 4rem">
 			<Card size="s">

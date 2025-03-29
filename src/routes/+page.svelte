@@ -1,3 +1,6 @@
+<script>
+</script>
+
 <div>
 	<h1>Nothing Here Yet</h1>
 </div>
