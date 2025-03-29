@@ -21,6 +21,10 @@
 			<AccordionItem title="Item 2">
 				<p>Content for item 2</p>
 			</AccordionItem>
+
+			<AccordionItem title="Item 3">
+				<p>Content for item 3</p>
+			</AccordionItem>
 		</Accordion>
 	</Showcase>
 
