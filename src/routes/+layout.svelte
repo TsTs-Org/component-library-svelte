@@ -1,19 +1,18 @@
 <script>
+	import "$lib/styles/main.css";
+	import "$lib/styles/theme.css";
+
 	let { children } = $props();
 	import Icon from "$lib/components/Icon.svelte";
 	import Link from "$lib/components/Link.svelte";
 	import NavigationBar from "$lib/components/NavigationBar.svelte";
 	import Select from "$lib/components/Select.svelte";
-	import Theme from "$lib/components/Theme.svelte";
 	// import "$lib/styles/main.scss";
 	import { getMode, setMode } from "../lib/states.svelte.js";
 	import { setPrimaryColor } from "$lib/utils/themeManager.js";
 
 	let primaryColor = $state("seagreen");
-
 </script>
-
-<Theme/>
 
 <div class={getMode() + "-mode page"}>
 	<NavigationBar variant="glass">
@@ -24,7 +23,7 @@
 		</div>
 
 		<div class="right">
-			<Select 
+			<Select
 				bind:value={primaryColor}
 				on:change={() => setPrimaryColor(primaryColor)}
 				variant="ghost"
@@ -32,7 +31,7 @@
 				options={[
 					{ value: "rebeccapurple", label: "Thingypurple" },
 					{ value: "royalblue", label: "Royalblue" },
-					{ value: "seagreen", label: "Seagreen"},
+					{ value: "seagreen", label: "Seagreen" },
 					{ value: "#F45D01", label: "Sunrise" },
 					{ value: "#D36135", label: "Charmander" },
 					{ value: "#3E5641", label: "Forest" },
@@ -42,7 +41,7 @@
 				{#if getMode() === "light"}
 					<Icon iconName="sun" />
 				{:else}
-					<Icon iconName="moon"/>
+					<Icon iconName="moon" />
 				{/if}
 			</button>
 		</div>
