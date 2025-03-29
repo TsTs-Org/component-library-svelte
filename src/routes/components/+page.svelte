@@ -9,6 +9,7 @@
 	import NavigationBar from "$lib/components/NavigationBar.svelte";
 	import Showcase from "$lib/components/Showcase.svelte";
 	import Select from "$lib/components/Select.svelte";
+	import ScrollContainer from "$lib/components/ScrollContainer.svelte";
 </script>
 
 <div class="components-page">
@@ -28,6 +29,15 @@
 		</Accordion>
 	</Showcase>
 
+	<Showcase name="Scroll Container">
+		<div style="height: 6rem">
+			<ScrollContainer>
+				{#each {length: 50}, i}
+				<p>Text {i}</p>
+				{/each}
+			</ScrollContainer>
+		</div>
+	</Showcase>
 	<Showcase name="Card">
 		<div style="width: 4rem; height: 4rem">
 			<Card size="s">
