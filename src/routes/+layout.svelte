@@ -6,7 +6,8 @@
 	import Icon from "$lib/components/Icon.svelte";
 	import Link from "$lib/components/Link.svelte";
 	import NavigationBar from "$lib/components/NavigationBar.svelte";
-	import Select from "$lib/components/Select.svelte";
+	import Select from "$lib/components/Select/Select.svelte";
+	import SelectItem from "$lib/components/Select/SelectItem.svelte";
 	// import "$lib/styles/main.scss";
 	import { getMode, setMode } from "../lib/states.svelte.js";
 	import { setPrimaryColor } from "$lib/utils/themeManager.js";
@@ -25,19 +26,39 @@
 		<div class="right">
 			<Select
 				bind:value={primaryColor}
-				on:change={() => setPrimaryColor(primaryColor)}
+				onchange={(color) => setPrimaryColor(color)}
 				variant="ghost"
 				placeholder="Theme"
-				options={[
-					{ value: "rebeccapurple", label: "Thingypurple" },
-					{ value: "royalblue", label: "Royalblue" },
-					{ value: "seagreen", label: "Seagreen" },
-					{ value: "#F45D01", label: "Sunrise" },
-					{ value: "#D36135", label: "Charmander" },
-					{ value: "#3E5641", label: "Forest" },
-				]}
-			/>
-			<button aria-label="Toggle light/dark mode" onclick={() => setMode()}>
+			>
+				<SelectItem
+					value="rebeccapurple"
+					label="Thingypurple"
+				/>
+				<SelectItem
+					value="royalblue"
+					label="Royalblue"
+				/>
+				<SelectItem
+					value="seagreen"
+					label="Seagreen"
+				/>
+				<SelectItem
+					value="#F45D01"
+					label="Sunrise"
+				/>
+				<SelectItem
+					value="#D36135"
+					label="Charmander"
+				/>
+				<SelectItem
+					value="#3E5641"
+					label="Forest"
+				/>
+			</Select>
+			<button
+				aria-label="Toggle light/dark mode"
+				onclick={() => setMode()}
+			>
 				{#if getMode() === "light"}
 					<Icon iconName="sun" />
 				{:else}

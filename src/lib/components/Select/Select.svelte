@@ -1,52 +1,61 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount, setContext } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
-	import Icon from "./Icon.svelte";
+	import Icon from "../Icon.svelte";
 	import { slide } from "svelte/transition";
+	import { writable, type Writable } from "svelte/store";
 
 	type Variant = "ghost" | "bordered";
+
+	type Props = {
+		onchange?: (value: string) => void;
+		value?: string;
+		label?: string;
+		description?: string;
+		variant?: Variant;
+		placeholder: string;
+	} & HTMLAttributes<any>;
+
 	type Option = {
 		value: string;
 		label: string;
 	};
 
-	type Props = {
-		value?: string;
-		label?: string;
-		description?: string;
-		variant?: Variant;
-		options: Option[];
-		placeholder: string;
-	} & HTMLAttributes<any>;
+	export type SelectCtx = {
+		selected: Writable<Option>;
+	};
+
 	let {
+		onchange = () => {},
 		value = $bindable(),
 		label,
 		description,
 		variant = "bordered",
-		options,
 		placeholder,
 		children,
 		...restProps
 	}: Props = $props();
 
 	let open = $state(false);
-	let selectedOption = $state(options.find((option) => option.value === value));
+	let selectedOption: Option | null = $state(null);
 
-	import { createEventDispatcher } from "svelte";
-	const dispatch = createEventDispatcher();
-
-	const selectOption = (option: Option) => {
-		selectedOption = option;
-		value = option.value;
-		dispatch("change", { value });
-		open = false;
+	const ctx = {
+		selected: writable({ value, label }),
 	};
+
+	setContext("SelectCtx", ctx);
 
 	onMount(() => {
 		document.addEventListener("click", (event: MouseEvent) => {
 			if (event.target && !event.target.closest(".Select") && open) {
 				open = false;
 			}
+		});
+		return ctx.selected.subscribe((x) => {
+			open = false;
+			value = (x as Option).value;
+			onchange((x as Option).value);
+			selectedOption = x as Option;
 		});
 	});
 </script>
@@ -61,7 +70,7 @@
 		{...restProps}
 		onclick={() => (open = !open)}
 	>
-		{#if selectedOption}
+		{#if selectedOption?.label}
 			{selectedOption.label}
 		{:else}
 			<span style="color: var(--text-color-muted)">{placeholder}</span>
@@ -87,9 +96,7 @@
 			class="Portal"
 			transition:slide={{ duration: 190 }}
 		>
-			{#each options as option}
-				<button onclick={() => selectOption(option)}>{option.label}</button>
-			{/each}
+			{@render children?.()}
 		</div>
 	{/if}
 
@@ -145,21 +152,7 @@
 		width: 100%;
 		min-width: fit-content;
 		box-sizing: border-box;
-		padding: var(--padding-xs);
 		border-radius: var(--border-radius-s);
 		border: 1px solid var(--border-color);
-		button {
-			background-color: transparent;
-			outline: none;
-			text-align: left;
-			width: 100%;
-			border: none;
-			border-radius: var(--border-radius-s);
-			padding: var(--padding-s);
-			color: var(--text-color-muted);
-			&:hover {
-				background-color: var(--background-color);
-			}
-		}
 	}
 </style>
