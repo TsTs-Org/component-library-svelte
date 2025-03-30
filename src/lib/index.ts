@@ -1,3 +1,5 @@
+
+// ------ Export Components ------
 import Button from "./components/Button.svelte";
 import Link from "./components/Link.svelte";
 import NavigationBar from "./components/NavigationBar.svelte";
@@ -13,5 +15,15 @@ export {
     Input, 
     Icon,
     Accordion,
-    AccordionItem
+    AccordionItem,
+};
+
+// ----- Export Blocks ------
+import SimpleLogin from "./blocks/Authentication/SimpleLogin.svelte";
+import LoginAndRegister from "./blocks/Authentication/LoginAndRegister.svelte";
+
+
+export { 
+    SimpleLogin,
+    LoginAndRegister
 };

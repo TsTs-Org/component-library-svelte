@@ -6,22 +6,38 @@
 	type Size = "s" | "m" | "l";
 
 	type Props = {
+		loading?: boolean;
 		variant?: Variant;
 		size?: Size;
 		icon?: Snippet;
 		children: Snippet;
 	} & HTMLButtonAttributes;
 
-	let { variant = "primary", size = "m", icon, children, ...restProps }: Props = $props();
+	let {
+		variant = "primary",
+		size = "m",
+		loading = false,
+		icon,
+		children,
+		...restProps
+	}: Props = $props();
 </script>
 
-<button class={[variant, size]} {...restProps}>
-	{#if !!icon}
-		<div class="icon">{@render icon?.()}</div>
+<button
+	class={[variant, size]}
+	disabled={loading}
+	{...restProps}
+>
+	{#if loading}
+		loading...
+	{:else}
+		{#if !!icon}
+			<div class="icon">{@render icon?.()}</div>
+		{/if}
+		<div class={[!icon ? "no-icon" : "", "content"]}>
+			{@render children?.()}
+		</div>
 	{/if}
-	<div class={[!icon ? "no-icon" : "", "content"]}>
-		{@render children?.()}
-	</div>
 </button>
 
 <style lang="scss">
@@ -78,13 +94,17 @@
 			}
 		}
 
-		&:hover {
+		&:not(:disabled):hover {
 			background-color: var(--hover-color);
 			scale: 99.5%;
 			cursor: pointer;
 		}
 
-		&:active {
+		&:disabled:hover {
+			cursor: not-allowed;
+		}
+
+		&:not(:disabled):active {
 			scale: 98%;
 		}
 	}

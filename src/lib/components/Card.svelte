@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
+	import type { HTMLAttributes } from "svelte/elements";
 
 	type Size = "s" | "m" | "l";
 
@@ -9,13 +10,16 @@
 		iconLeft?: Snippet<[Size]>;
 		iconRight?: Snippet<[Size]>;
 		children?: Snippet;
-	};
+	} & HTMLAttributes<any>;
 
-	let { size = "m", title, iconLeft, iconRight, children }: Props = $props();
+	let { size = "m", title, iconLeft, iconRight, children, ...restProps }: Props = $props();
 </script>
 
 <!-- TODO: min-width that is calculated from header-gap -->
-<div class={["card", size]}>
+<div
+	class={["card", size]}
+	{...restProps}
+>
 	<div class="header">
 		<!-- TODO: create component to hover ellipsed text to show full text 
 			 & fix for buggy ellipsis (for example when setting width of card to 6rem with title and icon on the right)

@@ -20,6 +20,7 @@
 		<div>
 			<Link href="/">Home</Link>
 			<Link href="/colors">Colors</Link>
+			<Link href="/blocks">Blocks</Link>
 			<Link href="/components">Components</Link>
 		</div>
 

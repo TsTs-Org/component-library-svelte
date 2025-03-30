@@ -4,6 +4,8 @@
 
 	type Variant = "ghost" | "bordered" | "colored";
 	type Props = {
+		onchange?: (value: string) => void;
+		value?: string;
 		variant?: Variant;
 		label?: string;
 		description?: string;
@@ -11,8 +13,9 @@
 	} & HTMLInputAttributes;
 
 	let {
-		variant = "ghost",
+		onchange = () => {},
 		value = $bindable(),
+		variant = "ghost",
 		label,
 		description,
 		icon,
@@ -24,7 +27,12 @@
 	{#if label}
 		<label>{label}</label>
 	{/if}
-	<input bind:value class={[variant]} {...restProps} />
+	<input
+		bind:value
+		{onchange}
+		class={[variant]}
+		{...restProps}
+	/>
 	{#if description}
 		<p>{description}</p>
 	{/if}
@@ -32,9 +40,13 @@
 
 <style lang="scss">
 	label {
-		font-size: 0.925rem;
-		font-weight: 600;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: var(--text-color-muted);
 		margin-left: var(--padding-xs);
+		&:has(+ input:focus) {
+			color: var(--text-color);
+		}
 	}
 	p {
 		font-size: 0.75rem;
@@ -54,7 +66,10 @@
 		margin-block: var(--padding-xs);
 	}
 	input:focus {
-		border-color: var(--primary-color);
+		border-color: var(--text-color);
+	}
+	input:disabled {
+		cursor: not-allowed;
 	}
 	input::placeholder {
 		color: var(--text-color-muted);
