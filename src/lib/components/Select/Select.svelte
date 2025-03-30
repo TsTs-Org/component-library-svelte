@@ -44,6 +44,7 @@
 	};
 
 	setContext("SelectCtx", ctx);
+	let initialized = false;
 
 	onMount(() => {
 		document.addEventListener("click", (event: MouseEvent) => {
@@ -52,6 +53,10 @@
 			}
 		});
 		return ctx.selected.subscribe((x) => {
+			if (!initialized) {
+				initialized = true;
+				return; // Skip the first run
+			}
 			open = false;
 			value = (x as Option).value;
 			onchange((x as Option).value);

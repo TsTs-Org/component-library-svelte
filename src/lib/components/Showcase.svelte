@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { getMode } from "../states.svelte.js";
+	import { _mode } from "$lib/utils/themify.svelte.js";
 	import Card from "./Card.svelte";
 	import Icon from "./Icon.svelte";
 	let { name, children } = $props();
-	let localMode = $state(getMode());
+	let localMode = $state($_mode);
 	const setMode = () => {
 		localMode === "light" ? (localMode = "dark") : (localMode = "light");
 	};
@@ -13,11 +13,20 @@
 	<Card size="l">
 		{#snippet title()}{name}{/snippet}
 		{#snippet iconRight(size)}
-			<button aria-label="Toggle light/dark mode" onclick={() => setMode()}>
+			<button
+				aria-label="Toggle light/dark mode"
+				onclick={() => setMode()}
+			>
 				{#if localMode === "light"}
-					<Icon iconName="sun" {size}></Icon>
+					<Icon
+						iconName="sun"
+						{size}
+					></Icon>
 				{:else}
-					<Icon iconName="moon" {size}></Icon>
+					<Icon
+						iconName="moon"
+						{size}
+					></Icon>
 				{/if}
 			</button>
 		{/snippet}
