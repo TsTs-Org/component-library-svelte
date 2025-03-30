@@ -1,16 +1,4 @@
 <script lang="ts">
-	import Accordion from "$lib/components/Accordion/Accordion.svelte";
-	import AccordionItem from "$lib/components/Accordion/AccordionItem.svelte";
-	import Button from "$lib/components/Button.svelte";
-	import Card from "$lib/components/Card.svelte";
-	import Icon from "$lib/components/Icon.svelte";
-	import Input from "$lib/components/Input.svelte";
-	import Link from "$lib/components/Link.svelte";
-	import NavigationBar from "$lib/components/NavigationBar.svelte";
-	import Showcase from "$lib/components/Showcase.svelte";
-	import Select from "$lib/components/Select/Select.svelte";
-	import SelectItem from "$lib/components/Select/SelectItem.svelte";
-	import ScrollContainer from "$lib/components/ScrollContainer.svelte";
 	import SimpleLogin from "$lib/blocks/Authentication/SimpleLogin.svelte";
 	import LoginAndRegister from "$lib/blocks/Authentication/LoginAndRegister.svelte";
 </script>

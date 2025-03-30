@@ -40,6 +40,15 @@
 	{/if}
 </button>
 
+<!--
+@component
+## Props
+@prop {boolean} loading - If true, the button will show a loading state.
+@prop {string} variant - The variant of the button. Can be "primary" or "bordered".
+@prop {string} size - The size of the button. Can be "s", "m", or "l".
+@prop {Snippet} icon - The icon to be displayed in the button.
+-->
+
 <style lang="scss">
 	button {
 		width: 100%;

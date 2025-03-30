@@ -105,6 +105,17 @@
 	{/if}
 </div>
 
+<!--
+@component
+## Props
+@prop {string} [label] - The label for the select input.
+@prop {string} [description] - The description for the select input.
+@prop {string} [placeholder] - The placeholder text for the select input.
+@prop {string} [variant] - The variant of the select input. Can be "ghost" or "bordered".
+@prop {function} [onchange] - The function to call when the select input changes.
+@prop {string} [value] - The value of the select input.
+-->
+
 <style lang="scss">
 	.Select {
 		position: relative;

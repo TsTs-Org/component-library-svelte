@@ -38,6 +38,17 @@
 	{/if}
 </div>
 
+<!--
+@component
+## Props
+@prop {function} onchange - The function to call when the input value changes.
+@prop {string} value - The value of the input.
+@prop {string} variant - The variant of the input. Can be "ghost", "bordered", or "colored".
+@prop {string} label - The label of the input.
+@prop {string} description - The description of the input.
+@prop {Snippet} icon - The icon to be displayed in the input.
+-->
+
 <style lang="scss">
 	label {
 		font-size: 0.85rem;

@@ -41,6 +41,12 @@
 	</div>
 </div>
 
+<!--
+@component
+## Props
+@prop {string} size - The size of the card. Can be "s", "m", or "l"
+-->
+
 <style lang="scss">
 	.card {
 		width: 100%;

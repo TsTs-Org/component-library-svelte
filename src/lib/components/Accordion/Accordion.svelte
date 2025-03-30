@@ -31,6 +31,13 @@
 	{@render children?.()}
 </div>
 
+<!--
+@component
+## Props
+@prop variant: "default" | "ghost" = "default"
+@prop children: Snippet
+-->
+
 <style lang="scss">
 	.Accordion {
 		display: flex;

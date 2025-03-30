@@ -14,13 +14,25 @@
 	let { size = "m", iconName, children, ...restProps }: Props = $props();
 </script>
 
-<svg class={[size]} {...restProps} xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+<svg
+	class={[size]}
+	{...restProps}
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 -960 960 960"
+>
 	{#if !!children}
 		{@render children?.()}
 	{:else if !!iconName}
 		{@html getIcon(iconName)}
 	{/if}
 </svg>
+
+<!--
+@component
+## Props
+@prop size="m" - The size of the icon. Can be "s", "m", "l", or "xl".
+@prop iconName="" - The name of the icon to be displayed. If provided, this will override the children prop.
+-->
 
 <style lang="scss">
 	svg {

@@ -14,9 +14,20 @@
 	let { variant = "ghost", size = "m", icon, children, ...restProps }: Props = $props();
 </script>
 
-<a class={[variant, size]} {...restProps}>
+<a
+	class={[variant, size]}
+	{...restProps}
+>
 	{@render children?.()}
 </a>
+
+<!--
+@component
+## Props
+@prop {string} variant - The variant of the link. Can be "ghost", "bordered", or "colored".
+@prop {string} size - The size of the link. Can be "s", "m", or "l".
+@prop {Snippet} icon - The icon to be displayed in the link.
+-->
 
 <style lang="scss">
 	a {

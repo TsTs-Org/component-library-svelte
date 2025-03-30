@@ -40,6 +40,14 @@
 	</div>
 </button>
 
+<!--
+@component
+## Props
+@prop {string} value - The value of the item.
+@prop {string} label - The label of the item.
+@prop {string} variant - The variant of the item. Can be "default" or "ghost". Default is "default".
+-->
+
 <style lang="scss">
 	.SelectItem {
 		display: flex;

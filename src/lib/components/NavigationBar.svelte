@@ -7,9 +7,18 @@
 	let { variant = "background", children, ...restProps }: Props = $props();
 </script>
 
-<nav class={[variant]} {...restProps}>
+<nav
+	class={[variant]}
+	{...restProps}
+>
 	{@render children?.()}
 </nav>
+
+<!--
+@component
+## Props
+@prop {string} variant - The variant of the navigation bar. Can be "background" or "glass".
+-->
 
 <style lang="scss">
 	nav {

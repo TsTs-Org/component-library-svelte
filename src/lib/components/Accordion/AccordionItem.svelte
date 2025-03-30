@@ -59,6 +59,14 @@
 	{/if}
 </div>
 
+<!--
+@component
+## Props
+@prop {string} title - The title of the accordion item.
+@prop {boolean} [open=false] - Whether the accordion item is open or not.
+@prop {string} [variant="default"] - The variant of the accordion item. Can be "default" or "ghost".
+-->
+
 <style lang="scss">
 	.AccordionItem {
 		display: flex;
