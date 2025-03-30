@@ -8,14 +8,16 @@
 	import NavigationBar from "$lib/components/NavigationBar.svelte";
 	import Select from "$lib/components/Select/Select.svelte";
 	import SelectItem from "$lib/components/Select/SelectItem.svelte";
-	// import "$lib/styles/main.scss";
-	import { getMode, setMode } from "../lib/states.svelte.js";
-	import { setPrimaryColor } from "$lib/utils/themeManager.js";
-
-	let primaryColor = $state("seagreen");
+	import Themify from "$lib/components/Themify.svelte";
+	import {
+		_mode,
+		getPrimaryColor,
+		setPrimaryColor,
+		switchMode,
+	} from "$lib/utils/themify.svelte.js";
 </script>
 
-<div class={getMode() + "-mode page"}>
+<Themify>
 	<NavigationBar variant="glass">
 		<div>
 			<Link href="/">Home</Link>
@@ -26,7 +28,7 @@
 
 		<div class="right">
 			<Select
-				bind:value={primaryColor}
+				value={getPrimaryColor()}
 				onchange={(color) => setPrimaryColor(color)}
 				variant="ghost"
 				placeholder="Theme"
@@ -58,9 +60,9 @@
 			</Select>
 			<button
 				aria-label="Toggle light/dark mode"
-				onclick={() => setMode()}
+				onclick={switchMode}
 			>
-				{#if getMode() === "light"}
+				{#if $_mode === "light-mode"}
 					<Icon iconName="sun" />
 				{:else}
 					<Icon iconName="moon" />
@@ -72,17 +74,9 @@
 	<div class="content">
 		{@render children()}
 	</div>
-</div>
+</Themify>
 
 <style>
-	.page {
-		position: relative;
-		height: 100vh;
-		overflow: auto;
-		box-sizing: border-box;
-		background-color: var(--background-color);
-	}
-
 	.content {
 		height: 100%;
 	}

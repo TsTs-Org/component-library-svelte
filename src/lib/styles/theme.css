@@ -2,7 +2,7 @@
 :root {
 	font-family: sans-serif;
 
-	--primary-color: seagreen;
+	--primary-color: rgba(0, 0, 0, 0);
 	--secondary-color: royalblue;
 
 	--neutral-100: oklch(from var(--primary-color) 0.97 0.02 h);

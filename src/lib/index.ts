@@ -7,6 +7,7 @@ import Input from "./components/Input.svelte";
 import Icon from "./components/Icon.svelte";
 import Accordion from "./components/Accordion/Accordion.svelte";
 import AccordionItem from "./components/Accordion/AccordionItem.svelte";
+import Themify from "./components/Themify.svelte";
 
 export { 
     Button,
@@ -16,6 +17,7 @@ export {
     Icon,
     Accordion,
     AccordionItem,
+    Themify
 };
 
 // ----- Export Blocks ------
