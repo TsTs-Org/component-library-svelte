@@ -21,7 +21,7 @@
 	<Navigationbar variant="glass">
 		{#snippet left()}
 			<NavigationbarItem href="/">Home</NavigationbarItem>
-			<NavigationbarItem href="/colors">Colors</NavigationbarItem>
+			<!-- <NavigationbarItem href="/colors">Colors</NavigationbarItem> -->
 			<NavigationbarItem href="/blocks">Blocks</NavigationbarItem>
 			<NavigationbarItem href="/components">Components</NavigationbarItem>
 		{/snippet}
