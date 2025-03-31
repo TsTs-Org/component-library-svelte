@@ -52,6 +52,7 @@
 			alt="img"
 		/>
 		<button
+			class:swap
 			disabled={loading}
 			onclick={() => {
 				swap = !swap;
@@ -140,6 +141,12 @@
 			&:disabled {
 				cursor: not-allowed;
 				background-color: var(--neutral-hover-color);
+			}
+			&:hover {
+				background-color: var(--hover-color);
+			}
+			&.swap {
+				transform: rotate(180deg);
 			}
 		}
 		form {
