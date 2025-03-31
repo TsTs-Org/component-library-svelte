@@ -11,9 +11,16 @@
 	import Select from "$lib/components/Select/Select.svelte";
 	import SelectItem from "$lib/components/Select/SelectItem.svelte";
 	import ScrollContainer from "$lib/components/ScrollContainer.svelte";
+	import Loader from "$lib/components/Loader.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="Loader">
+		<Loader size="s" />
+		<Loader />
+		<Loader size="l" />
+	</Showcase>
+
 	<Showcase name="Accordion">
 		<Accordion>
 			<AccordionItem title="Item 1">
