@@ -5,12 +5,12 @@
 	import Card from "$lib/components/Card.svelte";
 	import Icon from "$lib/components/Icon.svelte";
 	import Input from "$lib/components/Input.svelte";
-	import Link from "$lib/components/Link.svelte";
-	import NavigationBar from "$lib/components/NavigationBar.svelte";
 	import Showcase from "$lib/components/Showcase.svelte";
 	import Select from "$lib/components/Select/Select.svelte";
 	import SelectItem from "$lib/components/Select/SelectItem.svelte";
 	import ScrollContainer from "$lib/components/ScrollContainer.svelte";
+	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
+	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
 </script>
 
 <div class="components-page">
@@ -146,59 +146,17 @@
 	</Showcase>
 
 	<Showcase name="Navigation Bar">
-		<NavigationBar style="z-index: 1;">
-			<div>
-				<Link
-					href="#"
-					size="s">Home</Link
-				>
-				<Link
-					href="#"
-					size="s">Components</Link
-				>
-				<Link
-					href="#"
-					size="s">About</Link
-				>
-			</div>
-		</NavigationBar>
-	</Showcase>
-
-	<Showcase name="Link sizes">
-		<div class="mock-grid">
-			<Link
-				href="#"
-				size="s"
-				variant="colored">Link S</Link
-			>
-			<Link
-				href="#"
-				size="m"
-				variant="colored">Link M</Link
-			>
-			<Link
-				href="#"
-				size="l"
-				variant="colored">Link L</Link
-			>
-		</div>
-	</Showcase>
-
-	<Showcase name="Link variants">
-		<div class="mock-grid">
-			<Link
-				href="#"
-				variant="ghost">Ghost</Link
-			>
-			<Link
-				href="#"
-				variant="bordered">Bordered</Link
-			>
-			<Link
-				href="#"
-				variant="colored">Colored</Link
-			>
-		</div>
+		<Navigationbar>
+			{#snippet left()}
+				<NavigationbarItem>Home</NavigationbarItem>
+				<NavigationbarItem>Colors</NavigationbarItem>
+				<NavigationbarItem>Components</NavigationbarItem>
+			{/snippet}
+			<h3>YoMom</h3>
+			{#snippet right()}
+				<NavigationbarItem>User</NavigationbarItem>
+			{/snippet}
+		</Navigationbar>
 	</Showcase>
 
 	<Showcase name="Input">

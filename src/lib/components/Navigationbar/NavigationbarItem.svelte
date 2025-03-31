@@ -1,20 +1,38 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
+	import { getContext, onMount, type Snippet } from "svelte";
+	import Icon from "../Icon.svelte";
+	import { slide } from "svelte/transition";
+	import type { NavigationbarCtx } from "./Navigationbar.svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
 	type Variant = "ghost" | "bordered" | "colored";
+
 	type Size = "s" | "m" | "l";
 	type Props = {
 		variant?: Variant;
 		size?: Size;
 		icon?: Snippet;
-		children: Snippet;
+		children?: Snippet;
 	} & HTMLAnchorAttributes;
 
-	let { variant = "ghost", size = "m", icon, children, ...restProps }: Props = $props();
+	let { variant, size, icon, children, ...restProps }: Props = $props();
+
+	const ctx: NavigationbarCtx = getContext("ctx");
+	const selected = ctx.selected;
+
+	const self = {};
+	let active = $state(false);
+
+	onMount(() => {
+		return selected.subscribe((x) => (active = x === self));
+	});
 </script>
 
 <a
+	onclick={() => {
+		selected.set(self);
+	}}
+	class:active
 	class={[variant, size]}
 	{...restProps}
 >
@@ -24,9 +42,9 @@
 <!--
 @component
 ## Props
-@prop {string} variant - The variant of the link. Can be "ghost", "bordered", or "colored".
-@prop {string} size - The size of the link. Can be "s", "m", or "l".
-@prop {Snippet} icon - The icon to be displayed in the link.
+@prop {string} title - The title of the accordion item.
+@prop {boolean} [open=false] - Whether the accordion item is open or not.
+@prop {string} [variant="default"] - The variant of the accordion item. Can be "default" or "ghost".
 -->
 
 <style lang="scss">
@@ -38,6 +56,10 @@
 		padding: var(--padding-m);
 		border-radius: var(--border-radius-m);
 		font-size: 0.9rem;
+		&.active {
+			text-decoration: underline;
+		}
+
 		&.s {
 			padding: var(--padding-s);
 			border-radius: var(--border-radius-s);

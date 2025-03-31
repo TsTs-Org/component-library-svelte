@@ -4,8 +4,6 @@
 
 	let { children } = $props();
 	import Icon from "$lib/components/Icon.svelte";
-	import Link from "$lib/components/Link.svelte";
-	import NavigationBar from "$lib/components/NavigationBar.svelte";
 	import Select from "$lib/components/Select/Select.svelte";
 	import SelectItem from "$lib/components/Select/SelectItem.svelte";
 	import Themify from "$lib/components/Themify.svelte";
@@ -15,18 +13,20 @@
 		setPrimaryColor,
 		switchMode,
 	} from "$lib/utils/themify.svelte.js";
+	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
+	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
 </script>
 
 <Themify>
-	<NavigationBar variant="glass">
-		<div>
-			<Link href="/">Home</Link>
-			<Link href="/colors">Colors</Link>
-			<Link href="/blocks">Blocks</Link>
-			<Link href="/components">Components</Link>
-		</div>
-
-		<div class="right">
+	<Navigationbar variant="glass">
+		{#snippet left()}
+			<NavigationbarItem href="/">Home</NavigationbarItem>
+			<NavigationbarItem href="/colors">Colors</NavigationbarItem>
+			<NavigationbarItem href="/blocks">Blocks</NavigationbarItem>
+			<NavigationbarItem href="/components">Components</NavigationbarItem>
+		{/snippet}
+		<h3>LibiDibi</h3>
+		{#snippet right()}
 			<Select
 				value={getPrimaryColor()}
 				onchange={(color) => setPrimaryColor(color)}
@@ -68,8 +68,8 @@
 					<Icon iconName="moon" />
 				{/if}
 			</button>
-		</div>
-	</NavigationBar>
+		{/snippet}
+	</Navigationbar>
 
 	<div class="content">
 		{@render children()}
@@ -79,11 +79,5 @@
 <style>
 	.content {
 		height: 100%;
-	}
-
-	.right {
-		display: flex;
-		align-items: center;
-		gap: var(--padding-m);
 	}
 </style>
