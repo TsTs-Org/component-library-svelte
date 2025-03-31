@@ -31,7 +31,10 @@
 	{...restProps}
 >
 	{#if loading}
-		<Loader size="s" />
+		<Loader
+			size="s"
+			variant="onPrimary"
+		/>
 	{:else}
 		{#if !!icon}
 			<div class="icon">{@render icon?.()}</div>

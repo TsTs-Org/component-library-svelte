@@ -1,14 +1,16 @@
 <script lang="ts">
 	type Size = "xs" | "s" | "m" | "l";
+	type Variant = "default" | "onPrimary";
 
 	type Props = {
 		size?: Size;
+		variant?: Variant;
 	};
 
-	let { size = "m" }: Props = $props();
+	let { size = "m", variant = "default" }: Props = $props();
 </script>
 
-<div class={`loader triangle ${size}`}>
+<div class={`loader triangle ${size} ${variant}`}>
 	<svg viewBox="0 0 86 80">
 		<polygon points="43 8 79 72 7 72"></polygon>
 	</svg>
@@ -16,13 +18,22 @@
 
 <style lang="scss">
 	.loader {
-		--path: var(--text-color);
-		--dot: var(--primary-400);
 		--duration: 2s;
 		width: 44px;
 		height: 44px;
 		position: relative;
 		scale: 0.75;
+
+		&.onPrimary {
+			--path: var(--text-color-inverted);
+			--dot: var(--text-color-inverted);
+		}
+
+		&.default {
+			--path: var(--text-color);
+			--dot: var(--primary-400);
+		}
+
 		&.xs {
 			scale: 0.25;
 		}

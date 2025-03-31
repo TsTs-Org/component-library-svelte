@@ -12,7 +12,6 @@
 		getPersistentPrimaryColor,
 	} from "$lib/utils/themify.svelte.js";
 	import { onMount, type Snippet } from "svelte";
-	import Icon from "./Icon.svelte";
 	import Loader from "./Loader.svelte";
 
 	type Props = {
