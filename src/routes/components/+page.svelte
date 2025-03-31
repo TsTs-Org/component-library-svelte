@@ -163,8 +163,22 @@
 		<div class="mock-grid">
 			<Input
 				type="text"
-				placeholder="Username"
-				label="Username"
+				label="With Icon"
+				placeholder="username"
+				description="The name to identify the user"
+			>
+				{#snippet icon()}
+					<Icon
+						iconName="sun"
+						fill="inherit"
+					/>
+				{/snippet}
+			</Input>
+
+			<Input
+				type="text"
+				label="No Icon"
+				placeholder="username"
 				description="The name to identify the user"
 			/>
 		</div>

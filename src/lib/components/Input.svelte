@@ -21,18 +21,31 @@
 		icon,
 		...restProps
 	}: Props = $props();
+
+	let focused = $state(false);
 </script>
 
 <div>
 	{#if label}
-		<label>{label}</label>
+		<h4 class:focused>{label}</h4>
 	{/if}
-	<input
-		bind:value
-		{onchange}
-		class={[variant]}
-		{...restProps}
-	/>
+	<div class="Input">
+		<input
+			bind:focused
+			bind:value
+			{onchange}
+			class={[variant]}
+			{...restProps}
+		/>
+		{#if !!icon}
+			<div
+				class="icon"
+				class:focused
+			>
+				{@render icon?.()}
+			</div>
+		{/if}
+	</div>
 	{#if description}
 		<p>{description}</p>
 	{/if}
@@ -50,12 +63,35 @@
 -->
 
 <style lang="scss">
-	label {
+	.Input {
+		position: relative;
+
+		&:has(.icon) input {
+			padding-left: 2.35rem;
+		}
+
+		.icon {
+			position: absolute;
+			top: 12.5%;
+			left: 0;
+			height: 75%;
+			width: 2.5rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			fill: var(--text-color-muted);
+			&.focused {
+				fill: var(--text-color);
+			}
+		}
+	}
+
+	h4 {
 		font-size: 0.85rem;
 		font-weight: 500;
 		color: var(--text-color-muted);
 		margin-left: var(--padding-xs);
-		&:has(+ input:focus) {
+		&.focused {
 			color: var(--text-color);
 		}
 	}
