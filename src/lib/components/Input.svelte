@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Icon } from "$lib/index.js";
 	import type { Snippet } from "svelte";
 	import type { HTMLInputAttributes } from "svelte/elements";
 
@@ -9,6 +10,7 @@
 		variant?: Variant;
 		label?: string;
 		description?: string;
+		type?: string;
 		icon?: Snippet;
 	} & HTMLInputAttributes;
 
@@ -18,11 +20,14 @@
 		variant = "ghost",
 		label,
 		description,
+		type,
 		icon,
 		...restProps
 	}: Props = $props();
 
+	let custom_type = $state("");
 	let focused = $state(false);
+	let show_password = $state(false);
 </script>
 
 <div>
@@ -33,6 +38,7 @@
 		<input
 			bind:focused
 			bind:value
+			type={custom_type == "" ? custom_type : type}
 			{onchange}
 			class={[variant]}
 			{...restProps}
@@ -45,6 +51,19 @@
 				{@render icon?.()}
 			</div>
 		{/if}
+
+		<button
+			class="password-btn"
+			class:focused
+			onclick={() => {
+				show_password = !show_password;
+			}}
+		>
+			<Icon
+				iconName={show_password ? "sun" : "moon"}
+				fill="inherit"
+			/>
+		</button>
 	</div>
 	{#if description}
 		<p>{description}</p>
@@ -70,19 +89,35 @@
 			padding-left: 2.35rem;
 		}
 
-		.icon {
+		&:has(input[type="password"]) .password-btn {
+			display: flex;
+		}
+
+		.password-btn {
+			display: none;
+			right: 0;
+			&:hover {
+				fill: var(--text-color);
+			}
+		}
+
+		.icon,
+		.password-btn {
 			position: absolute;
 			top: 12.5%;
-			left: 0;
 			height: 75%;
 			width: 2.5rem;
-			display: flex;
 			align-items: center;
 			justify-content: center;
 			fill: var(--text-color-muted);
 			&.focused {
 				fill: var(--text-color);
 			}
+		}
+
+		.icon {
+			display: flex;
+			left: 0;
 		}
 	}
 

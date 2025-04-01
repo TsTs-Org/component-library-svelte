@@ -176,7 +176,7 @@
 			</Input>
 
 			<Input
-				type="text"
+				type="password"
 				label="No Icon"
 				placeholder="username"
 				description="The name to identify the user"
