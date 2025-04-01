@@ -9,11 +9,18 @@
 	import Select from "$lib/components/Select/Select.svelte";
 	import SelectItem from "$lib/components/Select/SelectItem.svelte";
 	import ScrollContainer from "$lib/components/ScrollContainer.svelte";
+	import Loader from "$lib/components/Loader.svelte";
 	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
 	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="Loader">
+		<Loader size="s" />
+		<Loader />
+		<Loader size="l" />
+	</Showcase>
+
 	<Showcase name="Accordion">
 		<Accordion>
 			<AccordionItem title="Item 1">

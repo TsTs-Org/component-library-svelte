@@ -12,7 +12,7 @@
 		getPersistentPrimaryColor,
 	} from "$lib/utils/themify.svelte.js";
 	import { onMount, type Snippet } from "svelte";
-	import Icon from "./Icon.svelte";
+	import Loader from "./Loader.svelte";
 
 	type Props = {
 		children?: Snippet;
@@ -37,10 +37,7 @@
 <div class={mode + " page"}>
 	{#if loading}
 		<div class="loader">
-			<Icon
-				size="l"
-				iconName="renew"
-			/>
+			<Loader size="l" />
 		</div>
 	{:else}
 		{@render children?.()}
@@ -60,16 +57,6 @@
 		width: fit-content;
 		margin-inline: auto;
 		margin-top: 50vh;
-		scale: 1.25;
 		animation: loading 1s linear infinite;
-	}
-
-	@keyframes loading {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
 	}
 </style>

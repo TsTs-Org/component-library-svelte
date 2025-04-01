@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import type { HTMLButtonAttributes } from "svelte/elements";
+	import Loader from "./Loader.svelte";
 
 	type Variant = "primary" | "bordered";
 	type Size = "s" | "m" | "l";
@@ -26,10 +27,14 @@
 <button
 	class={[variant, size]}
 	disabled={loading}
+	class:loading
 	{...restProps}
 >
 	{#if loading}
-		loading...
+		<Loader
+			size="s"
+			variant="onPrimary"
+		/>
 	{:else}
 		{#if !!icon}
 			<div class="icon">{@render icon?.()}</div>
@@ -87,6 +92,12 @@
 			gap: var(--padding-m);
 			font-size: var(--text-size-m);
 			font-weight: 600;
+		}
+
+		&.loading {
+			display: flex;
+			justify-content: center;
+			padding: 0;
 		}
 
 		&.primary {
