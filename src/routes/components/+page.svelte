@@ -12,9 +12,72 @@
 	import Loader from "$lib/components/Loader.svelte";
 	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
 	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
+	import Graph from "$lib/components/Graph/Graph.svelte";
+
+	const dummySemanticDataPointsWithNegatives = [
+		{ x: -5, y: 10 },
+		{ x: 0, y: -3 },
+		{ x: 2, y: 7 },
+		{ x: 4, y: 1 },
+		{ x: 8, y: 15 },
+		{ x: 12, y: -8 },
+		{ x: 20, y: 5 },
+		{ x: -10, y: 12 },
+		{ x: 3, y: 9 },
+		{ x: 15, y: 0 },
+	];
+
+	const dummySemanticDataPointsPositiveX = [
+		{ x: 0, y: -3 },
+		{ x: 2, y: 7 },
+		{ x: 4, y: 1 },
+		{ x: 8, y: 15 },
+		{ x: 12, y: -8 },
+		{ x: 20, y: 5 },
+		{ x: 3, y: 9 },
+		{ x: 15, y: 0 },
+	];
+
+	const dummySemanticDataPoints = [
+		{ x: 1, y: 3 },
+		{ x: 2, y: 5 },
+		{ x: 4, y: 1 },
+		{ x: 5, y: 7 },
+	];
+
+	const dummySemanticDataPointsOnlyNegative = [
+		{ x: -3, y: -3 },
+		{ x: -4, y: -4 },
+		{ x: -2, y: -2 },
+		{ x: -5, y: -1 },
+	];
 </script>
 
 <div class="components-page">
+	<Showcase name="graph">
+		<Card
+			><Graph
+				dataPoints={dummySemanticDataPointsOnlyNegative}
+				displayRange={"auto"}
+			></Graph></Card
+		><Card>
+			<Graph
+				dataPoints={dummySemanticDataPointsWithNegatives}
+				displayRange={"auto"}
+			></Graph></Card
+		><Card>
+			<Graph
+				dataPoints={dummySemanticDataPointsPositiveX}
+				displayRange={"auto"}
+			></Graph></Card
+		><Card>
+			<Graph
+				dataPoints={dummySemanticDataPoints}
+				displayRange={"auto"}
+			></Graph></Card
+		>
+	</Showcase>
+
 	<Showcase name="Loader">
 		<Loader size="s" />
 		<Loader />
