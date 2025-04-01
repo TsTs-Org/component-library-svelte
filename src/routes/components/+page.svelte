@@ -19,9 +19,18 @@
 	import TableBody from "$lib/components/Table/TableBody.svelte";
 	import TableCell from "$lib/components/Table/TableCell.svelte";
 	import TableFooter from "$lib/components/Table/TableFooter.svelte";
+	import Checkbox from "$lib/components/Checkbox.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="Checkbox">
+		<Checkbox
+			label="Test"
+			description="Some description"
+		/>
+		<!-- <Checkbox /> -->
+	</Showcase>
+
 	<Showcase name="Table">
 		<Table>
 			<TableHeader>
