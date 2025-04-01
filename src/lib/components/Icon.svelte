@@ -9,15 +9,21 @@
 	type EitherChildrenOrBuiltinIcon =
 		| { children: Snippet; iconName?: never }
 		| { children?: never; iconName: BuiltinIcon };
-	type Props = { size?: Size } & EitherChildrenOrBuiltinIcon & SVGAttributes<any>;
+	type Props = { size?: Size; fill?: string } & EitherChildrenOrBuiltinIcon & SVGAttributes<any>;
 
-	let { size = "m", iconName, children, ...restProps }: Props = $props();
+	let {
+		size = "m",
+		fill = "var(--text-color)",
+		iconName,
+		children,
+		...restProps
+	}: Props = $props();
 </script>
 
 <svg
+	style={`fill: ${fill}`}
 	class={[size]}
 	{...restProps}
-	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 -960 960 960"
 >
 	{#if !!children}

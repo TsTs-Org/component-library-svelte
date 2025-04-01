@@ -1,23 +1,23 @@
 
 // ------ Export Components ------
 import Button from "./components/Button.svelte";
-import Link from "./components/Link.svelte";
-import NavigationBar from "./components/NavigationBar.svelte";
 import Input from "./components/Input.svelte";
 import Icon from "./components/Icon.svelte";
 import Accordion from "./components/Accordion/Accordion.svelte";
 import AccordionItem from "./components/Accordion/AccordionItem.svelte";
 import Themify from "./components/Themify.svelte";
+import Navigationbar from "./components/Navigationbar/Navigationbar.svelte";
+import NavigationbarItem from "./components/Navigationbar/NavigationbarItem.svelte";
 
 export { 
     Button,
-    Link, 
-    NavigationBar, 
     Input, 
     Icon,
     Accordion,
     AccordionItem,
-    Themify
+    Themify,
+    Navigationbar,
+    NavigationbarItem
 };
 
 // ----- Export Blocks ------

@@ -101,6 +101,8 @@
 
 <style lang="scss">
 	.LoginAndRegister {
+		--width: 22rem;
+		--height: 28rem;
 		display: flex;
 		flex-direction: column;
 		width: 100%;
@@ -120,8 +122,8 @@
 		overflow: hidden;
 		img {
 			object-fit: cover;
-			width: 22rem;
-			height: 28rem;
+			width: var(--width);
+			height: var(--height);
 			&.swap {
 				transform: translateX(100%);
 			}
@@ -150,8 +152,8 @@
 			}
 		}
 		form {
-			width: 22rem;
-			height: 28rem;
+			width: var(--width);
+			height: var(--height);
 			display: flex;
 			flex-direction: column;
 			box-sizing: border-box;

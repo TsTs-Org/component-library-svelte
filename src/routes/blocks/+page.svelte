@@ -32,10 +32,9 @@
 	.blocks-page {
 		box-sizing: border-box;
 		width: 100%;
-		min-width: 1200px;
+		height: fit-content;
 		display: flex;
 		flex-direction: column;
-		margin-inline: auto;
 		gap: var(--padding-l);
 		padding: var(--padding-l);
 	}

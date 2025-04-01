@@ -55,7 +55,6 @@
 * {
 	/* transition: var(--transition); */
 	color: var(--text-color);
-	fill: var(--text-color);
 	margin: 0;
 	padding: 0;
 }
