@@ -12,9 +12,52 @@
 	import Loader from "$lib/components/Loader.svelte";
 	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
 	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
+	import Table from "$lib/components/Table/Table.svelte";
+	import TableHeader from "$lib/components/Table/TableHeader.svelte";
+	import TableRow from "$lib/components/Table/TableRow.svelte";
+	import TableHead from "$lib/components/Table/TableHead.svelte";
+	import TableBody from "$lib/components/Table/TableBody.svelte";
+	import TableCell from "$lib/components/Table/TableCell.svelte";
+	import TableFooter from "$lib/components/Table/TableFooter.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="Table">
+		<Table>
+			<TableHeader>
+				<TableRow>
+					<TableHead>TableHeader1</TableHead>
+					<TableHead>TableHeader2</TableHead>
+					<TableHead>TableHeader3</TableHead>
+				</TableRow>
+			</TableHeader>
+			<TableBody>
+				<TableRow>
+					<TableCell>TestBody1</TableCell>
+					<TableCell>TestBody2</TableCell>
+					<TableCell>TestBody3</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>TestBody1</TableCell>
+					<TableCell>TestBody2</TableCell>
+					<TableCell>TestBody3</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>TestBody1</TableCell>
+					<TableCell>TestBody2</TableCell>
+					<TableCell>TestBody3</TableCell>
+				</TableRow>
+			</TableBody>
+			<TableFooter>
+				<TableRow>
+					<TableCell>TableFooter1</TableCell>
+					<TableCell>TableFooter2</TableCell>
+					<TableCell>TableFooter3</TableCell>
+				</TableRow>
+			</TableFooter>
+		</Table>
+	</Showcase>
+
 	<Showcase name="Loader">
 		<Loader size="s" />
 		<Loader />

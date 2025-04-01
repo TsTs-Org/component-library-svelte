@@ -41,9 +41,9 @@
 	--border-radius-xl: calc(var(--border-radius-s) * 4);
 
 	--padding-xs: calc(var(--padding-s) / 2);
-	--padding-s: 0.5rem;
-	--padding-m: calc(var(--padding-s) * 2);
-	--padding-l: calc(var(--padding-s) * 3);
+	--padding-s: 0.75rem;
+	--padding-m: calc(var(--padding-s) * 1.5);
+	--padding-l: calc(var(--padding-s) * 2.25);
 	--padding-xl: calc(var(--padding-s) * 4);
 
 	--text-size-s: 1rem;
