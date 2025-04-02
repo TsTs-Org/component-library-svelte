@@ -124,6 +124,7 @@
 			object-fit: cover;
 			width: var(--width);
 			height: var(--height);
+			transition: transform 0.4s ease;
 			&.swap {
 				transform: translateX(100%);
 			}
@@ -140,6 +141,7 @@
 			width: 3rem;
 			height: 3rem;
 			background-color: var(--background-color);
+			transition: transform 0.4s ease;
 			&:disabled {
 				cursor: not-allowed;
 				background-color: var(--neutral-hover-color);
@@ -161,6 +163,7 @@
 			justify-content: center;
 			background-color: var(--foreground-color);
 			padding: var(--padding-l);
+			transition: transform 0.4s ease;
 			&.swap {
 				transform: translateX(-100%);
 			}

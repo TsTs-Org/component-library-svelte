@@ -65,6 +65,7 @@
 <style lang="scss">
 	.Input {
 		position: relative;
+		min-width: 15rem;
 
 		&:has(.icon) input {
 			padding-left: 2.35rem;
