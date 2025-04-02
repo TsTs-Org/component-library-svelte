@@ -5,8 +5,8 @@ node_modules
 .vercel
 .netlify
 .wrangler
+.build
 /.svelte-kit
-/build
 /dist
 
 # OS

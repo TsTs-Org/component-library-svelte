@@ -1,6 +1,7 @@
 <script>
 	import "$lib/styles/main.css";
 	import "$lib/styles/theme.css";
+	import { base } from "$app/paths";
 
 	let { children } = $props();
 	import Icon from "$lib/components/Icon.svelte";
@@ -20,12 +21,12 @@
 <Themify>
 	<Navigationbar variant="glass">
 		{#snippet left()}
-			<NavigationbarItem href="/">Home</NavigationbarItem>
+			<NavigationbarItem href="{base}/">Home</NavigationbarItem>
 			<!-- <NavigationbarItem href="/colors">Colors</NavigationbarItem> -->
-			<NavigationbarItem href="/blocks">Blocks</NavigationbarItem>
-			<NavigationbarItem href="/components">Components</NavigationbarItem>
+			<NavigationbarItem href="{base}/blocks">Blocks</NavigationbarItem>
+			<NavigationbarItem href="{base}/components">Components</NavigationbarItem>
 		{/snippet}
-		<h3>LibiDibi</h3>
+		<h3>Testo</h3>
 		{#snippet right()}
 			<Select
 				value={getPrimaryColor()}
