@@ -100,6 +100,21 @@
 </div>
 
 <style lang="scss">
+	@media (max-width: 900px) {
+		.main {
+			img {
+				display: none !important;
+			}
+			button {
+				top: initial !important;
+				bottom: 3% !important;
+			}
+		}
+	}
+
+	@media (min-width: 900px) {
+	}
+
 	.LoginAndRegister {
 		--width: 22rem;
 		--height: 28rem;

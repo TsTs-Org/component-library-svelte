@@ -153,7 +153,8 @@
 	</Showcase>
 
 	<Showcase name="Navigation Bar">
-		<Navigationbar>
+		<!-- TODO Fix mobile version -->
+		<!-- <Navigationbar>
 			{#snippet left()}
 				<NavigationbarItem>Home</NavigationbarItem>
 				<NavigationbarItem>Colors</NavigationbarItem>
@@ -163,7 +164,7 @@
 			{#snippet right()}
 				<NavigationbarItem>User</NavigationbarItem>
 			{/snippet}
-		</Navigationbar>
+		</Navigationbar> -->
 	</Showcase>
 
 	<Showcase name="Input">

@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { getContext, onMount, type Snippet } from "svelte";
-	import Icon from "../Icon.svelte";
-	import { slide } from "svelte/transition";
 	import type { NavigationbarCtx } from "./Navigationbar.svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
