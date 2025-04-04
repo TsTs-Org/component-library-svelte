@@ -67,7 +67,7 @@
 
 <div class="Multiselect">
 	{#if label}
-		<label>{label}</label>
+		<h4>{label}</h4>
 	{/if}
 
 	<button
@@ -114,7 +114,7 @@
 		position: relative;
 	}
 
-	label {
+	h4 {
 		font-size: 0.925rem;
 		font-weight: 600;
 		margin-left: var(--padding-xs);
