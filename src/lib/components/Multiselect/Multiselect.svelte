@@ -6,6 +6,7 @@
 	import { writable, type Writable } from "svelte/store";
 
 	type Variant = "ghost" | "bordered";
+	type Size = "s" | "m" | "l";
 
 	type Props = {
 		onchange?: (value: Array<Option>) => void;
@@ -14,6 +15,7 @@
 		description?: string;
 		initial?: Array<Option>;
 		variant?: Variant;
+		size?: Size;
 		placeholder: string;
 	} & HTMLAttributes<any>;
 
@@ -30,6 +32,7 @@
 		description,
 		initial = [],
 		variant = "bordered",
+		size = "m",
 		placeholder,
 		children,
 		...restProps
@@ -68,7 +71,7 @@
 	{/if}
 
 	<button
-		class={["Trigger", variant]}
+		class={["Trigger", variant, size]}
 		{...restProps}
 		onclick={() => (open = !open)}
 	>
@@ -134,13 +137,22 @@
 		justify-content: space-between;
 		color: var(--text-color);
 		border-radius: var(--border-radius-s);
-		padding: var(--padding-m);
 		margin-block: var(--padding-xs);
 		&.bordered {
 			border: 1px solid var(--border-color);
 		}
 		&.ghost {
 			border: none;
+		}
+
+		&.s {
+			padding: var(--padding-s);
+		}
+		&.m {
+			padding: var(--padding-m);
+		}
+		&.l {
+			padding: var(--padding-l);
 		}
 	}
 	button:focus {

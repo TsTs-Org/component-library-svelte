@@ -59,7 +59,11 @@
 	</Showcase>
 
 	<Showcase name="Table">
-		<Table initial={[0, 1, 2]}>
+		<Table
+			initial={[0, 1, 2]}
+			searchbar
+			bordered
+		>
 			<TableHeader>
 				<TableRow>
 					<TableHead>Name</TableHead>
@@ -87,7 +91,7 @@
 			<TableFooter>
 				<TableRow>
 					<TableCell>TableFooter1</TableCell>
-					<TableCell>TableFooter2</TableCell>
+					<TableCell></TableCell>
 					<TableCell>TableFooter3</TableCell>
 				</TableRow>
 			</TableFooter>

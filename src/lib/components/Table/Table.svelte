@@ -6,14 +6,17 @@
 
 	type Props = {
 		children: Snippet;
-		initial: Array<number>;
+		initial?: Array<number>;
+		searchbar?: boolean;
+		bordered?: boolean;
 	};
 
-	let { children, initial = [] }: Props = $props();
+	let { children, initial = [], searchbar = false, bordered = false }: Props = $props();
 	let columns: Array<string> = $state([]);
 	let activeColumns: Array<number> = $state(initial);
 	let searchValue: string = $state("");
 	let table: HTMLTableElement;
+
 	function setColumnDisplay(columnIndex: number, display: boolean) {
 		for (let i = 0; i < table.rows.length; i++) {
 			table.rows[i].cells[columnIndex].style.display = display ? "table-cell" : "none";
@@ -52,13 +55,17 @@
 
 <div class="Table">
 	<div class="header">
-		<Input
-			placeholder="Search"
-			type="search"
-			bind:value={searchValue}
-		/>
+		{#if searchbar}
+			<Input
+				placeholder="Search"
+				type="search"
+				size="s"
+				bind:value={searchValue}
+			/>
+		{/if}
 		<Multiselect
 			placeholder="Columns"
+			size="s"
 			{initial}
 		>
 			{#each columns as col, i}
@@ -72,9 +79,14 @@
 			{/each}
 		</Multiselect>
 	</div>
-	<table bind:this={table}>
-		{@render children?.()}
-	</table>
+	<div
+		class="_table"
+		class:bordered
+	>
+		<table bind:this={table}>
+			{@render children?.()}
+		</table>
+	</div>
 </div>
 
 <style lang="scss">
@@ -82,6 +94,14 @@
 		.header {
 			display: flex;
 			justify-content: space-between;
+			gap: var(--padding-xs);
+		}
+	}
+	._table {
+		&.bordered {
+			border: thin solid var(--border-color);
+			border-radius: var(--border-radius-s);
+			overflow: hidden;
 		}
 	}
 	table {

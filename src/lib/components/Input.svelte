@@ -1,21 +1,28 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
-	import type { HTMLInputAttributes } from "svelte/elements";
+	import type { ChangeEventHandler, HTMLInputAttributes } from "svelte/elements";
 
 	type Variant = "ghost" | "bordered" | "colored";
+	type Size = "s" | "m" | "x";
 	type Props = {
-		onchange?: (value: string) => void;
+		onchange?: ChangeEventHandler<HTMLInputElement>;
 		value?: string;
+		placeholder?: string;
+		type?: string;
 		variant?: Variant;
+		size: Size;
 		label?: string;
 		description?: string;
 		icon?: Snippet;
-	} & HTMLInputAttributes;
+	};
 
 	let {
 		onchange = () => {},
 		value = $bindable(),
+		placeholder,
+		type = "text",
 		variant = "ghost",
+		size = "m",
 		label,
 		description,
 		icon,
@@ -33,8 +40,9 @@
 		<input
 			bind:focused
 			bind:value
+			{placeholder}
 			{onchange}
-			class={[variant]}
+			class={[variant, size]}
 			{...restProps}
 		/>
 		{#if !!icon}
@@ -110,8 +118,16 @@
 		height: min-content;
 		border: 1px solid var(--border-color);
 		border-radius: var(--border-radius-s);
-		padding: var(--padding-m);
 		margin-block: var(--padding-xs);
+		&.s {
+			padding: var(--padding-s);
+		}
+		&.m {
+			padding: var(--padding-m);
+		}
+		&.l {
+			padding: var(--padding-l);
+		}
 	}
 	input:focus {
 		border-color: var(--text-color);
