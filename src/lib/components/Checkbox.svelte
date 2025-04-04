@@ -68,11 +68,13 @@
 		display: flex;
 		gap: var(--padding-s);
 		align-items: center;
+		justify-content: space-between;
+		width: 100%;
 	}
 
 	.container {
 		height: 100%;
-		flex: 1;
+		// flex: 1;
 		margin-block: auto;
 	}
 
@@ -92,19 +94,19 @@
 		stroke: var(--text-color);
 		stroke-width: 1.5;
 		transform: translate3d(0, 0, 0);
-		transition: all 0.2s ease;
+		transition: all 0.1s ease;
 	}
 
 	.check svg path {
 		stroke-dasharray: 60;
 		stroke-dashoffset: 0;
-		transition: all 0.3s linear;
+		transition: all 0.2s linear;
 	}
 
 	.check svg polyline {
 		stroke-dasharray: 22;
 		stroke-dashoffset: 66;
-		transition: all 0.2s linear;
+		transition: all 0.1s linear;
 	}
 
 	.check:hover:before {
