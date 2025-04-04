@@ -10,8 +10,6 @@
 	import SelectItem from "$lib/components/Select/SelectItem.svelte";
 	import ScrollContainer from "$lib/components/ScrollContainer.svelte";
 	import Loader from "$lib/components/Loader.svelte";
-	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
-	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
 	import Table from "$lib/components/Table/Table.svelte";
 	import TableHeader from "$lib/components/Table/TableHeader.svelte";
 	import TableRow from "$lib/components/Table/TableRow.svelte";
@@ -20,9 +18,38 @@
 	import TableCell from "$lib/components/Table/TableCell.svelte";
 	import TableFooter from "$lib/components/Table/TableFooter.svelte";
 	import Checkbox from "$lib/components/Checkbox.svelte";
+	import Multiselect from "$lib/components/Multiselect/Multiselect.svelte";
+	import MultiselectItem from "$lib/components/Multiselect/MultiselectItem.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="Multiselect">
+		<div class="mock-grid">
+			<Multiselect
+				placeholder="Multiselect a fruit..."
+				label="Fruits"
+				description="Dropdown to Multiselect a fruit"
+			>
+				<MultiselectItem
+					value="apple"
+					label="Apple"
+				/>
+				<MultiselectItem
+					value="banana"
+					label="Banana"
+				/>
+				<MultiselectItem
+					value="orange"
+					label="Orange"
+				/>
+				<MultiselectItem
+					value="grape"
+					label="Grape"
+				/>
+			</Multiselect>
+		</div>
+	</Showcase>
+
 	<Showcase name="Checkbox">
 		<Checkbox
 			label="Test"
@@ -32,29 +59,29 @@
 	</Showcase>
 
 	<Showcase name="Table">
-		<Table>
+		<Table initial={[0, 1, 2]}>
 			<TableHeader>
 				<TableRow>
-					<TableHead>TableHeader1</TableHead>
-					<TableHead>TableHeader2</TableHead>
-					<TableHead>TableHeader3</TableHead>
+					<TableHead>Name</TableHead>
+					<TableHead>Lastname</TableHead>
+					<TableHead>Address</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>
 				<TableRow>
-					<TableCell>TestBody1</TableCell>
-					<TableCell>TestBody2</TableCell>
-					<TableCell>TestBody3</TableCell>
+					<TableCell>Kevien</TableCell>
+					<TableCell>Flieger</TableCell>
+					<TableCell>Transtadt 54</TableCell>
 				</TableRow>
 				<TableRow>
-					<TableCell>TestBody1</TableCell>
-					<TableCell>TestBody2</TableCell>
-					<TableCell>TestBody3</TableCell>
+					<TableCell>Michael</TableCell>
+					<TableCell>Kiehn</TableCell>
+					<TableCell>Musikmarato 34</TableCell>
 				</TableRow>
 				<TableRow>
-					<TableCell>TestBody1</TableCell>
-					<TableCell>TestBody2</TableCell>
-					<TableCell>TestBody3</TableCell>
+					<TableCell>Moritz</TableCell>
+					<TableCell>Maier</TableCell>
+					<TableCell>Kinjistan</TableCell>
 				</TableRow>
 			</TableBody>
 			<TableFooter>
