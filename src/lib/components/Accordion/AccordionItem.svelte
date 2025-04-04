@@ -36,18 +36,11 @@
 		onclick={() => selected.set(open ? {} : self)}
 		class="AccordionItemTrigger"
 	>
-		<h2>{title}</h2>
-		{#if open}
-			<Icon
-				iconName="arrowUp"
-				size="m"
-			/>
-		{:else}
-			<Icon
-				iconName="arrowDown"
-				size="m"
-			/>
-		{/if}
+		<h3>{title}</h3>
+		<Icon
+			iconName={open ? "arrowUp" : "arrowDown"}
+			size="m"
+		/>
 	</button>
 	{#if open}
 		<div
@@ -74,7 +67,7 @@
 		box-sizing: border-box;
 		border-bottom: thin solid var(--border-color);
 		width: 100%;
-		padding: var(--padding-m);
+		padding: var(--padding-s);
 		&.ghost {
 			background-color: transparent;
 			border: none;
