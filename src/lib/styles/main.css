@@ -4,3 +4,7 @@ button {
 	border: none;
 	cursor: pointer;
 }
+
+p {
+	font-size: .9rem;
+}
