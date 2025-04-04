@@ -48,15 +48,11 @@
 				/>
 				<SelectItem
 					value="#F45D01"
-					label="Sunrise"
-				/>
-				<SelectItem
-					value="#D36135"
 					label="Charmander"
 				/>
 				<SelectItem
-					value="#3E5641"
-					label="Forest"
+					value="#b08968"
+					label="Creamy"
 				/>
 			</Select>
 			<button

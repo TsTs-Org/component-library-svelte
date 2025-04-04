@@ -113,6 +113,18 @@
 	}
 
 	@media (min-width: 900px) {
+		.main {
+			img {
+				&.swap {
+					transform: translateX(100%);
+				}
+			}
+		}
+		form {
+			&.swap {
+				transform: translateX(-100%);
+			}
+		}
 	}
 
 	.LoginAndRegister {
@@ -140,9 +152,6 @@
 			width: var(--width);
 			height: var(--height);
 			transition: transform 0.4s ease;
-			&.swap {
-				transform: translateX(100%);
-			}
 		}
 		button {
 			z-index: 10;
@@ -179,9 +188,7 @@
 			background-color: var(--foreground-color);
 			padding: var(--padding-l);
 			transition: transform 0.4s ease;
-			&.swap {
-				transform: translateX(-100%);
-			}
+
 			.header {
 				display: flex;
 				flex-direction: column;
