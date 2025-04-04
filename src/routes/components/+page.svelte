@@ -51,10 +51,14 @@
 	</Showcase>
 
 	<Showcase name="Checkbox">
-		<Checkbox
-			label="Test"
-			description="Some description"
-		/>
+		<div class="mock-grid">
+			<Checkbox />
+			<Checkbox label="Title only" />
+			<Checkbox
+				label="Title"
+				description="Description"
+			/>
+		</div>
 		<!-- <Checkbox /> -->
 	</Showcase>
 
