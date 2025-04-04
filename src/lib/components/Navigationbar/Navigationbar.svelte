@@ -4,7 +4,6 @@
 	import { onMount, setContext } from "svelte";
 	import { writable, type Writable } from "svelte/store";
 	import { Icon } from "$lib/index.js";
-	import { scale, slide } from "svelte/transition";
 
 	type Variant = "default" | "glass";
 
@@ -34,7 +33,7 @@
 
 <button
 	class:open
-	class="openNav"
+	class="openNavButton"
 	disabled={false}
 	onclick={() => {
 		open = !open;
@@ -70,8 +69,8 @@
 
 <style lang="scss">
 	@media (max-width: 900px) {
-		.openNav {
-			position: fixed;
+		.openNavButton {
+			position: sticky;
 			z-index: 1200;
 			top: 1rem;
 			left: 1rem;
@@ -79,20 +78,9 @@
 			justify-content: center;
 			align-items: center;
 			border-radius: 100%;
-			border: thin solid var(--border-color);
 			width: 4rem;
 			height: 4rem;
-			background-color: var(--background-color);
-			&:disabled {
-				cursor: not-allowed;
-				background-color: var(--neutral-hover-color);
-			}
-			&:hover {
-				background-color: var(--hover-color);
-			}
-			&.open {
-				transform: rotate(90deg);
-			}
+			padding: 1rem;
 		}
 		nav {
 			height: 100%;
@@ -126,7 +114,7 @@
 			grid-template-columns: 1fr auto 1fr;
 			border-bottom: 1px solid var(--border-color);
 		}
-		.openNav {
+		.openNavButton {
 			display: none;
 		}
 		.left,
@@ -151,9 +139,9 @@
 			background: var(--background-color);
 		}
 		&.glass {
-			background: rgba($color: #000000, $alpha: 0.35);
-			backdrop-filter: blur(8px);
-			-webkit-backdrop-filter: blur(8px);
+			background: rgba($color: #000000, $alpha: 0.125);
+			backdrop-filter: blur(6px);
+			-webkit-backdrop-filter: blur(6px);
 		}
 	}
 </style>
