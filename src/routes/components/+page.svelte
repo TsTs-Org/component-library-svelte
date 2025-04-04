@@ -99,50 +99,52 @@
 		</div>
 	</Showcase>
 	<Showcase name="Card">
-		<div style="width: 4rem; height: 4rem">
-			<Card size="s">
-				{#snippet title()}
-					Title text
-				{/snippet}
-				{#snippet iconRight(size)}
-					<Icon
-						{size}
-						iconName="x"
-					></Icon>
-				{/snippet}
-			</Card>
-		</div>
-		<div style="width: 7rem; height: 6rem">
-			<Card size="m">
-				{#snippet title()}
-					Title text
-				{/snippet}
-				{#snippet iconRight(size)}
-					<Icon
-						{size}
-						iconName="x"
-					></Icon>
-				{/snippet}
-			</Card>
-		</div>
-		<div style="width: 20rem; height: 10rem">
-			<Card size="l">
-				{#snippet iconLeft(size)}
-					<Icon
-						{size}
-						iconName="sun"
-					></Icon>
-				{/snippet}
-				{#snippet title()}
-					Title text
-				{/snippet}
-				{#snippet iconRight(size)}
-					<Icon
-						{size}
-						iconName="x"
-					></Icon>
-				{/snippet}
-			</Card>
+		<div class="mock-grid">
+			<div style="width: 4rem; height: 4rem">
+				<Card size="s">
+					{#snippet title()}
+						Title text
+					{/snippet}
+					{#snippet iconRight(size)}
+						<Icon
+							{size}
+							iconName="x"
+						></Icon>
+					{/snippet}
+				</Card>
+			</div>
+			<div style="width: 7rem; height: 6rem">
+				<Card size="m">
+					{#snippet title()}
+						Title text
+					{/snippet}
+					{#snippet iconRight(size)}
+						<Icon
+							{size}
+							iconName="x"
+						></Icon>
+					{/snippet}
+				</Card>
+			</div>
+			<div style="width: 20rem; height: 10rem">
+				<Card size="l">
+					{#snippet iconLeft(size)}
+						<Icon
+							{size}
+							iconName="sun"
+						></Icon>
+					{/snippet}
+					{#snippet title()}
+						Title text
+					{/snippet}
+					{#snippet iconRight(size)}
+						<Icon
+							{size}
+							iconName="x"
+						></Icon>
+					{/snippet}
+				</Card>
+			</div>
 		</div>
 	</Showcase>
 
@@ -202,20 +204,6 @@
 				XL
 			</div>
 		</div>
-	</Showcase>
-
-	<Showcase name="Navigation Bar">
-		<Navigationbar>
-			{#snippet left()}
-				<NavigationbarItem>Home</NavigationbarItem>
-				<NavigationbarItem>Colors</NavigationbarItem>
-				<NavigationbarItem>Components</NavigationbarItem>
-			{/snippet}
-			<h3>YoMom</h3>
-			{#snippet right()}
-				<NavigationbarItem>User</NavigationbarItem>
-			{/snippet}
-		</Navigationbar>
 	</Showcase>
 
 	<Showcase name="Input">
@@ -323,19 +311,21 @@
 
 <style lang="scss">
 	.components-page {
-		height: 100vh;
 		box-sizing: border-box;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-		grid-auto-rows: 20rem;
+		grid-template-columns: repeat(auto-fit, min(90vw, 30rem));
+		justify-content: center;
 		gap: var(--padding-l);
 		padding: var(--padding-l);
 	}
 
 	.mock-grid {
-		display: grid;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
 		width: 100%;
-		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+		grid-template-columns: repeat(auto-fit);
 		gap: var(--padding-m);
 		place-items: center;
 	}

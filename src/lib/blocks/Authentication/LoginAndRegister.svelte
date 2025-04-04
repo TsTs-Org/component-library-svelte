@@ -100,6 +100,33 @@
 </div>
 
 <style lang="scss">
+	@media (max-width: 900px) {
+		.main {
+			img {
+				display: none !important;
+			}
+			button {
+				top: initial !important;
+				bottom: 3% !important;
+			}
+		}
+	}
+
+	@media (min-width: 900px) {
+		.main {
+			img {
+				&.swap {
+					transform: translateX(100%);
+				}
+			}
+		}
+		form {
+			&.swap {
+				transform: translateX(-100%);
+			}
+		}
+	}
+
 	.LoginAndRegister {
 		--width: 22rem;
 		--height: 28rem;
@@ -124,9 +151,7 @@
 			object-fit: cover;
 			width: var(--width);
 			height: var(--height);
-			&.swap {
-				transform: translateX(100%);
-			}
+			transition: transform 0.4s ease;
 		}
 		button {
 			z-index: 10;
@@ -140,6 +165,7 @@
 			width: 3rem;
 			height: 3rem;
 			background-color: var(--background-color);
+			transition: transform 0.4s ease;
 			&:disabled {
 				cursor: not-allowed;
 				background-color: var(--neutral-hover-color);
@@ -161,9 +187,8 @@
 			justify-content: center;
 			background-color: var(--foreground-color);
 			padding: var(--padding-l);
-			&.swap {
-				transform: translateX(-100%);
-			}
+			transition: transform 0.4s ease;
+
 			.header {
 				display: flex;
 				flex-direction: column;

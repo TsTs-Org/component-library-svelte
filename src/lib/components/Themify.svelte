@@ -47,10 +47,12 @@
 <style>
 	.page {
 		position: relative;
-		height: 100vh;
+		height: 100dvh;
 		overflow: auto;
 		box-sizing: border-box;
 		background-color: var(--background-color);
+		display: flex;
+		flex-direction: column;
 	}
 
 	.loader {

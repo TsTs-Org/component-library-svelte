@@ -29,6 +29,23 @@
 </div>
 
 <style lang="scss">
+	@media (max-width: 900px) {
+		.mock-block {
+			aspect-ratio: 9/16;
+		}
+	}
+
+	@media (min-width: 900px) {
+		.mock-block {
+			aspect-ratio: 16/9;
+		}
+	}
+
+	.mock-block {
+		overflow: hidden;
+		border: thin solid var(--border-color);
+		border-radius: var(--border-radius-m);
+	}
 	.blocks-page {
 		box-sizing: border-box;
 		width: 100%;
@@ -37,11 +54,5 @@
 		flex-direction: column;
 		gap: var(--padding-l);
 		padding: var(--padding-l);
-	}
-	.mock-block {
-		overflow: hidden;
-		aspect-ratio: 16/9;
-		border: thin solid var(--border-color);
-		border-radius: var(--border-radius-m);
 	}
 </style>

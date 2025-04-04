@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { getContext, onMount, type Snippet } from "svelte";
-	import Icon from "../Icon.svelte";
-	import { slide } from "svelte/transition";
 	import type { NavigationbarCtx } from "./Navigationbar.svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
@@ -48,6 +46,13 @@
 -->
 
 <style lang="scss">
+	@media (min-width: 900px) {
+		a:hover {
+			background-color: var(--neutral-hover-color);
+			cursor: pointer;
+		}
+	}
+
 	a {
 		text-align: center;
 		text-decoration: none;
@@ -87,9 +92,5 @@
 				background-color: var(--hover-color);
 			}
 		}
-	}
-	a:hover {
-		background-color: var(--neutral-hover-color);
-		cursor: pointer;
 	}
 </style>
