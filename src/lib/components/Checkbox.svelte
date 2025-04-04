@@ -28,17 +28,16 @@
 		{/if}
 	</div>
 	<div class="container">
-		<input
-			{onchange}
-			bind:checked
-			type="checkbox"
-			id="cbx"
-			style="display: none;"
-		/>
 		<label
-			for="cbx"
 			class="check"
+			class:checked
 		>
+			<input
+				{onchange}
+				bind:checked
+				type="checkbox"
+				style="display: none;"
+			/>
 			<svg
 				width="18px"
 				height="18px"
@@ -84,17 +83,6 @@
 		// transform: translate3d(0, 0, 0);
 	}
 
-	// .check:before {
-	// 	content: "";
-	// 	position: absolute;
-	// 	top: -15px;
-	// 	left: -15px;
-	// 	border-radius: 50%;
-	// 	background: rgba(34, 50, 84, 0.03);
-	// 	opacity: 0;
-	// 	transition: opacity 0.2s ease;
-	// }
-
 	.check svg {
 		position: relative;
 		z-index: 1;
@@ -127,15 +115,15 @@
 		stroke: var(--primary-color);
 	}
 
-	#cbx:checked + .check svg {
+	.check.checked svg {
 		stroke: var(--text-color);
 	}
 
-	#cbx:checked + .check svg path {
+	.check.checked svg path {
 		stroke-dashoffset: 60;
 	}
 
-	#cbx:checked + .check svg polyline {
+	.check.checked svg polyline {
 		stroke-dashoffset: 42;
 		transition-delay: 0.15s;
 	}
