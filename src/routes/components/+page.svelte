@@ -59,43 +59,40 @@
 	</Showcase>
 
 	<Showcase name="Table">
-		<Table
-			initial={[0, 1, 2]}
-			searchbar
-			bordered
-		>
-			<TableHeader>
-				<TableRow>
-					<TableHead>Name</TableHead>
-					<TableHead>Lastname</TableHead>
-					<TableHead>Address</TableHead>
-				</TableRow>
-			</TableHeader>
-			<TableBody>
-				<TableRow>
-					<TableCell>Kevien</TableCell>
-					<TableCell>Flieger</TableCell>
-					<TableCell>Transtadt 54</TableCell>
-				</TableRow>
-				<TableRow>
-					<TableCell>Michael</TableCell>
-					<TableCell>Kiehn</TableCell>
-					<TableCell>Musikmarato 34</TableCell>
-				</TableRow>
-				<TableRow>
-					<TableCell>Moritz</TableCell>
-					<TableCell>Maier</TableCell>
-					<TableCell>Kinjistan</TableCell>
-				</TableRow>
-			</TableBody>
-			<TableFooter>
-				<TableRow>
-					<TableCell>TableFooter1</TableCell>
-					<TableCell></TableCell>
-					<TableCell>TableFooter3</TableCell>
-				</TableRow>
-			</TableFooter>
-		</Table>
+		<div class="mock-grid">
+			<Table
+				initial={[0, 1]}
+				searchbar
+				bordered
+			>
+				<TableHeader>
+					<TableRow>
+						<TableHead>Name</TableHead>
+						<TableHead>Lastname</TableHead>
+					</TableRow>
+				</TableHeader>
+				<TableBody>
+					<TableRow>
+						<TableCell>Kevien</TableCell>
+						<TableCell>Flieger</TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell>Michael</TableCell>
+						<TableCell>Kiehn</TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell>Moritz</TableCell>
+						<TableCell>Maier</TableCell>
+					</TableRow>
+				</TableBody>
+				<TableFooter>
+					<TableRow>
+						<TableCell>Data</TableCell>
+						<TableCell>100</TableCell>
+					</TableRow>
+				</TableFooter>
+			</Table>
+		</div>
 	</Showcase>
 
 	<Showcase name="Loader">
@@ -175,64 +172,6 @@
 						></Icon>
 					{/snippet}
 				</Card>
-			</div>
-		</div>
-	</Showcase>
-
-	<Showcase name="Border Radius">
-		<div class="mock-grid">
-			<div
-				class="mock-box fixed-size"
-				style="border-radius: var(--border-radius-s);"
-			>
-				S
-			</div>
-			<div
-				class="mock-box fixed-size"
-				style="border-radius: var(--border-radius-m);"
-			>
-				M
-			</div>
-			<div
-				class="mock-box fixed-size"
-				style="border-radius: var(--border-radius-l);"
-			>
-				L
-			</div>
-			<div
-				class="mock-box fixed-size"
-				style="border-radius: var(--border-radius-xl);"
-			>
-				XL
-			</div>
-		</div>
-	</Showcase>
-
-	<Showcase name="Padding">
-		<div class="mock-grid">
-			<div
-				class="mock-box"
-				style="padding: var(--padding-s)"
-			>
-				S
-			</div>
-			<div
-				class="mock-box"
-				style="padding: var(--padding-m)"
-			>
-				M
-			</div>
-			<div
-				class="mock-box"
-				style="padding: var(--padding-l)"
-			>
-				L
-			</div>
-			<div
-				class="mock-box"
-				style="padding: var(--padding-xl)"
-			>
-				XL
 			</div>
 		</div>
 	</Showcase>
@@ -356,9 +295,7 @@
 		justify-content: center;
 		flex-wrap: wrap;
 		width: 100%;
-		grid-template-columns: repeat(auto-fit);
 		gap: var(--padding-m);
-		place-items: center;
 	}
 
 	.mock-box {

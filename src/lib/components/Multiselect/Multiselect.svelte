@@ -161,6 +161,7 @@
 	.Portal {
 		z-index: 500;
 		position: absolute;
+		right: 0;
 		overflow: hidden;
 		background-color: var(--foreground-color);
 		width: 100%;

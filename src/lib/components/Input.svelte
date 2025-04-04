@@ -10,7 +10,8 @@
 		placeholder?: string;
 		type?: string;
 		variant?: Variant;
-		size: Size;
+		size?: Size;
+		outerStyle?: string;
 		label?: string;
 		description?: string;
 		icon?: Snippet;
@@ -23,6 +24,7 @@
 		type = "text",
 		variant = "ghost",
 		size = "m",
+		outerStyle,
 		label,
 		description,
 		icon,
@@ -32,32 +34,30 @@
 	let focused = $state(false);
 </script>
 
-<div>
-	{#if label}
-		<h4 class:focused>{label}</h4>
-	{/if}
-	<div class="Input">
-		<input
-			bind:focused
-			bind:value
-			{placeholder}
-			{onchange}
-			class={[variant, size]}
-			{...restProps}
-		/>
-		{#if !!icon}
-			<div
-				class="icon"
-				class:focused
-			>
-				{@render icon?.()}
-			</div>
-		{/if}
-	</div>
-	{#if description}
-		<p>{description}</p>
+{#if label}
+	<h4 class:focused>{label}</h4>
+{/if}
+<div class="Input">
+	<input
+		bind:focused
+		bind:value
+		{placeholder}
+		{onchange}
+		class={[variant, size]}
+		{...restProps}
+	/>
+	{#if !!icon}
+		<div
+			class="icon"
+			class:focused
+		>
+			{@render icon?.()}
+		</div>
 	{/if}
 </div>
+{#if description}
+	<p>{description}</p>
+{/if}
 
 <!--
 @component
@@ -73,7 +73,8 @@
 <style lang="scss">
 	.Input {
 		position: relative;
-		min-width: 15rem;
+		flex: 1;
+		width: 100%;
 
 		&:has(.icon) input {
 			padding-left: 2.35rem;

@@ -91,6 +91,9 @@
 
 <style lang="scss">
 	.Table {
+		width: 100%;
+		display: table;
+		overflow: hidden;
 		.header {
 			display: flex;
 			justify-content: space-between;

@@ -17,17 +17,10 @@
 				aria-label="Toggle light/dark mode"
 				onclick={() => setMode()}
 			>
-				{#if localMode === "light"}
-					<Icon
-						iconName="sun"
-						{size}
-					></Icon>
-				{:else}
-					<Icon
-						iconName="moon"
-						{size}
-					></Icon>
-				{/if}
+				<Icon
+					iconName={localMode === "light" ? "sun" : "moon"}
+					{size}
+				></Icon>
 			</button>
 		{/snippet}
 		<div class="content-wrapper">{@render children?.()}</div>
