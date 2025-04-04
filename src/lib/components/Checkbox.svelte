@@ -74,7 +74,6 @@
 
 	.container {
 		height: 100%;
-		// flex: 1;
 		margin-block: auto;
 	}
 
@@ -82,7 +81,6 @@
 		cursor: pointer;
 		position: relative;
 		-webkit-tap-highlight-color: transparent;
-		// transform: translate3d(0, 0, 0);
 	}
 
 	.check svg {
@@ -131,13 +129,9 @@
 	}
 
 	h4 {
-		font-size: 0.85rem;
-		font-weight: 500;
-		color: var(--text-color);
+		font-size: 0.925rem;
+		font-weight: 600;
 		margin-left: var(--padding-xs);
-		&.focused {
-			color: var(--text-color);
-		}
 	}
 	p {
 		font-size: 0.75rem;
