@@ -6,23 +6,23 @@
 	import { writable, type Writable } from "svelte/store";
 
 	type Variant = "ghost" | "bordered";
+	type Size = "s" | "m" | "l";
 
 	type Props = {
-		onchange?: (value: string) => void;
-		value?: string;
+		onchange?: (value: Array<Option>) => void;
+		value?: Array<Option>;
 		label?: string;
 		description?: string;
+		initial?: Array<Option>;
 		variant?: Variant;
+		size?: Size;
 		placeholder: string;
 	} & HTMLAttributes<any>;
 
-	type Option = {
-		value: string;
-		label: string;
-	};
+	type Option = string | number;
 
-	export type SelectCtx = {
-		selected: Writable<Option>;
+	export type MultiselectCtx = {
+		selected: Writable<Array<Option>>;
 	};
 
 	let {
@@ -30,25 +30,27 @@
 		value = $bindable(),
 		label,
 		description,
+		initial = [],
 		variant = "bordered",
+		size = "m",
 		placeholder,
 		children,
 		...restProps
 	}: Props = $props();
 
 	let open = $state(false);
-	let selectedOption: Option | null = $state(null);
+	// let selectedOptions: Array<Option> = $state([]);
 
 	const ctx = {
-		selected: writable({ value, label }),
+		selected: writable(initial),
 	};
 
-	setContext("SelectCtx", ctx);
+	setContext("MultiselectCtx", ctx);
 	let initialized = false;
 
 	onMount(() => {
 		document.addEventListener("click", (event: MouseEvent) => {
-			if (event.target && !event.target.closest(".Select") && open) {
+			if (event.target && !event.target.closest(".Multiselect") && open) {
 				open = false;
 			}
 		});
@@ -57,43 +59,29 @@
 				initialized = true;
 				return; // Skip the first run
 			}
-			open = false;
-			value = (x as Option).value;
-			onchange((x as Option).value);
-			selectedOption = x as Option;
+			value = x;
+			onchange(x);
 		});
 	});
 </script>
 
-<div class="Select">
+<div class="Multiselect">
 	{#if label}
 		<label>{label}</label>
 	{/if}
 
 	<button
-		class={["Trigger", variant]}
+		class={["Trigger", variant, size]}
 		{...restProps}
 		onclick={() => (open = !open)}
 	>
-		{#if selectedOption?.label}
-			{selectedOption.label}
-		{:else}
-			<span style="color: var(--text-color-muted)">{placeholder}</span>
-		{/if}
+		<span style="color: var(--text-color)">{placeholder}</span>
 
-		{#if open}
-			<Icon
-				iconName="arrowUp"
-				size="s"
-				style="fill: var(--text-color-muted)"
-			/>
-		{:else}
-			<Icon
-				iconName="arrowDown"
-				size="s"
-				style="fill: var(--text-color-muted)"
-			/>
-		{/if}
+		<Icon
+			iconName={open ? "arrowUp" : "arrowDown"}
+			size="s"
+			style="fill: var(--text-color-muted)"
+		/>
 	</button>
 
 	{#if open}
@@ -122,7 +110,7 @@
 -->
 
 <style lang="scss">
-	.Select {
+	.Multiselect {
 		position: relative;
 	}
 
@@ -149,13 +137,22 @@
 		justify-content: space-between;
 		color: var(--text-color);
 		border-radius: var(--border-radius-s);
-		padding: var(--padding-m);
 		margin-block: var(--padding-xs);
 		&.bordered {
 			border: 1px solid var(--border-color);
 		}
 		&.ghost {
 			border: none;
+		}
+
+		&.s {
+			padding: var(--padding-s);
+		}
+		&.m {
+			padding: var(--padding-m);
+		}
+		&.l {
+			padding: var(--padding-l);
 		}
 	}
 	button:focus {
