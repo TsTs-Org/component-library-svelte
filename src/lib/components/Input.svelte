@@ -34,30 +34,32 @@
 	let focused = $state(false);
 </script>
 
-{#if label}
-	<h4 class:focused>{label}</h4>
-{/if}
-<div class="Input">
-	<input
-		bind:focused
-		bind:value
-		{placeholder}
-		{onchange}
-		class={[variant, size]}
-		{...restProps}
-	/>
-	{#if !!icon}
-		<div
-			class="icon"
-			class:focused
-		>
-			{@render icon?.()}
-		</div>
+<div class="InputWrapper">
+	{#if label}
+		<h4 class:focused>{label}</h4>
+	{/if}
+	<div class="Input">
+		<input
+			bind:focused
+			bind:value
+			{placeholder}
+			{onchange}
+			class={[variant, size]}
+			{...restProps}
+		/>
+		{#if !!icon}
+			<div
+				class="icon"
+				class:focused
+			>
+				{@render icon?.()}
+			</div>
+		{/if}
+	</div>
+	{#if description}
+		<p>{description}</p>
 	{/if}
 </div>
-{#if description}
-	<p>{description}</p>
-{/if}
 
 <!--
 @component
@@ -71,10 +73,11 @@
 -->
 
 <style lang="scss">
+	.InputWrapper {
+		width: 100%;
+	}
 	.Input {
 		position: relative;
-		flex: 1;
-		width: 100%;
 
 		&:has(.icon) input {
 			padding-left: 2.35rem;
@@ -97,10 +100,10 @@
 	}
 
 	h4 {
-		font-size: 0.85rem;
-		font-weight: 500;
-		color: var(--text-color-muted);
+		font-size: 0.925rem;
+		font-weight: 600;
 		margin-left: var(--padding-xs);
+		color: var(--text-color-muted);
 		&.focused {
 			color: var(--text-color);
 		}
