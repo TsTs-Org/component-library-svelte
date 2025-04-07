@@ -10,7 +10,6 @@
 		variant?: Variant;
 		label?: string;
 		description?: string;
-		type?: string;
 		icon?: Snippet;
 	} & HTMLInputAttributes;
 
@@ -20,14 +19,19 @@
 		variant = "ghost",
 		label,
 		description,
-		type,
 		icon,
 		...restProps
 	}: Props = $props();
 
-	let custom_type = $state("");
+	const initial_type = restProps.type;
+	let self: HTMLInputElement;
 	let focused = $state(false);
 	let show_password = $state(false);
+
+	function swapPasswordDisplay() {
+		show_password = !show_password;
+		self.type = show_password ? "text" : "password";
+	}
 </script>
 
 <div>
@@ -36,9 +40,9 @@
 	{/if}
 	<div class="Input">
 		<input
+			bind:this={self}
 			bind:focused
 			bind:value
-			type={custom_type == "" ? custom_type : type}
 			{onchange}
 			class={[variant]}
 			{...restProps}
@@ -53,14 +57,14 @@
 		{/if}
 
 		<button
-			class="password-btn"
+			class={["password-btn", initial_type]}
 			class:focused
 			onclick={() => {
-				show_password = !show_password;
+				swapPasswordDisplay();
 			}}
 		>
 			<Icon
-				iconName={show_password ? "sun" : "moon"}
+				iconName={show_password ? "eyeOpen" : "eyeClosed"}
 				fill="inherit"
 			/>
 		</button>
@@ -89,13 +93,12 @@
 			padding-left: 2.35rem;
 		}
 
-		&:has(input[type="password"]) .password-btn {
-			display: flex;
-		}
-
 		.password-btn {
 			display: none;
 			right: 0;
+			&.password {
+				display: flex;
+			}
 			&:hover {
 				fill: var(--text-color);
 			}
