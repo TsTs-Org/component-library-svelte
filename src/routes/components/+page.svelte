@@ -20,9 +20,19 @@
 	import Checkbox from "$lib/components/Checkbox.svelte";
 	import Multiselect from "$lib/components/Multiselect/Multiselect.svelte";
 	import MultiselectItem from "$lib/components/Multiselect/MultiselectItem.svelte";
+	import Trigger from "$lib/components/test/Trigger.svelte";
+	import Portal from "$lib/components/test/Portal.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="dat mein ich">
+		<Trigger>
+			<Portal>
+				<h2 style="background-color: white">Hello world</h2>
+			</Portal>
+		</Trigger>
+	</Showcase>
+
 	<Showcase name="Multiselect">
 		<div class="mock-grid">
 			<Multiselect
