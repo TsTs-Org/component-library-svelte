@@ -82,7 +82,7 @@
 			<Input
 				bind:value={password}
 				disabled={loading}
-				type="Password"
+				type="password"
 				placeholder=""
 				label="Password"
 			/>

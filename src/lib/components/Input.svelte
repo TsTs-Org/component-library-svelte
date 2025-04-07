@@ -28,7 +28,8 @@
 	let focused = $state(false);
 	let show_password = $state(false);
 
-	function swapPasswordDisplay() {
+	function swapPasswordDisplay(e: Event) {
+		e.preventDefault();
 		show_password = !show_password;
 		self.type = show_password ? "text" : "password";
 	}
@@ -59,9 +60,7 @@
 		<button
 			class={["password-btn", initial_type]}
 			class:focused
-			onclick={() => {
-				swapPasswordDisplay();
-			}}
+			onclick={swapPasswordDisplay}
 		>
 			<Icon
 				iconName={show_password ? "eyeOpen" : "eyeClosed"}
