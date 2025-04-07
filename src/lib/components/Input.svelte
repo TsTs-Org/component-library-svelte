@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Icon } from "$lib/index.js";
 	import type { Snippet } from "svelte";
 	import type { ChangeEventHandler, HTMLInputAttributes } from "svelte/elements";
 
@@ -31,7 +32,16 @@
 		...restProps
 	}: Props = $props();
 
+	const initial_type = restProps.type;
+	let self: HTMLInputElement;
 	let focused = $state(false);
+	let show_password = $state(false);
+
+	function swapPasswordDisplay(e: Event) {
+		e.preventDefault();
+		show_password = !show_password;
+		self.type = show_password ? "text" : "password";
+	}
 </script>
 
 <div class="InputWrapper">
@@ -40,6 +50,7 @@
 	{/if}
 	<div class="Input">
 		<input
+			bind:this={self}
 			bind:focused
 			bind:value
 			{placeholder}
@@ -55,6 +66,17 @@
 				{@render icon?.()}
 			</div>
 		{/if}
+
+		<button
+			class={["password-btn", initial_type]}
+			class:focused
+			onclick={swapPasswordDisplay}
+		>
+			<Icon
+				iconName={show_password ? "eyeOpen" : "eyeClosed"}
+				fill="inherit"
+			/>
+		</button>
 	</div>
 	{#if description}
 		<p>{description}</p>
@@ -83,19 +105,34 @@
 			padding-left: 2.35rem;
 		}
 
-		.icon {
+		.password-btn {
+			display: none;
+			right: 0;
+			&.password {
+				display: flex;
+			}
+			&:hover {
+				fill: var(--text-color);
+			}
+		}
+
+		.icon,
+		.password-btn {
 			position: absolute;
 			top: 12.5%;
-			left: 0;
 			height: 75%;
 			width: 2.5rem;
-			display: flex;
 			align-items: center;
 			justify-content: center;
 			fill: var(--text-color-muted);
 			&.focused {
 				fill: var(--text-color);
 			}
+		}
+
+		.icon {
+			display: flex;
+			left: 0;
 		}
 	}
 
