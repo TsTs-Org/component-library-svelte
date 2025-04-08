@@ -52,6 +52,12 @@
 	onMount(() => {
 		const headers = table.querySelectorAll("th");
 		columns = Array.from(headers).map((header) => header.textContent) as Array<string>;
+		for (let i = 0; i < columns.length; i++) {
+			setColumnDisplay(i, false);
+		}
+		for (let i = 0; i < initial.length; i++) {
+			setColumnDisplay(initial[i], true);
+		}
 	});
 </script>
 
@@ -110,6 +116,7 @@
 		&.bordered {
 			border: thin solid var(--border-color);
 			border-radius: var(--border-radius-s);
+			overflow: hidden;
 		}
 	}
 	.emptyText {

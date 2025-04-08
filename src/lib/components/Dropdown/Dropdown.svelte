@@ -6,10 +6,11 @@
 
 	type Props = {
 		open: boolean;
+		alignRight?: boolean;
 		children?: Snippet;
 	} & HTMLAttributes<any>;
 
-	let { open = $bindable(), children, ...restProps }: Props = $props();
+	let { open = $bindable(), alignRight = false, children, ...restProps }: Props = $props();
 	$effect(() => {
 		changeOpen(open);
 	});
@@ -29,9 +30,9 @@
 		const { innerHeight, innerWidth } = window;
 		bottom = innerHeight - bottom;
 		right = innerWidth - right;
-		if (right < 0) {
+		if (right < 0 || alignRight) {
 			self.style.right = "0";
-		} else {
+		} else if (!alignRight) {
 			self.style.left = "0";
 		}
 		if (bottom < 0) {

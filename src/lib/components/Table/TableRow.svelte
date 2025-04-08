@@ -57,14 +57,16 @@
 					size="m"
 					iconName="threeDots"
 				/>
-				<Dropdown bind:open>
+				<Dropdown
+					alignRight
+					bind:open
+				>
 					<div class="rowActions">
 						{#each rowActions as action}
 							<ContextmenuItem onclick={() => executeRowAction(action.callback)}>
 								{#snippet icon()}
 									<Icon
 										size="s"
-										fill="var(--text-color-inverted)"
 										iconName={action.iconName!}
 									/>
 								{/snippet}

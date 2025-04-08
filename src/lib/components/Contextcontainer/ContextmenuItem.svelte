@@ -14,7 +14,9 @@
 	class="ContextmenuItem"
 	{...restProps}
 >
-	<div class="icon">{@render icon?.()}</div>
+	<div class="icon">
+		{@render icon?.()}
+	</div>
 	<div class={[!icon ? "no-icon" : "", "content"]}>
 		{@render children?.()}
 	</div>

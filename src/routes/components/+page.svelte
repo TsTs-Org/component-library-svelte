@@ -34,7 +34,6 @@
 					{#snippet icon()}
 						<Icon
 							size="s"
-							fill="var(--text-color-inverted)"
 							iconName="eyeOpen"
 						/>
 					{/snippet}
@@ -44,7 +43,6 @@
 					{#snippet icon()}
 						<Icon
 							size="s"
-							fill="var(--text-color-inverted)"
 							iconName="eyeClosed"
 						/>
 					{/snippet}
@@ -117,7 +115,6 @@
 					<TableRow>
 						<TableHead>Name</TableHead>
 						<TableHead>Lastname</TableHead>
-						<TableHead></TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
