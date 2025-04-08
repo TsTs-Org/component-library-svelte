@@ -110,7 +110,6 @@
 		&.bordered {
 			border: thin solid var(--border-color);
 			border-radius: var(--border-radius-s);
-			overflow: hidden;
 		}
 	}
 	.emptyText {

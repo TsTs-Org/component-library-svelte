@@ -117,27 +117,47 @@
 					<TableRow>
 						<TableHead>Name</TableHead>
 						<TableHead>Lastname</TableHead>
+						<TableHead></TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					<TableRow>
-						<TableCell>Kevien</TableCell>
-						<TableCell>Flieger</TableCell>
+					<TableRow
+						rowActions={[
+							{
+								title: "ActionOne",
+								iconName: "eyeOpen",
+								callback: (val) => {
+									console.log(val);
+								},
+							},
+						]}
+					>
+						<TableCell _for="name">Kevien</TableCell>
+						<TableCell _for="lastname">Flieger</TableCell>
+					</TableRow>
+					<TableRow
+						rowActions={[
+							{
+								title: "ActionOne",
+								callback: (val) => {
+									console.log(val);
+								},
+							},
+						]}
+					>
+						<TableCell _for="name">Michael</TableCell>
+						<TableCell _for="lastname">Kiehn</TableCell>
 					</TableRow>
 					<TableRow>
-						<TableCell>Michael</TableCell>
-						<TableCell>Kiehn</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell>Moritz</TableCell>
-						<TableCell>Maier</TableCell>
+						<TableCell _for="name">Moritz</TableCell>
+						<TableCell _for="lastname">Maier</TableCell>
 					</TableRow>
 				</TableBody>
 				<TableFooter>
 					<TableRow>
-						<TableCell>Data</TableCell>
-						<TableCell></TableCell>
-						<TableCell>100</TableCell>
+						<TableCell _for="_none">Data</TableCell>
+						<TableCell _for="_none"></TableCell>
+						<TableCell _for="_none">100</TableCell>
 					</TableRow>
 				</TableFooter>
 			</Table>
