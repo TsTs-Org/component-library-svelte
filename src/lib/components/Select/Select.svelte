@@ -4,6 +4,8 @@
 	import Icon from "../Icon.svelte";
 	import { slide } from "svelte/transition";
 	import { writable, type Writable } from "svelte/store";
+	import Dropdown from "../Dropdown/Dropdown.svelte";
+	import { closeOverlay } from "../Themify.svelte";
 
 	type Variant = "ghost" | "bordered";
 
@@ -81,29 +83,16 @@
 			<span style="color: var(--text-color-muted)">{placeholder}</span>
 		{/if}
 
-		{#if open}
-			<Icon
-				iconName="arrowUp"
-				size="s"
-				style="fill: var(--text-color-muted)"
-			/>
-		{:else}
-			<Icon
-				iconName="arrowDown"
-				size="s"
-				style="fill: var(--text-color-muted)"
-			/>
-		{/if}
+		<Icon
+			iconName={open ? "arrowUp" : "arrowDown"}
+			size="s"
+			style="fill: var(--text-color-muted)"
+		/>
 	</button>
 
-	{#if open}
-		<div
-			class="Portal"
-			transition:slide={{ duration: 190 }}
-		>
-			{@render children?.()}
-		</div>
-	{/if}
+	<Dropdown bind:open>
+		{@render children?.()}
+	</Dropdown>
 
 	{#if description}
 		<p>{description}</p>
@@ -160,16 +149,5 @@
 	}
 	button:focus {
 		border-color: var(--primary-color);
-	}
-	.Portal {
-		z-index: 500;
-		position: absolute;
-		overflow: hidden;
-		background-color: var(--foreground-color);
-		width: 100%;
-		min-width: fit-content;
-		box-sizing: border-box;
-		border-radius: var(--border-radius-s);
-		border: 1px solid var(--border-color);
 	}
 </style>

@@ -20,9 +20,53 @@
 	import Checkbox from "$lib/components/Checkbox.svelte";
 	import Multiselect from "$lib/components/Multiselect/Multiselect.svelte";
 	import MultiselectItem from "$lib/components/Multiselect/MultiselectItem.svelte";
+	import Contextmenu from "$lib/components/Contextcontainer/Contextmenu.svelte";
+	import Contextcontainer from "$lib/components/Contextcontainer/Contextcontainer.svelte";
+	import ContextmenuItem from "$lib/components/Contextcontainer/ContextmenuItem.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="Contextmenu">
+		<Contextcontainer>
+			<Contextmenu>
+				<ContextmenuItem>Test</ContextmenuItem>
+				<ContextmenuItem>
+					{#snippet icon()}
+						<Icon
+							size="s"
+							fill="var(--text-color-inverted)"
+							iconName="eyeOpen"
+						/>
+					{/snippet}
+					Test
+				</ContextmenuItem>
+				<ContextmenuItem>
+					{#snippet icon()}
+						<Icon
+							size="s"
+							fill="var(--text-color-inverted)"
+							iconName="eyeClosed"
+						/>
+					{/snippet}
+					Test
+				</ContextmenuItem>
+			</Contextmenu>
+			<div
+				style="
+					display: flex;
+					align-items: center; 
+					justify-content: center;
+					border: thin solid var(--border-color);
+					width: 100%;
+					height: 100%; 
+					border-radius: var(--border-radius-m); 
+				"
+			>
+				<h4>Right Click Me</h4>
+			</div>
+		</Contextcontainer>
+	</Showcase>
+
 	<Showcase name="Multiselect">
 		<div class="mock-grid">
 			<Multiselect
@@ -73,26 +117,47 @@
 					<TableRow>
 						<TableHead>Name</TableHead>
 						<TableHead>Lastname</TableHead>
+						<TableHead></TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					<TableRow>
-						<TableCell>Kevien</TableCell>
-						<TableCell>Flieger</TableCell>
+					<TableRow
+						rowActions={[
+							{
+								title: "ActionOne",
+								iconName: "eyeOpen",
+								callback: (val) => {
+									console.log(val);
+								},
+							},
+						]}
+					>
+						<TableCell _for="name">Kevien</TableCell>
+						<TableCell _for="lastname">Flieger</TableCell>
+					</TableRow>
+					<TableRow
+						rowActions={[
+							{
+								title: "ActionOne",
+								callback: (val) => {
+									console.log(val);
+								},
+							},
+						]}
+					>
+						<TableCell _for="name">Michael</TableCell>
+						<TableCell _for="lastname">Kiehn</TableCell>
 					</TableRow>
 					<TableRow>
-						<TableCell>Michael</TableCell>
-						<TableCell>Kiehn</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell>Moritz</TableCell>
-						<TableCell>Maier</TableCell>
+						<TableCell _for="name">Moritz</TableCell>
+						<TableCell _for="lastname">Maier</TableCell>
 					</TableRow>
 				</TableBody>
 				<TableFooter>
 					<TableRow>
-						<TableCell>Data</TableCell>
-						<TableCell>100</TableCell>
+						<TableCell _for="_none">Data</TableCell>
+						<TableCell _for="_none"></TableCell>
+						<TableCell _for="_none">100</TableCell>
 					</TableRow>
 				</TableFooter>
 			</Table>
@@ -130,6 +195,7 @@
 			</ScrollContainer>
 		</div>
 	</Showcase>
+
 	<Showcase name="Card">
 		<div class="mock-grid">
 			<div style="width: 4rem; height: 4rem">

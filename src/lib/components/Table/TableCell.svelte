@@ -2,13 +2,18 @@
 	import type { Snippet } from "svelte";
 
 	type Props = {
+		_for: string;
 		children?: Snippet;
+		style?: string;
 	};
 
-	let { children }: Props = $props();
+	let { _for, children, style }: Props = $props();
 </script>
 
-<td>
+<td
+	{style}
+	data-for={_for}
+>
 	{@render children?.()}
 </td>
 

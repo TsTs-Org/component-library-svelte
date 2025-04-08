@@ -3,6 +3,8 @@
 	import Input from "../Input.svelte";
 	import Multiselect from "../Multiselect/Multiselect.svelte";
 	import MultiselectItem from "../Multiselect/MultiselectItem.svelte";
+	import TableBody from "./TableBody.svelte";
+	import TableCell from "./TableCell.svelte";
 
 	type Props = {
 		children: Snippet;
@@ -55,14 +57,6 @@
 
 <div class="Table">
 	<div class="header">
-		{#if searchbar}
-			<Input
-				placeholder="Search"
-				type="search"
-				size="s"
-				bind:value={searchValue}
-			/>
-		{/if}
 		<Multiselect
 			placeholder="Columns"
 			size="s"
@@ -78,6 +72,14 @@
 				/>
 			{/each}
 		</Multiselect>
+		{#if searchbar}
+			<Input
+				placeholder="Search"
+				type="search"
+				size="s"
+				bind:value={searchValue}
+			/>
+		{/if}
 	</div>
 	<div
 		class="_table"
@@ -85,6 +87,11 @@
 	>
 		<table bind:this={table}>
 			{@render children?.()}
+			{#if activeColumns.length == 0}
+				<TableBody>
+					<TableCell><p class="emptyText">No Columns Selected</p></TableCell>
+				</TableBody>
+			{/if}
 		</table>
 	</div>
 </div>
@@ -93,7 +100,6 @@
 	.Table {
 		width: 100%;
 		display: table;
-		overflow: hidden;
 		.header {
 			display: flex;
 			justify-content: space-between;
@@ -104,8 +110,12 @@
 		&.bordered {
 			border: thin solid var(--border-color);
 			border-radius: var(--border-radius-s);
-			overflow: hidden;
 		}
+	}
+	.emptyText {
+		width: 100%;
+		text-align: center;
+		color: var(--text-color-muted);
 	}
 	table {
 		width: 100%;

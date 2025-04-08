@@ -2,7 +2,7 @@
 	import { onMount, setContext } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
 	import Icon from "../Icon.svelte";
-	import { slide } from "svelte/transition";
+	import Dropdown from "../Dropdown/Dropdown.svelte";
 	import { writable, type Writable } from "svelte/store";
 
 	type Variant = "ghost" | "bordered";
@@ -73,7 +73,9 @@
 	<button
 		class={["Trigger", variant, size]}
 		{...restProps}
-		onclick={() => (open = !open)}
+		onclick={() => {
+			open = !open;
+		}}
 	>
 		<span style="color: var(--text-color)">{placeholder}</span>
 
@@ -84,14 +86,9 @@
 		/>
 	</button>
 
-	{#if open}
-		<div
-			class="Portal"
-			transition:slide={{ duration: 190 }}
-		>
-			{@render children?.()}
-		</div>
-	{/if}
+	<Dropdown bind:open>
+		{@render children?.()}
+	</Dropdown>
 
 	{#if description}
 		<p>{description}</p>
@@ -157,17 +154,5 @@
 	}
 	button:focus {
 		border-color: var(--primary-color);
-	}
-	.Portal {
-		z-index: 500;
-		position: absolute;
-		right: 0;
-		overflow: hidden;
-		background-color: var(--foreground-color);
-		width: 100%;
-		min-width: fit-content;
-		box-sizing: border-box;
-		border-radius: var(--border-radius-s);
-		border: 1px solid var(--border-color);
 	}
 </style>
