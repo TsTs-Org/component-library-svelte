@@ -155,16 +155,4 @@
 	button:focus {
 		border-color: var(--primary-color);
 	}
-	.Portal {
-		z-index: 500;
-		position: absolute;
-		right: 0;
-		overflow: hidden;
-		background-color: var(--foreground-color);
-		width: 100%;
-		min-width: fit-content;
-		box-sizing: border-box;
-		border-radius: var(--border-radius-s);
-		border: 1px solid var(--border-color);
-	}
 </style>

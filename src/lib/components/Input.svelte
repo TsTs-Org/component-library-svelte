@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Icon } from "$lib/index.js";
-	import type { Snippet } from "svelte";
+	import { onMount, type Snippet } from "svelte";
 	import type { ChangeEventHandler, HTMLInputAttributes } from "svelte/elements";
 
 	type Variant = "ghost" | "bordered" | "colored";
@@ -42,6 +42,10 @@
 		show_password = !show_password;
 		self.type = show_password ? "text" : "password";
 	}
+
+	onMount(() => {
+		self.type = initial_type;
+	});
 </script>
 
 <div class="InputWrapper">

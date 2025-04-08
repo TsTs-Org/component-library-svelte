@@ -45,6 +45,9 @@
 	{#if open_overlay}
 		<div
 			class="Overlay"
+			oncontextmenu={(e) => {
+				e.preventDefault();
+			}}
 			onclick={() => (open_overlay = false)}
 		></div>
 	{/if}
@@ -77,7 +80,7 @@
 
 	.Overlay {
 		z-index: 499;
-		background-color: rgba(255, 0, 0, 0.1);
+		background-color: rgba(255, 0, 0, 0);
 		position: fixed;
 		top: 0;
 		left: 0;
