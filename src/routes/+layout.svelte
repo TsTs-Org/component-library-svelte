@@ -8,12 +8,7 @@
 	import Select from "$lib/components/Select/Select.svelte";
 	import SelectItem from "$lib/components/Select/SelectItem.svelte";
 	import Themify from "$lib/components/Themify.svelte";
-	import {
-		_mode,
-		getPrimaryColor,
-		setPrimaryColor,
-		switchMode,
-	} from "$lib/utils/themify.svelte.js";
+	import { theme } from "$lib/utils/themify.svelte.js";
 	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
 	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
 </script>
@@ -25,12 +20,17 @@
 			<!-- <NavigationbarItem href="/colors">Colors</NavigationbarItem> -->
 			<NavigationbarItem href="{base}/blocks">Blocks</NavigationbarItem>
 			<NavigationbarItem href="{base}/components">Components</NavigationbarItem>
+			<NavigationbarItem href="{base}/settings">Settings</NavigationbarItem>
 		{/snippet}
 		<h3>Testo</h3>
 		{#snippet right()}
 			<Select
-				value={getPrimaryColor()}
-				onchange={(color) => setPrimaryColor(color)}
+				value={$theme.primaryColor}
+				onchange={(color) =>
+					theme.update((x) => {
+						x.primaryColor = color;
+						return x;
+					})}
 				variant="ghost"
 				placeholder="Theme"
 			>
@@ -57,9 +57,14 @@
 			</Select>
 			<button
 				aria-label="Toggle light/dark mode"
-				onclick={switchMode}
+				onclick={() =>
+					theme.update((x) => {
+						x.lightMode = !x.lightMode;
+						console.log(x);
+						return x;
+					})}
 			>
-				{#if $_mode === "light-mode"}
+				{#if $theme.lightMode}
 					<Icon iconName="sun" />
 				{:else}
 					<Icon iconName="moon" />

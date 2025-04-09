@@ -1,26 +1,26 @@
 import { writable } from "svelte/store";
 
-export const _mode = writable("");
-let primaryColor = $state("");
-export function getPrimaryColor() { return primaryColor };
+// --- New Code
 
-export function setPrimaryColor(color: string) {
-    document.documentElement.style.setProperty("--primary-color", color);
-    localStorage.setItem("primaryColor", color);
-    primaryColor = color;
+export function mountTheme() {
+    const savedTheme: object | undefined = JSON.parse(localStorage.getItem("_theme")!)
+    if (savedTheme) {
+        theme.set(savedTheme);
+    }
+    theme.subscribe((x) => {
+        document.getElementById("Themify")?.classList.remove(x.lightMode ? "dark-mode" : "light-mode");
+        document.getElementById("Themify")?.classList.add(x.lightMode ? "light-mode" : "dark-mode");
+        document.documentElement.style.setProperty("--primary-color", x.primaryColor);
+        document.documentElement.style.setProperty("--border-radius-s", x.borderRadius);
+        document.documentElement.style.setProperty("--padding-s", x.padding);
+        localStorage.setItem("_theme", JSON.stringify(x))
+    })
+    
 }
 
-export function getPersistentPrimaryColor(default_color: string) {
-    primaryColor = localStorage.getItem("primaryColor") || default_color;
-    document.documentElement.style.setProperty("--primary-color", primaryColor);
-}
-
-export function switchMode() {
-    const mode = localStorage.getItem("mode") === "light-mode" ? "dark-mode" : "light-mode";
-    localStorage.setItem("mode", mode);
-    _mode.set(mode);
-}
-
-export function getPersistentMode(default_mode: string) {
-    _mode.set(localStorage.getItem("mode") || default_mode)
-}
+export const theme = writable({
+    lightMode: true,
+    primaryColor: "royalblue",
+    padding: "0.75rem",
+    borderRadius: "0.5rem"
+})

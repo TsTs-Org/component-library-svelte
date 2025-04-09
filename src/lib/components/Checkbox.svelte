@@ -132,12 +132,10 @@
 	h4 {
 		font-size: 0.925rem;
 		font-weight: 600;
-		margin-left: var(--padding-xs);
 	}
 	p {
 		font-size: 0.75rem;
 		font-weight: 600;
 		color: var(--text-color-muted);
-		margin-left: var(--padding-xs);
 	}
 </style>

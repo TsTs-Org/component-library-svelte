@@ -1,15 +1,18 @@
 <script lang="ts">
-	import { _mode } from "$lib/utils/themify.svelte.js";
+	import { theme } from "$lib/utils/themify.svelte.js";
 	import Card from "./Card.svelte";
 	import Icon from "./Icon.svelte";
 	let { name, children } = $props();
-	let localMode = $state($_mode);
+	let localLightMode = $state($theme.lightMode);
 	const setMode = () => {
-		localMode === "light" ? (localMode = "dark") : (localMode = "light");
+		localLightMode = !localLightMode;
 	};
+	theme.subscribe((x) => {
+		localLightMode = x.lightMode;
+	});
 </script>
 
-<div class={localMode + "-mode"}>
+<div class={localLightMode ? "light-mode" : "dark-mode"}>
 	<Card size="l">
 		{#snippet title()}{name}{/snippet}
 		{#snippet iconRight(size)}
@@ -18,7 +21,7 @@
 				onclick={() => setMode()}
 			>
 				<Icon
-					iconName={localMode === "light" ? "sun" : "moon"}
+					iconName={localLightMode ? "sun" : "moon"}
 					{size}
 				></Icon>
 			</button>
