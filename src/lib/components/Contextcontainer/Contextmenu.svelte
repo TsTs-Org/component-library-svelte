@@ -31,7 +31,10 @@
 	class="ContextMenu"
 	style={`left: ${xOffset}; top: ${yOffset};`}
 >
-	<Dropdown bind:open>
+	<Dropdown
+		bind:open
+		toParent
+	>
 		<div class="ContextContent">
 			{@render children?.()}
 		</div>

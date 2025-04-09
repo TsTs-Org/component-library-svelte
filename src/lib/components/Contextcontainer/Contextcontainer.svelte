@@ -21,8 +21,8 @@
 		e.preventDefault();
 		ctx.data.set({
 			open: true,
-			xOffset: e.offsetX + "px",
-			yOffset: e.offsetY + "px",
+			xOffset: e.layerX + "px",
+			yOffset: e.layerY + "px",
 		});
 	}
 

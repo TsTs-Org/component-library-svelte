@@ -8,24 +8,51 @@
 		open: boolean;
 		alignRight?: boolean;
 		children?: Snippet;
+		toParent?: boolean;
 	} & HTMLAttributes<any>;
 
-	let { open = $bindable(), alignRight = false, children, ...restProps }: Props = $props();
+	let {
+		open = $bindable(),
+		alignRight = false,
+		children,
+		toParent = false,
+		...restProps
+	}: Props = $props();
 	$effect(() => {
 		changeOpen(open);
 	});
 
+	let self: HTMLDivElement;
 	function changeOpen(open: boolean) {
 		if (open) {
-			getOffsets();
+			toParent ? getOffsetsToParent() : getOffsetsToViewport();
 			openOverlay();
 		} else {
 			closeOverlay();
 		}
 	}
 
-	let self: HTMLDivElement;
-	const getOffsets = () => {
+	const getOffsetsToParent = () => {
+		let {
+			top: ptop,
+			left: pleft,
+			bottom: pbottom,
+			right: pright,
+		} = self.parentElement!.parentElement!.getBoundingClientRect();
+		let { top, left, bottom, right } = self.getBoundingClientRect();
+		bottom = pbottom - bottom;
+		right = pright - right;
+		if (right < 0 || alignRight) {
+			self.style.right = "0";
+		} else if (!alignRight) {
+			self.style.left = "0";
+		}
+		if (bottom < 0) {
+			self.style.bottom = "0";
+		}
+		// console.log(`top: ${top}; left: ${left}; right: ${right}; bottom: ${bottom};`);
+	};
+	const getOffsetsToViewport = () => {
 		let { top, left, bottom, right } = self.getBoundingClientRect();
 		const { innerHeight, innerWidth } = window;
 		bottom = innerHeight - bottom;
