@@ -50,7 +50,7 @@
 
 <div class="InputWrapper">
 	{#if label}
-		<h4 class:focused>{label}</h4>
+		<h5 class:focused>{label}</h5>
 	{/if}
 	<div class="Input">
 		<input
@@ -140,8 +140,7 @@
 		}
 	}
 
-	h4 {
-		font-size: 0.925rem;
+	h5 {
 		font-weight: 600;
 		margin-left: var(--padding-xs);
 		color: var(--text-color-muted);
@@ -150,8 +149,6 @@
 		}
 	}
 	p {
-		font-size: 0.75rem;
-		font-weight: 600;
 		color: var(--text-color-muted);
 		margin-left: var(--padding-xs);
 	}

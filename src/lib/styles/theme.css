@@ -74,8 +74,9 @@
 	--padding-l: calc(var(--padding-s) * 2.25);
 	--padding-xl: calc(var(--padding-s) * 4);
 
+	--text-size-xs: calc(var(--text-size-s) * 0.9);
 	--text-size-s: 1rem;
-	--text-size-m: 1.25rem;
-	--text-size-l: 1.75rem;
-	--text-size-xl: 2.5rem;
+	--text-size-m: calc(var(--text-size-s) * 1.25);
+	--text-size-l: calc(var(--text-size-s) * 1.75);
+	--text-size-xl: calc(var(--text-size-s) * 2.5);
 }

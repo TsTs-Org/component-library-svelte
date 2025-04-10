@@ -21,7 +21,7 @@
 <div class="Checkbox">
 	<div class="text">
 		{#if label}
-			<h4>{label}</h4>
+			<h5>{label}</h5>
 		{/if}
 		{#if description}
 			<p>{description}</p>
@@ -129,13 +129,10 @@
 		transition-delay: 0.15s;
 	}
 
-	h4 {
-		font-size: 0.925rem;
+	h5 {
 		font-weight: 600;
 	}
 	p {
-		font-size: 0.75rem;
-		font-weight: 600;
 		color: var(--text-color-muted);
 	}
 </style>

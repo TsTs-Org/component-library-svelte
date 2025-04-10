@@ -135,6 +135,41 @@
 			0.15
 		</RadioItem>
 	</Radiogroup>
+	<Seperator />
+	<Radiogroup
+		label="TextSize"
+		value={$theme.fontSize}
+		onchange={(size) =>
+			theme.update((x) => {
+				x.fontSize = size;
+				return x;
+			})}
+	>
+		<RadioItem
+			value="0.9rem"
+			ofType="button"
+		>
+			0.9
+		</RadioItem>
+		<RadioItem
+			value="1rem"
+			ofType="button"
+		>
+			1
+		</RadioItem>
+		<RadioItem
+			value="1.25rem"
+			ofType="button"
+		>
+			1.25
+		</RadioItem>
+		<RadioItem
+			value="1.5rem"
+			ofType="button"
+		>
+			1.5
+		</RadioItem>
+	</Radiogroup>
 </div>
 
 <style lang="scss">

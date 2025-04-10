@@ -17,7 +17,7 @@
 		text-align: left;
 		padding: var(--padding-s);
 		font-weight: 600;
-		font-size: 0.9rem;
+		font-size: var(--text-size-xs);
 		color: var(--text-color-muted);
 	}
 </style>

@@ -60,7 +60,7 @@
 		color: var(--text-color);
 		padding: var(--padding-m);
 		border-radius: var(--border-radius-m);
-		font-size: 0.9rem;
+		font-size: var(--text-size-xs);
 		&.active {
 			text-decoration: underline;
 		}
@@ -71,7 +71,7 @@
 		}
 		&.l {
 			padding: var(--padding-l);
-			font-size: 1rem;
+			font-size: var(--text-size-m);
 			border-radius: var(--border-radius-l);
 		}
 

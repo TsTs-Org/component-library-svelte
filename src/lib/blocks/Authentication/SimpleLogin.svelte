@@ -105,7 +105,6 @@
 		justify-content: center;
 		align-items: center;
 		p {
-			font-size: 0.95rem;
 			color: var(--text-color-muted);
 		}
 	}
