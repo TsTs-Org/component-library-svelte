@@ -2,10 +2,8 @@
 	import { onMount, setContext } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
 	import Icon from "../Icon.svelte";
-	import { slide } from "svelte/transition";
 	import { writable, type Writable } from "svelte/store";
 	import Dropdown from "../Dropdown/Dropdown.svelte";
-	import { closeOverlay } from "../Themify.svelte";
 
 	type Variant = "ghost" | "bordered";
 

@@ -23,7 +23,10 @@
 	import Contextmenu from "$lib/components/Contextcontainer/Contextmenu.svelte";
 	import Contextcontainer from "$lib/components/Contextcontainer/Contextcontainer.svelte";
 	import ContextmenuItem from "$lib/components/Contextcontainer/ContextmenuItem.svelte";
+	import ThemeSettings from "$lib/components/ThemeSettings.svelte";
 </script>
+
+<ThemeSettings />
 
 <div class="components-page">
 	<Showcase name="Contextmenu">
