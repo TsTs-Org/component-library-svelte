@@ -26,7 +26,9 @@
 	import ThemeSettings from "$lib/components/ThemeSettings.svelte";
 </script>
 
-<ThemeSettings />
+<div class="theme-settings">
+	<ThemeSettings />
+</div>
 
 <div class="components-page">
 	<Showcase name="Contextmenu">
@@ -381,5 +383,12 @@
 			width: 5rem;
 			height: 5rem;
 		}
+	}
+
+	.theme-settings {
+		margin: var(--padding-l);
+		background-color: var(--foreground-color);
+		border-radius: var(--border-radius-m);
+		border: thin solid var(--border-color);
 	}
 </style>

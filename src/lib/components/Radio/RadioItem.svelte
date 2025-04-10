@@ -45,7 +45,6 @@
 		{#if ofType == "button"}
 			<h4>{@render children?.()}</h4>
 		{/if}
-		<!-- {@render children?.()} -->
 	</button>
 </div>
 
@@ -94,14 +93,15 @@
 			}
 		}
 		&.button {
+			border-width: 1px;
 			padding: var(--padding-xs);
-			border-radius: var(--border-radius-m);
+			border-radius: var(--border-radius-s);
 			min-width: 2.5rem;
 			&.selected {
-				background-color: var(--border-color);
+				background-color: var(--neutral-hover-color);
 			}
 			&:hover {
-				border-color: var(--hover-color);
+				background-color: var(--neutral-hover-color);
 			}
 		}
 	}

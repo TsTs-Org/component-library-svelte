@@ -20,11 +20,10 @@
 			<!-- <NavigationbarItem href="/colors">Colors</NavigationbarItem> -->
 			<NavigationbarItem href="{base}/blocks">Blocks</NavigationbarItem>
 			<NavigationbarItem href="{base}/components">Components</NavigationbarItem>
-			<NavigationbarItem href="{base}/settings">Settings</NavigationbarItem>
 		{/snippet}
-		<h3>Testo</h3>
+		<h3></h3>
 		{#snippet right()}
-			<Select
+			<!-- <Select
 				value={$theme.primaryColor}
 				onchange={(color) =>
 					theme.update((x) => {
@@ -54,7 +53,7 @@
 					value="#b08968"
 					label="Creamy"
 				/>
-			</Select>
+			</Select> -->
 			<button
 				aria-label="Toggle light/dark mode"
 				onclick={() =>
