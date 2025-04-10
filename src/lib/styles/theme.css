@@ -39,18 +39,18 @@
 :root {
 	font-family: sans-serif;
 
-	/* --primary-color: rgba(0, 0, 0, 0); */
 	--primary-color: rgba(0, 0, 0, 0);
+	--color-influence: 0.01;
 
-	--neutral-100: oklch(from var(--primary-color) 0.97 0.02 h);
-	--neutral-200: oklch(from var(--primary-color) 0.92 0.02 h);
-	--neutral-300: oklch(from var(--primary-color) 0.87 0.02 h);
-	--neutral-400: oklch(from var(--primary-color) 0.7 0.03 h);
-	--neutral-500: oklch(from var(--primary-color) 0.5 0.03 h);
-	--neutral-600: oklch(from var(--primary-color) 0.45 0.03 h);
-	--neutral-700: oklch(from var(--primary-color) 0.32 0.03 h);
-	--neutral-800: oklch(from var(--primary-color) 0.26 0.02 h);
-	--neutral-900: oklch(from var(--primary-color) 0.2 0.015 h);
+	--neutral-100: oklch(from var(--primary-color) 0.97 calc(var(--color-influence) * 2) h);
+	--neutral-200: oklch(from var(--primary-color) 0.92 calc(var(--color-influence) * 2) h);
+	--neutral-300: oklch(from var(--primary-color) 0.87 calc(var(--color-influence) * 2) h);
+	--neutral-400: oklch(from var(--primary-color) 0.7 calc(var(--color-influence) * 3) h);
+	--neutral-500: oklch(from var(--primary-color) 0.5 calc(var(--color-influence) * 3) h);
+	--neutral-600: oklch(from var(--primary-color) 0.45 calc(var(--color-influence) * 3) h);
+	--neutral-700: oklch(from var(--primary-color) 0.32 calc(var(--color-influence) * 3) h);
+	--neutral-800: oklch(from var(--primary-color) 0.26 calc(var(--color-influence) * 2) h);
+	--neutral-900: oklch(from var(--primary-color) 0.2 calc(var(--color-influence) * 2) h);
 
 	--primary-100: hsl(from var(--primary-color) h s calc(l/100 * 160));
 	--primary-200: hsl(from var(--primary-color) h s calc(l/100 * 150));

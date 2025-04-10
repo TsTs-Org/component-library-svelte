@@ -100,12 +100,48 @@
 			0.9
 		</RadioItem>
 	</Radiogroup>
+	<Seperator />
+	<Radiogroup
+		label="ColorInfluence"
+		value={$theme.colorInfluence}
+		onchange={(radius) =>
+			theme.update((x) => {
+				x.colorInfluence = radius;
+				return x;
+			})}
+	>
+		<RadioItem
+			value="0.005"
+			ofType="button"
+		>
+			0.5
+		</RadioItem>
+		<RadioItem
+			value="0.0075"
+			ofType="button"
+		>
+			0.75
+		</RadioItem>
+		<RadioItem
+			value="0.01"
+			ofType="button"
+		>
+			0.1
+		</RadioItem>
+		<RadioItem
+			value="0.015"
+			ofType="button"
+		>
+			0.15
+		</RadioItem>
+	</Radiogroup>
 </div>
 
 <style lang="scss">
 	.theme-settings {
 		padding: var(--padding-m);
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		gap: var(--padding-m);
 	}
