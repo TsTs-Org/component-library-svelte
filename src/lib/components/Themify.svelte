@@ -1,8 +1,4 @@
 <script module>
-	if (typeof window !== "undefined") {
-		getPersistentPrimaryColor("royalblue");
-		getPersistentMode("light-mode");
-	}
 	let open_overlay = $state(false);
 	export function openOverlay() {
 		open_overlay = true;
@@ -13,11 +9,7 @@
 </script>
 
 <script lang="ts">
-	import {
-		_mode,
-		getPersistentMode,
-		getPersistentPrimaryColor,
-	} from "$lib/utils/themify.svelte.js";
+	import { mountTheme } from "$lib/utils/themify.svelte.js";
 	import { onMount, type Snippet } from "svelte";
 	import Loader from "./Loader.svelte";
 
@@ -27,21 +19,23 @@
 
 	let { children }: Props = $props();
 
-	let mode = $state("");
-	onMount(() => {
-		return _mode.subscribe((value) => {
-			mode = value;
-		});
-	});
-
 	let loading = $state(true);
 
 	setTimeout(() => {
 		loading = false;
 	}, 500);
+
+	onMount(() => {
+		if (typeof window !== "undefined") {
+			mountTheme();
+		}
+	});
 </script>
 
-<div class={mode + " page"}>
+<div
+	class={"page"}
+	id="Themify"
+>
 	{#if open_overlay}
 		<div
 			class="Overlay"

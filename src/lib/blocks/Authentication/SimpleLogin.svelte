@@ -93,7 +93,7 @@
 		justify-content: center;
 		background-color: var(--foreground-color);
 		border-radius: var(--border-radius-m);
-		padding: var(--padding-l);
+		padding: var(--padding-l) var(--padding-xl);
 	}
 
 	.header {
