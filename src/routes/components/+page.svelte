@@ -20,9 +20,21 @@
 	import Checkbox from "$lib/components/Checkbox.svelte";
 	import Multiselect from "$lib/components/Multiselect/Multiselect.svelte";
 	import MultiselectItem from "$lib/components/Multiselect/MultiselectItem.svelte";
+	import Popover from "$lib/components/Popover.svelte";
 </script>
 
 <div class="components-page">
+	<Showcase name="Popover">
+		<Popover>
+			{#snippet title()}
+				Some title
+			{/snippet}
+			CONTENT
+			{#snippet popoverTrigger(trigger)}
+				<Button onclick={trigger}>Open Popover</Button>
+			{/snippet}
+		</Popover>
+	</Showcase>
 	<Showcase name="Multiselect">
 		<div class="mock-grid">
 			<Multiselect
