@@ -3,6 +3,8 @@
 	import Card from "./Card.svelte";
 	import Icon from "./Icon.svelte";
 	import Button from "./Button.svelte";
+	import { flip, type AnimationConfig } from "svelte/animate";
+	import { backIn, linear } from "svelte/easing";
 
 	type Props = { children: Snippet; popoverTrigger: Snippet<[() => void]>; title: Snippet };
 	let { children, popoverTrigger, title }: Props = $props();
@@ -16,39 +18,45 @@
 	let childrenWrapperElement: HTMLDivElement;
 	let triggerWrapperElement: HTMLDivElement;
 
-	// TODO: use object instead of attributes
-	function setInitialSizeToGrowFrom(
-		width: string,
-		height: string,
-		left: string,
-		top: string,
-		borderRadius: string
-	) {
-		childrenWrapperElement.style.setProperty("--calculated-width", width);
-		childrenWrapperElement.style.setProperty("--calculated-height", height);
-		childrenWrapperElement.style.setProperty("--calculated-left", left);
-		childrenWrapperElement.style.setProperty("--calculated-top", top);
-		childrenWrapperElement.style.setProperty("--calculated-borderRadius", borderRadius);
-	}
-
-	$effect(() => {
-		if (!open) return;
+	function myFadeInTransition(
+		node: HTMLElement,
+		params?: { delay?: number; duration?: number; easing?: (t: number) => number }
+	): AnimationConfig {
 		const boundingRect = triggerWrapperElement.getBoundingClientRect();
-		let sizing = {
+		const initial = {
 			width: boundingRect.width + "px",
 			height: boundingRect.height + "px",
 			left: boundingRect.left + "px",
 			top: boundingRect.top + "px",
+			translateX: "0" + "px",
+			translateY: "0" + "px",
 		};
-		console.log(sizing);
-		setInitialSizeToGrowFrom(
-			boundingRect.width + "px",
-			boundingRect.height + "px",
-			boundingRect.left + "px",
-			boundingRect.top + "px",
-			window.getComputedStyle(triggerWrapperElement).borderRadius
-		);
-	});
+		const final = {
+			width: "80%",
+			height: "80%",
+			left: "50%",
+			top: "50%",
+			translateX: "-50%",
+			translateY: "-50%",
+		};
+		return {
+			delay: params?.delay || 0,
+			duration: params?.duration || 300,
+			easing: params?.easing || linear,
+			css: (t, _) => {
+				return `
+					width: calc(${initial.width} + calc(${final.width} - ${initial.width}) * ${t});
+					height: calc(${initial.height} + calc(${final.height} - ${initial.height}) * ${t}) ;
+					left: calc(${initial.left} + calc(${final.left} - ${initial.left}) * ${t});
+					top: calc(${initial.top} + calc(${final.top} - ${initial.top}) * ${t});
+					translate: 
+						calc(${initial.translateX} + calc(${final.translateX} - ${initial.translateX}) * ${t}) 
+						calc(${initial.translateY} + calc(${final.translateY} - ${initial.translateY}) * ${t});
+				`;
+			},
+		};
+		// create AnimationConfig-object from the input values... -> the animation inside the config will be automatically run
+	}
 </script>
 
 <div>
@@ -68,7 +76,7 @@
 			role="none"
 		>
 			<div
-				class={["children-wrapper", open ? "children-wrapper--active" : ""]}
+				class={["children-wrapper"]}
 				onclick={(ev) => {
 					// TODO: is there a cleaner way to do this?
 					// can you enrich an event with data? for example "inside-popover" to use in a higher eventhandler?
@@ -76,6 +84,8 @@
 				}}
 				role="none"
 				bind:this={childrenWrapperElement}
+				in:myFadeInTransition
+				out:myFadeInTransition
 			>
 				<Card {title}>
 					{#snippet iconRight(size)}
@@ -109,49 +119,16 @@
 	.children-wrapper {
 		position: relative;
 		overflow: hidden;
-		width: var(--calculated-width, 20%);
-		height: var(--calculated-height, 20%);
-		left: var(
-			--calculated-left,
-			calc(50% - var(--calculated-width, 20%) / 2)
-		); /* check if this works...*/
-		top: var(--calculated-top, 100%);
-
-		/* FIXME: missing close animation */
-
-		&--active {
-			animation:
-				popup-dimensions 0.3s ease-in-out forwards,
-				popup-position 0.3s ease-out forwards;
-
-			@keyframes popup-dimensions {
-				from {
-					width: var(--calculated-width);
-					height: var(--calculated-height);
-					border-radius: var(--calculated-border-radius);
-				}
-				to {
-					width: 80%;
-					height: 80%;
-					border-radius: 16px;
-				}
-			}
-
-			@keyframes popup-position {
-				from {
-					left: var(--calculated-left);
-					top: var(--calculated-top);
-					translate: 0 0;
-				}
-				to {
-					left: 50%;
-					top: 50%;
-					translate: -50% -50%;
-				}
-			}
-		}
+		width: 80%;
+		height: 80%;
+		left: 50%;
+		top: 50%;
+		translate: -50% -50%;
 	}
 
+	// FIXME: animation for dimming when opening/closing
+	// make something like this into a ripple effect through upscaling: https://stackoverflow.com/questions/10768451/inline-svg-in-css
+	// (of an svg "blob" -> https://www.blobmaker.app/)
 	.background-dimmer {
 		position: fixed;
 		z-index: 1001;
