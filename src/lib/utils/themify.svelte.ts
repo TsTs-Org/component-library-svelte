@@ -13,6 +13,8 @@ export function mountTheme() {
         document.documentElement.style.setProperty("--primary-color", x.primaryColor);
         document.documentElement.style.setProperty("--border-radius-s", x.borderRadius);
         document.documentElement.style.setProperty("--padding-s", x.padding);
+        document.documentElement.style.setProperty("--color-influence", x.colorInfluence);
+        document.documentElement.style.setProperty("--text-size-s", x.fontSize);
         localStorage.setItem("_theme", JSON.stringify(x))
     })
     
@@ -22,5 +24,7 @@ export const theme = writable({
     lightMode: true,
     primaryColor: "royalblue",
     padding: "0.75rem",
-    borderRadius: "0.5rem"
+    borderRadius: "0.5rem",
+    colorInfluence: "0.01",
+    fontSize: "1rem"
 })

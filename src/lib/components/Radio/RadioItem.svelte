@@ -30,7 +30,7 @@
 	{...restProps}
 >
 	{#if !(ofType == "button")}
-		<h4>{@render children?.()}</h4>
+		<h5>{@render children?.()}</h5>
 	{/if}
 	<button
 		onclick={() => _selected.set(value)}
@@ -43,7 +43,7 @@
 			class:selected
 		></span>
 		{#if ofType == "button"}
-			<h4>{@render children?.()}</h4>
+			<h5>{@render children?.()}</h5>
 		{/if}
 	</button>
 </div>
@@ -56,9 +56,6 @@
 -->
 
 <style lang="scss">
-	h4 {
-		font-weight: 500;
-	}
 	.RadioItem {
 		display: flex;
 		flex-direction: row;

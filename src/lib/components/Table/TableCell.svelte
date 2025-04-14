@@ -20,6 +20,6 @@
 <style>
 	td {
 		padding: var(--padding-s);
-		font-size: 0.9rem;
+		font-size: var(--text-size-xs);
 	}
 </style>

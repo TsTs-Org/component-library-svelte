@@ -59,7 +59,6 @@
 				onclick={() =>
 					theme.update((x) => {
 						x.lightMode = !x.lightMode;
-						console.log(x);
 						return x;
 					})}
 			>

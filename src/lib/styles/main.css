@@ -6,5 +6,26 @@ button {
 }
 
 p {
-	font-size: .9rem;
+	font-size: var(--text-size-xs);
+}
+
+h1 {
+	font-size: calc(var(--text-size-xl) * 1.5);
+}
+
+h2 {
+	font-size: var(--text-size-xl);
+}
+
+h3{
+	font-size: var(--text-size-l);
+}
+
+h4 {
+	font-size: var(--text-size-m);
+}
+
+h5 {
+	font-size: var(--text-size-s);
+	font-weight: 400;
 }
