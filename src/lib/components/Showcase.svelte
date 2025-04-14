@@ -13,7 +13,10 @@
 </script>
 
 <div class={localLightMode ? "light-mode" : "dark-mode"}>
-	<Card size="l">
+	<Card
+		size="l"
+		transparent
+	>
 		{#snippet title()}{name}{/snippet}
 		{#snippet iconRight(size)}
 			<button

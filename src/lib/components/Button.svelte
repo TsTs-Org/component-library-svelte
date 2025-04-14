@@ -104,7 +104,7 @@
 			background-color: var(--primary-color);
 		}
 		&.bordered {
-			background-color: var(--foreground-color);
+			background-color: transparent;
 			border: 1px solid var(--border-color);
 			&:hover {
 				background-color: var(--neutral-hover-color);

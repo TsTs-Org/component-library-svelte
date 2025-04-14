@@ -10,14 +10,24 @@
 		iconLeft?: Snippet<[Size]>;
 		iconRight?: Snippet<[Size]>;
 		children?: Snippet;
+		transparent?: boolean;
 	} & HTMLAttributes<any>;
 
-	let { size = "m", title, iconLeft, iconRight, children, ...restProps }: Props = $props();
+	let {
+		size = "m",
+		title,
+		iconLeft,
+		iconRight,
+		children,
+		transparent = false,
+		...restProps
+	}: Props = $props();
 </script>
 
 <!-- TODO: min-width that is calculated from header-gap -->
 <div
 	class={["card", size]}
+	class:transparent
 	{...restProps}
 >
 	<div class="header">
@@ -57,6 +67,10 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr auto; /* 3 because there could be a bottom bar */
+
+		&.transparent {
+			background-color: transparent;
+		}
 
 		/* TODO: xs variant */
 

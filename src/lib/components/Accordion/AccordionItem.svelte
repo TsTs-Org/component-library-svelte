@@ -36,7 +36,7 @@
 		onclick={() => selected.set(open ? {} : self)}
 		class="AccordionItemTrigger"
 	>
-		<h3>{title}</h3>
+		<h4>{title}</h4>
 		<Icon
 			iconName={open ? "arrowUp" : "arrowDown"}
 			size="m"

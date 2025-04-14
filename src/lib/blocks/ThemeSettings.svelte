@@ -1,8 +1,8 @@
 <script>
 	import { theme } from "$lib/utils/themify.svelte.js";
-	import Radiogroup from "./Radio/Radiogroup.svelte";
-	import RadioItem from "./Radio/RadioItem.svelte";
-	import Seperator from "./Seperator.svelte";
+	import Radiogroup from "$lib/components/Radio/Radiogroup.svelte";
+	import RadioItem from "$lib/components/Radio/RadioItem.svelte";
+	import Seperator from "$lib/components/Seperator.svelte";
 </script>
 
 <div class="theme-settings">

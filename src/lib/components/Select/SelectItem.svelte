@@ -34,7 +34,7 @@
 	onclick={() => selected.set(self)}
 	{...restProps}
 >
-	<p>{self.label}</p>
+	<h5>{self.label}</h5>
 	<div class="SelectItemPortal">
 		{@render children?.()}
 	</div>

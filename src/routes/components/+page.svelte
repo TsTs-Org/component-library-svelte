@@ -398,7 +398,7 @@
 
 	.theme-settings {
 		margin: var(--padding-l);
-		background-color: var(--foreground-color);
+		// background-color: var(--foreground-color);
 		border-radius: var(--border-radius-m);
 		border: thin solid var(--border-color);
 	}

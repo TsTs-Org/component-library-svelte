@@ -24,7 +24,7 @@
 			<h5>{label}</h5>
 		{/if}
 		{#if description}
-			<p>{description}</p>
+			<p class="description">{description}</p>
 		{/if}
 	</div>
 	<div class="container">
@@ -130,9 +130,10 @@
 	}
 
 	h5 {
-		font-weight: 600;
+		// font-weight: 600;
 	}
-	p {
+	.description {
 		color: var(--text-color-muted);
+		font-size: var(--text-size-xs);
 	}
 </style>
