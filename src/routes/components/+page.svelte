@@ -23,7 +23,7 @@
 	import Contextmenu from "$lib/components/Contextcontainer/Contextmenu.svelte";
 	import Contextcontainer from "$lib/components/Contextcontainer/Contextcontainer.svelte";
 	import ContextmenuItem from "$lib/components/Contextcontainer/ContextmenuItem.svelte";
-	import ThemeSettings from "$lib/components/ThemeSettings.svelte";
+	import ThemeSettings from "$lib/blocks/ThemeSettings.svelte";
 </script>
 
 <div class="theme-settings">
