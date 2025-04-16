@@ -19,7 +19,7 @@
 	let {
 		onchange = () => {},
 		value = $bindable(),
-		label,
+		label = "",
 		children,
 		vertical = false,
 		...restProps
@@ -47,6 +47,9 @@
 	class={"Radio"}
 	{...restProps}
 >
+	{#if label != ""}
+		<h5>{label}</h5>
+	{/if}
 	<div
 		class="items"
 		class:vertical
