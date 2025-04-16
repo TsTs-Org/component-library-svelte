@@ -18,7 +18,18 @@ export function mountTheme() {
     })
 }
 
-const defaults = {
+export const themeValues = [
+    "background_color",
+    "foreground_color",
+    "text_color",
+    "text_color_muted",
+    "text_color_inverted",
+    "border_color",
+    "hover_color",
+    "neutral_hover_color",
+]
+
+export const defaults = {
     lightMode: true,
     primaryColor: "royalblue",
     padding: "0.75rem",
@@ -54,15 +65,12 @@ const defaults = {
 export const theme = writable(defaults)
 
 function setModeColors(colors: object) {
-    const raw_keys = Object.keys(colors);
     const formatted_keys = []
-    raw_keys.map((key) => {
+    themeValues.map((key) => {
         key = key.replaceAll("_", "-")
         formatted_keys.push(key);
     })
-    console.log(raw_keys)
-    console.log(formatted_keys)
     formatted_keys.forEach((key, i) => {
-        document.documentElement.style.setProperty(`--${key}`, colors[raw_keys[i]] ?? "red");
+        document.documentElement.style.setProperty(`--${key}`, colors[themeValues[i]] ?? "red");
     })
 }

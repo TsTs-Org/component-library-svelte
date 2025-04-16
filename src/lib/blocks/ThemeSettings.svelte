@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { theme } from "$lib/utils/themify.svelte.js";
+	import { defaults, theme, themeValues } from "$lib/utils/themify.svelte.js";
 	import Radiogroup from "$lib/components/Radio/Radiogroup.svelte";
 	import RadioItem from "$lib/components/Radio/RadioItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";
@@ -10,7 +10,7 @@
 	};
 
 	let { colors }: Props = $props();
-	let devsettings = $state(false);
+	let devsettings = $state(true);
 </script>
 
 <div class="theme-settings">
@@ -150,15 +150,26 @@
 		bind:checked={devsettings}
 	></Checkbox>
 	{#if devsettings}
-		{#each Object.keys($theme.lightValues) as value}
-			<p>
-				{value}:
-				<span
-					class="blob"
-					style={`background-color: ${$theme.lightValues[value]}`}
-				></span>
-			</p>
-		{/each}
+		<div class="devSettings">
+			<div class="allColors">
+				<h4>All Colors</h4>
+				{#each themeValues as value}
+					<div class="color">
+						<p>
+							{value}:
+						</p>
+						<span
+							class="blob"
+							style={`background-color: ${$theme.lightValues ? $theme.lightValues[value] : defaults.lightValues[value]};`}
+						></span>
+						<span
+							class="blob"
+							style={`background-color: ${$theme.darkValues ? $theme.darkValues[value] : defaults.darkValues[value]};`}
+						></span>
+					</div>
+				{/each}
+			</div>
+		</div>
 	{/if}
 </div>
 
@@ -176,5 +187,23 @@
 		width: 25px;
 		border-radius: 25px;
 		border: 1px solid var(--border-color);
+	}
+
+	.devSettings {
+		display: flex;
+		flex-direction: row;
+		gap: var(--padding-m);
+	}
+
+	.allColors {
+		display: flex;
+		flex-direction: column;
+		gap: var(--padding-s);
+	}
+	.color {
+		display: flex;
+		align-items: center;
+		// justify-content: space-between;
+		gap: var(--padding-m);
 	}
 </style>
