@@ -3,19 +3,15 @@
 </script>
 
 <div class="mockup-page">
-	<div class="light-mode" style="padding: var(--padding-xl)">
-		<h1>CSS Variablen Test - Light Mode</h1>
+	<div
+		class="light-mode"
+		style="padding: var(--padding-xl)"
+	>
+		<h1>Variable Showcase</h1>
 
-		<div class="container">
-			<h2>Test Container</h2>
-			<p>Dies ist ein Test-Container mit den definierten CSS-Variablen.</p>
-			<button style="border-radius: var(--border-radius-l)">TEST BUTTON</button>
-			<button style="border-radius: var(--border-radius-m)">Another Test Button</button>
-			<button style="border-radius: var(--border-radius-s)">aaaand another test button</button>
-		</div>
-
-		<div class="color-swatches">
-			{#each variations as variation}
+		{#each variations as variation}
+			<h3>{variation}</h3>
+			<div class="color-swatches">
 				{#each Array.from({ length: 9 }, (_, i) => i + 1) as shade}
 					<div
 						class="swatch"
@@ -23,32 +19,8 @@
 						data-color={`${variation}-${shade}00`}
 					></div>
 				{/each}
-			{/each}
-		</div>
-	</div>
-
-	<div class="dark-mode" style="padding: var(--padding-xl)">
-		<h1>CSS Variablen Test - Dark Mode</h1>
-
-		<div class="container">
-			<h2>Test Container</h2>
-			<p>Dies ist ein Test-Container mit den definierten CSS-Variablen.</p>
-			<button style="border-radius: var(--border-radius-l)">TEST BUTTON</button>
-			<button style="border-radius: var(--border-radius-m)">Another Test Button</button>
-			<button style="border-radius: var(--border-radius-s)">aaaand another test button</button>
-		</div>
-
-		<div class="color-swatches">
-			{#each variations as variation}
-				{#each Array.from({ length: 9 }, (_, i) => i + 1) as shade}
-					<div
-						class="swatch"
-						style="--color: var(--{variation}-{shade}00)"
-						data-color={`${variation}-${shade}00`}
-					></div>
-				{/each}
-			{/each}
-		</div>
+			</div>
+		{/each}
 	</div>
 </div>
 

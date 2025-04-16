@@ -54,6 +54,7 @@
 		"svelte"
 	],
 	"dependencies": {
+		"chart.js": "^4.4.9",
 		"svelte": "^5.0.0"
 	}
 }

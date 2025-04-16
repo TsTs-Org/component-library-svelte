@@ -24,6 +24,8 @@
 	import Contextcontainer from "$lib/components/Contextcontainer/Contextcontainer.svelte";
 	import ContextmenuItem from "$lib/components/Contextcontainer/ContextmenuItem.svelte";
 	import ThemeSettings from "$lib/blocks/ThemeSettings.svelte";
+	import BaseChart from "$lib/components/Chart/BaseChart.svelte";
+	import RoundChart from "$lib/components/Chart/RoundChart.svelte";
 </script>
 
 <div class="theme-settings">
@@ -31,6 +33,117 @@
 </div>
 
 <div class="components-page">
+	<Showcase name="Thingy Chart">
+		<RoundChart
+			chartType="thingy"
+			value="1203"
+			title="Visitors"
+			displayTooltip
+			labels={["one", "two", "three", "four", "five", "six"]}
+			data={[
+				{
+					title: "second",
+					data: [2, 8, 2, 11, 7, 4],
+				},
+			]}
+		></RoundChart>
+	</Showcase>
+
+	<Showcase name="Donut Chart">
+		<RoundChart
+			value="1203"
+			title="Visitors"
+			displayTooltip
+			labels={["one", "two", "three", "four", "five", "six"]}
+			data={[
+				{
+					title: "second",
+					data: [2, 8, 2, 11, 7, 4],
+				},
+			]}
+		></RoundChart>
+	</Showcase>
+
+	<Showcase name="Step Chart">
+		<BaseChart
+			chartType="line"
+			stepped
+			yGrid
+			yAxis
+			displayTooltip
+			labels={["one", "two", "three", "four", "five", "six"]}
+			data={[
+				{
+					title: "first",
+					data: [12, 19, 2, 5, 12, 15],
+				},
+			]}
+		></BaseChart>
+	</Showcase>
+
+	<Showcase name="Line Chart">
+		<BaseChart
+			chartType="line"
+			yGrid
+			yAxis
+			displayTooltip
+			displayLegend
+			labels={["one", "two", "three", "four", "five", "six"]}
+			data={[
+				{
+					title: "first",
+					data: [12, 19, 5, 5, 12, 15],
+				},
+				{
+					title: "second",
+					data: [2, 8, 2, 11, 7, 4],
+				},
+			]}
+		></BaseChart>
+	</Showcase>
+
+	<Showcase name="Area Chart">
+		<BaseChart
+			chartType="line"
+			area
+			xAxis
+			yGrid
+			yAxis
+			displayTooltip
+			displayLegend
+			labels={["one", "two", "three", "four", "five", "six"]}
+			data={[
+				{
+					title: "first",
+					data: [12, 19, 5, 5, 12, 15],
+				},
+				{
+					title: "second",
+					data: [2, 8, 2, 11, 7, 4],
+				},
+			]}
+		></BaseChart>
+	</Showcase>
+
+	<Showcase name="Bar Chart">
+		<BaseChart
+			chartType="bar"
+			xAxis
+			displayTooltip
+			labels={["one", "two", "three", "four", "five", "six"]}
+			data={[
+				{
+					title: "first",
+					data: [12, 19, 5, 5, 2, 3],
+				},
+				{
+					title: "second",
+					data: [2, 8, 2, 11, 7, 4],
+				},
+			]}
+		></BaseChart>
+	</Showcase>
+
 	<Showcase name="Headings">
 		<div class="mock-grid">
 			<h1>Heading</h1>
