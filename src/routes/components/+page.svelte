@@ -26,6 +26,7 @@
 	import ThemeSettings from "$lib/blocks/ThemeSettings.svelte";
 	import BaseChart from "$lib/components/Chart/BaseChart.svelte";
 	import RoundChart from "$lib/components/Chart/RoundChart.svelte";
+	import Popover from "$lib/components/Popover.svelte";
 </script>
 
 <div class="theme-settings">
@@ -196,6 +197,18 @@
 				</div>
 			</Contextcontainer>
 		</div>
+	</Showcase>
+
+	<Showcase name="Popover">
+		<Popover>
+			{#snippet title()}
+				Some title
+			{/snippet}
+			CONTENT
+			{#snippet popoverTrigger(trigger)}
+				<Button onclick={trigger}>Open Popover</Button>
+			{/snippet}
+		</Popover>
 	</Showcase>
 
 	<Showcase name="Multiselect">
