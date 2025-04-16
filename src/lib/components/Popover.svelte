@@ -26,10 +26,17 @@
 		translateY: "-50%",
 	};
 
-	function myFadeInTransition(
-		node: HTMLElement,
-		params?: { delay?: number; duration?: number; easing?: (t: number) => number }
-	): AnimationConfig {
+	type AnimationParams = { delay?: number; duration?: number; easing?: (t: number) => number };
+
+	function defaultPartialAnimationConfigFromParams(params?: AnimationParams): AnimationConfig {
+		return {
+			delay: params?.delay || 0,
+			duration: params?.duration || 300,
+			easing: params?.easing || linear,
+		};
+	}
+
+	function growToPopoverAnimation(node: HTMLElement, params?: AnimationParams): AnimationConfig {
 		const boundingRect = triggerWrapperElement.getBoundingClientRect();
 		const initial = {
 			width: boundingRect.width + "px",
@@ -40,9 +47,7 @@
 			translateY: "0" + "px",
 		};
 		return {
-			delay: params?.delay || 0,
-			duration: params?.duration || 300,
-			easing: params?.easing || linear,
+			...defaultPartialAnimationConfigFromParams(params),
 			css: (t, _) => {
 				return `
 					width: calc(${initial.width} + calc(${final.width} - ${initial.width}) * ${t});
@@ -55,64 +60,102 @@
 				`;
 			},
 		};
-		// create AnimationConfig-object from the input values... -> the animation inside the config will be automatically run
+	}
+
+	const backdropDimmingRemainingBrightnessPercentage: number = 60;
+
+	function dimBackgroundAnimation(node: HTMLElement, params?: AnimationParams): AnimationConfig {
+		return {
+			...defaultPartialAnimationConfigFromParams(params),
+			css: (t, _) => {
+				const remainingBrightness = 100 - (100 - backdropDimmingRemainingBrightnessPercentage) * t;
+				return `backdrop-filter: brightness(${remainingBrightness}%);`;
+			},
+		};
+	}
+
+	function changeOpacityAnimation(node: HTMLElement, params?: AnimationParams): AnimationConfig {
+		return {
+			...defaultPartialAnimationConfigFromParams(params),
+			css: (t, _) => {
+				const remainingOpacity = t;
+				return `
+					opacity: ${remainingOpacity};
+					transform-origin: top left;
+					transform: scale(${t});
+				`;
+			},
+		};
 	}
 </script>
 
-<div>
-	<div
-		class="trigger-wrapper"
-		bind:this={triggerWrapperElement}
-	>
-		{@render popoverTrigger?.(openTrigger)}
-	</div>
+<div
+	class="trigger-wrapper"
+	bind:this={triggerWrapperElement}
+>
+	{@render popoverTrigger?.(openTrigger)}
+</div>
 
-	{#if open}
+{#if open}
+	<div
+		class="background-dimmer"
+		style="backdrop-filter: brightness({backdropDimmingRemainingBrightnessPercentage}%)"
+		transition:dimBackgroundAnimation
+		onclick={() => {
+			open = false;
+		}}
+		role="none"
+	>
 		<div
-			class="background-dimmer"
-			onclick={() => {
-				open = false;
+			class={"children-wrapper"}
+			style="width:{final.width}; height:{final.height}; left:{final.left}; top:{final.top}; translate:{final.translateX} {final.translateY}"
+			onclick={(ev) => {
+				// TODO: is there a cleaner way to do this?
+				// can you enrich an event with data? for example "inside-popover" to use in a higher eventhandler?
+				ev.stopPropagation();
 			}}
 			role="none"
+			bind:this={childrenWrapperElement}
+			transition:growToPopoverAnimation
 		>
-			<div
-				class={"children-wrapper"}
-				style="width:{final.width}; height:{final.height}; left:{final.left}; top:{final.top}; translate:{final.translateX} {final.translateY}"
-				onclick={(ev) => {
-					// TODO: is there a cleaner way to do this?
-					// can you enrich an event with data? for example "inside-popover" to use in a higher eventhandler?
-					ev.stopPropagation();
-				}}
-				role="none"
-				bind:this={childrenWrapperElement}
-				in:myFadeInTransition
-				out:myFadeInTransition
-			>
-				<Card {title}>
-					{#snippet iconRight(size)}
-						<button
-							onclick={() => {
-								console.log("cliiiick");
-								open = false;
-							}}
+			<Card>
+				{#snippet iconRight(size)}
+					<button
+						onclick={() => {
+							open = false;
+						}}
+						><div
+							class="children-opacity-changer"
+							transition:changeOpacityAnimation
 						>
 							<Icon
 								iconName="x"
 								{size}
 							></Icon>
-						</button>
-					{/snippet}
-					{@render title?.()}
+						</div>
+					</button>
+				{/snippet}
+				{#snippet title()}
+					<div
+						class="children-opacity-changer"
+						transition:changeOpacityAnimation
+					>
+						{@render title?.()}
+					</div>
+				{/snippet}
+				<div
+					class="children-opacity-changer"
+					transition:changeOpacityAnimation
+				>
 					{@render children?.()}
-				</Card>
-			</div>
+				</div>
+			</Card>
 		</div>
-	{/if}
-</div>
+	</div>
+{/if}
 
 <style lang="scss">
 	.trigger-wrapper {
-		/* TODO: maybe use `display: contents`, but then I have to figure out a way to get the boundingclientrect */
 		height: fit-content;
 		width: fit-content;
 	}
@@ -122,9 +165,6 @@
 		overflow: hidden;
 	}
 
-	// FIXME: animation for dimming when opening/closing
-	// make something like this into a ripple effect through upscaling: https://stackoverflow.com/questions/10768451/inline-svg-in-css
-	// (of an svg "blob" -> https://www.blobmaker.app/)
 	.background-dimmer {
 		position: fixed;
 		z-index: 1001;
@@ -132,6 +172,5 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		backdrop-filter: brightness(60%);
 	}
 </style>
