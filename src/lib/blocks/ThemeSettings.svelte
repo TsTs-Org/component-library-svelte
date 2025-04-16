@@ -3,14 +3,12 @@
 	import Radiogroup from "$lib/components/Radio/Radiogroup.svelte";
 	import RadioItem from "$lib/components/Radio/RadioItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";
-	import Checkbox from "$lib/components/Checkbox.svelte";
 
 	type Props = {
 		colors: string[];
 	};
 
 	let { colors }: Props = $props();
-	let devsettings = $state(true);
 </script>
 
 <div class="theme-settings">
@@ -145,32 +143,6 @@
 			1.25
 		</RadioItem>
 	</Radiogroup>
-	<Checkbox
-		label="DevSettings"
-		bind:checked={devsettings}
-	></Checkbox>
-	{#if devsettings}
-		<div class="devSettings">
-			<div class="allColors">
-				<h4>All Colors</h4>
-				{#each themeValues as value}
-					<div class="color">
-						<p>
-							{value}:
-						</p>
-						<span
-							class="blob"
-							style={`background-color: ${$theme.lightValues ? $theme.lightValues[value] : defaults.lightValues[value]};`}
-						></span>
-						<span
-							class="blob"
-							style={`background-color: ${$theme.darkValues ? $theme.darkValues[value] : defaults.darkValues[value]};`}
-						></span>
-					</div>
-				{/each}
-			</div>
-		</div>
-	{/if}
 </div>
 
 <style lang="scss">
