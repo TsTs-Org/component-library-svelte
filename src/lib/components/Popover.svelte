@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { onMount, type Snippet } from "svelte";
+	import { type Snippet } from "svelte";
 	import Card from "./Card.svelte";
 	import Icon from "./Icon.svelte";
-	import Button from "./Button.svelte";
-	import { flip, type AnimationConfig } from "svelte/animate";
-	import { backIn, linear } from "svelte/easing";
+	import { type AnimationConfig } from "svelte/animate";
+	import { linear } from "svelte/easing";
 
 	type Props = { children: Snippet; popoverTrigger: Snippet<[() => void]>; title: Snippet };
 	let { children, popoverTrigger, title }: Props = $props();
@@ -18,6 +17,15 @@
 	let childrenWrapperElement: HTMLDivElement;
 	let triggerWrapperElement: HTMLDivElement;
 
+	const final = {
+		width: "80%",
+		height: "80%",
+		left: "50%",
+		top: "50%",
+		translateX: "-50%",
+		translateY: "-50%",
+	};
+
 	function myFadeInTransition(
 		node: HTMLElement,
 		params?: { delay?: number; duration?: number; easing?: (t: number) => number }
@@ -30,14 +38,6 @@
 			top: boundingRect.top + "px",
 			translateX: "0" + "px",
 			translateY: "0" + "px",
-		};
-		const final = {
-			width: "80%",
-			height: "80%",
-			left: "50%",
-			top: "50%",
-			translateX: "-50%",
-			translateY: "-50%",
 		};
 		return {
 			delay: params?.delay || 0,
@@ -76,7 +76,8 @@
 			role="none"
 		>
 			<div
-				class={["children-wrapper"]}
+				class={"children-wrapper"}
+				style="width:{final.width}; height:{final.height}; left:{final.left}; top:{final.top}; translate:{final.translateX} {final.translateY}"
 				onclick={(ev) => {
 					// TODO: is there a cleaner way to do this?
 					// can you enrich an event with data? for example "inside-popover" to use in a higher eventhandler?
@@ -119,11 +120,6 @@
 	.children-wrapper {
 		position: relative;
 		overflow: hidden;
-		width: 80%;
-		height: 80%;
-		left: 50%;
-		top: 50%;
-		translate: -50% -50%;
 	}
 
 	// FIXME: animation for dimming when opening/closing
