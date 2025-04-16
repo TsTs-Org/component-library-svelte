@@ -14,6 +14,10 @@
 	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
 </script>
 
+<svelte:head>
+	<title>Docsmocs</title>
+</svelte:head>
+
 <Themify>
 	<Navigationbar variant="glass">
 		{#snippet left()}
