@@ -10,7 +10,7 @@
 	let canvas: HTMLCanvasElement;
 	let legend: HTMLUListElement;
 
-	type ChartType = "line" | "bar";
+	type ChartType = "donut" | "thingy";
 	type Dataset = {
 		title: string;
 		data: Array<number>;
@@ -18,14 +18,10 @@
 
 	type Props = {
 		chartType?: ChartType;
-		labels: Array<string>;
+		labels?: Array<string>;
 		data: Array<Dataset>;
-		area?: boolean;
-		stepped?: boolean;
-		xAxis?: boolean;
-		yAxis?: boolean;
-		xGrid?: boolean;
-		yGrid?: boolean;
+		value: string;
+		title?: string;
 		displayLegend?: boolean;
 		displayTooltip?: boolean;
 		displayTitle?: boolean;
@@ -33,15 +29,11 @@
 	};
 
 	let {
-		chartType = "line",
+		chartType = "donut",
 		labels,
 		data,
-		stepped = false,
-		area = false,
-		xAxis = false,
-		yAxis = false,
-		xGrid = false,
-		yGrid = false,
+		value,
+		title = "",
 		displayLegend = false,
 		displayTooltip = false,
 		displayTitle = false,
@@ -54,8 +46,10 @@
 		borderWidth: number;
 		borderRadius: number;
 		borderSkipped: boolean;
-		stepped: string | boolean;
-		fill: string | boolean;
+		offset: number;
+		cutout: string;
+		circumference: number;
+		rotation: number;
 	}[] = [];
 
 	onMount(() => {
@@ -63,64 +57,31 @@
 			datasets.push({
 				label: val.title,
 				data: val.data,
-				borderWidth: 2,
-				borderRadius: 3,
+				borderWidth: 0,
+				borderRadius: 0,
 				borderSkipped: false,
-				stepped: stepped ? "middle" : false,
-				fill: area ? "start" : false,
+				offset: 0,
+				cutout: "65%",
+				circumference: chartType == "donut" ? 360 : 210,
+				rotation: chartType == "donut" ? 0 : 255,
+				// radius: "65%",
 			});
 		});
 		const chart = new Chart(canvas, {
-			type: chartType,
+			type: "doughnut",
 			data: {
 				labels: labels,
 				datasets: datasets,
 			},
 			options: {
+				responsive: false,
 				events: displayTooltip ? undefined : [],
-
-				interaction: {
-					intersect: false,
-					mode: "index",
-				},
 				scales: {
 					x: {
-						border: {
-							display: false,
-						},
-						ticks: {
-							display: xAxis,
-							color: "#999",
-						},
-						grid: {
-							display: xGrid,
-							color: "rgba(145,145,145,0.25)",
-						},
+						display: false,
 					},
 					y: {
-						beginAtZero: true,
-						border: {
-							display: false,
-						},
-						ticks: {
-							display: yAxis,
-							// display: false,
-							color: "#999",
-						},
-						grid: {
-							display: yGrid,
-							color: "rgba(145,145,145,0.25)",
-						},
-					},
-				},
-				elements: {
-					line: {
-						tension: 0.4,
-					},
-					point: {
-						radius: 0,
-						hitRadius: 5,
-						hoverRadius: 4,
+						display: false,
 					},
 				},
 				plugins: {
@@ -152,20 +113,58 @@
 		});
 
 		theme.subscribe(() => {
-			chart.data.datasets.forEach((dataset, i) => {
-				mainColor = styles.getPropertyValue(`--primary-${i + 4}00`).trim();
-				dataset.backgroundColor = `hsl(from ${mainColor} h s l / ${chartType == "bar" ? 0.75 : 0.25})`;
-				dataset.borderColor = `hsl(from ${mainColor} h s l / ${chartType == "bar" ? 1 : 0.75})`;
+			chart.data.datasets.forEach((dataset) => {
+				const new_bgs: Array<string> = [];
+				dataset.data.forEach((element: number, i: number) => {
+					mainColor = styles.getPropertyValue(`--primary-${i + 2}00`).trim();
+					new_bgs.push(`hsl(from ${mainColor} h s l / .75)`);
+				});
+				dataset.backgroundColor = new_bgs;
+				return dataset;
 			});
 			chart.update();
 		});
 	});
 </script>
 
-<div class="BaseChart">
-	<canvas bind:this={canvas}></canvas>
-	<ul
-		class="__chartPlugin-legend"
-		bind:this={legend}
-	></ul>
+<div class="RoundChart">
+	<div class="Chart">
+		<canvas
+			bind:this={canvas}
+			style="width: 180px"
+		></canvas>
+		<ul
+			class="__chartPlugin-legend"
+			bind:this={legend}
+		></ul>
+	</div>
+	<div
+		class="main"
+		class:donut={chartType == "donut"}
+	>
+		<h3>{value}</h3>
+		<h5>{title}</h5>
+	</div>
 </div>
+
+<style lang="scss">
+	.RoundChart {
+		position: relative;
+		width: min-content;
+		.main {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, 10%);
+			h5 {
+				color: var(--text-color-muted);
+			}
+			&.donut {
+				transform: translate(-50%, -45%);
+			}
+		}
+	}
+</style>

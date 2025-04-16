@@ -1,5 +1,6 @@
 .__chartPlugin-legend {
-    /* background-color: red; */
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .__chartPlugin-legend li {
@@ -24,6 +25,7 @@
 }
 
 .__chartPlugin-tooltip {
+    z-index: 1;
     background: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-s);
@@ -50,15 +52,16 @@
     width: auto;
 }
 
-.__chartPlugin-tooltip tr, th {
+.__chartPlugin-tooltip tr, h5 {
     border-width: 0;
     background-color: inherit;
     text-align: left;
     font-size: var(--text-size-xs);
+    text-transform: capitalize;
 }
 
-.__chartPlugin-tooltip th {
-    text-transform: capitalize;
+.__chartPlugin-tooltip h5, .__chartPlugin-tooltip table {
+    padding-inline: var(--padding-xs);
 }
 
 .__chartPlugin-tooltip span {
@@ -71,4 +74,10 @@
 
 .__chartPlugin-tooltip td:nth-child(2){
     color: var(--text-color-muted);
+    padding-right: 10px;
+}
+
+.__chartPlugin-tooltip td:nth-child(3){
+    color: var(--text-color);
+    text-align: right;
 }

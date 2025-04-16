@@ -1,7 +1,7 @@
 
 export const htmlLegendPlugin = {
     id: "htmlLegend",
-    afterUpdate(chart, args, options) {
+    afterUpdate(chart: { options: { plugins: { legend: { labels: { generateLabels: (arg0: any) => any; }; }; }; }; config: { type: any; }; toggleDataVisibility: (arg0: any) => void; setDatasetVisibility: (arg0: any, arg1: boolean) => void; isDatasetVisible: (arg0: any) => any; update: () => void; }, args: any, options: { containerRef: any; }) {
         const ul = options.containerRef;
 
         // Remove old legend items
@@ -12,7 +12,7 @@ export const htmlLegendPlugin = {
         // Reuse the built-in legendItems generator
         const items = chart.options.plugins.legend.labels.generateLabels(chart);
 
-        items.forEach((item) => {
+        items.forEach((item: { index: any; datasetIndex: any; fillStyle: string; strokeStyle: string; lineWidth: string; fontColor: string; hidden: any; text: string; }) => {
             const li = document.createElement("li");
 
             li.onclick = () => {
@@ -52,13 +52,15 @@ export const htmlLegendPlugin = {
 
 // --------------------- Custom Tooltip ---------------------
 
-const getOrCreateTooltip = (chart) => {
+const getOrCreateTooltip = (chart: { canvas: { parentNode: { querySelector: (arg0: string) => any; appendChild: (arg0: any) => void; }; }; }) => {
     let tooltipEl = chart.canvas.parentNode.querySelector("div");
 
     if (!tooltipEl) {
         tooltipEl = document.createElement("div");
         tooltipEl.classList.add("__chartPlugin-tooltip")
         const table = document.createElement("table");
+        const heading = document.createElement("h5");
+        tooltipEl.appendChild(heading);
         tooltipEl.appendChild(table);
         chart.canvas.parentNode.appendChild(tooltipEl);
     }
@@ -67,7 +69,7 @@ const getOrCreateTooltip = (chart) => {
 };
 
 
-export const externalTooltipHandler = (context) => {
+export const externalTooltipHandler = (context: { chart: any; tooltip: any; }) => {
     // Tooltip Element
     const { chart, tooltip } = context;
     const tooltipEl = getOrCreateTooltip(chart);
@@ -81,27 +83,20 @@ export const externalTooltipHandler = (context) => {
     // Set Text
     if (tooltip.body) {
         const titleLines = tooltip.title || [];
-        const bodyLines = tooltip.body.map((b) => b.lines);
+        const bodyLines = tooltip.body.map((b: { lines: any; }) => b.lines);
 
-        const tableHead = document.createElement("thead");
-
-        titleLines.forEach((title) => {
-            const tr = document.createElement("tr");
-            const th = document.createElement("th");
-            const text = document.createTextNode(title);
-            th.appendChild(text);
-            tr.appendChild(th);
-            tableHead.appendChild(tr);
+        titleLines.forEach((title: any) => {
+            tooltipEl.querySelector("h5").innerText = title;
         });
 
         const tableBody = document.createElement("tbody");
-        bodyLines.forEach((body, i) => {
+        bodyLines.forEach((body: string[], i: string | number) => {
             const colors = tooltip.labelColors[i];
             const splitText = body[0].split(":")
 
             const span = document.createElement("span");
-            span.style.background = colors.backgroundColor;
-            span.style.borderColor = colors.borderColor;
+            span.style.background = chart.config._config.type == "doughnut" ? colors.backgroundColor : colors.borderColor;
+            span.style.borderColor = chart.config._config.type == "doughnut" ? colors.backgroundColor : colors.borderColor;
 
             const tr = document.createElement("tr");
             const tdColor = document.createElement("td");
@@ -128,7 +123,6 @@ export const externalTooltipHandler = (context) => {
         }
 
         // Add new children
-        tableRoot.appendChild(tableHead);
         tableRoot.appendChild(tableBody);
     }
 
