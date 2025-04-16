@@ -24,37 +24,6 @@
 		{/snippet}
 		<h3></h3>
 		{#snippet right()}
-			<!-- <Select
-				value={$theme.primaryColor}
-				onchange={(color) =>
-					theme.update((x) => {
-						x.primaryColor = color;
-						return x;
-					})}
-				variant="ghost"
-				placeholder="Theme"
-			>
-				<SelectItem
-					value="rebeccapurple"
-					label="Thingypurple"
-				/>
-				<SelectItem
-					value="royalblue"
-					label="Royalblue"
-				/>
-				<SelectItem
-					value="seagreen"
-					label="Seagreen"
-				/>
-				<SelectItem
-					value="#F45D01"
-					label="Charmander"
-				/>
-				<SelectItem
-					value="#b08968"
-					label="Creamy"
-				/>
-			</Select> -->
 			<button
 				aria-label="Toggle light/dark mode"
 				onclick={() =>

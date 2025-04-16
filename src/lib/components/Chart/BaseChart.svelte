@@ -2,54 +2,64 @@
 	import Chart from "chart.js/auto";
 	import { onMount } from "svelte";
 	import { externalTooltipHandler, htmlLegendPlugin } from "$lib/components/Chart/plugins.js";
+	import { theme } from "$lib/utils/themify.svelte.js";
+
+	const styles = getComputedStyle(document.documentElement);
+	let mainColor;
 
 	let canvas: HTMLCanvasElement;
 	let legend: HTMLUListElement;
 
-	type Variant = "line" | "bar";
+	type ChartType = "line" | "bar";
+	type Dataset = {
+		title: string;
+		borderColor: string;
+		backgroundColor: string;
+		data: Array<number>;
+	};
 
 	type Props = {
-		variant?: Variant;
-		dispayLegend?: boolean;
+		chartType?: ChartType;
+		labels: Array<string>;
+		data: Array<Dataset>;
+		xAxis?: boolean;
+		displayLegend?: boolean;
+		displayTooltip?: boolean;
 		displayTitle?: boolean;
 		displayDescription?: boolean;
 	};
 
 	let {
-		variant = "line",
-		dispayLegend = true,
+		chartType = "line",
+		labels,
+		data,
+		xAxis = false,
+		displayLegend = false,
+		displayTooltip = false,
 		displayTitle = false,
 		displayDescription = false,
 	}: Props = $props();
 
+	const datasets = [];
+
 	onMount(() => {
-		new Chart(canvas, {
-			type: variant,
+		data.forEach((val) => {
+			datasets.push({
+				label: val.title,
+				data: val.data,
+				borderWidth: 2,
+				borderRadius: 5,
+				fill: "start",
+			});
+		});
+		const chart = new Chart(canvas, {
+			type: chartType,
 			data: {
-				labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-				datasets: [
-					{
-						label: "first",
-						data: [12, 19, 3, 5, 2, 3],
-						borderWidth: 2,
-						borderRadius: 5,
-						borderColor: "rgb(54, 162, 235)",
-						backgroundColor: "rgba(54, 162, 235, .4)",
-						fill: "start",
-					},
-					{
-						label: "second",
-						data: [2, 8, 2, 7, 12, 5],
-						borderWidth: 2,
-						borderRadius: 5,
-						borderColor: "rgb(54, 162, 235)",
-						backgroundColor: "rgba(54, 162, 235, .4)",
-						fill: "start",
-					},
-				],
+				labels: labels,
+				datasets: datasets,
 			},
 			options: {
-				// events: ["click"],
+				events: displayTooltip ? undefined : [],
 
 				interaction: {
 					intersect: false,
@@ -57,23 +67,26 @@
 				},
 				scales: {
 					x: {
-						display: false,
+						display: xAxis,
 						ticks: {
 							// display: false,
+							color: "#999",
 						},
 						grid: {
-							// display: false,
+							display: false,
+							color: "rgba(145,145,145,0.25)",
 						},
 					},
 					y: {
 						beginAtZero: true,
-						// display: false,
 						ticks: {
+							display: !xAxis,
 							// display: false,
+							color: "#999",
 						},
 						grid: {
 							// display: false,
-							color: "rgba(125, 125, 125, 0.15)",
+							color: "rgba(145,145,145,0.25)",
 						},
 					},
 				},
@@ -113,7 +126,16 @@
 					},
 				},
 			},
-			plugins: [htmlLegendPlugin],
+			plugins: displayLegend ? [htmlLegendPlugin] : [],
+		});
+
+		theme.subscribe(() => {
+			mainColor = styles.getPropertyValue("--primary-500").trim();
+			chart.data.datasets.forEach((dataset) => {
+				dataset.backgroundColor = `hsl(from ${mainColor} h s l / .25)`;
+				dataset.borderColor = `hsl(from ${mainColor} h s l / .75)`;
+			});
+			chart.update();
 		});
 	});
 </script>

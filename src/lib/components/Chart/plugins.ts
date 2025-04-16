@@ -97,16 +97,26 @@ export const externalTooltipHandler = (context) => {
         const tableBody = document.createElement("tbody");
         bodyLines.forEach((body, i) => {
             const colors = tooltip.labelColors[i];
+            const splitText = body[0].split(":")
 
             const span = document.createElement("span");
             span.style.background = colors.backgroundColor;
             span.style.borderColor = colors.borderColor;
+
             const tr = document.createElement("tr");
-            const td = document.createElement("td");
-            const text = document.createTextNode(body);
-            td.appendChild(span);
-            td.appendChild(text);
-            tr.appendChild(td);
+            const tdColor = document.createElement("td");
+            const tdText = document.createElement("td");
+            const tdValue = document.createElement("td");
+            const text = document.createTextNode(splitText[0]);
+            const value = document.createTextNode(splitText[1]);
+
+            tdColor.appendChild(span);
+            tdText.appendChild(text);
+            tdValue.appendChild(value);
+            
+            tr.appendChild(tdColor);
+            tr.appendChild(tdText);
+            tr.appendChild(tdValue);
             tableBody.appendChild(tr);
         });
 

@@ -37,17 +37,38 @@
 
 .__chartPlugin-tooltip table {
     margin: 0px;
+    table-layout: fixed;
+}
+
+.__chartPlugin-tooltip table td:nth-child(1) {
+    width: min-content;
+}
+.__chartPlugin-tooltip table td:nth-child(3) {
+    width: min-content;
+}
+.__chartPlugin-tooltip table td:nth-child(2) {
+    width: auto;
 }
 
 .__chartPlugin-tooltip tr, th {
     border-width: 0;
     background-color: inherit;
+    text-align: left;
+    font-size: var(--text-size-xs);
+}
+
+.__chartPlugin-tooltip th {
+    text-transform: capitalize;
 }
 
 .__chartPlugin-tooltip span {
     border-width: 2px;
-    margin-right: 10px;
+    border-radius: var(--border-radius-xs);
     height: 10px;
     width: 10px;
     display: inline-block;
+}
+
+.__chartPlugin-tooltip td:nth-child(2){
+    color: var(--text-color-muted);
 }

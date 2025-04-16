@@ -33,7 +33,26 @@
 
 <div class="components-page">
 	<Showcase name="Chart">
-		<BaseChart variant="line"></BaseChart>
+		<BaseChart
+			chartType="line"
+			xAxis
+			displayTooltip
+			labels={["one", "two", "three", "four", "five", "six"]}
+			data={[
+				{
+					title: "first",
+					data: [12, 19, 5, 5, 2, 3],
+					borderColor: "rgb(54, 162, 235)",
+					backgroundColor: "rgba(54, 162, 235, .4)",
+				},
+				{
+					title: "second",
+					data: [2, 8, 2, 11, 7, 4],
+					borderColor: "rgb(54, 162, 235)",
+					backgroundColor: "rgba(54, 162, 235, .4)",
+				},
+			]}
+		></BaseChart>
 	</Showcase>
 
 	<Showcase name="Headings">

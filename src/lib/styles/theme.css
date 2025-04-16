@@ -62,6 +62,8 @@
 	--primary-800: hsl(from var(--primary-color) h s calc(l/100 * 30));
 	--primary-900: hsl(from var(--primary-color) h s calc(l/100 * 20));
 
+	--test: rgb(from var(--primary-500) r g b);
+
 	--border-radius-xs: calc(var(--border-radius-s) / 2);
 	--border-radius-s: 0.5rem;
 	--border-radius-m: calc(var(--border-radius-s) * 2);
