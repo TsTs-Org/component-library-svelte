@@ -1,13 +1,18 @@
-<script>
-	import { theme } from "$lib/utils/themify.svelte.js";
+<script lang="ts">
+	import { defaults, theme, themeValues } from "$lib/utils/themify.svelte.js";
 	import Radiogroup from "$lib/components/Radio/Radiogroup.svelte";
 	import RadioItem from "$lib/components/Radio/RadioItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";
+
+	type Props = {
+		colors: string[];
+	};
+
+	let { colors }: Props = $props();
 </script>
 
 <div class="theme-settings">
 	<Radiogroup
-		label="Color"
 		value={$theme.primaryColor}
 		onchange={(color) =>
 			theme.update((x) => {
@@ -15,26 +20,12 @@
 				return x;
 			})}
 	>
-		<RadioItem
-			value="seagreen"
-			ofType="color"
-		></RadioItem>
-		<RadioItem
-			value="royalblue"
-			ofType="color"
-		></RadioItem>
-		<RadioItem
-			value="rebeccapurple"
-			ofType="color"
-		></RadioItem>
-		<RadioItem
-			value="#F45D01"
-			ofType="color"
-		></RadioItem>
-		<RadioItem
-			value="#b08968"
-			ofType="color"
-		></RadioItem>
+		{#each colors as color}
+			<RadioItem
+				value={color}
+				ofType="color"
+			></RadioItem>
+		{/each}
 	</Radiogroup>
 	<Seperator />
 	<Radiogroup
@@ -46,12 +37,6 @@
 				return x;
 			})}
 	>
-		<RadioItem
-			value="0rem"
-			ofType="button"
-		>
-			0
-		</RadioItem>
 		<RadioItem
 			value="0.25rem"
 			ofType="button"
@@ -73,7 +58,7 @@
 	</Radiogroup>
 	<Seperator />
 	<Radiogroup
-		label="Radius"
+		label="Padding"
 		value={$theme.padding}
 		onchange={(radius) =>
 			theme.update((x) => {
@@ -102,7 +87,7 @@
 	</Radiogroup>
 	<Seperator />
 	<Radiogroup
-		label="ColorInfluence"
+		label="Color Influence"
 		value={$theme.colorInfluence}
 		onchange={(radius) =>
 			theme.update((x) => {
@@ -110,12 +95,6 @@
 				return x;
 			})}
 	>
-		<RadioItem
-			value="0.005"
-			ofType="button"
-		>
-			0.5
-		</RadioItem>
 		<RadioItem
 			value="0.0075"
 			ofType="button"
@@ -137,7 +116,7 @@
 	</Radiogroup>
 	<Seperator />
 	<Radiogroup
-		label="TextSize"
+		label="Text Size"
 		value={$theme.fontSize}
 		onchange={(size) =>
 			theme.update((x) => {
@@ -163,12 +142,6 @@
 		>
 			1.25
 		</RadioItem>
-		<RadioItem
-			value="1.5rem"
-			ofType="button"
-		>
-			1.5
-		</RadioItem>
 	</Radiogroup>
 </div>
 
@@ -178,6 +151,31 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
+		gap: var(--padding-m);
+	}
+	.blob {
+		display: block;
+		height: 25px;
+		width: 25px;
+		border-radius: 25px;
+		border: 1px solid var(--border-color);
+	}
+
+	.devSettings {
+		display: flex;
+		flex-direction: row;
+		gap: var(--padding-m);
+	}
+
+	.allColors {
+		display: flex;
+		flex-direction: column;
+		gap: var(--padding-s);
+	}
+	.color {
+		display: flex;
+		align-items: center;
+		// justify-content: space-between;
 		gap: var(--padding-m);
 	}
 </style>

@@ -4,7 +4,7 @@
 
 	type Props = {
 		onchange?: (value: string) => void;
-		checked?: string;
+		checked?: boolean;
 		label?: string;
 		description?: string;
 	} & HTMLInputAttributes;

@@ -29,7 +29,9 @@
 </script>
 
 <div class="theme-settings">
-	<ThemeSettings />
+	<ThemeSettings
+		colors={["#6a994e", "royalblue", "#9d4edd", "#FE7520", "#e63946", "#CA802B", "#99582a"]}
+	/>
 </div>
 
 <div class="components-page">
