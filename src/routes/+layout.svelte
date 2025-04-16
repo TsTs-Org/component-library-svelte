@@ -1,6 +1,7 @@
 <script>
 	import "$lib/styles/main.css";
 	import "$lib/styles/theme.css";
+	import "$lib/styles/charts.css";
 	import { base } from "$app/paths";
 
 	let { children } = $props();

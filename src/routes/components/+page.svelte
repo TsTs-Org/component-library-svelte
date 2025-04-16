@@ -24,6 +24,7 @@
 	import Contextcontainer from "$lib/components/Contextcontainer/Contextcontainer.svelte";
 	import ContextmenuItem from "$lib/components/Contextcontainer/ContextmenuItem.svelte";
 	import ThemeSettings from "$lib/blocks/ThemeSettings.svelte";
+	import BaseChart from "$lib/components/Chart/BaseChart.svelte";
 </script>
 
 <div class="theme-settings">
@@ -31,6 +32,10 @@
 </div>
 
 <div class="components-page">
+	<Showcase name="Chart">
+		<BaseChart variant="line"></BaseChart>
+	</Showcase>
+
 	<Showcase name="Headings">
 		<div class="mock-grid">
 			<h1>Heading</h1>
