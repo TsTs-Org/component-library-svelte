@@ -10,7 +10,6 @@
 	};
 
 	let { colors }: Props = $props();
-	let devsettings = $state(false);
 </script>
 
 <div class="theme-settings">
@@ -145,21 +144,6 @@
 			1.25
 		</RadioItem>
 	</Radiogroup>
-	<Checkbox
-		label="DevSettings"
-		bind:checked={devsettings}
-	></Checkbox>
-	{#if devsettings}
-		{#each Object.keys($theme.lightValues) as value}
-			<p>
-				{value}:
-				<span
-					class="blob"
-					style={`background-color: ${$theme.lightValues[value]}`}
-				></span>
-			</p>
-		{/each}
-	{/if}
 </div>
 
 <style lang="scss">

@@ -55,13 +55,11 @@ export const theme = writable(defaults)
 
 function setModeColors(colors: object) {
     const raw_keys = Object.keys(colors);
-    const formatted_keys = []
+    const formatted_keys: string[] = []
     raw_keys.map((key) => {
         key = key.replaceAll("_", "-")
         formatted_keys.push(key);
     })
-    console.log(raw_keys)
-    console.log(formatted_keys)
     formatted_keys.forEach((key, i) => {
         document.documentElement.style.setProperty(`--${key}`, colors[raw_keys[i]] ?? "red");
     })
