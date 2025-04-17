@@ -27,6 +27,9 @@
 	import BaseChart from "$lib/components/Chart/BaseChart.svelte";
 	import RoundChart from "$lib/components/Chart/RoundChart.svelte";
 	import Popover from "$lib/components/Popover.svelte";
+	import Tabs from "$lib/components/Tabs/Tabs.svelte";
+	import TabTrigger from "$lib/components/Tabs/TabTrigger.svelte";
+	import TabContent from "$lib/components/Tabs/TabContent.svelte";
 </script>
 
 <div class="theme-settings">
@@ -36,6 +39,24 @@
 </div>
 
 <div class="components-page">
+	<Showcase name="Tabs">
+		<Tabs>
+			<TabTrigger tabIdentifier="tab1">
+				{#snippet trigger(selectTab)}
+					<Button onclick={selectTab}>Select Tab 1</Button>
+				{/snippet}
+			</TabTrigger>
+			<TabTrigger tabIdentifier="tab2">
+				{#snippet trigger(selectTab)}
+					<Button onclick={selectTab}>Select Tab 2</Button>
+				{/snippet}
+			</TabTrigger>
+
+			<TabContent tabIdentifier="tab1">this is tab1</TabContent>
+			<TabContent tabIdentifier="tab2">this is tab2</TabContent>
+		</Tabs>
+	</Showcase>
+
 	<Showcase name="Icon Buttons">
 		<div class="mock-grid">
 			<Button size="s">
