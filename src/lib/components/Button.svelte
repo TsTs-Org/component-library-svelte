@@ -111,7 +111,7 @@
 		&.bordered {
 			background-color: transparent;
 			border: 1px solid var(--border-color);
-			&:hover {
+			&:not(:disabled):hover {
 				background-color: var(--neutral-hover-color);
 			}
 			.content {
