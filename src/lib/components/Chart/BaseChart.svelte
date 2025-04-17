@@ -19,6 +19,7 @@
 	type Props = {
 		chartType?: ChartType;
 		labels: Array<string>;
+		customColors?: Array<string>;
 		data: Array<Dataset>;
 		area?: boolean;
 		stepped?: boolean;
@@ -35,6 +36,7 @@
 	let {
 		chartType = "line",
 		labels,
+		customColors,
 		data,
 		stepped = false,
 		area = false,
@@ -56,10 +58,12 @@
 		borderSkipped: boolean;
 		stepped: string | boolean;
 		fill: string | boolean;
+		borderColor: string;
+		backgroundColor: string;
 	}[] = [];
 
 	onMount(() => {
-		data.forEach((val) => {
+		data.forEach((val, i) => {
 			datasets.push({
 				label: val.title,
 				data: val.data,
@@ -68,6 +72,8 @@
 				borderSkipped: false,
 				stepped: stepped ? "middle" : false,
 				fill: area ? "start" : false,
+				borderColor: customColors ? `rgba(from ${customColors[i]} r g b / .75)` : "grey",
+				backgroundColor: customColors ? `rgba(from ${customColors[i]} r g b / .25)` : "grey",
 			});
 		});
 		const chart = new Chart(canvas, {
@@ -151,14 +157,16 @@
 			plugins: displayLegend ? [htmlLegendPlugin] : [],
 		});
 
-		theme.subscribe(() => {
-			chart.data.datasets.forEach((dataset, i) => {
-				mainColor = styles.getPropertyValue(`--primary-${i + 4}00`).trim();
-				dataset.backgroundColor = `hsl(from ${mainColor} h s l / ${chartType == "bar" ? 0.75 : 0.25})`;
-				dataset.borderColor = `hsl(from ${mainColor} h s l / ${chartType == "bar" ? 1 : 0.75})`;
+		if (!customColors) {
+			theme.subscribe(() => {
+				chart.data.datasets.forEach((dataset, i) => {
+					mainColor = styles.getPropertyValue(`--primary-${i + 4}00`).trim();
+					dataset.backgroundColor = `hsl(from ${mainColor} h s l / ${chartType == "bar" ? 0.75 : 0.25})`;
+					dataset.borderColor = `hsl(from ${mainColor} h s l / ${chartType == "bar" ? 1 : 0.75})`;
+				});
+				chart.update();
 			});
-			chart.update();
-		});
+		}
 	});
 </script>
 

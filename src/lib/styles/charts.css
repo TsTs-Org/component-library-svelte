@@ -1,6 +1,10 @@
 .__chartPlugin-legend {
     display: flex;
+    row-gap: 4px;
+    column-gap: 10px;
     flex-wrap: wrap;
+    height: fit-content;
+    margin-block: auto;
 }
 
 .__chartPlugin-legend li {
@@ -8,15 +12,17 @@
     align-items: center;
     cursor: pointer;
     flex-direction: row;
-    margin-left: 10px;
+    gap: 5px;
+    height: fit-content;
+    text-transform: capitalize;
 }
 
 .__chartPlugin-legend span {
     display: inline-block;
     flex-shrink: 0;
-    height: 20px;
-    width: 20px;
-    margin-right: 10px;
+    height: 18px;
+    width: 18px;
+    border-radius: 100%;
 }
 
 .__chartPlugin-legend p {

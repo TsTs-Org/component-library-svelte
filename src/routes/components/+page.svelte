@@ -77,11 +77,12 @@
 			value="1203"
 			title="Visitors"
 			displayTooltip
-			labels={["one", "two", "three", "four", "five", "six"]}
+			col
+			labels={["January", "February", "March", "May"]}
 			data={[
 				{
 					title: "second",
-					data: [2, 8, 2, 11, 7, 4],
+					data: [2, 8, 2, 11],
 				},
 			]}
 		></RoundChart>
@@ -92,7 +93,9 @@
 			value="1203"
 			title="Visitors"
 			displayTooltip
-			labels={["one", "two", "three", "four", "five", "six"]}
+			displayLegend
+			customColors={["#eae2b7", "#fcbf49", "#f77f00", "#d62828", "#003049"]}
+			labels={["January", "February", "March", "May", "June"]}
 			data={[
 				{
 					title: "second",
@@ -109,6 +112,7 @@
 			yGrid
 			yAxis
 			displayTooltip
+			displayLegend
 			labels={["one", "two", "three", "four", "five", "six"]}
 			data={[
 				{
@@ -127,6 +131,7 @@
 			displayTooltip
 			displayLegend
 			labels={["one", "two", "three", "four", "five", "six"]}
+			customColors={["#d62828", "#219ebc"]}
 			data={[
 				{
 					title: "first",

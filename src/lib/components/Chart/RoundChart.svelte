@@ -19,9 +19,11 @@
 	type Props = {
 		chartType?: ChartType;
 		labels?: Array<string>;
+		customColors?: Array<string>;
 		data: Array<Dataset>;
 		value: string;
 		title?: string;
+		col?: boolean;
 		displayLegend?: boolean;
 		displayTooltip?: boolean;
 		displayTitle?: boolean;
@@ -31,9 +33,11 @@
 	let {
 		chartType = "donut",
 		labels,
+		customColors,
 		data,
 		value,
 		title = "",
+		col = false,
 		displayLegend = false,
 		displayTooltip = false,
 		displayTitle = false,
@@ -50,6 +54,7 @@
 		cutout: string;
 		circumference: number;
 		rotation: number;
+		backgroundColor?: Array<string>;
 	}[] = [];
 
 	onMount(() => {
@@ -64,7 +69,7 @@
 				cutout: "65%",
 				circumference: chartType == "donut" ? 360 : 210,
 				rotation: chartType == "donut" ? 0 : 255,
-				// radius: "65%",
+				backgroundColor: customColors,
 			});
 		});
 		const chart = new Chart(canvas, {
@@ -112,45 +117,58 @@
 			plugins: displayLegend ? [htmlLegendPlugin] : [],
 		});
 
-		theme.subscribe(() => {
-			chart.data.datasets.forEach((dataset) => {
-				const new_bgs: Array<string> = [];
-				dataset.data.forEach((element: number, i: number) => {
-					mainColor = styles.getPropertyValue(`--primary-${i + 2}00`).trim();
-					new_bgs.push(`hsl(from ${mainColor} h s l / .75)`);
+		if (!customColors) {
+			theme.subscribe(() => {
+				chart.data.datasets.forEach((dataset) => {
+					const new_bgs: Array<string> = [];
+					dataset.data.forEach((element: number, i: number) => {
+						mainColor = styles.getPropertyValue(`--primary-${i + 2}00`).trim();
+						new_bgs.push(`hsl(from ${mainColor} h s l / .75)`);
+					});
+					dataset.backgroundColor = new_bgs;
+					return dataset;
 				});
-				dataset.backgroundColor = new_bgs;
-				return dataset;
+				chart.update();
 			});
-			chart.update();
-		});
+		}
 	});
 </script>
 
-<div class="RoundChart">
+<div
+	class="RoundChart"
+	class:col
+>
 	<div class="Chart">
 		<canvas
 			bind:this={canvas}
 			style="width: 180px"
 		></canvas>
 		<ul
-			class="__chartPlugin-legend"
-			bind:this={legend}
-		></ul>
+			class="main"
+			class:donut={chartType == "donut"}
+		>
+			<h3>{value}</h3>
+			<h5>{title}</h5>
+		</ul>
 	</div>
-	<div
-		class="main"
-		class:donut={chartType == "donut"}
-	>
-		<h3>{value}</h3>
-		<h5>{title}</h5>
-	</div>
+	<ul
+		class="__chartPlugin-legend"
+		bind:this={legend}
+	></ul>
 </div>
 
 <style lang="scss">
 	.RoundChart {
-		position: relative;
+		display: flex;
+		flex-direction: row;
+		gap: var(--padding-s);
 		width: min-content;
+		&.col {
+			flex-direction: column;
+		}
+		.Chart {
+			position: relative;
+		}
 		.main {
 			display: flex;
 			flex-direction: column;
