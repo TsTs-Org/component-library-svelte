@@ -11,7 +11,7 @@
 		iconRight?: Snippet<[Size]>;
 		children?: Snippet;
 		transparent?: boolean;
-	} & HTMLAttributes<any>;
+	} & Omit<HTMLAttributes<any>, "title">;
 
 	let {
 		size = "m",
