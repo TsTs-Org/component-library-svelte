@@ -1,6 +1,8 @@
 name: Deploy to GitHub Pages
 
-on: push
+on:
+  push:
+    branches: "main"
 
 jobs:
   build_site:
@@ -18,9 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
+      - name: build
         env:
-          BASE_PATH: "/${{ github.event.repository.name }}/${{ github.ref_name }}"
+          BASE_PATH: "/${{ github.event.repository.name }}"
         run: |
           npm run build
 
@@ -45,5 +47,3 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          branch: ${{ github.ref_name }}
