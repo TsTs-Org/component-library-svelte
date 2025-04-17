@@ -3,6 +3,7 @@
 	import Radiogroup from "$lib/components/Radio/Radiogroup.svelte";
 	import RadioItem from "$lib/components/Radio/RadioItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";
+	import { onMount } from "svelte";
 
 	type Props = {
 		colors: string[];
@@ -143,6 +144,12 @@
 			1.25
 		</RadioItem>
 	</Radiogroup>
+
+	<input
+		type="color"
+		class="colorInput"
+		onblur={(e) => console.log(e.target.value)}
+	/>
 </div>
 
 <style lang="scss">
@@ -161,21 +168,20 @@
 		border: 1px solid var(--border-color);
 	}
 
-	.devSettings {
-		display: flex;
-		flex-direction: row;
-		gap: var(--padding-m);
-	}
-
-	.allColors {
-		display: flex;
-		flex-direction: column;
-		gap: var(--padding-s);
-	}
-	.color {
-		display: flex;
-		align-items: center;
-		// justify-content: space-between;
-		gap: var(--padding-m);
+	.colorInput {
+		height: 30px;
+		width: 30px;
+		border-radius: 100%;
+		border: none;
+		outline: none;
+		-webkit-appearance: none;
+		cursor: pointer;
+		&::-webkit-color-swatch-wrapper {
+			padding: 0;
+		}
+		&::-webkit-color-swatch {
+			border: none;
+			border-radius: 100%;
+		}
 	}
 </style>

@@ -32,39 +32,24 @@
 	});
 </script>
 
-<div
-	class={"page"}
-	id="Themify"
->
-	{#if open_overlay}
-		<div
-			class="Overlay"
-			oncontextmenu={(e) => {
-				e.preventDefault();
-			}}
-			onclick={() => (open_overlay = false)}
-		></div>
-	{/if}
-	{#if loading}
-		<div class="loader">
-			<Loader size="l" />
-		</div>
-	{:else}
-		{@render children?.()}
-	{/if}
-</div>
+{#if open_overlay}
+	<div
+		class="Overlay"
+		oncontextmenu={(e) => {
+			e.preventDefault();
+		}}
+		onclick={() => (open_overlay = false)}
+	></div>
+{/if}
+{#if loading}
+	<div class="loader">
+		<Loader size="l" />
+	</div>
+{:else}
+	{@render children?.()}
+{/if}
 
 <style>
-	.page {
-		position: relative;
-		height: 100dvh;
-		overflow: auto;
-		box-sizing: border-box;
-		background-color: var(--background-color);
-		display: flex;
-		flex-direction: column;
-	}
-
 	.loader {
 		width: fit-content;
 		margin-inline: auto;
