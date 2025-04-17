@@ -1,9 +1,23 @@
 <script lang="ts">
 	import SimpleLogin from "$lib/blocks/Authentication/SimpleLogin.svelte";
 	import LoginAndRegister from "$lib/blocks/Authentication/LoginAndRegister.svelte";
+	import Sidebar from "$lib/components/Sideabar/Sidebar.svelte";
+	import { Button } from "$lib/index.js";
+	import SidebarItem from "$lib/components/Sideabar/SidebarItem.svelte";
 </script>
 
 <div class="blocks-page">
+	<div class="mock-block">
+		<Sidebar>
+			<SidebarItem>Item</SidebarItem>
+			<SidebarItem>Item</SidebarItem>
+			<SidebarItem>Item</SidebarItem>
+			<SidebarItem>Item</SidebarItem>
+			{#snippet footer()}
+				<Button variant="ghost">Logout</Button>
+			{/snippet}
+		</Sidebar>
+	</div>
 	<div class="mock-block">
 		<SimpleLogin
 			onsubmit={(data) => {
@@ -42,6 +56,7 @@
 	}
 
 	.mock-block {
+		display: flex;
 		overflow: hidden;
 		border: thin solid var(--border-color);
 		border-radius: var(--border-radius-m);
