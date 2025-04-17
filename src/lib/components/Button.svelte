@@ -3,7 +3,7 @@
 	import type { HTMLButtonAttributes } from "svelte/elements";
 	import Loader from "./Loader.svelte";
 
-	type Variant = "primary" | "bordered";
+	type Variant = "primary" | "bordered" | "ghost";
 	type Size = "s" | "m" | "l";
 
 	type Props = {
@@ -107,6 +107,12 @@
 
 		&.primary {
 			background-color: var(--primary-color);
+		}
+		&.ghost {
+			background-color: transparent;
+			&:not(:disabled):hover {
+				background-color: transparent;
+			}
 		}
 		&.bordered {
 			background-color: transparent;

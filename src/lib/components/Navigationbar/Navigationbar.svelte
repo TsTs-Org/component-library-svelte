@@ -4,6 +4,7 @@
 	import { onMount, setContext } from "svelte";
 	import { writable, type Writable } from "svelte/store";
 	import { Icon } from "$lib/index.js";
+	import { page } from "$app/state";
 
 	type Variant = "default" | "glass";
 
@@ -15,11 +16,11 @@
 	} & HTMLAttributes<any>;
 
 	export type NavigationbarCtx = {
-		selected: Writable<object>;
+		selected: Writable<string>;
 	};
 
 	const ctx = {
-		selected: writable(),
+		selected: writable(page.route.id),
 	};
 
 	let { variant = "default", left, right, children, ...restProps }: Props = $props();
@@ -88,7 +89,7 @@
 			display: none;
 			&.open {
 				display: flex;
-				flex-direction: column-reverse;
+				flex-direction: column;
 				justify-content: space-between;
 				.left,
 				.right {
@@ -134,12 +135,12 @@
 		box-sizing: border-box;
 		width: 100%;
 		z-index: 1000;
-		padding: var(--padding-m) var(--padding-l);
+		padding: var(--padding-s) var(--padding-m);
 		&.default {
 			background: var(--background-color);
 		}
 		&.glass {
-			background: rgba($color: #000000, $alpha: 0.125);
+			background: rgba(from var(--background-color) r g b / 0.65);
 			backdrop-filter: blur(6px);
 			-webkit-backdrop-filter: blur(6px);
 		}

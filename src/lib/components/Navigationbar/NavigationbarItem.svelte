@@ -18,7 +18,7 @@
 	const ctx: NavigationbarCtx = getContext("ctx");
 	const selected = ctx.selected;
 
-	const self = {};
+	const self = restProps.href ?? "unset";
 	let active = $state(false);
 
 	onMount(() => {
@@ -40,29 +40,21 @@
 <!--
 @component
 ## Props
-@prop {string} title - The title of the accordion item.
-@prop {boolean} [open=false] - Whether the accordion item is open or not.
-@prop {string} [variant="default"] - The variant of the accordion item. Can be "default" or "ghost".
 -->
 
 <style lang="scss">
-	@media (min-width: 900px) {
-		a:hover {
-			background-color: var(--neutral-hover-color);
-			cursor: pointer;
-		}
-	}
-
 	a {
 		text-align: center;
 		text-decoration: none;
 		height: fit-content;
-		color: var(--text-color);
-		padding: var(--padding-m);
+		color: var(--text-color-muted);
+		padding: var(--padding-s);
 		border-radius: var(--border-radius-m);
-		font-size: var(--text-size-xs);
+		font-size: var(--text-size-s);
+		font-weight: 600;
+		cursor: pointer;
 		&.active {
-			text-decoration: underline;
+			color: var(--text-color);
 		}
 
 		&.s {
@@ -71,7 +63,7 @@
 		}
 		&.l {
 			padding: var(--padding-l);
-			font-size: var(--text-size-m);
+			font-size: var(--text-size-l);
 			border-radius: var(--border-radius-l);
 		}
 
@@ -88,9 +80,9 @@
 			border: none;
 			background-color: var(--primary-color);
 			color: var(--text-color-inverted);
-			&:hover {
-				background-color: var(--hover-color);
-			}
+			// &:hover {
+			// 	background-color: var(--hover-color);
+			// }
 		}
 	}
 </style>

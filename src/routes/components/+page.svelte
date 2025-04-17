@@ -98,7 +98,7 @@
 			labels={["January", "February", "March", "May", "June"]}
 			data={[
 				{
-					title: "second",
+					title: "DataOne",
 					data: [2, 8, 2, 11, 7, 4],
 				},
 			]}
@@ -113,10 +113,10 @@
 			yAxis
 			displayTooltip
 			displayLegend
-			labels={["one", "two", "three", "four", "five", "six"]}
+			labels={["January", "February", "March", "May", "June"]}
 			data={[
 				{
-					title: "first",
+					title: "DataOne",
 					data: [12, 19, 2, 5, 12, 15],
 				},
 			]}
@@ -130,15 +130,15 @@
 			yAxis
 			displayTooltip
 			displayLegend
-			labels={["one", "two", "three", "four", "five", "six"]}
+			labels={["January", "February", "March", "May", "June"]}
 			customColors={["#d62828", "#219ebc"]}
 			data={[
 				{
-					title: "first",
+					title: "DataOne",
 					data: [12, 19, 5, 5, 12, 15],
 				},
 				{
-					title: "second",
+					title: "DataTwo",
 					data: [2, 8, 2, 11, 7, 4],
 				},
 			]}
@@ -154,14 +154,14 @@
 			yAxis
 			displayTooltip
 			displayLegend
-			labels={["one", "two", "three", "four", "five", "six"]}
+			labels={["January", "February", "March", "May", "June"]}
 			data={[
 				{
-					title: "first",
+					title: "DataOne",
 					data: [12, 19, 5, 5, 12, 15],
 				},
 				{
-					title: "second",
+					title: "DataTwo",
 					data: [2, 8, 2, 11, 7, 4],
 				},
 			]}
@@ -173,14 +173,14 @@
 			chartType="bar"
 			xAxis
 			displayTooltip
-			labels={["one", "two", "three", "four", "five", "six"]}
+			labels={["January", "February", "March", "May", "June"]}
 			data={[
 				{
-					title: "first",
+					title: "DataOne",
 					data: [12, 19, 5, 5, 2, 3],
 				},
 				{
-					title: "second",
+					title: "DataTwo",
 					data: [2, 8, 2, 11, 7, 4],
 				},
 			]}
