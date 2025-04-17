@@ -97,6 +97,17 @@
 		</div>
 	</div>
 	<div class="mock-block">
+		<Sidebar>
+			<SidebarItem>Item</SidebarItem>
+			<SidebarItem>Item</SidebarItem>
+			<SidebarItem>Item</SidebarItem>
+			<SidebarItem>Item</SidebarItem>
+			{#snippet sidebarFooter()}
+				<Button variant="ghost">Logout</Button>
+			{/snippet}
+		</Sidebar>
+	</div>
+	<div class="mock-block">
 		<SimpleLogin
 			onsubmit={(data) => {
 				console.log(data);
