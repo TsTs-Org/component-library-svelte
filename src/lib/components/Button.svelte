@@ -7,14 +7,16 @@
 	type Size = "s" | "m" | "l";
 
 	type Props = {
+		onclick?: (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
 		loading?: boolean;
 		variant?: Variant;
 		size?: Size;
 		icon?: Snippet;
-		children: Snippet;
+		children?: Snippet;
 	} & HTMLButtonAttributes;
 
 	let {
+		onclick,
 		variant = "primary",
 		size = "m",
 		loading = false,
@@ -25,9 +27,11 @@
 </script>
 
 <button
+	{onclick}
 	class={[variant, size]}
 	disabled={loading}
 	class:loading
+	class:children
 	{...restProps}
 >
 	{#if loading}
@@ -70,6 +74,7 @@
 
 		& .icon {
 			width: fit-content;
+			fill: var(--text-color-inverted);
 		}
 		& .content {
 			margin-left: auto;
@@ -112,12 +117,18 @@
 			.content {
 				color: var(--text-color);
 			}
+			.icon {
+				fill: var(--text-color);
+			}
 		}
 
 		&:not(:disabled):hover {
 			background-color: var(--hover-color);
 			scale: 99.5%;
 			cursor: pointer;
+			.icon {
+				fill: var(--text-color-muted);
+			}
 		}
 
 		&:disabled:hover {
@@ -126,6 +137,15 @@
 
 		&:not(:disabled):active {
 			scale: 98%;
+		}
+	}
+
+	button:not(.children) {
+		display: flex;
+		width: fit-content;
+		aspect-ratio: 1/1;
+		.content {
+			display: none;
 		}
 	}
 </style>
