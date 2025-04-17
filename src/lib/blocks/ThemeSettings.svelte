@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { theme } from "$lib/utils/themify.svelte.js";
+	import { defaults, theme, themeValues } from "$lib/utils/themify.svelte.js";
 	import Radiogroup from "$lib/components/Radio/Radiogroup.svelte";
 	import RadioItem from "$lib/components/Radio/RadioItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";
-	import Checkbox from "$lib/components/Checkbox.svelte";
 
 	type Props = {
 		colors: string[];
@@ -160,5 +159,23 @@
 		width: 25px;
 		border-radius: 25px;
 		border: 1px solid var(--border-color);
+	}
+
+	.devSettings {
+		display: flex;
+		flex-direction: row;
+		gap: var(--padding-m);
+	}
+
+	.allColors {
+		display: flex;
+		flex-direction: column;
+		gap: var(--padding-s);
+	}
+	.color {
+		display: flex;
+		align-items: center;
+		// justify-content: space-between;
+		gap: var(--padding-m);
 	}
 </style>
