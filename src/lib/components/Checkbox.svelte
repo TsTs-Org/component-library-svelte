@@ -1,57 +1,41 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
 	import type { HTMLInputAttributes } from "svelte/elements";
 
 	type Props = {
-		onchange?: (value: string) => void;
+		onchange?: (e: Event) => void;
 		checked?: boolean;
-		label?: string;
-		description?: string;
 	} & HTMLInputAttributes;
 
-	let {
-		onchange = () => {},
-		checked = $bindable(),
-		label,
-		description,
-		...restProps
-	}: Props = $props();
+	let { onchange = () => {}, checked = $bindable(), ...restProps }: Props = $props();
+
+	function changeProxy(e: Event) {
+		e!.target!.value = checked;
+		onchange(e);
+	}
 </script>
 
-<div class="Checkbox">
-	<div class="text">
-		{#if label}
-			<h5>{label}</h5>
-		{/if}
-		{#if description}
-			<p class="description">{description}</p>
-		{/if}
-	</div>
-	<div class="container">
-		<label
-			class="check"
-			class:checked
-		>
-			<input
-				{onchange}
-				bind:checked
-				type="checkbox"
-				style="display: none;"
-			/>
-			<svg
-				width="18px"
-				height="18px"
-				viewBox="0 0 18 18"
-				style="display: block;"
-			>
-				<path
-					d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"
-				></path>
-				<polyline points="1 9 7 14 15 4"></polyline>
-			</svg>
-		</label>
-	</div>
-</div>
+<label
+	class="check"
+	class:checked
+>
+	<input
+		onchange={changeProxy}
+		bind:checked
+		type="checkbox"
+		style="display: none;"
+	/>
+	<svg
+		width="18px"
+		height="18px"
+		viewBox="0 0 18 18"
+		style="display: block;"
+	>
+		<path
+			d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"
+		></path>
+		<polyline points="1 9 7 14 15 4"></polyline>
+	</svg>
+</label>
 
 <!--
 @component
@@ -65,14 +49,6 @@
 -->
 
 <style lang="scss">
-	.Checkbox {
-		display: flex;
-		gap: var(--padding-s);
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-	}
-
 	.container {
 		height: 100%;
 		margin-block: auto;
@@ -127,13 +103,5 @@
 	.check.checked svg polyline {
 		stroke-dashoffset: 42;
 		transition-delay: 0.15s;
-	}
-
-	h5 {
-		// font-weight: 600;
-	}
-	.description {
-		color: var(--text-color-muted);
-		font-size: var(--text-size-xs);
 	}
 </style>

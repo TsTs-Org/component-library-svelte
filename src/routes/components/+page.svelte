@@ -241,11 +241,6 @@
 	<Showcase name="Checkbox">
 		<div class="mock-grid">
 			<Checkbox />
-			<Checkbox label="Title only" />
-			<Checkbox
-				label="Title"
-				description="Description"
-			/>
 		</div>
 		<!-- <Checkbox /> -->
 	</Showcase>
