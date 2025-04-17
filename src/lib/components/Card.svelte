@@ -30,22 +30,24 @@
 	class:transparent
 	{...restProps}
 >
-	<div class="header">
-		<!-- TODO: create component to hover ellipsed text to show full text 
+	{#if !!iconLeft || !!iconRight || !!title}
+		<div class="header">
+			<!-- TODO: create component to hover ellipsed text to show full text 
 			 & fix for buggy ellipsis (for example when setting width of card to 6rem with title and icon on the right)
 			-->
-		{#if !!iconLeft}
-			<div>
-				{@render iconLeft?.(size)}
-			</div>
-		{/if}
-		<span class="title">{@render title?.()}</span>
-		{#if !!iconRight}
-			<div>
-				{@render iconRight?.(size)}
-			</div>
-		{/if}
-	</div>
+			{#if !!iconLeft}
+				<div>
+					{@render iconLeft?.(size)}
+				</div>
+			{/if}
+			<span class="title">{@render title?.()}</span>
+			{#if !!iconRight}
+				<div>
+					{@render iconRight?.(size)}
+				</div>
+			{/if}
+		</div>
+	{/if}
 	<div class="content">
 		{@render children?.()}
 	</div>

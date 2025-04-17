@@ -26,6 +26,7 @@
 	import ThemeSettings from "$lib/blocks/ThemeSettings.svelte";
 	import BaseChart from "$lib/components/Chart/BaseChart.svelte";
 	import RoundChart from "$lib/components/Chart/RoundChart.svelte";
+	import Stattracker from "$lib/blocks/Dashboard/Stattracker.svelte";
 </script>
 
 <div class="theme-settings">
@@ -35,6 +36,10 @@
 </div>
 
 <div class="components-page">
+	<Showcase name="Stattracker">
+		<Stattracker></Stattracker>
+	</Showcase>
+
 	<Showcase name="Thingy Chart">
 		<RoundChart
 			chartType="thingy"

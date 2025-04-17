@@ -77,6 +77,7 @@
 				datasets: datasets,
 			},
 			options: {
+				aspectRatio: 3,
 				events: displayTooltip ? undefined : [],
 
 				interaction: {
@@ -115,7 +116,7 @@
 				},
 				elements: {
 					line: {
-						tension: 0.4,
+						tension: 0.3,
 					},
 					point: {
 						radius: 0,
