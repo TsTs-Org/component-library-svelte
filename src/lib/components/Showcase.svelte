@@ -3,15 +3,13 @@
 	let { name, children } = $props();
 </script>
 
-<div>
-	<Card
-		size="l"
-		transparent
-	>
-		{#snippet title()}{name}{/snippet}
-		<div class="content-wrapper">{@render children?.()}</div>
-	</Card>
-</div>
+<Card
+	size="l"
+	transparent
+>
+	{#snippet title()}{name}{/snippet}
+	<div class="content-wrapper">{@render children?.()}</div>
+</Card>
 
 <style lang="scss">
 	.content-wrapper {
