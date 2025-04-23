@@ -98,6 +98,7 @@
 
 <style lang="scss">
 	.Sidebar {
+		z-index: 900;
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;

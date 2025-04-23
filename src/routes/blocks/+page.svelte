@@ -102,9 +102,6 @@
 			<SidebarItem>Item</SidebarItem>
 			<SidebarItem>Item</SidebarItem>
 			<SidebarItem>Item</SidebarItem>
-			{#snippet sidebarFooter()}
-				<Button variant="ghost">Logout</Button>
-			{/snippet}
 		</Sidebar>
 	</div>
 	<div class="mock-block">
