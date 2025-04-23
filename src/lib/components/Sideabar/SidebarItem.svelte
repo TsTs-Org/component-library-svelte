@@ -20,6 +20,7 @@
 	class="SidebarItem"
 	{...restProps}
 >
+	{@render icon?.()}
 	{@render children?.()}
 </a>
 
@@ -30,13 +31,16 @@
 
 <style lang="scss">
 	a {
+		display: flex;
+		align-items: center;
+		gap: var(--padding-xs);
 		text-decoration: none;
 		height: fit-content;
 		color: var(--text-color);
 		padding: var(--padding-xs);
 		border-radius: var(--border-radius-s);
 		font-size: var(--text-size-s);
-		font-weight: 600;
+		font-weight: 500;
 		cursor: pointer;
 
 		&:hover {

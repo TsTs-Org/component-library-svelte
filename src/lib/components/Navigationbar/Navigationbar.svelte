@@ -72,7 +72,7 @@
 	@media (max-width: 900px) {
 		.openNavButton {
 			position: sticky;
-			z-index: 1200;
+			z-index: 400;
 			top: 1rem;
 			left: 1rem;
 			display: flex;
@@ -134,7 +134,7 @@
 		top: 0;
 		box-sizing: border-box;
 		width: 100%;
-		z-index: 1000;
+		z-index: 400;
 		padding: var(--padding-s) var(--padding-m);
 		&.default {
 			background: var(--background-color);

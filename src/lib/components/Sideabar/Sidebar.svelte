@@ -3,23 +3,26 @@
 	import Seperator from "../Seperator.svelte";
 
 	type Props = {
-		header?: Snippet;
-		footer?: Snippet;
+		collapsed?: boolean;
+		closed?: boolean;
+		center?: boolean;
+		sidebarHeader?: Snippet;
+		sidebarFooter?: Snippet;
 		children?: Snippet;
 	};
 
-	let { header, footer, children }: Props = $props();
+	let { collapsed = false, closed = false, center = false, sidebarHeader, sidebarFooter, children }: Props = $props();
 </script>
 
-<div class="Sidebar">
-	{#if !!header}
-		<div class="Header">{@render header?.()}</div>
+<div class="Sidebar" class:collapsed class:closed>
+	{#if !!sidebarHeader}
+		<div class="Header">{@render sidebarHeader?.()}</div>
 		<Seperator horizontal></Seperator>
 	{/if}
-	<div class="Content">{@render children?.()}</div>
-	{#if !!footer}
+	<div class="Content" class:center>{@render children?.()}</div>
+	{#if !!sidebarFooter}
 		<Seperator horizontal></Seperator>
-		<div class="Footer">{@render footer?.()}</div>
+		<div class="Footer">{@render sidebarFooter?.()}</div>
 	{/if}
 </div>
 
@@ -30,12 +33,13 @@
 
 <style lang="scss">
 	.Sidebar {
+		z-index: 900;
 		display: flex;
 		flex-direction: column;
-		position: static;
+		position: sticky;
+		top: 0;
 		height: 100%;
 		width: 25%;
-		min-width: 4rem;
 		background-color: var(--foreground-color);
 
 		.Content {
@@ -43,12 +47,15 @@
 			flex-direction: column;
 			padding: var(--padding-s);
 			flex: 1;
+			&.center {
+				justify-content: center;
+			}
 		}
 
 		.Header,
 		.Footer {
 			display: flex;
-			height: 4rem;
+			height: 3rem;
 			width: 100%;
 			align-items: center;
 		}

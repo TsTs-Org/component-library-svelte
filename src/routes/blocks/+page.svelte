@@ -4,19 +4,25 @@
 	import Sidebar from "$lib/components/Sideabar/Sidebar.svelte";
 	import { Button } from "$lib/index.js";
 	import SidebarItem from "$lib/components/Sideabar/SidebarItem.svelte";
+	import Icon from "$lib/components/Icon.svelte";
 </script>
 
 <div class="blocks-page">
 	<div class="mock-block">
-		<Sidebar>
-			<SidebarItem>Item</SidebarItem>
-			<SidebarItem>Item</SidebarItem>
-			<SidebarItem>Item</SidebarItem>
-			<SidebarItem>Item</SidebarItem>
+		<!-- <Sidebar center>
+			<SidebarItem>
+				{#snippet icon()}
+					<Icon iconName="sun"></Icon>
+				{/snippet}
+				Dashboard
+			</SidebarItem>
+			<SidebarItem>Lifecycle</SidebarItem>
+			<SidebarItem>Analytics</SidebarItem>
+			<SidebarItem>Projects</SidebarItem>
 			{#snippet footer()}
 				<Button variant="ghost">Logout</Button>
 			{/snippet}
-		</Sidebar>
+		</Sidebar> -->
 	</div>
 	<div class="mock-block">
 		<SimpleLogin

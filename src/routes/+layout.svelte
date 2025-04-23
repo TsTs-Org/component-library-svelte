@@ -11,6 +11,7 @@
 	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
 	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
 	import Button from "$lib/components/Button.svelte";
+	import Sidebar from "$lib/components/Sideabar/Sidebar.svelte";
 </script>
 
 <svelte:head>
@@ -24,7 +25,6 @@
 			<NavigationbarItem href="{base}/blocks">Blocks</NavigationbarItem>
 			<NavigationbarItem href="{base}/components">Components</NavigationbarItem>
 		{/snippet}
-		<h3></h3>
 		{#snippet right()}
 			<Button
 				variant="ghost"
@@ -40,6 +40,10 @@
 			</Button>
 		{/snippet}
 	</Navigationbar>
+
+	<Sidebar>
+		<h2>Hello</h2>
+	</Sidebar>
 
 	<div class="content">
 		{@render children()}
