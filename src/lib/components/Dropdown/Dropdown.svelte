@@ -2,7 +2,6 @@
 	import { onMount, type Snippet } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { slide } from "svelte/transition";
-	import { closeOverlay, openOverlay } from "../Themify.svelte";
 
 	type Props = {
 		open: boolean;
@@ -26,9 +25,6 @@
 	function changeOpen(open: boolean) {
 		if (open) {
 			toParent ? getOffsetsToParent() : getOffsetsToViewport();
-			openOverlay();
-		} else {
-			closeOverlay();
 		}
 	}
 

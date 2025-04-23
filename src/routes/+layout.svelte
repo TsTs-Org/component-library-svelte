@@ -6,7 +6,6 @@
 
 	let { children } = $props();
 	import Icon from "$lib/components/Icon.svelte";
-	import Themify from "$lib/components/Themify.svelte";
 	import { theme } from "$lib/utils/themify.svelte.js";
 	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
 	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
@@ -18,37 +17,35 @@
 	<title>Docsmocs</title>
 </svelte:head>
 
-<Themify>
-	<Navigationbar variant="glass">
-		{#snippet left()}
-			<NavigationbarItem href="{base}/">Home</NavigationbarItem>
-			<NavigationbarItem href="{base}/blocks">Blocks</NavigationbarItem>
-			<NavigationbarItem href="{base}/components">Components</NavigationbarItem>
-		{/snippet}
-		{#snippet right()}
-			<Button
-				variant="ghost"
-				onclick={() =>
-					theme.update((x) => {
-						x.lightMode = !x.lightMode;
-						return x;
-					})}
-			>
-				{#snippet icon()}
-					<Icon iconName={$theme.lightMode ? "sun" : "moon"} />
-				{/snippet}
-			</Button>
-		{/snippet}
-	</Navigationbar>
+<Navigationbar variant="glass">
+	{#snippet left()}
+		<NavigationbarItem href="{base}/">Home</NavigationbarItem>
+		<NavigationbarItem href="{base}/blocks">Blocks</NavigationbarItem>
+		<NavigationbarItem href="{base}/components">Components</NavigationbarItem>
+	{/snippet}
+	{#snippet right()}
+		<Button
+			variant="ghost"
+			onclick={() =>
+				theme.update((x) => {
+					x.lightMode = !x.lightMode;
+					return x;
+				})}
+		>
+			{#snippet icon()}
+				<Icon iconName={$theme.lightMode ? "sun" : "moon"} />
+			{/snippet}
+		</Button>
+	{/snippet}
+</Navigationbar>
 
-	<Sidebar>
-		<h2>Hello</h2>
-	</Sidebar>
+<Sidebar>
+	<h2>Hello</h2>
+</Sidebar>
 
-	<div class="content">
-		{@render children()}
-	</div>
-</Themify>
+<div class="content">
+	{@render children()}
+</div>
 
 <style>
 	.content {
