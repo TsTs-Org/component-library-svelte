@@ -97,12 +97,39 @@
 		</div>
 	</div>
 	<div class="mock-block">
-		<Sidebar>
-			<SidebarItem>Item</SidebarItem>
-			<SidebarItem>Item</SidebarItem>
-			<SidebarItem>Item</SidebarItem>
-			<SidebarItem>Item</SidebarItem>
-		</Sidebar>
+		<Layout>
+			{#snippet topnav()}
+				<Navigationbar variant="glass">
+					{#snippet left()}
+						<NavigationbarItem href="#1">Home</NavigationbarItem>
+						<NavigationbarItem href="#2">Blocks</NavigationbarItem>
+						<NavigationbarItem href="#3">Components</NavigationbarItem>
+					{/snippet}
+				</Navigationbar>
+			{/snippet}
+
+			{#snippet leftSidebar()}
+				<Sidebar
+					center
+					variant="glass"
+				>
+					<SidebarItem>
+						{#snippet icon()}
+							<Icon iconName="sun"></Icon>
+						{/snippet}
+						Dashboard
+					</SidebarItem>
+					<SidebarItem>Lifecycle</SidebarItem>
+					<SidebarItem>Analytics</SidebarItem>
+					<SidebarItem>Projects</SidebarItem>
+					{#snippet sidebarFooter()}
+						<Button variant="ghost">Logout</Button>
+					{/snippet}
+				</Sidebar>
+			{/snippet}
+
+			<h2 style="margin: auto">Main Content</h2>
+		</Layout>
 	</div>
 	<div class="mock-block">
 		<SimpleLogin
