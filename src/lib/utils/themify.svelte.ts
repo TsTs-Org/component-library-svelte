@@ -6,8 +6,6 @@ export function mountTheme() {
         theme.set(savedTheme);
     }
     theme.subscribe((x) => {
-        // document.getElementById("Themify")?.classList.remove(x.lightMode ? "dark-mode" : "light-mode");
-        // document.getElementById("Themify")?.classList.add(x.lightMode ? "light-mode" : "dark-mode");
         document.documentElement.style.setProperty("--primary-color", x.primaryColor ?? "royalblue");
         document.documentElement.style.setProperty("--border-radius-s", x.borderRadius ?? ".75rem");
         document.documentElement.style.setProperty("--padding-s", x.padding ?? ".5rem");

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getContext, onMount, type Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
+	import type { SidebarCtx } from "./Sidebar.svelte";
 
 	type Props = {
 		icon?: Snippet;
@@ -10,6 +11,13 @@
 	let { icon, children, ...restProps }: Props = $props();
 
 	let active = $state(false);
+
+	const ctx: SidebarCtx = getContext("SidebarCtx");
+	const options = ctx.options;
+
+	onMount(() => {
+		return options.subscribe((x) => console.log(x));
+	});
 </script>
 
 <a

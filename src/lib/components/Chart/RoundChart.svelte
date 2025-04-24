@@ -4,7 +4,11 @@
 	import { externalTooltipHandler, htmlLegendPlugin } from "$lib/components/Chart/plugins.js";
 	import { theme } from "$lib/utils/themify.svelte.js";
 
-	const styles = getComputedStyle(document.documentElement);
+	let styles = undefined;
+	onMount(() => {
+		styles = getComputedStyle(document.documentElement);
+	});
+	// const styles = getComputedStyle(document.documentElement);
 	let mainColor;
 
 	let canvas: HTMLCanvasElement;

@@ -7,4 +7,3 @@
 		mountTheme();
 	}
 </script>
-

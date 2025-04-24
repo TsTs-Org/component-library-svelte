@@ -13,17 +13,16 @@
 	let open = $state(false);
 	let xOffset = $state("0");
 	let yOffset = $state("0");
-
-	document.onclick = () => {
-		open = false;
-	};
-
+	
 	onMount(() => {
 		ctx.data.subscribe((x) => {
 			open = x.open;
 			xOffset = x.xOffset;
 			yOffset = x.yOffset;
 		});
+		document.onclick = () => {
+			open = false;
+		};
 	});
 </script>
 

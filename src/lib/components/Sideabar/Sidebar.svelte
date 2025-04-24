@@ -1,25 +1,62 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
+	import { setContext, type Snippet } from "svelte";
 	import Seperator from "../Seperator.svelte";
+	import { writable, type Writable } from "svelte/store";
+
+	type Variant = "default" | "glass";
 
 	type Props = {
-		collapsed?: boolean;
-		closed?: boolean;
+		sidebarCollapsed?: boolean;
+		sidebarClosed?: boolean;
 		center?: boolean;
 		sidebarHeader?: Snippet;
 		sidebarFooter?: Snippet;
+		variant?: Variant;
 		children?: Snippet;
 	};
 
-	let { collapsed = false, closed = false, center = false, sidebarHeader, sidebarFooter, children }: Props = $props();
+	export type SidebarCtx = {
+		options: Writable<{
+			collapsed: boolean;
+			closed: boolean;
+		}>;
+	};
+
+	let {
+		sidebarCollapsed = false,
+		sidebarClosed = false,
+		center = false,
+		sidebarHeader,
+		sidebarFooter,
+		variant = "default",
+		children,
+	}: Props = $props();
+
+	const ctx = {
+		options: writable({
+			collapsed: sidebarCollapsed,
+			closed: sidebarClosed,
+		}),
+	};
+
+	setContext("SidebarCtx", ctx);
 </script>
 
-<div class="Sidebar" class:collapsed class:closed>
+<div
+	class={["Sidebar", variant]}
+	class:sidebarCollapsed
+	class:sidebarClosed
+>
 	{#if !!sidebarHeader}
 		<div class="Header">{@render sidebarHeader?.()}</div>
 		<Seperator horizontal></Seperator>
 	{/if}
-	<div class="Content" class:center>{@render children?.()}</div>
+	<div
+		class="Content"
+		class:center
+	>
+		{@render children?.()}
+	</div>
 	{#if !!sidebarFooter}
 		<Seperator horizontal></Seperator>
 		<div class="Footer">{@render sidebarFooter?.()}</div>
@@ -33,14 +70,28 @@
 
 <style lang="scss">
 	.Sidebar {
-		z-index: 900;
 		display: flex;
 		flex-direction: column;
-		position: sticky;
-		top: 0;
+		overflow: hidden;
 		height: 100%;
-		width: 25%;
-		background-color: var(--foreground-color);
+		width: 350px;
+		transition: width 0.3s ease-in-out;
+		border-right: thin solid var(--border-color);
+		&.sidebarCollapsed {
+			width: 4rem;
+		}
+		&.sidebarClosed {
+			width: 0px;
+		}
+
+		&.default {
+			background: var(--background-color);
+		}
+		&.glass {
+			background: rgba(from var(--background-color) r g b / 0.65);
+			backdrop-filter: blur(6px);
+			-webkit-backdrop-filter: blur(6px);
+		}
 
 		.Content {
 			display: flex;

@@ -71,10 +71,6 @@
 <style lang="scss">
 	@media (max-width: 900px) {
 		.openNavButton {
-			position: sticky;
-			z-index: 400;
-			top: 1rem;
-			left: 1rem;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -110,7 +106,6 @@
 	}
 	@media (min-width: 900px) {
 		nav {
-			position: sticky;
 			display: grid;
 			grid-template-columns: 1fr auto 1fr;
 			border-bottom: 1px solid var(--border-color);
@@ -131,10 +126,8 @@
 	}
 
 	nav {
-		top: 0;
 		box-sizing: border-box;
 		width: 100%;
-		z-index: 400;
 		padding: var(--padding-s) var(--padding-m);
 		&.default {
 			background: var(--background-color);
