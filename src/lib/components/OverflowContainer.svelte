@@ -99,6 +99,7 @@
 	.overflow-container {
 		position: relative;
 		width: 100%;
+		touch-action: none;
 	}
 
 	.content-wrapper {

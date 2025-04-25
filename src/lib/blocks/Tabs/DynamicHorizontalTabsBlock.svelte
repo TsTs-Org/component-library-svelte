@@ -25,7 +25,16 @@
 	}
 
 	function addTab() {
-		tabs.push({ tabIdentifier: crypto.randomUUID() });
+		let randomIdentifierString: string;
+		if (!!crypto && !!crypto.randomUUID) {
+			randomIdentifierString = crypto.randomUUID();
+		} else {
+			// dirty fix because mobile browsers don't seem to support crypto.randomUUID yet:
+			const array = new Uint32Array(3);
+			randomIdentifierString = crypto.getRandomValues(array).join("");
+		}
+
+		tabs.push({ tabIdentifier: randomIdentifierString });
 	}
 
 	function closeTab(tabIdentifierToClose: string) {
