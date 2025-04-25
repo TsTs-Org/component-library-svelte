@@ -27,6 +27,7 @@
 	import BaseChart from "$lib/components/Chart/BaseChart.svelte";
 	import RoundChart from "$lib/components/Chart/RoundChart.svelte";
 	import Popover from "$lib/components/Popover.svelte";
+	import OverflowContainer from "$lib/components/OverflowContainer.svelte";
 </script>
 
 <div class="theme-settings">
@@ -36,6 +37,47 @@
 </div>
 
 <div class="components-page">
+	<Showcase name="Overflow Container">
+		<div class="content-wrapper">
+			<div class="overflow-container-size-wrapper">
+				<OverflowContainer>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+				</OverflowContainer>
+			</div>
+			<div class="overflow-container-size-wrapper">
+				<OverflowContainer fadeColor="var(--neutral-400)">
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+				</OverflowContainer>
+			</div>
+		</div>
+		<style>
+			.content-wrapper {
+				display: flex;
+				gap: 1rem;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.overflow-container-size-wrapper {
+				width: 10rem;
+				background-color: var(--neutral-200);
+				& > div {
+					text-wrap: nowrap;
+				}
+			}
+		</style>
+	</Showcase>
+
 	<Showcase name="Icon Buttons">
 		<div class="mock-grid">
 			<Button size="s">
