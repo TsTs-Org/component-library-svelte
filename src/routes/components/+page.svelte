@@ -50,6 +50,16 @@
 				</OverflowContainer>
 			</div>
 			<div class="overflow-container-size-wrapper">
+				<OverflowContainer fadeWidth="2rem">
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+					<div>content</div>
+				</OverflowContainer>
+			</div>
+			<div class="overflow-container-size-wrapper">
 				<OverflowContainer fadeColor="var(--neutral-400)">
 					<div>content</div>
 					<div>content</div>
