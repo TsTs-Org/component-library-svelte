@@ -1,13 +1,17 @@
 <script lang="ts">
 	import { onMount, type Snippet } from "svelte";
 
+	// TODO: add vertical option
+
 	type Props = {
 		fadeColor?: string;
+		fadeWidth?: string;
 		children: Snippet;
 	};
 
-	let { children, fadeColor }: Props = $props();
+	let { fadeColor, fadeWidth, children }: Props = $props();
 
+	let overflowContainer: HTMLDivElement;
 	let contentWrapper: HTMLDivElement;
 
 	let indicatorBeforeVisible = $state(false);
@@ -62,6 +66,14 @@
 		document.addEventListener("pointerup", () => {
 			dragging = false;
 		});
+		processIndicatorVisibility();
+	});
+
+	$effect(() => {
+		if (!!fadeColor)
+			overflowContainer.style.setProperty("--indicator-overwrite-to-color", fadeColor);
+		if (!!fadeWidth)
+			overflowContainer.style.setProperty("--indicator-overwrite-fade-width", fadeWidth);
 	});
 </script>
 
@@ -71,7 +83,7 @@
 	onwheel={handleWheel}
 	onpointerdown={handlePointerDown}
 	onpointermove={handlePointerMove}
-	style={fadeColor ? "--indicator-overwrite-to-color: " + fadeColor : ""}
+	bind:this={overflowContainer}
 >
 	<div class={["indicator-before", indicatorBeforeVisible ? "indicator-visible" : ""]}></div>
 	<div
@@ -117,7 +129,7 @@
 		display: block;
 		content: "";
 		height: 100%;
-		width: 0.75rem;
+		width: var(--indicator-overwrite-fade-width, 0.75rem);
 	}
 
 	.indicator-before {
