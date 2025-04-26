@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from "$app/paths";
 	import { page } from "$app/state";
 	import { type Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
@@ -17,7 +18,7 @@
 
 	let { variant, size, icon, active, href, children, ...restProps }: Props = $props();
 
-	let _active = $derived(page.route.id == href);
+	let _active = $derived(base + page.route.id == href);
 </script>
 
 <a

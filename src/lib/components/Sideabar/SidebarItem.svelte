@@ -17,7 +17,7 @@
 
 	let { icon, active, href, size = "m", children, ...restProps }: Props = $props();
 
-	let _active = $derived(page.route.id == href);
+	let _active = $derived(base + page.route.id == href);
 
 	console.log(page.route.id, href);
 
