@@ -3,6 +3,7 @@
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 	import type { SidebarCtx } from "./Sidebar.svelte";
 	import { page } from "$app/state";
+	import { base } from "$app/paths";
 
 	type size = "s" | "m" | "l";
 
@@ -17,6 +18,8 @@
 	let { icon, active, href, size = "m", children, ...restProps }: Props = $props();
 
 	let _active = $derived(page.route.id == href);
+
+	console.log(page.route.id, href);
 
 	const ctx: SidebarCtx = getContext("SidebarCtx");
 	const options = ctx;
