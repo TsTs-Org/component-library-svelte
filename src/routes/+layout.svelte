@@ -14,6 +14,7 @@
 	import Layout from "$lib/components/Layout/Layout.svelte";
 	import SidebarItem from "$lib/components/Sideabar/SidebarItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";
+	import Themify from "$lib/components/Themify.svelte";
 
 	let sidebarCollapsed = $state(true);
 	let customActive = $state(false);
@@ -90,6 +91,8 @@
 		);
 	</script>
 </svelte:head>
+
+<Themify />
 
 <Layout>
 	{#snippet topnav()}
