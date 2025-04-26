@@ -84,7 +84,7 @@
 	tr {
 		border-bottom: thin solid var(--border-color);
 		&:hover {
-			background-color: var(--neutral-hover-color);
+			background-color: var(--hover-color);
 		}
 	}
 	.actions {

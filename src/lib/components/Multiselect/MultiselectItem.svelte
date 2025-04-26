@@ -53,8 +53,8 @@
 	class:isActive
 	{...restProps}
 >
+	{self.label}
 	<Checkbox
-		label={self.label}
 		bind:checked={isActive}
 		onchange={() => {
 			onchange(isActive);
@@ -74,6 +74,8 @@
 <style lang="scss">
 	.SelectItem {
 		display: flex;
+		justify-content: space-between;
+		gap: var(--padding-s);
 		box-sizing: border-box;
 		border-bottom: thin solid var(--border-color);
 		width: 100%;
