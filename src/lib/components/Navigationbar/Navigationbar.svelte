@@ -15,21 +15,8 @@
 		children?: Snippet;
 	} & HTMLAttributes<any>;
 
-	export type NavigationbarCtx = {
-		selected: Writable<string>;
-	};
-
-	const ctx = {
-		selected: writable(page.route.id),
-	};
-
 	let { variant = "default", left, right, children, ...restProps }: Props = $props();
-
-	setContext("ctx", ctx);
 	let open = $state();
-	onMount(() => {
-		return ctx.selected.subscribe(() => (open = false));
-	});
 </script>
 
 <button
@@ -128,7 +115,7 @@
 	nav {
 		box-sizing: border-box;
 		width: 100%;
-		padding: var(--padding-s) var(--padding-m);
+		padding: var(--padding-xs);
 		&.default {
 			background: var(--background-color);
 		}
