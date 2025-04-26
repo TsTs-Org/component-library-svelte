@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { setContext, type Snippet } from "svelte";
+	import { getContext, onMount, setContext, type Snippet } from "svelte";
 	import Seperator from "../Seperator.svelte";
 	import { writable, type Writable } from "svelte/store";
+	import type { LayoutCtx } from "../Layout/Layout.svelte";
 
 	type Variant = "default" | "glass";
 
@@ -9,19 +10,16 @@
 		sidebarCollapsed?: boolean;
 		sidebarClosed?: boolean;
 		center?: boolean;
-		sidebarHeader?: Snippet;
-		sidebarFooter?: Snippet;
+		sidebarHeader?: Snippet<[isCollapsed: () => boolean]>;
+		sidebarFooter?: Snippet<[isCollapsed: () => boolean]>;
 		variant?: Variant;
 		children?: Snippet;
 	};
 
-	export type SidebarCtx = {
-		options: Writable<{
-			collapsed: boolean;
-			closed: boolean;
-		}>;
-	};
-
+	export type SidebarCtx = Writable<{
+		collapsed: boolean;
+		closed: boolean;
+	}>;
 	let {
 		sidebarCollapsed = false,
 		sidebarClosed = false,
@@ -32,14 +30,27 @@
 		children,
 	}: Props = $props();
 
-	const ctx = {
-		options: writable({
-			collapsed: sidebarCollapsed,
-			closed: sidebarClosed,
-		}),
-	};
+	let ctx: SidebarCtx = writable({
+		collapsed: sidebarCollapsed,
+		closed: sidebarClosed,
+	});
 
+	const layoutCtx: LayoutCtx | undefined = getContext("LayoutCtx");
+	if (layoutCtx !== undefined) {
+		ctx = layoutCtx.sidebarOptions;
+	}
 	setContext("SidebarCtx", ctx);
+
+	$effect(() => {
+		ctx.update((x) => {
+			x.collapsed = sidebarCollapsed;
+			x.closed = sidebarClosed;
+			return x;
+		});
+	});
+
+	let headerHandlesCollapsed = false;
+	let footerHandlesCollapsed = false;
 </script>
 
 <div
@@ -47,8 +58,17 @@
 	class:sidebarCollapsed
 	class:sidebarClosed
 >
-	{#if !!sidebarHeader}
-		<div class="Header">{@render sidebarHeader?.()}</div>
+	<div
+		class="Header"
+		class:display={!sidebarCollapsed || headerHandlesCollapsed}
+	>
+		{@render sidebarHeader?.(() => {
+			headerHandlesCollapsed = true;
+			return sidebarCollapsed;
+		})}
+	</div>
+
+	{#if !!sidebarHeader && !sidebarCollapsed}
 		<Seperator horizontal></Seperator>
 	{/if}
 	<div
@@ -57,10 +77,18 @@
 	>
 		{@render children?.()}
 	</div>
-	{#if !!sidebarFooter}
+	{#if !!sidebarFooter && !sidebarCollapsed}
 		<Seperator horizontal></Seperator>
-		<div class="Footer">{@render sidebarFooter?.()}</div>
 	{/if}
+	<div
+		class="Footer"
+		class:display={!sidebarCollapsed || footerHandlesCollapsed}
+	>
+		{@render sidebarFooter?.(() => {
+			footerHandlesCollapsed = true;
+			return sidebarCollapsed;
+		})}
+	</div>
 </div>
 
 <!--
@@ -74,14 +102,14 @@
 		flex-direction: column;
 		overflow: hidden;
 		height: 100%;
-		width: 350px;
-		transition: width 0.3s ease-in-out;
+		width: max(min(300px, 25vw), 250px);
 		border-right: thin solid var(--border-color);
 		&.sidebarCollapsed {
-			width: 4rem;
+			width: fit-content;
 		}
 		&.sidebarClosed {
 			width: 0px;
+			border: none;
 		}
 
 		&.default {
@@ -97,6 +125,7 @@
 			display: flex;
 			flex-direction: column;
 			padding: var(--padding-s);
+			gap: var(--padding-xs);
 			flex: 1;
 			&.center {
 				justify-content: center;
@@ -106,9 +135,13 @@
 		.Header,
 		.Footer {
 			display: flex;
-			height: 3rem;
-			width: 100%;
-			align-items: center;
+			flex-direction: column;
+			height: fit-content;
+			width: calc(100% - 2 * var(--padding-s));
+			padding: var(--padding-s);
+			.display {
+				display: none;
+			}
 		}
 	}
 </style>

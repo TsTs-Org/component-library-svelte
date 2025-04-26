@@ -12,9 +12,11 @@
 	import Button from "$lib/components/Button.svelte";
 	import Sidebar from "$lib/components/Sideabar/Sidebar.svelte";
 	import Layout from "$lib/components/Layout/Layout.svelte";
+	import SidebarItem from "$lib/components/Sideabar/SidebarItem.svelte";
+	import Seperator from "$lib/components/Seperator.svelte";
 
-	let sidebarCollapsed = $state(false);
-	let sidebarClosed = $state(false);
+	let sidebarCollapsed = $state(true);
+	let customActive = $state(false);
 </script>
 
 <svelte:head>
@@ -95,14 +97,6 @@
 			{#snippet left()}
 				<Button
 					variant="ghost"
-					onclick={() => (sidebarClosed = !sidebarClosed)}
-				>
-					{#snippet icon()}
-						<Icon iconName={sidebarClosed ? "sun" : "moon"} />
-					{/snippet}
-				</Button>
-				<Button
-					variant="ghost"
 					onclick={() => (sidebarCollapsed = !sidebarCollapsed)}
 				>
 					{#snippet icon()}
@@ -132,10 +126,71 @@
 
 	{#snippet leftSidebar()}
 		<Sidebar
-			{sidebarClosed}
+			center
 			{sidebarCollapsed}
 		>
-			<h2>Hello</h2>
+			<SidebarItem href="{base}/">
+				{#snippet icon(size)}
+					<Icon
+						iconName="home"
+						{size}
+						fill="inherit"
+					></Icon>
+				{/snippet}
+				Home
+			</SidebarItem>
+			<SidebarItem href="{base}/blocks">
+				{#snippet icon(size)}
+					<Icon
+						iconName="dashboard"
+						{size}
+						fill="inherit"
+					></Icon>
+				{/snippet}
+				Blocks
+			</SidebarItem>
+			<SidebarItem href="{base}/components">
+				{#snippet icon(size)}
+					<Icon
+						iconName="folder"
+						{size}
+						fill="inherit"
+					></Icon>
+				{/snippet}
+				Components
+			</SidebarItem>
+			<Seperator
+				horizontal
+				thick
+			></Seperator>
+			<SidebarItem
+				onclick={() => (customActive = !customActive)}
+				active={customActive}
+			>
+				{#snippet icon(size)}
+					<Icon
+						iconName="account"
+						{size}
+						fill="inherit"
+					></Icon>
+				{/snippet}
+				Projects
+			</SidebarItem>
+
+			{#snippet sidebarFooter(collapsed)}
+				{#if collapsed() || !collapsed()}
+					<SidebarItem href="#">
+						{#snippet icon(size)}
+							<Icon
+								iconName="settings"
+								{size}
+								fill="inherit"
+							></Icon>
+						{/snippet}
+						Settings
+					</SidebarItem>
+				{/if}
+			{/snippet}
 		</Sidebar>
 	{/snippet}
 
