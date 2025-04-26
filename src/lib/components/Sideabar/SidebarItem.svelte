@@ -19,8 +19,6 @@
 
 	let _active = $derived(base + page.route.id == href);
 
-	console.log(page.route.id, href);
-
 	const ctx: SidebarCtx = getContext("SidebarCtx");
 	const options = ctx;
 

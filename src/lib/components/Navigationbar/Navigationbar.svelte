@@ -15,7 +15,6 @@
 </script>
 
 <nav
-	class:open
 	class={"Navigationbar " + variant}
 	{...restProps}
 >
