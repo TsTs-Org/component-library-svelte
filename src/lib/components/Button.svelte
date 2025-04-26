@@ -110,6 +110,9 @@
 		}
 		&.ghost {
 			background-color: transparent;
+			.content {
+				color: var(--text-color);
+			}
 			&:not(:disabled):hover {
 				background-color: transparent;
 			}

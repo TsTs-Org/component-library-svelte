@@ -15,21 +15,8 @@
 		children?: Snippet;
 	} & HTMLAttributes<any>;
 
-	export type NavigationbarCtx = {
-		selected: Writable<string>;
-	};
-
-	const ctx = {
-		selected: writable(page.route.id),
-	};
-
 	let { variant = "default", left, right, children, ...restProps }: Props = $props();
-
-	setContext("ctx", ctx);
 	let open = $state();
-	onMount(() => {
-		return ctx.selected.subscribe(() => (open = false));
-	});
 </script>
 
 <button
@@ -71,10 +58,6 @@
 <style lang="scss">
 	@media (max-width: 900px) {
 		.openNavButton {
-			position: sticky;
-			z-index: 1200;
-			top: 1rem;
-			left: 1rem;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -110,7 +93,6 @@
 	}
 	@media (min-width: 900px) {
 		nav {
-			position: sticky;
 			display: grid;
 			grid-template-columns: 1fr auto 1fr;
 			border-bottom: 1px solid var(--border-color);
@@ -131,11 +113,9 @@
 	}
 
 	nav {
-		top: 0;
 		box-sizing: border-box;
 		width: 100%;
-		z-index: 1000;
-		padding: var(--padding-s) var(--padding-m);
+		padding: var(--padding-xs);
 		&.default {
 			background: var(--background-color);
 		}

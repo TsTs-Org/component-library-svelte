@@ -4,10 +4,21 @@
 	import { externalTooltipHandler, htmlLegendPlugin } from "$lib/components/Chart/plugins.js";
 	import { theme } from "$lib/utils/themify.svelte.js";
 
-	const styles = getComputedStyle(document.documentElement);
+	let styles: CSSStyleDeclaration | undefined = undefined;
+	onMount(() => {
+		styles = getComputedStyle(document.documentElement);
+	});
+	// const styles = getComputedStyle(document.documentElement);
 	let mainColor;
 
 	let canvas: HTMLCanvasElement;
+	onMount(() => {
+		const parentBound = canvas.parentElement?.getBoundingClientRect();
+		if (parentBound) {
+			canvas.width = parentBound.width;
+			canvas.height = parentBound.height;
+		}
+	});
 	let legend: HTMLUListElement;
 
 	type ChartType = "line" | "bar";
@@ -83,6 +94,7 @@
 				datasets: datasets,
 			},
 			options: {
+				responsive: false,
 				events: displayTooltip ? undefined : [],
 
 				interaction: {
@@ -177,3 +189,11 @@
 		bind:this={legend}
 	></ul>
 </div>
+
+<style>
+	.BaseChart {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+</style>

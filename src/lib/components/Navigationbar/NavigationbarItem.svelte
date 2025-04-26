@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getContext, onMount, type Snippet } from "svelte";
-	import type { NavigationbarCtx } from "./Navigationbar.svelte";
+	import { page } from "$app/state";
+	import { type Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
 
 	type Variant = "ghost" | "bordered" | "colored";
@@ -9,29 +9,21 @@
 	type Props = {
 		variant?: Variant;
 		size?: Size;
+		active?: boolean;
+		href?: string;
 		icon?: Snippet;
 		children?: Snippet;
 	} & HTMLAnchorAttributes;
 
-	let { variant, size, icon, children, ...restProps }: Props = $props();
+	let { variant, size, icon, active, href, children, ...restProps }: Props = $props();
 
-	const ctx: NavigationbarCtx = getContext("ctx");
-	const selected = ctx.selected;
-
-	const self = restProps.href ?? "unset";
-	let active = $state(false);
-
-	onMount(() => {
-		return selected.subscribe((x) => (active = x === self));
-	});
+	let _active = $derived(page.route.id == href);
 </script>
 
 <a
-	onclick={() => {
-		selected.set(self);
-	}}
-	class:active
+	class:_active={active == undefined ? _active : active}
 	class={[variant, size]}
+	{href}
 	{...restProps}
 >
 	{@render children?.()}
@@ -53,7 +45,7 @@
 		font-size: var(--text-size-s);
 		font-weight: 600;
 		cursor: pointer;
-		&.active {
+		&._active {
 			color: var(--text-color);
 		}
 

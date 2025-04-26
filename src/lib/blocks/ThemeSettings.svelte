@@ -125,22 +125,22 @@
 			})}
 	>
 		<RadioItem
-			value="0.9rem"
+			value="0.8rem"
 			ofType="button"
 		>
 			0.9
 		</RadioItem>
 		<RadioItem
-			value="1rem"
+			value=".9rem"
 			ofType="button"
 		>
 			1
 		</RadioItem>
 		<RadioItem
-			value="1.25rem"
+			value="1.1rem"
 			ofType="button"
 		>
-			1.25
+			1.1
 		</RadioItem>
 	</Radiogroup>
 </div>
