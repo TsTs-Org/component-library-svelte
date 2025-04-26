@@ -11,10 +11,6 @@
 	import TabContent from "$lib/components/Tabs/TabContent.svelte";
 	import AutoGenerateTriggers from "$lib/components/Tabs/AutoGenerateTriggers.svelte";
 	import DynamicHorizontalTabs from "$lib/blocks/Tabs/DynamicHorizontalTabsBlock.svelte";
-	import Tabs from "$lib/components/Tabs/Tabs.svelte";
-	import TabContent from "$lib/components/Tabs/TabContent.svelte";
-	import AutoGenerateTriggers from "$lib/components/Tabs/AutoGenerateTriggers.svelte";
-	import DynamicHorizontalTabs from "$lib/blocks/Tabs/DynamicHorizontalTabsBlock.svelte";
 	let sidebarClosed = $state(false);
 </script>
 
