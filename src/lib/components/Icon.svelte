@@ -43,6 +43,7 @@
 <style lang="scss">
 	svg {
 		pointer-events: none;
+		flex-shrink: 0;
 		display: block;
 
 		&.s {
