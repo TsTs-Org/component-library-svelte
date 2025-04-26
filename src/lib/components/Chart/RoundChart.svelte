@@ -4,7 +4,7 @@
 	import { externalTooltipHandler, htmlLegendPlugin } from "$lib/components/Chart/plugins.js";
 	import { theme } from "$lib/utils/themify.svelte.js";
 
-	let styles = undefined;
+	let styles: CSSStyleDeclaration | undefined = undefined;
 	onMount(() => {
 		styles = getComputedStyle(document.documentElement);
 	});
@@ -12,6 +12,15 @@
 	let mainColor;
 
 	let canvas: HTMLCanvasElement;
+
+	onMount(() => {
+		const parentBound = canvas.parentElement?.getBoundingClientRect();
+		if (parentBound) {
+			canvas.width = parentBound.width;
+			canvas.height = parentBound.height;
+		}
+	});
+
 	let legend: HTMLUListElement;
 
 	type ChartType = "donut" | "thingy";
@@ -143,10 +152,7 @@
 	class:col
 >
 	<div class="Chart">
-		<canvas
-			bind:this={canvas}
-			style="width: 180px"
-		></canvas>
+		<canvas bind:this={canvas}></canvas>
 		<ul
 			class="main"
 			class:donut={chartType == "donut"}
