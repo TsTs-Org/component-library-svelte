@@ -1,6 +1,6 @@
 {
 	"name": "@tsts-org/component-library-svelte",
-	"version": "1.0.0",
+	"version": "1.0.3",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
 	},

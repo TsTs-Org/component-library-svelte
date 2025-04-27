@@ -8,7 +8,7 @@ import Contextcontainer from "./components/Contextcontainer/Contextcontainer.sve
 import Contextmenu from "./components/Contextcontainer/Contextmenu.svelte";
 import ContextmenuItem from "./components/Contextcontainer/ContextmenuItem.svelte";
 import Dropdown from "./components/Dropdown/Dropdown.svelte";
-import Layout from "../routes/+layout.svelte";
+import Layout from "./components/Layout/Layout.svelte";
 import Multiselect from "./components/Multiselect/Multiselect.svelte";
 import MultiselectItem from "./components/Multiselect/MultiselectItem.svelte";
 import Navigationbar from "./components/Navigationbar/Navigationbar.svelte";
@@ -25,10 +25,10 @@ import TableCell from "./components/Table/TableCell.svelte";
 import TableFooter from "./components/Table/TableFooter.svelte";
 import TableHead from "./components/Table/TableHead.svelte";
 import TableRow from "./components/Table/TableRow.svelte";
-import AutoGenerateTriggers from "./components/Tabs/AutoGenerateTriggers.svelte";
-import TabContent from "./components/Tabs/TabContent.svelte";
-import Tabs from "./components/Tabs/Tabs.svelte";
-import TabTrigger from "./components/Tabs/TabTrigger.svelte";
+// import AutoGenerateTriggers from "./components/Tabs/AutoGenerateTriggers.svelte";
+// import TabContent from "./components/Tabs/TabContent.svelte";
+// import Tabs from "./components/Tabs/Tabs.svelte";
+// import TabTrigger from "./components/Tabs/TabTrigger.svelte";
 
 import Button from "./components/Button.svelte";
 import Card from "./components/Card.svelte";
@@ -68,10 +68,10 @@ export {
     TableFooter,
     TableHead,
     TableRow,
-    AutoGenerateTriggers,
-    TabContent,
-    Tabs,
-    TabTrigger,
+    // AutoGenerateTriggers,
+    // TabContent,
+    // Tabs,
+    // TabTrigger,
 
     Button,
     Card,

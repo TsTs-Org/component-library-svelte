@@ -5,8 +5,8 @@
 	const KEY = Symbol(); // this could also be just "TabState" as there probably won't be another component with the same naming
 
 	export class TabState {
-		registeredTabs: string[] = $state([]);
-		visibleTabs: Set<string> = $state(new SvelteSet());
+		private registeredTabs: string[] = $state([]);
+		private visibleTabs: Set<string> = $state(new SvelteSet());
 
 		constructor(defaultTab?: string) {
 			if (!!defaultTab) this.visibleTabs.add(defaultTab);

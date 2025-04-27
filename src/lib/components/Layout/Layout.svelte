@@ -91,6 +91,7 @@
 		}
 	}
 	.Content {
+		background-color: var(--background-color);
 		overflow: auto;
 	}
 </style>
