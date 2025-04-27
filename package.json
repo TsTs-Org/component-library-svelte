@@ -1,6 +1,10 @@
 {
 	"name": "@tsts-org/component-library-svelte",
 	"version": "1.0.3",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/TsTs-Org/component-library-svelte.git"
+	},
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
 	},
@@ -11,6 +15,7 @@
 		"prepare": "svelte-kit sync || echo ''",
 		"prepack": "svelte-kit sync && svelte-package && publint",
 		"package": "svelte-package",
+		"publish:library": "npm run package && npm publish",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
@@ -55,6 +60,7 @@
 	],
 	"dependencies": {
 		"chart.js": "^4.4.9",
-		"svelte": "^5.0.0"
+		"svelte": "^5.0.0",
+		"@sveltejs/kit": "^2.16.0"
 	}
 }
