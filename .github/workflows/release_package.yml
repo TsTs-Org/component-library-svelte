@@ -9,9 +9,11 @@ on:
 jobs:
   release-package:
     runs-on: ubuntu-latest
+
     permissions:
       packages: write
       contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,21 +26,16 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@tsts-org"
 
-      - name: Bump version
-        run: |
-          git config --global user.email "pipeline@github.com"
-          git config --global user.name "Pipeline"
-          npm version patch
-
       - name: Install dependencies
         run: npm install
 
-      # - name: Package and Publish
-      - run: npm publish
+      - name: Package library
+        run: npm run package
+
+      - name: Set package version number
+        run: ./scripts/set_upstream_version.sh
+
+      - name: Publish libraray
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push new version
-        run: git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

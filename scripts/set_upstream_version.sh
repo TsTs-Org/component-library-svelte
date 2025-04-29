@@ -18,6 +18,3 @@ elif [[ "$BIGGER_VERSION_NUMBER" == "$UPSTREAM_VERSION" ]]; then
 else 
     echo "Version from package.json was most recent. Using version from package.json."
 fi
-
-# otherwise manual override appeared and the version from package.json should be used
-# therefore the version doesn't need to be changed
