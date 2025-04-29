@@ -1,0 +1,1 @@
+npm_config_loglevel=silent npm pkg get version | tr -d '"'
