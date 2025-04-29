@@ -24,7 +24,11 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
           scope: "@tsts-org"
 
-      - run: npm version patch
+      - name: Bump version
+        run: |
+          git config --global user.email "pipeline@github.com"
+          git config --global user.name "Pipeline"
+          npm version patch
       
       - name: Install dependencies
         run: npm install
