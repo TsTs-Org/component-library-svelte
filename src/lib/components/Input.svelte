@@ -71,16 +71,18 @@
 			</div>
 		{/if}
 
-		<button
-			class={["password-btn", initial_type]}
-			class:focused
-			onclick={swapPasswordDisplay}
-		>
-			<Icon
-				iconName={show_password ? "eyeOpen" : "eyeClosed"}
-				fill="inherit"
-			/>
-		</button>
+		{#if initial_type == "password"}
+			<span
+				class={["password-btn", initial_type]}
+				class:focused
+				onclick={swapPasswordDisplay}
+			>
+				<Icon
+					iconName={show_password ? "eyeOpen" : "eyeClosed"}
+					fill="inherit"
+				/>
+			</span>
+		{/if}
 	</div>
 	{#if description}
 		<p>{description}</p>
@@ -112,6 +114,7 @@
 		.password-btn {
 			display: none;
 			right: 0;
+			cursor: pointer;
 			&.password {
 				display: flex;
 			}
