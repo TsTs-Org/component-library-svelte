@@ -43,7 +43,7 @@ export const defaults = {
         text_color_inverted: "var(--neutral-200)",
         
         border_color: "var(--neutral-400)",
-        hover_color: "var(--neutral-300)",
+        hover_color: "var(--neutral-400)",
         neutral_hover_color: "var(--neutral-400)",
     },
     darkValues: {

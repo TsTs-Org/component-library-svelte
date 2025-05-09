@@ -135,9 +135,6 @@
 			background-color: var(--hover-color);
 			scale: 99.5%;
 			cursor: pointer;
-			.icon {
-				fill: var(--text-color-muted);
-			}
 		}
 
 		&:disabled:hover {
