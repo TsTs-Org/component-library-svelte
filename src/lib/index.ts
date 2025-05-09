@@ -24,6 +24,7 @@ import TableBody from "./components/Table/TableBody.svelte";
 import TableCell from "./components/Table/TableCell.svelte";
 import TableFooter from "./components/Table/TableFooter.svelte";
 import TableHead from "./components/Table/TableHead.svelte";
+import TableHeader from "./components/Table/TableHeader.svelte";
 import TableRow from "./components/Table/TableRow.svelte";
 // import AutoGenerateTriggers from "./components/Tabs/AutoGenerateTriggers.svelte";
 // import TabContent from "./components/Tabs/TabContent.svelte";
@@ -67,6 +68,7 @@ export {
     TableCell,
     TableFooter,
     TableHead,
+    TableHeader,
     TableRow,
     // AutoGenerateTriggers,
     // TabContent,
