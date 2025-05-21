@@ -128,5 +128,10 @@
 				flex-shrink: 1;
 			}
 		}
+
+		& .content {
+			min-width: 0;
+			min-height: 0;
+		}
 	}
 </style>

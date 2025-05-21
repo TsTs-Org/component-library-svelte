@@ -22,8 +22,8 @@
 	const ctx: SidebarCtx = getContext("SidebarCtx");
 	const options = ctx;
 
-	let sidebarClosed = $state(false);
-	let sidebarCollapsed = $state(false);
+	let sidebarClosed = $state(true);
+	let sidebarCollapsed = $state(true);
 
 	onMount(() => {
 		return options.subscribe((x) => {

@@ -14,10 +14,10 @@
 	let canvas: HTMLCanvasElement;
 
 	onMount(() => {
-		const parentBound = canvas.parentElement?.getBoundingClientRect();
+		const parentBound = canvas.parentElement?.parentElement?.getBoundingClientRect();
 		if (parentBound) {
-			canvas.width = parentBound.width;
 			canvas.height = parentBound.height;
+			canvas.width = parentBound.width;
 		}
 	});
 
@@ -172,7 +172,6 @@
 		display: flex;
 		flex-direction: row;
 		gap: var(--padding-s);
-		width: min-content;
 		&.col {
 			flex-direction: column;
 		}
