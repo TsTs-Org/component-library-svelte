@@ -5,7 +5,7 @@
 </script>
 
 <div
-	style="width: calc(100% - 4rem); margin: 2rem; gap: 1rem; display: grid; grid-template-columns: 300px 300px auto;"
+	style="width: calc(100% - 4rem); margin: 2rem; gap: 1rem; display: grid; grid-template-columns: 300px 300px auto; grid-template-rows: 250px;"
 >
 	<Card>
 		{#snippet title()}
@@ -16,7 +16,6 @@
 			area
 			yGrid
 			yAxis
-			xAxis
 			displayTooltip
 			labels={["January", "February", "March", "May", "June"]}
 			data={[
@@ -51,6 +50,7 @@
 			<h3>System Usage</h3>
 		{/snippet}
 		<BaseChart
+			dynamic
 			chartType="line"
 			area
 			yGrid

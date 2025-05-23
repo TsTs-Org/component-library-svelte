@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Chart from "chart.js/auto";
-	import { onMount } from "svelte";
+	import { onDestroy, onMount } from "svelte";
 	import { externalTooltipHandler, htmlLegendPlugin } from "$lib/components/Chart/plugins.js";
 	import { theme } from "$lib/utils/themify.svelte.js";
 
@@ -12,14 +12,7 @@
 	let mainColor;
 
 	let canvas: HTMLCanvasElement;
-
-	onMount(() => {
-		const parentBound = canvas.parentElement?.parentElement?.getBoundingClientRect();
-		if (parentBound) {
-			canvas.height = parentBound.height;
-			canvas.width = parentBound.width;
-		}
-	});
+	let chart: Chart;
 
 	let legend: HTMLUListElement;
 
@@ -31,6 +24,7 @@
 
 	type Props = {
 		chartType?: ChartType;
+		dynamic?: boolean;
 		labels?: Array<string>;
 		customColors?: Array<string>;
 		data: Array<Dataset>;
@@ -45,6 +39,7 @@
 
 	let {
 		chartType = "donut",
+		dynamic,
 		labels,
 		customColors,
 		data,
@@ -70,6 +65,35 @@
 		backgroundColor?: Array<string>;
 	}[] = [];
 
+	let observer: ResizeObserver;
+
+	function handleResize(entry: ResizeObserverEntry) {
+		chart?.resize(entry.contentRect.width, entry.contentRect.height);
+	}
+
+	onMount(() => {
+		if (dynamic) {
+			console.warn("Dynamic charts are an experimental feature and might cause issues.");
+		}
+		const parent = canvas.parentElement?.parentElement;
+		if (parent) {
+			canvas.width = parent.getBoundingClientRect().width;
+			canvas.height = parent.getBoundingClientRect().height;
+			if (dynamic) {
+				observer = new ResizeObserver((e) => {
+					for (const entry of e) {
+						handleResize(entry);
+					}
+				});
+				observer.observe(parent);
+			}
+		}
+	});
+
+	onDestroy(() => {
+		observer?.disconnect();
+	});
+
 	onMount(() => {
 		data.forEach((val) => {
 			datasets.push({
@@ -85,7 +109,7 @@
 				backgroundColor: customColors,
 			});
 		});
-		const chart = new Chart(canvas, {
+		chart = new Chart(canvas, {
 			type: "doughnut",
 			data: {
 				labels: labels,
@@ -93,6 +117,7 @@
 			},
 			options: {
 				responsive: false,
+				maintainAspectRatio: false,
 				events: displayTooltip ? undefined : [],
 				scales: {
 					x: {
@@ -134,8 +159,8 @@
 			theme.subscribe(() => {
 				chart.data.datasets.forEach((dataset) => {
 					const new_bgs: Array<string> = [];
-					dataset.data.forEach((element: number, i: number) => {
-						mainColor = styles.getPropertyValue(`--primary-${i + 2}00`).trim();
+					dataset.data.forEach((_: number, i: number) => {
+						mainColor = styles?.getPropertyValue(`--primary-${i + 2}00`).trim();
 						new_bgs.push(`hsl(from ${mainColor} h s l / .75)`);
 					});
 					dataset.backgroundColor = new_bgs;

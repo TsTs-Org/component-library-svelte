@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Chart from "chart.js/auto";
-	import { onMount } from "svelte";
+	import { onDestroy, onMount } from "svelte";
 	import { externalTooltipHandler, htmlLegendPlugin } from "$lib/components/Chart/plugins.js";
 	import { theme } from "$lib/utils/themify.svelte.js";
 
@@ -8,17 +8,10 @@
 	onMount(() => {
 		styles = getComputedStyle(document.documentElement);
 	});
-	// const styles = getComputedStyle(document.documentElement);
 	let mainColor;
 
 	let canvas: HTMLCanvasElement;
-	onMount(() => {
-		const parentBound = canvas.parentElement?.getBoundingClientRect();
-		if (parentBound) {
-			canvas.width = parentBound.width;
-			canvas.height = parentBound.height;
-		}
-	});
+	let chart: Chart;
 	let legend: HTMLUListElement;
 
 	type ChartType = "line" | "bar";
@@ -29,6 +22,9 @@
 
 	type Props = {
 		chartType?: ChartType;
+		width?: string;
+		height?: string;
+		dynamic?: boolean;
 		labels: Array<string>;
 		customColors?: Array<string>;
 		data: Array<Dataset>;
@@ -46,6 +42,9 @@
 
 	let {
 		chartType = "line",
+		width = "100%",
+		height = "100%",
+		dynamic = false,
 		labels,
 		customColors,
 		data,
@@ -73,6 +72,35 @@
 		backgroundColor: string;
 	}[] = [];
 
+	let observer: ResizeObserver;
+
+	function handleResize(entry: ResizeObserverEntry) {
+		chart?.resize(entry.contentRect.width, entry.contentRect.height);
+	}
+
+	onMount(() => {
+		if (dynamic) {
+			console.warn("Dynamic charts are an experimental feature and might cause issues.");
+		}
+		const parent = canvas.parentElement;
+		if (parent) {
+			canvas.width = parent.getBoundingClientRect().width;
+			canvas.height = parent.getBoundingClientRect().height;
+			if (dynamic) {
+				observer = new ResizeObserver((e) => {
+					for (const entry of e) {
+						handleResize(entry);
+					}
+				});
+				observer.observe(parent);
+			}
+		}
+	});
+
+	onDestroy(() => {
+		observer?.disconnect();
+	});
+
 	onMount(() => {
 		data.forEach((val, i) => {
 			datasets.push({
@@ -87,7 +115,7 @@
 				backgroundColor: customColors ? `rgba(from ${customColors[i]} r g b / .25)` : "grey",
 			});
 		});
-		const chart = new Chart(canvas, {
+		chart = new Chart(canvas, {
 			type: chartType,
 			data: {
 				labels: labels,
@@ -95,6 +123,7 @@
 			},
 			options: {
 				responsive: false,
+				maintainAspectRatio: false,
 				events: displayTooltip ? undefined : [],
 
 				interaction: {
@@ -172,7 +201,7 @@
 		if (!customColors) {
 			theme.subscribe(() => {
 				chart.data.datasets.forEach((dataset, i) => {
-					mainColor = styles.getPropertyValue(`--primary-${i + 4}00`).trim();
+					mainColor = styles?.getPropertyValue(`--primary-${i + 4}00`).trim();
 					dataset.backgroundColor = `hsl(from ${mainColor} h s l / ${chartType == "bar" ? 0.75 : 0.25})`;
 					dataset.borderColor = `hsl(from ${mainColor} h s l / ${chartType == "bar" ? 1 : 0.75})`;
 				});
@@ -182,7 +211,10 @@
 	});
 </script>
 
-<div class="BaseChart">
+<div
+	class="BaseChart"
+	style={`width: ${width}; height: calc(${height} - 1rem);`}
+>
 	<canvas bind:this={canvas}></canvas>
 	<ul
 		class="__chartPlugin-legend"
@@ -193,7 +225,5 @@
 <style>
 	.BaseChart {
 		position: relative;
-		width: 100%;
-		height: 100%;
 	}
 </style>
