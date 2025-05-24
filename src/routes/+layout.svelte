@@ -111,7 +111,7 @@
 
 			{#snippet sidebarFooter(collapsed)}
 				{#if collapsed() || !collapsed()}
-					<SidebarItem href="#">
+					<SidebarItem href="{base}/test">
 						{#snippet icon(size)}
 							<Icon
 								iconName="settings"

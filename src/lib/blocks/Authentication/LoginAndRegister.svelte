@@ -2,40 +2,81 @@
 	import Button from "$lib/components/Button.svelte";
 	import Icon from "$lib/components/Icon.svelte";
 	import Input from "$lib/components/Input.svelte";
+	import Loader from "$lib/components/Loader.svelte";
 	import type { HTMLAttributes } from "svelte/elements";
 
 	let username: string = $state("");
 	let password: string = $state("");
+	let error_message: string = $state("");
 
 	type Props = {
 		onsubmit?: (data: object) => void;
-		loading?: boolean;
 		loginHeader: string;
 		loginDescription: string;
 		registerHeader: string;
 		registerDescription: string;
 		service?: string;
+		timeout?: number;
 	} & HTMLAttributes<any>;
 
 	let {
-		loading = false,
 		onsubmit = ({}) => {},
 		loginHeader,
 		loginDescription,
 		registerHeader,
 		registerDescription,
 		service,
+		timeout = 5000,
 		...restProps
 	}: Props = $props();
 
-	function submit_proxy(e: SubmitEvent) {
-		loading = true;
+	let swapButton: HTMLButtonElement;
+	let form: HTMLFormElement;
+	let loader: HTMLDivElement;
+
+	function setFormDisabled(disabled: boolean) {
+		if (form && loader) {
+			form.querySelectorAll("input, button").forEach((el) => {
+				if (el instanceof HTMLInputElement || el instanceof HTMLButtonElement) {
+					el.disabled = disabled;
+				}
+			});
+			const formsize = form.getBoundingClientRect();
+			swapButton.disabled = disabled;
+			form.style.display = disabled ? "none" : "flex";
+			loader.style.width = `${formsize.width}px`;
+			loader.style.height = `${formsize.height}px`;
+			loader.style.display = disabled ? "flex" : "none";
+		}
+	}
+
+	async function submit_proxy(e: SubmitEvent) {
 		e.preventDefault();
-		onsubmit({
-			username: username,
-			password: password,
-			action: swap ? "register" : "login",
+		setFormDisabled(true);
+
+		const timeoutTimer = new Promise((_, reject) => {
+			setTimeout(() => {
+				reject(new Error("Promise timed out"));
+			}, timeout);
 		});
+		if (onsubmit) {
+			Promise.race([
+				onsubmit({ username: username, password: password, action: swap ? "register" : "login" }),
+				timeoutTimer,
+			])
+				.then((e) => {
+					error_message = e.msg;
+				})
+				.catch((e) => {
+					error_message = "Submit timeout";
+					console.warn(e);
+				})
+				.finally(() => {
+					// loading = false;
+					setFormDisabled(false);
+					password = "";
+				});
+		}
 	}
 
 	let swap = $state(false);
@@ -53,7 +94,7 @@
 		/>
 		<button
 			class:swap
-			disabled={loading}
+			bind:this={swapButton}
 			onclick={() => {
 				swap = !swap;
 			}}
@@ -64,6 +105,7 @@
 			/>
 		</button>
 		<form
+			bind:this={form}
 			class:swap
 			onsubmit={submit_proxy}
 			{...restProps}
@@ -74,21 +116,19 @@
 			</div>
 			<Input
 				bind:value={username}
-				disabled={loading}
 				type="text"
 				placeholder=""
 				label="Username"
 			/>
 			<Input
 				bind:value={password}
-				disabled={loading}
 				type="password"
 				placeholder=""
 				label="Password"
 			/>
+			<p style="color: rgb(230, 10, 10);">{error_message}</p>
 
 			<Button
-				{loading}
 				variant="primary"
 				size="m"
 				type="submit"
@@ -96,6 +136,14 @@
 				{swap ? "Register" : "Login"}
 			</Button>
 		</form>
+		<div
+			class="loader"
+			style="display: none;"
+			class:swap
+			bind:this={loader}
+		>
+			<Loader></Loader>
+		</div>
 	</div>
 </div>
 
@@ -107,7 +155,7 @@
 			}
 			button {
 				top: initial !important;
-				bottom: 3% !important;
+				top: 1% !important;
 			}
 		}
 	}
@@ -120,7 +168,8 @@
 				}
 			}
 		}
-		form {
+		form,
+		.loader {
 			&.swap {
 				transform: translateX(-100%);
 			}
@@ -202,5 +251,14 @@
 				}
 			}
 		}
+	}
+
+	.loader {
+		background-color: var(--foreground-color);
+		width: var(--width);
+		height: var(--height);
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>
