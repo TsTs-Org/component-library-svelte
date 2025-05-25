@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { defaults, theme, themeValues } from "$lib/utils/themify.svelte.js";
+	import { theme } from "$lib/components/Themify.svelte";
 	import Radiogroup from "$lib/components/Radio/Radiogroup.svelte";
 	import RadioItem from "$lib/components/Radio/RadioItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";

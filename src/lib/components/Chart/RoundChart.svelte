@@ -2,7 +2,7 @@
 	import Chart from "chart.js/auto";
 	import { onDestroy, onMount } from "svelte";
 	import { externalTooltipHandler, htmlLegendPlugin } from "$lib/components/Chart/plugins.js";
-	import { theme } from "$lib/utils/themify.svelte.js";
+	import { theme } from "../Themify.svelte";
 
 	let styles: CSSStyleDeclaration | undefined = undefined;
 	onMount(() => {

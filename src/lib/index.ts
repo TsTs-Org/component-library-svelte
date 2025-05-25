@@ -41,6 +41,7 @@ import OverflowContainer from "./components/OverflowContainer.svelte";
 import Popover from "./components/Popover.svelte";
 import ScrollContainer from "./components/ScrollContainer.svelte";
 import Seperator from "./components/Seperator.svelte";
+import ThemeModeButton from "./components/ThemeModeButton.svelte";
 import Themify from "./components/Themify.svelte";
 
 export { 
@@ -85,6 +86,7 @@ export {
     Popover,
     ScrollContainer,
     Seperator,
+    ThemeModeButton,
     Themify,
 };
 

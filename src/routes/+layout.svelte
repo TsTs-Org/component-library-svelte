@@ -3,7 +3,6 @@
 
 	let { children } = $props();
 	import Icon from "$lib/components/Icon.svelte";
-	import { mountTheme, theme } from "$lib/utils/themify.svelte.js";
 	import Navigationbar from "$lib/components/Navigationbar/Navigationbar.svelte";
 	import NavigationbarItem from "$lib/components/Navigationbar/NavigationbarItem.svelte";
 	import Button from "$lib/components/Button.svelte";
@@ -12,6 +11,7 @@
 	import SidebarItem from "$lib/components/Sideabar/SidebarItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";
 	import Themify from "$lib/components/Themify.svelte";
+	import ThemeModeButton from "$lib/components/ThemeModeButton.svelte";
 
 	let sidebarCollapsed = $state(true);
 	let customActive = $state(false);
@@ -40,18 +40,7 @@
 				<NavigationbarItem href="{base}/components">Components</NavigationbarItem>
 			{/snippet}
 			{#snippet right()}
-				<Button
-					variant="ghost"
-					onclick={() =>
-						theme.update((x) => {
-							x.lightMode = !x.lightMode;
-							return x;
-						})}
-				>
-					{#snippet icon()}
-						<Icon iconName={$theme.lightMode ? "sun" : "moon"} />
-					{/snippet}
-				</Button>
+				<ThemeModeButton />
 			{/snippet}
 		</Navigationbar>
 	{/snippet}
