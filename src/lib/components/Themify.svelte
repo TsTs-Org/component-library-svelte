@@ -26,7 +26,7 @@
 			text_color_muted: "var(--neutral-500)",
 			text_color_inverted: "var(--neutral-200)",
 			border_color: "var(--neutral-400)",
-			hover_color: "var(--neutral-400)",
+			hover_color: "var(--neutral-300)",
 			neutral_hover_color: "var(--neutral-400)",
 		},
 		darkValues: {
@@ -101,6 +101,12 @@
 		);
 	}
 
+	// export const jsColors = writable({
+	// 	primary: "",
+	// 	hover: "",
+	// 	border: "",
+	// });
+
 	function mountTheme() {
 		const savedTheme = JSON.parse(localStorage.getItem("_theme") ?? "null");
 		if (savedTheme) {
@@ -110,6 +116,17 @@
 		theme.subscribe((t) => {
 			applyTheme(t);
 			localStorage.setItem("_theme", JSON.stringify(t));
+
+			// let styles: CSSStyleDeclaration | undefined = undefined;
+			// styles = getComputedStyle(document.documentElement);
+
+			// jsColors.update((curr) => {
+			// 	curr.primary = styles?.getPropertyValue(`--primary-${5}00`).trim();
+			// 	curr.hover = styles?.getPropertyValue("--hover-color").trim();
+			// 	curr.border = styles?.getPropertyValue("--border-color").trim();
+			// 	console.log(curr);
+			// 	return curr;
+			// });
 		});
 	}
 

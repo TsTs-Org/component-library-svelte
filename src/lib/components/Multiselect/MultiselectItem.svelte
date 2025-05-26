@@ -53,7 +53,7 @@
 	class:isActive
 	{...restProps}
 >
-	{self.label}
+	<h5>{self.label}</h5>
 	<Checkbox
 		bind:checked={isActive}
 		onchange={() => {

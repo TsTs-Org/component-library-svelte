@@ -82,9 +82,10 @@
 
 <style lang="scss">
 	tr {
-		border-bottom: thin solid var(--border-color);
+		border-bottom: 1px solid var(--border-color);
 		&:hover {
 			background-color: var(--hover-color);
+			border-color: var(--hover-color);
 		}
 	}
 	.actions {

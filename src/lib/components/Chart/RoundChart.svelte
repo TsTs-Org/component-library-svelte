@@ -31,6 +31,7 @@
 		value: string;
 		title?: string;
 		col?: boolean;
+		dualColored?: boolean;
 		displayLegend?: boolean;
 		displayTooltip?: boolean;
 		displayTitle?: boolean;
@@ -46,6 +47,7 @@
 		value,
 		title = "",
 		col = false,
+		dualColored = false,
 		displayLegend = false,
 		displayTooltip = false,
 		displayTitle = false,
@@ -160,8 +162,15 @@
 				chart.data.datasets.forEach((dataset) => {
 					const new_bgs: Array<string> = [];
 					dataset.data.forEach((_: number, i: number) => {
-						mainColor = styles?.getPropertyValue(`--primary-${i + 2}00`).trim();
-						new_bgs.push(`hsl(from ${mainColor} h s l / .75)`);
+						if (dualColored) {
+							mainColor = styles?.getPropertyValue(`--primary-${5}00`).trim();
+							let secondColor = styles?.getPropertyValue(`--hover-color`).trim();
+							new_bgs.push(`hsl(from ${mainColor} h s l / .85)`);
+							new_bgs.push(`hsl(from ${secondColor} h s l / 1)`);
+						} else {
+							mainColor = styles?.getPropertyValue(`--primary-${i + 2}00`).trim();
+							new_bgs.push(`hsl(from ${mainColor} h s l / .75)`);
+						}
 					});
 					dataset.backgroundColor = new_bgs;
 					return dataset;

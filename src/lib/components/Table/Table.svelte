@@ -11,9 +11,16 @@
 		initial?: Array<number>;
 		searchbar?: boolean;
 		bordered?: boolean;
+		headerAction?: Snippet;
 	};
 
-	let { children, initial = [], searchbar = false, bordered = false }: Props = $props();
+	let {
+		children,
+		initial = [],
+		searchbar = false,
+		bordered = false,
+		headerAction,
+	}: Props = $props();
 	let columns: Array<string> = $state([]);
 	let activeColumns: Array<number> = $state(initial);
 	let searchValue: string = $state("");
@@ -86,6 +93,9 @@
 				bind:value={searchValue}
 			/>
 		{/if}
+		<div class="headerAction">
+			{@render headerAction?.()}
+		</div>
 	</div>
 	<div
 		class="_table"
@@ -110,6 +120,10 @@
 			display: flex;
 			justify-content: space-between;
 			gap: var(--padding-xs);
+			.headerAction {
+				display: flex;
+				align-items: center;
+			}
 		}
 	}
 	._table {

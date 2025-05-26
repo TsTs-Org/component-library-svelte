@@ -160,6 +160,23 @@
 		></RoundChart>
 	</Showcase>
 
+	<Showcase name="Thingy Chart testcolor">
+		<RoundChart
+			chartType="thingy"
+			value="1203"
+			title="Visitors"
+			displayTooltip
+			col
+			dualColored
+			data={[
+				{
+					title: "second",
+					data: [2, 8],
+				},
+			]}
+		></RoundChart>
+	</Showcase>
+
 	<Showcase name="Donut Chart">
 		<RoundChart
 			value="1203"
@@ -363,6 +380,17 @@
 				searchbar
 				bordered
 			>
+				{#snippet headerAction()}
+					<Button size="s">
+						{#snippet icon()}
+							<Icon
+								size="s"
+								iconName="plus"
+								fill="inherit"
+							/>
+						{/snippet}
+					</Button>
+				{/snippet}
 				<TableHeader>
 					<TableRow>
 						<TableHead>Name</TableHead>
