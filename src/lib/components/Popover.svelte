@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { type Snippet } from "svelte";
+	import { onDestroy, onMount, type Snippet } from "svelte";
 	import Card from "./Card.svelte";
 	import Icon from "./Icon.svelte";
 	import { type AnimationConfig } from "svelte/animate";
 	import { linear } from "svelte/easing";
+
+	// TODO: add option to open page with already openend popover
 
 	type Props = { children: Snippet; popoverTrigger: Snippet<[() => void]>; title: Snippet };
 	let { children, popoverTrigger, title }: Props = $props();
@@ -87,6 +89,23 @@
 			},
 		};
 	}
+
+	onMount(() => {
+		document.addEventListener("keyup", handleEscKey);
+	});
+
+	onDestroy(() => {
+		document.removeEventListener("keyup", handleEscKey);
+	})
+
+	function handleEscKey(ev: KeyboardEvent): void {
+		if (ev.key !== "Escape") return
+		closePopover();
+	}
+
+	export function closePopover(): void {
+		open = false
+	}
 </script>
 
 <div
@@ -101,9 +120,7 @@
 		class="background-dimmer"
 		style="backdrop-filter: brightness({backdropDimmingRemainingBrightnessPercentage}%)"
 		transition:dimBackgroundAnimation
-		onclick={() => {
-			open = false;
-		}}
+		onclick={closePopover}
 		role="none"
 	>
 		<div

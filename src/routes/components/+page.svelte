@@ -31,6 +31,8 @@
 	import Tabs from "$lib/components/Tabs/Tabs.svelte";
 	import TabTrigger from "$lib/components/Tabs/TabTrigger.svelte";
 	import TabContent from "$lib/components/Tabs/TabContent.svelte";
+
+	let closablePopover: ReturnType<typeof Popover>;
 </script>
 
 <div class="theme-settings">
@@ -329,6 +331,20 @@
 	</Showcase>
 
 	<Showcase name="Popover">
+		<Popover bind:this={closablePopover}>
+			{#snippet title()}
+				should be closed by content
+			{/snippet}
+			<Button onclick={() => {
+				closablePopover.closePopover();
+			}}>
+				close from inner content
+			</Button>
+			{#snippet popoverTrigger(trigger)}
+				<Button onclick={trigger}>open closable Popover</Button>
+			{/snippet}
+		</Popover>
+
 		<Popover>
 			{#snippet title()}
 				Some title
