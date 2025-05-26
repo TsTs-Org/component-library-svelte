@@ -1,6 +1,6 @@
 {
 	"name": "@tsts-org/component-library-svelte",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/TsTs-Org/component-library-svelte.git"
