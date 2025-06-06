@@ -27,11 +27,11 @@
 		border: none;
 		white-space: nowrap;
 		display: flex;
+		align-items: center;
 		gap: var(--padding-s);
 		padding: var(--padding-xs);
-		border-radius: var(--border-radius-s);
 		&:hover {
-			background-color: var(--neutral-hover-color);
+			background-color: var(--hover-color);
 		}
 
 		.icon {
