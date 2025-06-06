@@ -93,5 +93,10 @@
 		&:last-child {
 			border: none;
 		}
+		h5 {
+			font-size: var(--text-size-s);
+			height: min-content;
+			margin-block: auto;
+		}
 	}
 </style>

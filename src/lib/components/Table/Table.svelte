@@ -8,7 +8,7 @@
 
 	type Props = {
 		children: Snippet;
-		initial?: Array<number>;
+		initial?: Array<string>;
 		searchbar?: boolean;
 		bordered?: boolean;
 		headerAction?: Snippet;
@@ -21,8 +21,9 @@
 		bordered = false,
 		headerAction,
 	}: Props = $props();
+
 	let columns: Array<string> = $state([]);
-	let activeColumns: Array<number> = $state(initial);
+	let activeColumns: Array<number> = $state([]);
 	let searchValue: string = $state("");
 	let table: HTMLTableElement;
 
@@ -35,36 +36,62 @@
 			: (activeColumns = activeColumns.filter((curr) => curr != columnIndex));
 	}
 
-	$effect(() => {
+	function searchStringInCells(searchString: string) {
 		const tbody = table.querySelector("tbody");
-
+	
 		if (!tbody) {
 			console.error("No <tbody> found in the table.");
 			return;
 		}
+
 		for (let i = 0; i < tbody.rows.length; i++) {
 			let rowContainsString = false;
-
+	
 			activeColumns.forEach((j) => {
 				const cellText = tbody.rows[i].cells[j].textContent || tbody.rows[i].cells[j].innerText;
-
-				if (cellText.toLowerCase().includes(searchValue.toLowerCase())) {
+				if (cellText.toLowerCase().includes(searchString.toLowerCase())) {
 					rowContainsString = true;
 				}
 			});
 			tbody.rows[i].style.display = rowContainsString ? "" : "none";
 		}
+	}
+
+	function properlyRoundCorners() {
+		const firstRow = table.rows[0];
+		const lastRow = table.rows[table.rows.length - 1];
+		if (firstRow) {
+			firstRow.cells[0].style.borderTopLeftRadius = "var(--border-radius-s)";
+			firstRow.cells[firstRow.cells.length - 1].style.borderTopRightRadius = "var(--border-radius-s)";
+		}
+		if (lastRow) {
+			lastRow.cells[0].style.borderBottomLeftRadius = "var(--border-radius-s)";
+			lastRow.cells[lastRow.cells.length - 1].style.borderBottomRightRadius = "var(--border-radius-s)";
+		}
+	}
+
+	function getAllColumns() {
+		const headers = table.querySelectorAll("th");
+		columns = Array.from(headers).map((header) => header.textContent) as Array<string>;
+	}
+
+	function enableInitialColumns() {
+		getAllColumns();
+		// If no initial columns are provided, select all
+		if (initial.length == 0) { initial = columns; }
+		activeColumns = [];
+		for (let i = 0; i < columns.length; i++) {
+			setColumnDisplay(i, initial.includes(columns[i]));
+		}
+	}
+
+	$effect(() => {
+		searchStringInCells(searchValue);
 	});
 
 	onMount(() => {
-		const headers = table.querySelectorAll("th");
-		columns = Array.from(headers).map((header) => header.textContent) as Array<string>;
-		for (let i = 0; i < columns.length; i++) {
-			setColumnDisplay(i, false);
-		}
-		for (let i = 0; i < initial.length; i++) {
-			setColumnDisplay(initial[i], true);
-		}
+		properlyRoundCorners();
+		enableInitialColumns();
 	});
 </script>
 
@@ -77,7 +104,7 @@
 		>
 			{#each columns as col, i}
 				<MultiselectItem
-					value={i}
+					value={col}
 					label={col}
 					onchange={(newVal) => {
 						setColumnDisplay(i, newVal as boolean);
@@ -130,7 +157,7 @@
 		&.bordered {
 			border: thin solid var(--border-color);
 			border-radius: var(--border-radius-s);
-			overflow: hidden;
+			// overflow: hidden;
 		}
 	}
 	.emptyText {

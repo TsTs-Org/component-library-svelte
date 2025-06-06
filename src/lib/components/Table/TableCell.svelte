@@ -21,5 +21,6 @@
 	td {
 		padding: var(--padding-s);
 		font-size: var(--text-size-xs);
+		display: none;
 	}
 </style>

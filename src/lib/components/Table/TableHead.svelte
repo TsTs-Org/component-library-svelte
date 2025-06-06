@@ -19,5 +19,6 @@
 		font-weight: 600;
 		font-size: var(--text-size-xs);
 		color: var(--text-color-muted);
+		display: none;
 	}
 </style>

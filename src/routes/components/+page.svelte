@@ -392,7 +392,7 @@
 	<Showcase name="Table">
 		<div class="mock-grid">
 			<Table
-				initial={[0, 1]}
+				initial={["Name", "Lastname", "Actions"]}
 				searchbar
 				bordered
 			>
@@ -410,7 +410,9 @@
 				<TableHeader>
 					<TableRow>
 						<TableHead>Name</TableHead>
+						<TableHead>Middlename</TableHead>
 						<TableHead>Lastname</TableHead>
+						<TableHead>Actions</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -426,6 +428,7 @@
 						]}
 					>
 						<TableCell _for="name">Kevien</TableCell>
+						<TableCell _for="middlename">Matthias</TableCell>
 						<TableCell _for="lastname">Flieger</TableCell>
 					</TableRow>
 					<TableRow
@@ -439,16 +442,33 @@
 						]}
 					>
 						<TableCell _for="name">Michael</TableCell>
+						<TableCell _for="middlename">Matthias</TableCell>
 						<TableCell _for="lastname">Kiehn</TableCell>
 					</TableRow>
-					<TableRow>
+					<TableRow rowActions={[
+						{
+							title: "ActionOne",
+							iconName: "eyeOpen",
+							callback: (val) => {
+								console.log(val);
+							}
+						}, {
+							title: "ActionTwo",
+							iconName: "eyeOpen",
+							callback: (val) => {
+								console.log(val);
+							},
+						}
+					]}>
 						<TableCell _for="name">Moritz</TableCell>
+						<TableCell _for="middlename">Matthias</TableCell>
 						<TableCell _for="lastname">Maier</TableCell>
 					</TableRow>
 				</TableBody>
 				<TableFooter>
 					<TableRow>
 						<TableCell _for="_none">Data</TableCell>
+						<TableCell _for="_none"></TableCell>
 						<TableCell _for="_none"></TableCell>
 						<TableCell _for="_none">100</TableCell>
 					</TableRow>

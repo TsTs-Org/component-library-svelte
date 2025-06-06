@@ -27,9 +27,9 @@
 		border: none;
 		white-space: nowrap;
 		display: flex;
-		gap: var(--padding-xs);
+		gap: var(--padding-s);
 		padding: var(--padding-xs);
-		border-radius: var(--border-radius-xs);
+		border-radius: var(--border-radius-s);
 		&:hover {
 			background-color: var(--neutral-hover-color);
 		}
