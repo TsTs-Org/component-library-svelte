@@ -101,3 +101,8 @@ export {
     LoginAndRegister,
     ThemeSettings,
 };
+
+// ----- Export Utilities ------
+import { setGeneralTheme } from "./components/Themify.svelte";
+
+export { setGeneralTheme };
