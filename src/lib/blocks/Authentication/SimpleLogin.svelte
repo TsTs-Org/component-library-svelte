@@ -8,8 +8,13 @@
 	let password: string = $state("");
 	let error_message: string = $state("");
 
+	type Answer = {
+		success: boolean;
+		msg: string;
+	};
+
 	type Props = {
-		onsubmit?: (data: object) => Promise<{ success: boolean; msg: string }>;
+		onsubmit?: (data: object) => Promise<Answer>;
 		header?: string;
 		description?: string;
 		service?: string;
@@ -48,17 +53,20 @@
 		});
 		if (onsubmit) {
 			Promise.race([onsubmit({ username: username, password: password }), timeoutTimer])
-				.then((e) => {
-					error_message = e.msg;
+				.then((obj) => {
+					if((obj as Answer).success) {
+						error_message = "";
+					} else {
+						error_message = (obj as Answer).msg;
+						password = "";
+						setFormDisabled(false);
+					}
 				})
 				.catch((e) => {
-					error_message = "Submit timeout";
 					console.warn(e);
-				})
-				.finally(() => {
-					// loading = false;
-					setFormDisabled(false);
+					error_message = "Submit timeout";
 					password = "";
+					setFormDisabled(false);
 				});
 		}
 	}
