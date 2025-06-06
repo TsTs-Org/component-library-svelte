@@ -9,6 +9,7 @@
 	type Props = {
 		children: Snippet;
 		initial?: Array<string>;
+		ignoreColumns?: Array<string>;
 		searchbar?: boolean;
 		bordered?: boolean;
 		headerAction?: Snippet;
@@ -17,6 +18,7 @@
 	let {
 		children,
 		initial = [],
+		ignoreColumns = [],
 		searchbar = false,
 		bordered = false,
 		headerAction,
@@ -103,6 +105,7 @@
 			{initial}
 		>
 			{#each columns as col, i}
+				{#if !ignoreColumns.includes(col)}
 				<MultiselectItem
 					value={col}
 					label={col}
@@ -110,6 +113,7 @@
 						setColumnDisplay(i, newVal as boolean);
 					}}
 				/>
+				{/if}
 			{/each}
 		</Multiselect>
 		{#if searchbar}

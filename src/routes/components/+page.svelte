@@ -392,7 +392,8 @@
 	<Showcase name="Table">
 		<div class="mock-grid">
 			<Table
-				initial={["Name", "Lastname", "Actions"]}
+				initial={["", "Name", "Lastname", "Actions"]}
+				ignoreColumns={[""]}
 				searchbar
 				bordered
 			>
@@ -409,6 +410,7 @@
 				{/snippet}
 				<TableHeader>
 					<TableRow>
+						<TableHead></TableHead>
 						<TableHead>Name</TableHead>
 						<TableHead>Middlename</TableHead>
 						<TableHead>Lastname</TableHead>
@@ -427,6 +429,7 @@
 							},
 						]}
 					>
+						<TableCell _for="">O</TableCell>
 						<TableCell _for="name">Kevien</TableCell>
 						<TableCell _for="middlename">Matthias</TableCell>
 						<TableCell _for="lastname">Flieger</TableCell>
@@ -441,6 +444,7 @@
 							},
 						]}
 					>
+						<TableCell _for="">O</TableCell>
 						<TableCell _for="name">Michael</TableCell>
 						<TableCell _for="middlename">Matthias</TableCell>
 						<TableCell _for="lastname">Kiehn</TableCell>
@@ -460,6 +464,7 @@
 							},
 						}
 					]}>
+						<TableCell _for="">O</TableCell>
 						<TableCell _for="name">Moritz</TableCell>
 						<TableCell _for="middlename">Matthias</TableCell>
 						<TableCell _for="lastname">Maier</TableCell>
@@ -467,6 +472,8 @@
 				</TableBody>
 				<TableFooter>
 					<TableRow>
+
+						<TableCell _for="_none"></TableCell>
 						<TableCell _for="_none">Data</TableCell>
 						<TableCell _for="_none"></TableCell>
 						<TableCell _for="_none"></TableCell>
