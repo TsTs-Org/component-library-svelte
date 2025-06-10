@@ -23,7 +23,7 @@
 
 <Themify />
 
-<Layout>
+<Layout mainLayout>
 	{#snippet topnav()}
 		<Navigationbar variant="glass">
 			{#snippet left()}

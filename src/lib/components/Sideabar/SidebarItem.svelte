@@ -88,7 +88,8 @@
 
 		&.s {
 			padding: var(--padding-xs);
-			border-radius: var(--border-radius-s);
+			border-radius: var(--border-radius-xs);
+			font-size: var(--text-size-s);
 			&.sidebarCollapsed {
 				padding: var(--padding-s);
 			}

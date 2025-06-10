@@ -1,673 +1,146 @@
 <script lang="ts">
-	import Accordion from "$lib/components/Accordion/Accordion.svelte";
-	import AccordionItem from "$lib/components/Accordion/AccordionItem.svelte";
-	import Button from "$lib/components/Button.svelte";
-	import Card from "$lib/components/Card.svelte";
-	import Icon from "$lib/components/Icon.svelte";
-	import Input from "$lib/components/Input.svelte";
-	import Showcase from "$lib/components/Showcase.svelte";
-	import Select from "$lib/components/Select/Select.svelte";
-	import SelectItem from "$lib/components/Select/SelectItem.svelte";
-	import ScrollContainer from "$lib/components/ScrollContainer.svelte";
-	import Loader from "$lib/components/Loader.svelte";
-	import Table from "$lib/components/Table/Table.svelte";
-	import TableHeader from "$lib/components/Table/TableHeader.svelte";
-	import TableRow from "$lib/components/Table/TableRow.svelte";
-	import TableHead from "$lib/components/Table/TableHead.svelte";
-	import TableBody from "$lib/components/Table/TableBody.svelte";
-	import TableCell from "$lib/components/Table/TableCell.svelte";
-	import TableFooter from "$lib/components/Table/TableFooter.svelte";
-	import Checkbox from "$lib/components/Checkbox.svelte";
-	import Multiselect from "$lib/components/Multiselect/Multiselect.svelte";
-	import MultiselectItem from "$lib/components/Multiselect/MultiselectItem.svelte";
-	import Contextmenu from "$lib/components/Contextcontainer/Contextmenu.svelte";
-	import Contextcontainer from "$lib/components/Contextcontainer/Contextcontainer.svelte";
-	import ContextmenuItem from "$lib/components/Contextcontainer/ContextmenuItem.svelte";
 	import ThemeSettings from "$lib/blocks/ThemeSettings.svelte";
-	import BaseChart from "$lib/components/Chart/BaseChart.svelte";
-	import RoundChart from "$lib/components/Chart/RoundChart.svelte";
-	import Popover from "$lib/components/Popover.svelte";
-	import OverflowContainer from "$lib/components/OverflowContainer.svelte";
 	import Tabs from "$lib/components/Tabs/Tabs.svelte";
 	import TabTrigger from "$lib/components/Tabs/TabTrigger.svelte";
 	import TabContent from "$lib/components/Tabs/TabContent.svelte";
+	import Layout from "$lib/components/Layout/Layout.svelte";
+	import { Seperator, Sidebar, SidebarItem } from "$lib/index.js";
+	import ScOverflowContainer from "../../showcase/components/sc-OverflowContainer.svelte";
+	import ScTabs from "../../showcase/components/sc-Tabs.svelte";
+	import ScButtons from "../../showcase/components/sc-Buttons.svelte";
+	import ScCharts from "../../showcase/components/sc-Charts.svelte";
+	import ScBasics from "../../showcase/components/sc-Basics.svelte";
+	import ScContextmenu from "../../showcase/components/sc-Contextmenu.svelte";
+	import ScPopover from "../../showcase/components/sc-Popover.svelte";
+	import ScSelect from "../../showcase/components/sc-Select.svelte";
+	import ScInput from "../../showcase/components/sc-Input.svelte";
+	import ScTable from "../../showcase/components/sc-Table.svelte";
+	import ScAccordion from "../../showcase/components/sc-Accordion.svelte";
+	import ScCard from "../../showcase/components/sc-Card.svelte";
+	import ScScrollContainer from "../../showcase/components/sc-ScrollContainer.svelte";
+	import ScIcons from "../../showcase/components/sc-Icons.svelte";
 
-	let closablePopover: ReturnType<typeof Popover>;
+	let activeTab = $state("");
+
+	const ShowCases = [
+		{
+			name: "Tabs",
+			identifier: "sc-tabs",
+			component: ScTabs
+		},
+		{
+			name: "Charts",
+			identifier: "sc-charts",
+			component: ScCharts
+		},
+		{
+			name: "Table",
+			identifier: "sc-table",
+			component: ScTable
+		},
+		{
+			name: "Accordion",
+			identifier: "sc-accordion",
+			component: ScAccordion
+		},
+		{
+			name: "Overflow Container",
+			identifier: "sc-overflow-container",
+			component: ScOverflowContainer
+		},
+		{
+			name: "Buttons",
+			identifier: "sc-buttons",
+			component: ScButtons
+		},
+		{
+			name: "Basics",
+			identifier: "sc-basics",
+			component: ScBasics
+		},
+		{
+			name: "Icons",
+			identifier: "sc-icons",
+			component: ScIcons
+		},
+		{
+			name: "Contextmenu",
+			identifier: "sc-contextmenu",
+			component: ScContextmenu
+		},
+		{
+			name: "Popover",
+			identifier: "sc-popover",
+			component: ScPopover
+		},
+		{
+			name: "Select",
+			identifier: "sc-select",
+			component: ScSelect
+		},
+		{
+			name: "Input",
+			identifier: "sc-input",
+			component: ScInput
+		},
+		{
+			name: "Card",
+			identifier: "sc-card",
+			component: ScCard
+		},
+		{
+			name: "Scroll container",
+			identifier: "sc-scrollcontainer",
+			component: ScScrollContainer
+		}
+	].sort((a, b) => a.name.localeCompare(b.name));
+
 </script>
 
-<div class="theme-settings">
-	<ThemeSettings
-		colors={["#6a994e", "royalblue", "#9d4edd", "#FE7520", "#e63946", "#CA802B", "#99582a"]}
-	/>
-</div>
+<Tabs>
+<Layout>
 
-<div class="components-page">
-	<Showcase name="Overflow Container">
-		<div class="content-wrapper">
-			<div class="overflow-container-size-wrapper">
-				<OverflowContainer>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-				</OverflowContainer>
-			</div>
-			<div class="overflow-container-size-wrapper">
-				<OverflowContainer fadeWidth="2rem">
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-				</OverflowContainer>
-			</div>
-			<div class="overflow-container-size-wrapper">
-				<OverflowContainer fadeColor="var(--neutral-400)">
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-					<div>content</div>
-				</OverflowContainer>
-			</div>
-		</div>
-		<style>
-			.content-wrapper {
-				display: flex;
-				gap: 1rem;
-				flex-direction: column;
-				align-items: center;
-			}
+	{#snippet leftSidebar()}
+		<Sidebar>
+			<h4> Components </h4>
+			<Seperator horizontal thick />
 
-			.overflow-container-size-wrapper {
-				width: 10rem;
-				background-color: var(--neutral-200);
-				& > div {
-					text-wrap: nowrap;
-				}
-			}
-		</style>
-	</Showcase>
-	<Showcase name="Tabs">
-		<Tabs>
-			<TabTrigger tabIdentifier="tab1">
-				{#snippet trigger(selectTab)}
-					<Button onclick={selectTab}>Select Tab 1</Button>
-				{/snippet}
-			</TabTrigger>
-			<TabTrigger tabIdentifier="tab2">
-				{#snippet trigger(selectTab)}
-					<Button onclick={selectTab}>Select Tab 2</Button>
-				{/snippet}
-			</TabTrigger>
-
-			<TabContent tabIdentifier="tab1">this is tab1</TabContent>
-			<TabContent tabIdentifier="tab2">this is tab2</TabContent>
-		</Tabs>
-	</Showcase>
-
-	<Showcase name="Icon Buttons">
-		<div class="mock-grid">
-			<Button size="s">
-				{#snippet icon()}
-					<Icon
-						size="s"
-						fill="inherit"
-						iconName="moon"
-					></Icon>
-				{/snippet}
-			</Button>
-			<Button
-				size="m"
-				variant="bordered"
-			>
-				{#snippet icon()}
-					<Icon
-						size="m"
-						fill="inherit"
-						iconName="moon"
-					></Icon>
-				{/snippet}
-			</Button>
-			<Button size="l">
-				{#snippet icon()}
-					<Icon
-						size="l"
-						fill="inherit"
-						iconName="moon"
-					></Icon>
-				{/snippet}
-			</Button>
-		</div>
-	</Showcase>
-
-	<Showcase name="Thingy Chart">
-		<RoundChart
-			chartType="thingy"
-			value="1203"
-			title="Visitors"
-			displayTooltip
-			col
-			labels={["January", "February", "March", "May"]}
-			data={[
-				{
-					title: "second",
-					data: [2, 8, 2, 11],
-				},
-			]}
-		></RoundChart>
-	</Showcase>
-
-	<Showcase name="Thingy Chart testcolor">
-		<RoundChart
-			chartType="thingy"
-			value="1203"
-			title="Visitors"
-			displayTooltip
-			col
-			dualColored
-			data={[
-				{
-					title: "second",
-					data: [2, 8],
-				},
-			]}
-		></RoundChart>
-	</Showcase>
-
-	<Showcase name="Donut Chart">
-		<RoundChart
-			value="1203"
-			title="Visitors"
-			displayTooltip
-			displayLegend
-			customColors={["#eae2b7", "#fcbf49", "#f77f00", "#d62828", "#003049"]}
-			labels={["January", "February", "March", "May", "June"]}
-			data={[
-				{
-					title: "DataOne",
-					data: [2, 8, 2, 11, 7, 4],
-				},
-			]}
-		></RoundChart>
-	</Showcase>
-
-	<Showcase name="Step Chart">
-		<BaseChart
-			chartType="line"
-			stepped
-			yGrid
-			yAxis
-			displayTooltip
-			displayLegend
-			labels={["January", "February", "March", "May", "June"]}
-			data={[
-				{
-					title: "DataOne",
-					data: [12, 19, 2, 5, 12, 15],
-				},
-			]}
-		></BaseChart>
-	</Showcase>
-
-	<Showcase name="Line Chart">
-		<BaseChart
-			chartType="line"
-			yGrid
-			yAxis
-			displayTooltip
-			displayLegend
-			labels={["January", "February", "March", "May", "June"]}
-			customColors={["#d62828", "#219ebc"]}
-			data={[
-				{
-					title: "DataOne",
-					data: [12, 19, 5, 5, 12, 15],
-				},
-				{
-					title: "DataTwo",
-					data: [2, 8, 2, 11, 7, 4],
-				},
-			]}
-		></BaseChart>
-	</Showcase>
-
-	<Showcase name="Area Chart">
-		<BaseChart
-			chartType="line"
-			area
-			xAxis
-			yGrid
-			yAxis
-			displayTooltip
-			displayLegend
-			labels={["January", "February", "March", "May", "June"]}
-			data={[
-				{
-					title: "DataOne",
-					data: [12, 19, 5, 5, 12, 15],
-				},
-				{
-					title: "DataTwo",
-					data: [2, 8, 2, 11, 7, 4],
-				},
-			]}
-		></BaseChart>
-	</Showcase>
-
-	<Showcase name="Bar Chart">
-		<BaseChart
-			chartType="bar"
-			xAxis
-			displayTooltip
-			labels={["January", "February", "March", "May", "June"]}
-			data={[
-				{
-					title: "DataOne",
-					data: [12, 19, 5, 5, 2, 3],
-				},
-				{
-					title: "DataTwo",
-					data: [2, 8, 2, 11, 7, 4],
-				},
-			]}
-		></BaseChart>
-	</Showcase>
-
-	<Showcase name="Headings">
-		<div class="mock-grid">
-			<h1>Heading</h1>
-			<h2>Heading</h2>
-			<h3>Heading</h3>
-			<h4>Heading</h4>
-			<h5>Heading</h5>
-			<p>Paragraph</p>
-		</div>
-	</Showcase>
-
-	<Showcase name="Contextmenu">
-		<div style="height: 10rem; width: 100%">
-			<Contextcontainer>
-				<Contextmenu>
-					<ContextmenuItem>Test</ContextmenuItem>
-					<ContextmenuItem>
-						{#snippet icon()}
-							<Icon
-								size="s"
-								iconName="eyeOpen"
-							/>
-						{/snippet}
-						Test
-					</ContextmenuItem>
-					<ContextmenuItem>
-						{#snippet icon()}
-							<Icon
-								size="s"
-								iconName="eyeClosed"
-							/>
-						{/snippet}
-						Test
-					</ContextmenuItem>
-				</Contextmenu>
-				<div
-					style="
-				display: flex;
-				align-items: center; 
-				justify-content: center;
-				border: thin solid var(--border-color);
-				width: 100%;
-				height: 100%; 
-				border-radius: var(--border-radius-m); 
-				"
-				>
-					<h4>Right Click Me</h4>
-				</div>
-			</Contextcontainer>
-		</div>
-	</Showcase>
-
-	<Showcase name="Popover">
-		<Popover bind:this={closablePopover}>
-			{#snippet title()}
-				should be closed by content
-			{/snippet}
-			<Button onclick={() => {
-				closablePopover.closePopover();
-			}}>
-				close from inner content
-			</Button>
-			{#snippet popoverTrigger(trigger)}
-				<Button onclick={trigger}>open closable Popover</Button>
-			{/snippet}
-		</Popover>
-
-		<Popover>
-			{#snippet title()}
-				Some title
-			{/snippet}
-			CONTENT
-			{#snippet popoverTrigger(trigger)}
-				<Button onclick={trigger}>Open Popover</Button>
-			{/snippet}
-		</Popover>
-	</Showcase>
-
-	<Showcase name="Multiselect">
-		<div class="mock-grid">
-			<Multiselect
-				placeholder="Multiselect a fruit..."
-				label="Fruits"
-				description="Dropdown to Multiselect a fruit"
-			>
-				<MultiselectItem
-					value="apple"
-					label="Apple"
-				/>
-				<MultiselectItem
-					value="banana"
-					label="Banana"
-				/>
-				<MultiselectItem
-					value="orange"
-					label="Orange"
-				/>
-				<MultiselectItem
-					value="grape"
-					label="Grape"
-				/>
-			</Multiselect>
-		</div>
-	</Showcase>
-
-	<Showcase name="Checkbox">
-		<div class="mock-grid">
-			<Checkbox />
-		</div>
-	</Showcase>
-
-	<Showcase name="Table">
-		<div class="mock-grid">
-			<Table
-				initial={["", "Name", "Lastname", "Actions"]}
-				ignoreColumns={[""]}
-				searchbar
-				bordered
-			>
-				{#snippet headerAction()}
-					<Button size="s">
-						{#snippet icon()}
-							<Icon
-								size="s"
-								iconName="plus"
-								fill="inherit"
-							/>
-						{/snippet}
-					</Button>
-				{/snippet}
-				<TableHeader>
-					<TableRow>
-						<TableHead></TableHead>
-						<TableHead>Name</TableHead>
-						<TableHead>Middlename</TableHead>
-						<TableHead>Lastname</TableHead>
-						<TableHead>Actions</TableHead>
-					</TableRow>
-				</TableHeader>
-				<TableBody>
-					<TableRow
-						rowActions={[
-							{
-								title: "ActionOne",
-								iconName: "eyeOpen",
-								callback: (val) => {
-									console.log(val);
-								},
-							},
-						]}
-					>
-						<TableCell _for="">O</TableCell>
-						<TableCell _for="name">Kevien</TableCell>
-						<TableCell _for="middlename">Matthias</TableCell>
-						<TableCell _for="lastname">Flieger</TableCell>
-					</TableRow>
-					<TableRow
-						rowActions={[
-							{
-								title: "ActionOne",
-								callback: (val) => {
-									console.log(val);
-								},
-							},
-						]}
-					>
-						<TableCell _for="">O</TableCell>
-						<TableCell _for="name">Michael</TableCell>
-						<TableCell _for="middlename">Matthias</TableCell>
-						<TableCell _for="lastname">Kiehn</TableCell>
-					</TableRow>
-					<TableRow rowActions={[
-						{
-							title: "ActionOne",
-							iconName: "eyeOpen",
-							callback: (val) => {
-								console.log(val);
-							}
-						}, {
-							title: "ActionTwo",
-							iconName: "eyeOpen",
-							callback: (val) => {
-								console.log(val);
-							},
-						}
-					]}>
-						<TableCell _for="">O</TableCell>
-						<TableCell _for="name">Moritz</TableCell>
-						<TableCell _for="middlename">Matthias</TableCell>
-						<TableCell _for="lastname">Maier</TableCell>
-					</TableRow>
-				</TableBody>
-				<TableFooter>
-					<TableRow>
-
-						<TableCell _for="_none"></TableCell>
-						<TableCell _for="_none">Data</TableCell>
-						<TableCell _for="_none"></TableCell>
-						<TableCell _for="_none"></TableCell>
-						<TableCell _for="_none">100</TableCell>
-					</TableRow>
-				</TableFooter>
-			</Table>
-		</div>
-	</Showcase>
-
-	<Showcase name="Loader">
-		<Loader size="s" />
-		<Loader />
-		<Loader size="l" />
-	</Showcase>
-
-	<Showcase name="Accordion">
-		<Accordion>
-			<AccordionItem title="Item 1">
-				<p>Content for item 1</p>
-			</AccordionItem>
-
-			<AccordionItem title="Item 2">
-				<p>Content for item 2</p>
-			</AccordionItem>
-
-			<AccordionItem title="Item 3">
-				<p>Content for item 3</p>
-			</AccordionItem>
-		</Accordion>
-	</Showcase>
-
-	<Showcase name="Scroll Container">
-		<div style="height: 6rem">
-			<ScrollContainer>
-				{#each { length: 50 }, i}
-					<p>Text {i}</p>
-				{/each}
-			</ScrollContainer>
-		</div>
-	</Showcase>
-
-	<Showcase name="Card">
-		<div class="mock-grid">
-			<div style="width: 4rem; height: 4rem">
-				<Card size="s">
-					{#snippet title()}
-						Title text
+			{#each ShowCases as showcase}
+				<TabTrigger tabIdentifier={showcase.identifier}>
+					{#snippet trigger(selectTab)}
+						<SidebarItem 
+							size="s" 
+							onclick={() => {
+								selectTab();
+								activeTab = showcase.identifier
+							}} 
+							active={activeTab === showcase.identifier}
+						>
+							{showcase.name}
+						</SidebarItem>
 					{/snippet}
-					{#snippet iconRight(size)}
-						<Icon
-							{size}
-							iconName="x"
-						></Icon>
-					{/snippet}
-				</Card>
-			</div>
-			<div style="width: 7rem; height: 6rem">
-				<Card size="m">
-					{#snippet title()}
-						Title text
-					{/snippet}
-					{#snippet iconRight(size)}
-						<Icon
-							{size}
-							iconName="x"
-						></Icon>
-					{/snippet}
-				</Card>
-			</div>
-			<div style="width: 20rem; height: 10rem">
-				<Card size="l">
-					{#snippet iconLeft(size)}
-						<Icon
-							{size}
-							iconName="sun"
-						></Icon>
-					{/snippet}
-					{#snippet title()}
-						Title text
-					{/snippet}
-					{#snippet iconRight(size)}
-						<Icon
-							{size}
-							iconName="x"
-						></Icon>
-					{/snippet}
-				</Card>
-			</div>
-		</div>
-	</Showcase>
+				</TabTrigger>
+			{/each}
 
-	<Showcase name="Input">
-		<div class="mock-grid">
-			<Input
-				type="text"
-				label="With Icon"
-				placeholder="username"
-				description="The name to identify the user"
-			>
-				{#snippet icon()}
-					<Icon
-						iconName="sun"
-						fill="inherit"
-					/>
-				{/snippet}
-			</Input>
+		</Sidebar>
+	{/snippet}
 
-			<Input
-				type="password"
-				label="No Icon"
-				placeholder="username"
-				description="The name to identify the user"
-			/>
-		</div>
-	</Showcase>
+	<div class="theme-settings">
+		<ThemeSettings
+			colors={["#6a994e", "royalblue", "#9d4edd", "#FE7520", "#e63946", "#CA802B", "#99582a"]}
+		/>
+	</div>
 
-	<Showcase name="Select">
-		<div class="mock-grid">
-			<Select
-				placeholder="Select a fruit..."
-				label="Fruits"
-				description="Dropdown to select a fruit"
-			>
-				<SelectItem
-					value="apple"
-					label="Apple"
-				/>
-				<SelectItem
-					value="banana"
-					label="Banana"
-				/>
-				<SelectItem
-					value="orange"
-					label="Orange"
-				/>
-				<SelectItem
-					value="grape"
-					label="Grape"
-				/>
-			</Select>
+	{#each ShowCases as showcase}
+	<TabContent tabIdentifier={showcase.identifier}>
+			<div class="components-page">
+			<svelte:component this={showcase.component} />
 		</div>
-	</Showcase>
+		</TabContent>
+	{/each}
 
-	<Showcase name="Icons">
-		<div class="mock-grid">
-			<Icon size="s">
-				<path
-					d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
-				/>
-			</Icon>
-			<Icon size="m">
-				<path
-					d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
-				/>
-			</Icon>
-			<Icon size="l">
-				<path
-					d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
-				/>
-			</Icon>
-			<Icon
-				size="s"
-				iconName="x"
-			></Icon>
-		</div>
-	</Showcase>
-
-	<Showcase name="Buttons">
-		<div class="mock-grid">
-			<Button
-				variant="primary"
-				size="s">Primary</Button
-			>
-			<Button
-				variant="bordered"
-				size="m">Secondary</Button
-			>
-			<Button size="l">
-				{#snippet icon()}
-					<Icon
-						size="l"
-						fill="inherit"
-					>
-						<path
-							d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
-						/>
-					</Icon>
-				{/snippet}
-				With Icon
-			</Button>
-		</div>
-	</Showcase>
-</div>
+</Layout>
+</Tabs>
 
 <style lang="scss">
 	.components-page {
@@ -679,32 +152,25 @@
 		padding: var(--padding-l);
 	}
 
-	.mock-grid {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-wrap: wrap;
-		width: 100%;
-		gap: var(--padding-m);
-	}
+	// .mock-grid {
+	// 	display: flex;
+	// 	align-items: center;
+	// 	justify-content: center;
+	// 	flex-wrap: wrap;
+	// 	width: 100%;
+	// 	gap: var(--padding-m);
+	// }
 
-	.mock-box {
-		border: 1px solid var(--border-color);
-		border-radius: var(--border-radius-m);
-		margin: auto;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		&.fixed-size {
-			width: 5rem;
-			height: 5rem;
-		}
-	}
-
-	.theme-settings {
-		margin: var(--padding-l);
-		// background-color: var(--foreground-color);
-		border-radius: var(--border-radius-m);
-		border: thin solid var(--border-color);
-	}
+	// .mock-box {
+	// 	border: 1px solid var(--border-color);
+	// 	border-radius: var(--border-radius-m);
+	// 	margin: auto;
+	// 	display: flex;
+	// 	align-items: center;
+	// 	justify-content: center;
+	// 	&.fixed-size {
+	// 		width: 5rem;
+	// 		height: 5rem;
+	// 	}
+	// }
 </style>

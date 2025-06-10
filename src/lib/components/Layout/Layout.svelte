@@ -5,6 +5,7 @@
 	import type { HTMLAttributes } from "svelte/elements";
 
 	type Props = {
+		mainLayout?: boolean;
 		leftSidebar?: Snippet;
 		// rightSidebar?: Snippet;
 		topnav?: Snippet;
@@ -16,6 +17,7 @@
 	} & HTMLAttributes<any>;
 
 	let {
+		mainLayout = false,
 		leftSidebar,
 		// rightSidebar,
 		topnav,
@@ -45,6 +47,7 @@
 
 <div
 	class="Layout"
+	class:mainLayout
 	class:sidebarOverNav
 	class:noSidebar={!leftSidebar || $sidebarOptions.closed}
 	{...restProps}
@@ -70,7 +73,7 @@
 
 <style lang="scss">
 	.Layout {
-		height: 100dvh;
+		height: 100%;
 		width: 100%;
 		overflow: hidden;
 		display: grid;
@@ -85,6 +88,9 @@
 				"leftSidebar topnav topnav"
 				"leftSidebar content content"
 				"leftSidebar content content";
+		}
+		&.mainLayout {
+			height: 100dvh;
 		}
 		&.noSidebar {
 			grid-template-columns: 0px auto;
