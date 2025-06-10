@@ -69,6 +69,7 @@
 		if (lastRow) {
 			lastRow.cells[0].style.borderBottomLeftRadius = "var(--border-radius-s)";
 			lastRow.cells[lastRow.cells.length - 1].style.borderBottomRightRadius = "var(--border-radius-s)";
+			lastRow.style.borderBottom = "none"; // Remove bottom border for last row
 		}
 	}
 
@@ -161,7 +162,6 @@
 		&.bordered {
 			border: thin solid var(--border-color);
 			border-radius: var(--border-radius-s);
-			// overflow: hidden;
 		}
 	}
 	.emptyText {

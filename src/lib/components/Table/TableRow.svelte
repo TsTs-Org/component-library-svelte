@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, type Snippet } from "svelte";
+	import { onDestroy, onMount, type Snippet } from "svelte";
 	import TableCell from "./TableCell.svelte";
 	import Icon from "../Icon.svelte";
 	import Dropdown from "../Dropdown/Dropdown.svelte";
@@ -18,6 +18,7 @@
 	};
 
 	let self: HTMLTableRowElement;
+	let actions: HTMLButtonElement;
 	let open = $state(false);
 	let { children, rowActions }: Props = $props();
 
@@ -35,7 +36,15 @@
 
 	onMount(() => {
 		document.addEventListener("click", (event: MouseEvent) => {
-			if (event.target && !event.target.closest(".actions") && open) {
+			if (actions && !actions.contains(event.target as Node) && open) {
+				open = false;
+			}
+		});
+	});
+
+	onDestroy(() => {
+		document.removeEventListener("click", (event: MouseEvent) => {
+			if (actions && !actions.contains(event.target as Node) && open) {
 				open = false;
 			}
 		});
@@ -51,6 +60,7 @@
 		>
 			<button
 				class="actions"
+				bind:this={actions}
 				onclick={() => (open = !open)}
 			>
 				<Icon
