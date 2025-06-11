@@ -16,7 +16,7 @@
 		initial?: Array<Option>;
 		variant?: Variant;
 		size?: Size;
-		placeholder: string;
+		placeholder?: string;
 	} & HTMLAttributes<any>;
 
 	type Option = string | number;

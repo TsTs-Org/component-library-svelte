@@ -29,3 +29,18 @@ h5 {
 	font-size: var(--text-size-s);
 	font-weight: 400;
 }
+
+/* Storybook code block styling for readability */
+pre {
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+pre span:not(.token){
+	color: #c890dc !important;
+}
+
+pre span.plain-text {
+	color: #fff !important;
+}

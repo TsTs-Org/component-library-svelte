@@ -36,7 +36,6 @@
 					{/snippet}
 				</Button>
 				<NavigationbarItem href="{base}/">Home</NavigationbarItem>
-				<NavigationbarItem href="{base}/blocks">Blocks</NavigationbarItem>
 				<NavigationbarItem href="{base}/components">Components</NavigationbarItem>
 			{/snippet}
 			{#snippet right()}
@@ -59,16 +58,6 @@
 					></Icon>
 				{/snippet}
 				Home
-			</SidebarItem>
-			<SidebarItem href="{base}/blocks">
-				{#snippet icon(size)}
-					<Icon
-						iconName="dashboard"
-						{size}
-						fill="inherit"
-					></Icon>
-				{/snippet}
-				Blocks
 			</SidebarItem>
 			<SidebarItem href="{base}/components">
 				{#snippet icon(size)}

@@ -13,7 +13,7 @@
 		label?: string;
 		description?: string;
 		variant?: Variant;
-		placeholder: string;
+		placeholder?: string;
 	} & HTMLAttributes<any>;
 
 	type Option = {

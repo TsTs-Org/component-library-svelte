@@ -8,7 +8,7 @@
 
 	type Props = {
 		variant?: Variant;
-		children: Snippet;
+		children?: Snippet;
 	} & HTMLAttributes<any>;
 
 	export type AccordionCtx = {
@@ -42,7 +42,7 @@
 	.Accordion {
 		display: flex;
 		flex-direction: column;
-		width: 100%;
+		// width: 100%;
 		border: thin solid var(--border-color);
 		border-radius: var(--border-radius-s);
 		padding: var(--padding-m);

@@ -5,9 +5,11 @@ import "../src/lib/styles/theme.css";
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      codePanel: true,
+    },
     controls: {
       matchers: {
-       color: /(background|color)$/i,
        date: /Date$/i,
       },
     },

@@ -7,7 +7,7 @@
 	import TableCell from "./TableCell.svelte";
 
 	type Props = {
-		children: Snippet;
+		children?: Snippet;
 		initial?: Array<string>;
 		ignoreColumns?: Array<string>;
 		searchbar?: boolean;

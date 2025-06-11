@@ -122,10 +122,11 @@
 		box-sizing: border-box;
 		height: 100%;
 		width: 100%;
+		padding: 2rem;
 		gap: var(--padding-m);
 		justify-content: center;
 		align-items: center;
-		background-color: var(--background-color);
+		// background-color: var(--background-color);
 		.service {
 			color: var(--text-color-muted);
 		}
