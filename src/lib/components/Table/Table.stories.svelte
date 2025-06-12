@@ -12,7 +12,7 @@
     import TableFooter from './TableFooter.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Table',
+      title: '2. Components/Table',
       component: Table,
       tags: ['autodocs'],
     });

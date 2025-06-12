@@ -3,6 +3,7 @@
 	import Radiogroup from "$lib/components/Radio/Radiogroup.svelte";
 	import RadioItem from "$lib/components/Radio/RadioItem.svelte";
 	import Seperator from "$lib/components/Seperator.svelte";
+	import ThemeModeButton from "$lib/components/ThemeModeButton.svelte";
 
 	type Props = {
 		colors: string[];
@@ -12,6 +13,8 @@
 </script>
 
 <div class="theme-settings">
+	<ThemeModeButton />
+	<Seperator />
 	<Radiogroup
 		value={$theme.primaryColor}
 		onchange={(color) =>

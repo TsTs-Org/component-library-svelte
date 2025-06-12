@@ -3,7 +3,7 @@
     import LoginAndRegister from './LoginAndRegister.svelte';
   
     const { Story } = defineMeta({
-      title: 'Blocks/LoginAndRegister',
+      title: '1. Blocks/LoginAndRegister',
       component: LoginAndRegister,
       tags: ['autodocs'],
     });

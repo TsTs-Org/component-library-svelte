@@ -3,7 +3,7 @@
     import ScrollContainer from './ScrollContainer.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/ScrollContainer',
+      title: '2. Components/ScrollContainer',
       component: ScrollContainer,
       tags: ['autodocs'],
     });

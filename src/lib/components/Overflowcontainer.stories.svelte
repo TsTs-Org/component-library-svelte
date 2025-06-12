@@ -3,7 +3,7 @@
     import OverflowContainer from './OverflowContainer.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/OverflowContainer',
+      title: '2. Components/OverflowContainer',
       component: OverflowContainer,
       tags: ['autodocs'],
     });

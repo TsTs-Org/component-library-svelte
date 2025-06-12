@@ -3,7 +3,7 @@
     import BaseChart from './BaseChart.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Charts/BaseChart',
+      title: '2. Components/Charts/BaseChart',
       component: BaseChart,
       tags: ['autodocs'],
     });

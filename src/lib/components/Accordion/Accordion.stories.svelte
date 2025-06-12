@@ -4,7 +4,7 @@
     import AccordionItem from './AccordionItem.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Accordion',
+      title: '2. Components/Accordion',
       component: Accordion,
       tags: ['autodocs'],
       argTypes: {

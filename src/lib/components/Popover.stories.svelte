@@ -4,7 +4,7 @@
     import Button from './Button.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Popover',
+      title: '2. Components/Popover',
       component: Popover,
       tags: ['autodocs'],
     });

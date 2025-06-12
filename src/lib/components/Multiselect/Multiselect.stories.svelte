@@ -4,7 +4,7 @@
     import MultiselectItem from './MultiselectItem.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Multiselect',
+      title: '2. Components/Multiselect',
       component: Multiselect,
       tags: ['autodocs'],
     });

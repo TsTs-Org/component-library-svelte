@@ -8,7 +8,7 @@
     import TabContent from './TabContent.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Tabs',
+      title: '2. Components/Tabs',
       component: Tabs,
       tags: ['autodocs'],
     });

@@ -4,7 +4,7 @@
     import SelectItem from './SelectItem.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Select',
+      title: '2. Components/Select',
       component: Select,
       tags: ['autodocs'],
     });

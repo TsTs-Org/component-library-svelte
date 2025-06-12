@@ -3,7 +3,7 @@
     import Loader from './Loader.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Loader',
+      title: '2. Components/Loader',
       component: Loader,
       tags: ['autodocs'],
       argTypes: {

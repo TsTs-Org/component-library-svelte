@@ -3,7 +3,7 @@
     import Icon from './Icon.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Icon',
+      title: '2. Components/Icon',
       component: Icon,
       tags: ['autodocs'],
       argTypes: {

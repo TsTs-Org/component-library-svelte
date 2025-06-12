@@ -44,3 +44,32 @@ pre span:not(.token){
 pre span.plain-text {
 	color: #fff !important;
 }
+
+/* Storybook theme styles to kinda work with dark mode */
+
+div.sbdocs.sbdocs-wrapper.css-3rewwu, div.sb-bar.css-l1e2yg {
+	background-color: var(--background-color); 
+}
+
+div.sbdocs.sbdocs-wrapper.css-3rewwu h1 {
+	color: var(--text-color);
+}
+
+div.sbdocs.sbdocs-preview.sb-unstyled {
+	background-color: var(--background-color);
+	border: 1px solid var(--border-color);
+}
+
+table.docblock-argstable.sb-unstyled {
+	border: 1px solid var(--border-color);
+}
+
+table.docblock-argstable.sb-unstyled,
+table.docblock-argstable.sb-unstyled thead tr th,
+table.docblock-argstable.sb-unstyled tbody tr td {
+	background-color: var(--background-color) !important;
+}
+
+table.docblock-argstable.sb-unstyled tbody {
+	filter: none;
+}

@@ -3,7 +3,7 @@
     import SimpleLogin from './SimpleLogin.svelte';
   
     const { Story } = defineMeta({
-      title: 'Blocks/SimpleLogin',
+      title: '1. Blocks/SimpleLogin',
       component: SimpleLogin,
       tags: ['autodocs'],
     });

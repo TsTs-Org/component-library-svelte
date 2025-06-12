@@ -3,7 +3,7 @@
     import RoundChart from './RoundChart.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Charts/Roundchart',
+      title: '2. Components/Charts/Roundchart',
       component: RoundChart,
       tags: ['autodocs'],
     });

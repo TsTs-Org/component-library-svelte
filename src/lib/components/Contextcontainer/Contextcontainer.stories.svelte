@@ -6,7 +6,7 @@
     import Icon from '../Icon.svelte';
   
     const { Story } = defineMeta({
-      title: 'Components/Contextcontainer',
+      title: '2. Components/Contextcontainer',
       component: Contextcontainer,
       tags: ['autodocs'],
     });
