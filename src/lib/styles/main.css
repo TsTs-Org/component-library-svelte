@@ -34,6 +34,12 @@ h5 {
 	cursor: move;
 }
 
+.dragging {
+	opacity: 0.35;
+	border: 1px var(--border-color);
+	border-style: dashed !important
+}
+
 .draggable[data-draggable="false"] {
 	cursor: not-allowed;
 }

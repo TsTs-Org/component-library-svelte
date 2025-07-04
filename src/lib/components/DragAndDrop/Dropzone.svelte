@@ -6,7 +6,10 @@ Probleme der Dropzone:
         werden, können wir keinen container mit eigenem style in
         die dropzone reingeben in der die objekte sind die man 
         draggable haben möchte. 
-2. Sorting
+    - Möglicher fix: 
+        - Ein snippet für den container, da kann man dann einfach die listener drauf injecten
+        - Ein snippet für draggable children / Oder die top level children aus dem container snippet
+2. Sorting [ x ] 
 	- Ein reingedraggtes element wird am ende der dropzone appended,
         dadurch ist es nicht möglich die Elemente innerhalb der dropzone
         durch drag and drop zu sortieren
@@ -21,6 +24,11 @@ Probleme der Dropzone:
         was kacke ist. Weiter ist der callback von jedem child derselbe
         dabei 
 -->
+
+<script module lang="ts">
+    export let dragged_item_dropzone: number = 0;
+    export let dragged_item: HTMLElement;
+</script>
 
 <script lang="ts">
 	import { onMount, type Snippet } from "svelte";
@@ -41,19 +49,33 @@ Probleme der Dropzone:
 
     function handleDrop(event: DragEvent) {
         event.preventDefault();
-        const data = event.dataTransfer?.getData('text/plain');
-        if (data && event.target instanceof HTMLElement) {
-            const draggedElem = document.querySelector(`[data-dragging='true']`);
-            if (draggedElem) {
-                if(data == "undefined" || data == event.target.dataset.dropzone_group){
-                    self.appendChild(draggedElem);
-                } else {
-                    console.warn('Invalid dropzone:', data, event.target.dataset.dropzone_group);
-                }
+        event.stopPropagation();
+  
+        Array.from(self.children).forEach((el, i) => {
+            el.dataset.index = i;
+        });
+    }
+
+    function handleDragEnter(event: DragEvent) {
+        event.preventDefault();
+        const items = Array.from(self.children) as HTMLElement[];
+        const target = event.target.closest(".draggable");
+        const targetIndex = items.indexOf(target);
+        const draggedItemIndex = items.indexOf(dragged_item as HTMLElement);
+
+        if(dragged_item_dropzone == undefined ||
+            event.target.dataset.dropzone_group == undefined ||
+            dragged_item_dropzone == event.target.dataset.dropzone_group 
+        ){
+            if (draggedItemIndex < targetIndex) {
+                self.insertBefore(dragged_item, target.nextSibling);
             } else {
-                console.warn('Element with data-dragging not found:');
+                self.insertBefore(dragged_item, target);
             }
+        } else {
+            console.warn('Invalid dropzone:', dragged_item_dropzone, event.target.dataset.dropzone_group);
         }
+        
     }
     
     function handleDragOver(event: DragEvent) {
@@ -68,13 +90,19 @@ Probleme der Dropzone:
             e.preventDefault();
             return;
         }
-        const dropzone_group = e.target.parentElement.dataset.dropzone_group;
-        e.dataTransfer?.setData('text/plain', dropzone_group);
+
+        dragged_item_dropzone = e.target.parentElement.dataset.dropzone_group;
+        dragged_item = e.target as HTMLElement;
         e.target.dataset.dragging = 'true';
+
+        setTimeout(() => {
+            e.target.classList.add('dragging');
+        }, 0);
     }
     
     function handleDragEnd(e: DragEvent) {
         e.target.dataset.dragging = 'false';
+        e.target.classList.remove('dragging');
     }
 
     onMount(() => {
@@ -82,6 +110,8 @@ Probleme der Dropzone:
         if(children) {
             for (let i = 0; i < children.length; i++) {
                 const child = children[i] as HTMLElement;
+                child.dataset.index = i; 
+
                 if (child.dataset.draggable !== 'false') {
                     child.draggable = true;
                     child.addEventListener('dragstart', handleDragStart);
@@ -101,6 +131,7 @@ Probleme der Dropzone:
         class="dropzone" 
         on:drop={handleDrop} 
         on:dragover={handleDragOver}
+        on:dragenter={handleDragEnter}
         data-dropzone_group={`${group}`}
         >
         {@render children?.()}
