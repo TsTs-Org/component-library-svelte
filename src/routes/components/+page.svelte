@@ -1,7 +1,12 @@
 <script lang="ts">
 	import Calendar from "$lib/components/Calendar/Calendar.svelte";
 
+	type TestType = {
 
+	} & {name: "tom"} | {alter: 25}
+
+	let testString: TestType = {name: "tom"}
+	let anotherTestString: TestType = {alter: 25}
 </script>
 
 <div class="test-wrapper">
@@ -16,7 +21,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: solid #bbbbbb;
+	border: solid red;
 	box-sizing: border-box;
 }
 </style>
