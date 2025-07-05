@@ -8,6 +8,7 @@ import Contextcontainer from "./components/Contextcontainer/Contextcontainer.sve
 import Contextmenu from "./components/Contextcontainer/Contextmenu.svelte";
 import ContextmenuItem from "./components/Contextcontainer/ContextmenuItem.svelte";
 import Dropdown from "./components/Dropdown/Dropdown.svelte";
+import Dropzone from "./components/DragAndDrop/Dropzone.svelte";
 import Layout from "./components/Layout/Layout.svelte";
 import Multiselect from "./components/Multiselect/Multiselect.svelte";
 import MultiselectItem from "./components/Multiselect/MultiselectItem.svelte";
@@ -53,6 +54,7 @@ export {
     Contextmenu,
     ContextmenuItem,
     Dropdown,
+    Dropzone,
     Layout,
     Multiselect,
     MultiselectItem,

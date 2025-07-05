@@ -30,20 +30,6 @@ h5 {
 	font-weight: 400;
 }
 
-.draggable {
-	cursor: move;
-}
-
-.dragging {
-	opacity: 0.35;
-	border: 1px var(--border-color);
-	border-style: dashed !important
-}
-
-.draggable[data-draggable="false"] {
-	cursor: not-allowed;
-}
-
 /* Storybook code block styling for readability */
 pre {
   padding: 1rem;

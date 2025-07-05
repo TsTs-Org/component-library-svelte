@@ -1,32 +1,6 @@
-<!-- 
-Probleme der Dropzone:  
-1. Styling
-	- Da children der dropzone den drag and drop listener bekommen 
-        und reingedraggte elemente direkt der dropzone appended 
-        werden, können wir keinen container mit eigenem style in
-        die dropzone reingeben in der die objekte sind die man 
-        draggable haben möchte. 
-    - Möglicher fix: 
-        - Ein snippet für den container, da kann man dann einfach die listener drauf injecten
-        - Ein snippet für draggable children / Oder die top level children aus dem container snippet
-2. Sorting [ x ] 
-	- Ein reingedraggtes element wird am ende der dropzone appended,
-        dadurch ist es nicht möglich die Elemente innerhalb der dropzone
-        durch drag and drop zu sortieren
-3. Javascript callback
-	- Keine Möglichkeit im javascript festzustellen das ein element x
-        in dropzone y gezogen wurde.
-        (Keine Persistenz des moves möglich)
-	- Möglichkeit ein callback auf der dropzone zu definieren
-        und an jedes child weiterzugeben. Bei ausführung können nur
-        die html-elemente mitgegeben werden, das heißt,
-        dass javascript daten aus dem html herausgezogen werden müssen
-        was kacke ist. Weiter ist der callback von jedem child derselbe
-        dabei 
--->
 
 <script module lang="ts">
-    export let dragged_item_dropzone: number = 0;
+    export let dragged_item_dropzone: number | undefined;
     export let dragged_item: HTMLElement;
 </script>
 
@@ -35,13 +9,17 @@ Probleme der Dropzone:
 	import type { HTMLAttributes } from "svelte/elements";
 
 	type Props = {
+        callback?: (dataset: DOMStringMap) => null;
 		children?: Snippet;
         group?: Number;
+        identifier: String;
     } & HTMLAttributes<any>;
 
 	let {
+        callback = () => null,
 		children,
         group,
+        identifier,
 		...restProps
 	}: Props = $props();
 
@@ -52,14 +30,14 @@ Probleme der Dropzone:
         event.stopPropagation();
   
         Array.from(self.children).forEach((el, i) => {
-            el.dataset.index = i;
+            el.dataset._index = i;
         });
     }
 
     function handleDragEnter(event: DragEvent) {
         event.preventDefault();
         const items = Array.from(self.children) as HTMLElement[];
-        const target = event.target.closest(".draggable");
+        const target = event.target.closest(".DROPZONE-draggable");
         const targetIndex = items.indexOf(target);
         const draggedItemIndex = items.indexOf(dragged_item as HTMLElement);
 
@@ -72,8 +50,9 @@ Probleme der Dropzone:
             } else {
                 self.insertBefore(dragged_item, target);
             }
+            dragged_item.dataset._dropzone_identifier = event.target.dataset._dropzone_identifier;
         } else {
-            console.warn('Invalid dropzone:', dragged_item_dropzone, event.target.dataset.dropzone_group);
+            // console.warn('Invalid dropzone:', dragged_item_dropzone, event.target.dataset.dropzone_group);
         }
         
     }
@@ -84,71 +63,78 @@ Probleme der Dropzone:
     }
 
     // Children elements
-    
     function handleDragStart(e: DragEvent) {
         if(e.target.dataset.draggable == 'false'){
             e.preventDefault();
             return;
         }
 
-        dragged_item_dropzone = e.target.parentElement.dataset.dropzone_group;
+        const parent = e.target.parentElement;
+        dragged_item_dropzone = parent.dataset.dropzone_group;
         dragged_item = e.target as HTMLElement;
-        e.target.dataset.dragging = 'true';
 
         setTimeout(() => {
-            e.target.classList.add('dragging');
+            e.target.classList.add('DROPZONE-dragging');
         }, 0);
     }
     
     function handleDragEnd(e: DragEvent) {
-        e.target.dataset.dragging = 'false';
-        e.target.classList.remove('dragging');
+        e.target.classList.remove('DROPZONE-dragging');
+        callback(e.target.dataset);
     }
 
+
     onMount(() => {
+        const new_self = self.getElementsByTagName('div')[0] as HTMLDivElement;
+        if(new_self !== undefined) {
+            self.parentNode.insertBefore(new_self, self.nextSibling);
+            self.remove();
+            self = new_self;
+        }
+
+        // self.classList.add('Dropzone');
+        self.addEventListener('drop', handleDrop);
+        self.addEventListener('dragover', handleDragOver);
+        self.addEventListener('dragenter', handleDragEnter);
+        self.dataset._dropzone_identifier = `${identifier}`;
+        self.dataset.dropzone_group = `${group}`;
+
         const children = self.children;
         if(children) {
             for (let i = 0; i < children.length; i++) {
                 const child = children[i] as HTMLElement;
-                child.dataset.index = i; 
+                child.dataset._index = i; 
 
                 if (child.dataset.draggable !== 'false') {
                     child.draggable = true;
                     child.addEventListener('dragstart', handleDragStart);
                     child.addEventListener('dragend', handleDragEnd);
-                    child.classList.add('draggable');
+                    child.classList.add('DROPZONE-draggable');
+                    child.dataset._dropzone_identifier = self.dataset._dropzone_identifier;
                 }
             }
         }
-
-    })
+    });
     
     </script>
     
-    <div
-        {...restProps}
-        bind:this={self} 
-        class="dropzone" 
-        on:drop={handleDrop} 
-        on:dragover={handleDragOver}
-        on:dragenter={handleDragEnter}
-        data-dropzone_group={`${group}`}
-        >
+    <div bind:this={self} >
         {@render children?.()}
     </div>
-    
-<style lang="scss">
-    .dropzone {
-      width: 70%;
-      margin: 2rem;
-      height: 200px;
-      border: 2px dashed #ccc;
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      font-size: 1.2em;
-    }
+
+<style>
+
+:global(.DROPZONE-draggable) {
+	cursor: move;
+}
+
+:global(.DROPZONE-draggable[data-draggable="false"]) {
+	cursor: not-allowed;
+}
+
+:global(.DROPZONE-dragging) {
+	opacity: 0.45;
+	border: 1px var(--border-color);
+	border-style: dashed !important
+}
 </style>
