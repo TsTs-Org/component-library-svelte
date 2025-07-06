@@ -2,6 +2,7 @@
 	import { onMount, type Snippet } from "svelte";
 	import Day from "./Day.svelte";
 	import type { MonthNumber, SimplifiedDate } from "./types.js";
+	import WeekDayDisplay from "./WeekDayDisplay.svelte";
 
 	// TODO: when clicking the day, it the current year/month should be retrieved from a context created by the calendar and passed to the handle function
 	// how does this work for the dates outside of the selected month?
@@ -10,8 +11,11 @@
 	// when no snipped is supplied, the number gets rendered in a standard way (-> this standard way could be exported as a snippet as well)
 	// Problem: than there has to be a different way to handle a click -> either handle click or custom snippet insertion
 
+	// TODO: does it make sense to use the european week-format (start week with monday) by default?
+
 	type Props = {
 		dateInMonth: Date;
+		useAmericanWeekFormat?: boolean;
 	} & (
 		| {
 				onclick: (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
@@ -20,30 +24,21 @@
 		| { onclick: never; dateDisplaySnippet: Snippet<[simplifiedDate: SimplifiedDate]> }
 	);
 
-	let { dateInMonth, onclick, dateDisplaySnippet }: Props = $props();
+	let { dateInMonth, onclick, dateDisplaySnippet, useAmericanWeekFormat = false }: Props = $props();
 
 	function getFirstDayOfMonth(date: Date): Date {
 		return new Date(date.getFullYear(), date.getMonth(), 1);
 	}
 
-	function getMonthDateOffset(date: Date): number {
-		const firstOfMonth = getFirstDayOfMonth(date);
-		return firstOfMonth.getDay() - 1;
-	}
+	function getMonthDateOffset(date: Date, useAmericanFormat: boolean): number {
+		let firstOfMonth = getFirstDayOfMonth(date);
+		let monthOffset = firstOfMonth.getDay();
+		if (!useAmericanFormat) {
+			monthOffset = monthOffset - 1;
+		}
 
-	// type ValidWeekIdentifier = 0|1|2|3|4|5|6;
-	// function mapNumberToDay(num: ValidWeekIdentifier, useAmericanFormat: boolean = true): string {
-	//    let dateMap = {
-	//         "0": "sunday",
-	//         "1": "monday",
-	//         "2": "tuesday",
-	//         "3": "wednesday",
-	//         "4": "thursday",
-	//         "5": "friday",
-	//         "6": "saturday"
-	//     }
-	//     return dateMap[num];
-	// }
+		return monthOffset;
+	}
 
 	function sanitizeDate(year: number, monthLike: number, dayLike: number): SimplifiedDate {
 		const sanitizer = new Date(year, monthLike, dayLike);
@@ -78,7 +73,7 @@
 		const currentMonth = currentDate.getMonth();
 		const currentYear = currentDate.getFullYear();
 		const firstDayOfMonth = getFirstDayOfMonth(currentDate).getDate();
-		const monthDateOffset = getMonthDateOffset(currentDate);
+		const monthDateOffset = getMonthDateOffset(currentDate, useAmericanWeekFormat);
 
 		for (let i = 0; i < 6; i++) {
 			const day = firstDayOfMonth - monthDateOffset + 7 * i;
@@ -90,6 +85,9 @@
 </script>
 
 <div class="calendar-wrapper">
+	<div class="week-wrapper">
+		<WeekDayDisplay {useAmericanWeekFormat}></WeekDayDisplay>
+	</div>
 	{#each weeks as week}
 		<div class="week-wrapper">
 			{#each week as date}
@@ -104,20 +102,13 @@
 	{/each}
 </div>
 
-<!-- 
-<div class="week-wrapper">
-    {#each [1,2,3,4,5,6,7] as day}
-        <Day day={day + ""} previousSelected={true} nextSelected={day !== 7}></Day>
-    {/each}
-</div>
--->
-
 <style lang="scss">
 	.week-wrapper {
 		width: 20rem;
 
 		display: grid;
 		grid-auto-flow: column;
+		grid-template-columns: repeat(7, 1fr);
 		border: 1px solid red;
 		box-sizing: border-box;
 		align-items: center;
