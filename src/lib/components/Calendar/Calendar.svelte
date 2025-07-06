@@ -3,6 +3,7 @@
 	import Day from "./Day.svelte";
 	import type { MonthNumber, SimplifiedDate } from "./types.js";
 	import WeekDayDisplay from "./WeekDayDisplay.svelte";
+	import { sanitizeDate } from "./weekUtils.js";
 
 	// TODO: when clicking the day, it the current year/month should be retrieved from a context created by the calendar and passed to the handle function
 	// how does this work for the dates outside of the selected month?
@@ -16,15 +17,22 @@
 	type Props = {
 		dateInMonth: Date;
 		useAmericanWeekFormat?: boolean;
+		getSelectionStateByDate?: (simplifiedDate: SimplifiedDate) => boolean;
 	} & (
 		| {
-				onclick: (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
+				onclick: (dateOfClickedDisplay: SimplifiedDate) => void;
 				dateDisplaySnippet: never;
 		  }
 		| { onclick: never; dateDisplaySnippet: Snippet<[simplifiedDate: SimplifiedDate]> }
 	);
 
-	let { dateInMonth, onclick, dateDisplaySnippet, useAmericanWeekFormat = false }: Props = $props();
+	let {
+		dateInMonth,
+		onclick,
+		dateDisplaySnippet,
+		useAmericanWeekFormat = false,
+		getSelectionStateByDate = (_) => false,
+	}: Props = $props();
 
 	function getFirstDayOfMonth(date: Date): Date {
 		return new Date(date.getFullYear(), date.getMonth(), 1);
@@ -38,17 +46,6 @@
 		}
 
 		return monthOffset;
-	}
-
-	function sanitizeDate(year: number, monthLike: number, dayLike: number): SimplifiedDate {
-		const sanitizer = new Date(year, monthLike, dayLike);
-		const simplifiedDate = {
-			year: sanitizer.getFullYear(),
-			month: sanitizer.getMonth(),
-			day: sanitizer.getDate(),
-		} as SimplifiedDate;
-
-		return simplifiedDate;
 	}
 
 	function weekDaysFromStartDay(
@@ -80,7 +77,6 @@
 			const week = weekDaysFromStartDay(currentYear, currentMonth, day);
 			weeks.push(week);
 		}
-		console.log(weeks);
 	});
 </script>
 
@@ -94,8 +90,8 @@
 				<Day
 					{date}
 					{targetedMonth}
-					previousSelected={true}
-					nextSelected={date.day !== 7}
+					{onclick}
+					{getSelectionStateByDate}
 				></Day>
 			{/each}
 		</div>
@@ -109,13 +105,12 @@
 		display: grid;
 		grid-auto-flow: column;
 		grid-template-columns: repeat(7, 1fr);
-		border: 1px solid red;
-		box-sizing: border-box;
 		align-items: center;
 	}
 
 	.calendar-wrapper {
 		display: flex;
 		flex-direction: column;
+		gap: var(--padding-xs);
 	}
 </style>

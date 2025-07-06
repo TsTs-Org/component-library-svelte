@@ -1,30 +1,44 @@
 <script lang="ts">
 	import type { MonthNumber, SimplifiedDate } from "./types.js";
+	import { nextDay, previousDay } from "./weekUtils.js";
 
 	type props = {
 		date: SimplifiedDate;
 		targetedMonth: MonthNumber; // TODO: styling depending on targetState
-		previousSelected: boolean;
-		nextSelected: boolean;
+		getSelectionStateByDate: (simplifiedDate: SimplifiedDate) => boolean;
+		onclick: (dateOfClickedDisplay: SimplifiedDate) => void;
 	};
-	let { date, previousSelected, nextSelected }: props = $props();
+	let { date, targetedMonth, getSelectionStateByDate, onclick }: props = $props();
 </script>
 
 <div
 	class={[
 		"date-wrapper",
-		previousSelected ? "date-wrapper--previous-selected" : "",
-		nextSelected ? "date-wrapper--next-selected" : "",
+		getSelectionStateByDate(previousDay(date)) ? "date-wrapper--previous-selected" : "",
+		getSelectionStateByDate(nextDay(date)) ? "date-wrapper--next-selected" : "",
 	]}
 >
-	<div class="date"><span class="date__text">{date.day}</span></div>
+	<div
+		role="button"
+		tabindex="0"
+		onclick={() => onclick(date)}
+		onkeyup={(e) => {
+			if (e.key === "Enter") onclick(date);
+		}}
+		class={[
+			"date",
+			getSelectionStateByDate(date) ? "date--selected" : "",
+			date.month != targetedMonth ? "date--not-in-target-month" : "",
+		]}
+	>
+		<span class="date__text">{date.day}</span>
+	</div>
 </div>
 
 <style lang="scss">
 	.date-wrapper {
 		--selected-color: seagreen;
 		--connection-opacity: 80%;
-		// --connected-color: var(--selected-color);
 		--connected-color: color-mix(
 			in srgb,
 			var(--selected-color) var(--connection-opacity),
@@ -33,11 +47,6 @@
 
 		width: 100%;
 		position: relative;
-
-		// box-sizing: border-box;
-		// border: 1px solid blue;
-
-		background-color: #11aacc88;
 
 		&--previous-selected:before {
 			content: "";
@@ -63,7 +72,6 @@
 		--date-size: 2rem;
 
 		position: relative;
-		background-color: var(--selected-color);
 		width: var(--date-size);
 		height: var(--date-size);
 		display: flex;
@@ -75,14 +83,14 @@
 		margin-left: auto;
 		margin-right: auto;
 
-		// box-sizing: border-box;
-		// border: 1px solid darkgreen;
-
 		z-index: 1;
 
-		&__text {
-			// box-sizing: border-box;
-			// border: 1px solid blue;
+		background-color: var(--foreground-color);
+		&--selected {
+			background-color: var(--selected-color);
+		}
+		&--not-in-target-month {
+			background-color: var(--background-color);
 		}
 	}
 </style>
