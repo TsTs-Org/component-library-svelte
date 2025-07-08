@@ -11,12 +11,10 @@
 	let { date, targetedMonth, getSelectionStateByDate, onclick }: props = $props();
 </script>
 
+<!-- FIXME: if this works, create invisible, position absolute elements with one day before and one day after month display-->
 <div
-	class={[
-		"date-wrapper",
-		getSelectionStateByDate(previousDay(date)) ? "date-wrapper--previous-selected" : "",
-		getSelectionStateByDate(nextDay(date)) ? "date-wrapper--next-selected" : "",
-	]}
+	class={["date-wrapper"]}
+	data-selected={getSelectionStateByDate(date)}
 >
 	<div
 		role="button"
@@ -36,6 +34,32 @@
 </div>
 
 <style lang="scss">
+	/* doesn't work, because last day of last week isn't previous tag in html (container per week) */
+	:global(.date-wrapper[data-selected="true"]:has(+ [data-selected="true"])) {
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 50%;
+			height: 100%;
+			background-color: var(--connected-color);
+		}
+	}
+
+	:global([data-selected="true"] + .date-wrapper[data-selected="true"]) {
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 50%;
+			height: 100%;
+			background-color: var(--connected-color);
+		}
+	}
+	/**/
+
 	.date-wrapper {
 		--selected-color: seagreen;
 		--connection-opacity: 80%;
@@ -47,25 +71,6 @@
 
 		width: 100%;
 		position: relative;
-
-		&--previous-selected:before {
-			content: "";
-			display: block;
-			position: absolute;
-			width: 50%;
-			height: 100%;
-			background-color: var(--connected-color);
-		}
-		&--next-selected:after {
-			content: "";
-			display: block;
-			position: absolute;
-			right: 0;
-			top: 0;
-			width: 50%;
-			height: 100%;
-			background-color: var(--connected-color);
-		}
 	}
 
 	.date {
