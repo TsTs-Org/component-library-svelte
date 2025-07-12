@@ -9,17 +9,17 @@
 	let anotherTestString: TestType = { alter: 25 };
 
 	let selectedDates: SvelteSet<SimplifiedDate> = $state(new SvelteSet());
+
+	let el: Calendar;
 </script>
 
 <div class="test-wrapper">
 	<Calendar
-		onclick={(dateOfClickedDisplay) => {
-			selectedDates.has(dateOfClickedDisplay)
-				? selectedDates.delete(dateOfClickedDisplay)
-				: selectedDates.add(dateOfClickedDisplay);
-			console.log(selectedDates);
+		bind:this={el}
+		onclick={(dateOfClickedDisplay: SimplifiedDate) => {
+			console.log("onclick ran");
+			el.toggleDateSelection(dateOfClickedDisplay);
 		}}
-		getSelectionStateByDate={(simplifiedDate) => selectedDates.has(simplifiedDate)}
 	></Calendar>
 </div>
 

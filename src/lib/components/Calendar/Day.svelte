@@ -1,37 +1,58 @@
 <script lang="ts">
-	import type { MonthNumber, SimplifiedDate } from "./types.js";
-	import { nextDay, previousDay } from "./weekUtils.js";
+	import type { DateNumber } from "./types.js";
 
-	type props = {
-		date: SimplifiedDate;
-		targetedMonth: MonthNumber; // TODO: styling depending on targetState
-		getSelectionStateByDate: (simplifiedDate: SimplifiedDate) => boolean;
-		onclick: (dateOfClickedDisplay: SimplifiedDate) => void;
+	export type DisplayState =
+		| "disconnected"
+		| "connected-l"
+		| "connected-r"
+		| "connected-both"
+		| "deselected";
+
+	type Props = {
+		day: DateNumber;
+		displayState: DisplayState;
+		isInTargetedMonth: boolean;
+		onclick: () => void; // the date gets passed in the Calendar Component through something like onclick = () => {onclick(date)}
 	};
-	let { date, targetedMonth, getSelectionStateByDate, onclick }: props = $props();
+	let { day, displayState, isInTargetedMonth, onclick }: Props = $props();
+
+	function getClassesFromState(state: DisplayState, isInMonth: boolean): String[] {
+		let classes: string[] = [];
+		switch (state) {
+			case "disconnected":
+				classes = ["date-wrapper--selected"];
+				break;
+			case "connected-both":
+				classes = [
+					"date-wrapper--next-selected",
+					"date-wrapper--previous-selected",
+					"date-wrapper--selected",
+				];
+				break;
+			case "connected-l":
+				classes = ["date-wrapper--previous-selected", "date-wrapper--selected"];
+				break;
+			case "connected-r":
+				classes = ["date-wrapper--next-selected", "date-wrapper--selected"];
+				break;
+			case "deselected":
+				break;
+		}
+		return classes;
+	}
 </script>
 
-<div
-	class={[
-		"date-wrapper",
-		getSelectionStateByDate(previousDay(date)) ? "date-wrapper--previous-selected" : "",
-		getSelectionStateByDate(nextDay(date)) ? "date-wrapper--next-selected" : "",
-	]}
->
+<div class={["date-wrapper", ...getClassesFromState(displayState, isInTargetedMonth)]}>
 	<div
 		role="button"
 		tabindex="0"
-		onclick={() => onclick(date)}
+		{onclick}
 		onkeyup={(e) => {
-			if (e.key === "Enter") onclick(date);
+			if (e.key === "Enter") onclick();
 		}}
-		class={[
-			"date",
-			getSelectionStateByDate(date) ? "date--selected" : "",
-			date.month != targetedMonth ? "date--not-in-target-month" : "",
-		]}
+		class={["date"]}
 	>
-		<span class="date__text">{date.day}</span>
+		<span class="date__text">{day}</span>
 	</div>
 </div>
 
@@ -66,6 +87,18 @@
 			height: 100%;
 			background-color: var(--connected-color);
 		}
+
+		&--selected {
+			& > .date {
+				background-color: var(--selected-color);
+			}
+		}
+
+		&--not-in-target-month {
+			& > .date {
+				background-color: var(--background-color);
+			}
+		}
 	}
 
 	.date {
@@ -86,11 +119,5 @@
 		z-index: 1;
 
 		background-color: var(--foreground-color);
-		&--selected {
-			background-color: var(--selected-color);
-		}
-		&--not-in-target-month {
-			background-color: var(--background-color);
-		}
 	}
 </style>

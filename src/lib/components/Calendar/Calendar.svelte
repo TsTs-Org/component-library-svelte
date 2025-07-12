@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount, type Snippet } from "svelte";
-	import Day from "./Day.svelte";
+	import Day, { type DisplayState } from "./Day.svelte";
 	import type { MonthNumber, SimplifiedDate } from "./types.js";
 	import WeekDayDisplay from "./WeekDayDisplay.svelte";
-	import { sanitizeDate } from "./weekUtils.js";
+	import { nextDay, previousDay, sanitizeDate } from "./weekUtils.js";
+	import { SvelteSet } from "svelte/reactivity";
 
 	// TODO: when clicking the day, it the current year/month should be retrieved from a context created by the calendar and passed to the handle function
 	// how does this work for the dates outside of the selected month?
@@ -78,6 +79,73 @@
 			weeks.push(week);
 		}
 	});
+
+	// FIXME: this structure seems flawed. the lookup is awful, as it has to be done via filter, etc.
+	// would another system, eg. {year0: {month0: {day0: true}}, year1: ...} make sense? where only those dates are present which are actually selected (year0.month0.day1) could be unset
+
+	let selectedDates = $state<SimplifiedDate[]>([]); // is it possible to create a list of states? for each month? does this even make sense?
+	// a set can't be used here, as objects are compared via reference not value
+
+	export function toggleDateSelection(date: SimplifiedDate): void {
+		if (isDateSelected(date, selectedDates)) {
+			deselectDate(date, selectedDates);
+		} else {
+			selectDate(date, selectedDates);
+		}
+	}
+
+	function selectDate(date: SimplifiedDate, dateSelectionList: SimplifiedDate[]): void {
+		if (!isDateSelected(date, dateSelectionList)) {
+			selectedDates.push(date);
+			selectedDates = selectedDates;
+		}
+	}
+
+	function deselectDate(date: SimplifiedDate, dateSelectionList: SimplifiedDate[]): void {
+		selectedDates = dateSelectionList.filter((currentDate) => {
+			return !areDatesEqual(date, currentDate);
+		});
+	}
+
+	function isDateSelected(date: SimplifiedDate, dateSelectionList: SimplifiedDate[]): boolean {
+		return (
+			dateSelectionList.find((currentDate) => {
+				return areDatesEqual(date, currentDate);
+			}) !== undefined
+		);
+	}
+
+	function areDatesEqual(firstDate: SimplifiedDate, secondDate: SimplifiedDate): boolean {
+		return (
+			firstDate.day === secondDate.day &&
+			firstDate.month === secondDate.month &&
+			firstDate.year === secondDate.year
+		);
+	}
+
+	function getDisplayState(
+		date: SimplifiedDate,
+		dateSelectionList: SimplifiedDate[]
+	): DisplayState {
+		if (!isDateSelected(date, dateSelectionList)) return "deselected";
+
+		const previousDate = previousDay(date);
+		const nextDate = nextDay(date);
+
+		const previousDateSelected = isDateSelected(previousDate, dateSelectionList);
+		const nextDateSelected = isDateSelected(nextDate, dateSelectionList);
+
+		if (previousDateSelected && nextDateSelected) {
+			return "connected-both";
+		} else if (previousDateSelected) {
+			return "connected-l";
+		} else if (nextDateSelected) {
+			return "connected-r";
+		} else return "disconnected";
+	}
+
+	// TODO: pass fixed dates to some field like "initialSelectedDates" and set them to the internal state "selectedDates" or sth on mount.
+	// add functions to clear all selections and set/add selections
 </script>
 
 <div class="calendar-wrapper">
@@ -88,10 +156,10 @@
 		<div class="week-wrapper">
 			{#each week as date}
 				<Day
-					{date}
-					{targetedMonth}
-					{onclick}
-					{getSelectionStateByDate}
+					displayState={getDisplayState(date, selectedDates)}
+					day={date.day}
+					isInTargetedMonth={date.month === targetedMonth}
+					onclick={() => onclick(date)}
 				></Day>
 			{/each}
 		</div>
