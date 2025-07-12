@@ -4,7 +4,6 @@
 	import type { MonthNumber, SimplifiedDate } from "./types.js";
 	import WeekDayDisplay from "./WeekDayDisplay.svelte";
 	import { nextDay, previousDay, sanitizeDate } from "./weekUtils.js";
-	import { SvelteSet } from "svelte/reactivity";
 
 	// TODO: when clicking the day, it the current year/month should be retrieved from a context created by the calendar and passed to the handle function
 	// how does this work for the dates outside of the selected month?
@@ -87,29 +86,29 @@
 	// a set can't be used here, as objects are compared via reference not value
 
 	export function toggleDateSelection(date: SimplifiedDate): void {
-		if (isDateSelected(date, selectedDates)) {
-			deselectDate(date, selectedDates);
+		if (isDateSelected(date)) {
+			deselectDate(date);
 		} else {
-			selectDate(date, selectedDates);
+			selectDate(date);
 		}
 	}
 
-	function selectDate(date: SimplifiedDate, dateSelectionList: SimplifiedDate[]): void {
-		if (!isDateSelected(date, dateSelectionList)) {
+	function selectDate(date: SimplifiedDate): void {
+		if (!isDateSelected(date)) {
 			selectedDates.push(date);
 			selectedDates = selectedDates;
 		}
 	}
 
-	function deselectDate(date: SimplifiedDate, dateSelectionList: SimplifiedDate[]): void {
-		selectedDates = dateSelectionList.filter((currentDate) => {
+	function deselectDate(date: SimplifiedDate): void {
+		selectedDates = selectedDates.filter((currentDate) => {
 			return !areDatesEqual(date, currentDate);
 		});
 	}
 
-	function isDateSelected(date: SimplifiedDate, dateSelectionList: SimplifiedDate[]): boolean {
+	function isDateSelected(date: SimplifiedDate): boolean {
 		return (
-			dateSelectionList.find((currentDate) => {
+			selectedDates.find((currentDate) => {
 				return areDatesEqual(date, currentDate);
 			}) !== undefined
 		);
@@ -127,13 +126,13 @@
 		date: SimplifiedDate,
 		dateSelectionList: SimplifiedDate[]
 	): DisplayState {
-		if (!isDateSelected(date, dateSelectionList)) return "deselected";
+		if (!isDateSelected(date)) return "deselected";
 
 		const previousDate = previousDay(date);
 		const nextDate = nextDay(date);
 
-		const previousDateSelected = isDateSelected(previousDate, dateSelectionList);
-		const nextDateSelected = isDateSelected(nextDate, dateSelectionList);
+		const previousDateSelected = isDateSelected(previousDate);
+		const nextDateSelected = isDateSelected(nextDate);
 
 		if (previousDateSelected && nextDateSelected) {
 			return "connected-both";
