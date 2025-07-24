@@ -11,13 +11,16 @@
 	let selectedDates: SvelteSet<SimplifiedDate> = $state(new SvelteSet());
 
 	let el: Calendar;
+	//el.
+
+	let currentDate: SimplifiedDate = { year: 2025, day: 1, month: 6 };
 </script>
 
 <div class="test-wrapper">
 	<Calendar
+		dateInMonth={currentDate}
 		bind:this={el}
 		onclick={(dateOfClickedDisplay: SimplifiedDate) => {
-			console.log("onclick ran");
 			el.toggleDateSelection(dateOfClickedDisplay);
 		}}
 	></Calendar>

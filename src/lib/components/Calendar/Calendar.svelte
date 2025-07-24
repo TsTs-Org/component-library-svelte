@@ -14,25 +14,22 @@
 
 	// TODO: does it make sense to use the european week-format (start week with monday) by default?
 
-	type Props = {
-		dateInMonth: Date;
-		useAmericanWeekFormat?: boolean;
-		getSelectionStateByDate?: (simplifiedDate: SimplifiedDate) => boolean;
-	} & (
-		| {
-				onclick: (dateOfClickedDisplay: SimplifiedDate) => void;
-				dateDisplaySnippet: never;
-		  }
-		| { onclick: never; dateDisplaySnippet: Snippet<[simplifiedDate: SimplifiedDate]> }
-	);
+	type DefaultDisplay = {
+		onclick: (dateOfClickedDisplay: SimplifiedDate) => void;
+		dateDisplaySnippet?: never;
+	};
 
-	let {
-		dateInMonth,
-		onclick,
-		dateDisplaySnippet,
-		useAmericanWeekFormat = false,
-		getSelectionStateByDate = (_) => false,
-	}: Props = $props();
+	type CustomDisplay = {
+		onclick?: never;
+		dateDisplaySnippet: Snippet<[simplifiedDate: SimplifiedDate]>;
+	};
+
+	type Props = {
+		dateInMonth: SimplifiedDate;
+		useAmericanWeekFormat?: boolean;
+	} & (DefaultDisplay | CustomDisplay);
+
+	let { dateInMonth, onclick, dateDisplaySnippet, useAmericanWeekFormat = false }: Props = $props();
 
 	function getFirstDayOfMonth(date: Date): Date {
 		return new Date(date.getFullYear(), date.getMonth(), 1);
@@ -122,10 +119,7 @@
 		);
 	}
 
-	function getDisplayState(
-		date: SimplifiedDate,
-		dateSelectionList: SimplifiedDate[]
-	): DisplayState {
+	function getDisplayState(date: SimplifiedDate): DisplayState {
 		if (!isDateSelected(date)) return "deselected";
 
 		const previousDate = previousDay(date);
@@ -143,6 +137,15 @@
 		} else return "disconnected";
 	}
 
+	/* TODO: use this method to conditionally exclude functions, depending on input. there seems to be no way to exclude exported fields from autocompletion.
+    However when changing the type in index.ts and only importing it from there, this might be possible
+
+	const F = { onclick: onclick, dateDisplaySnippet: dateDisplaySnippet };
+	type a = typeof F extends CustomDisplay ? typeof getDisplayState : never;
+	// type a = typeof F extends CustomDisplay ? never : typeof getDisplayState;
+	export const getDisplayState = getDisplayState as a;
+    */
+
 	// TODO: pass fixed dates to some field like "initialSelectedDates" and set them to the internal state "selectedDates" or sth on mount.
 	// add functions to clear all selections and set/add selections
 </script>
@@ -154,12 +157,17 @@
 	{#each weeks as week}
 		<div class="week-wrapper">
 			{#each week as date}
-				<Day
-					displayState={getDisplayState(date, selectedDates)}
-					day={date.day}
-					isInTargetedMonth={date.month === targetedMonth}
-					onclick={() => onclick(date)}
-				></Day>
+				{#if !!onclick}
+					<Day
+						displayState={getDisplayState(date)}
+						day={date.day}
+						isInTargetedMonth={date.month === targetedMonth}
+						onclick={() => onclick(date)}
+					></Day>
+				{:else}
+					<!-- using ! is fine, because {!!onclick, else} implies that CustomSnippet is used -->
+					{@render dateDisplaySnippet!(date)}
+				{/if}
 			{/each}
 		</div>
 	{/each}
