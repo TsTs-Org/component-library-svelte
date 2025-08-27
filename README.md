@@ -1,3 +1,5 @@
+[![Build](https://github.com/TsTs-Org/component-library-svelte/actions/workflows/release_package.yml/badge.svg?branch=main)](https://github.com/TsTs-Org/component-library-svelte/actions/workflows/release_package.yml)
+
 # create-svelte
 
 Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
