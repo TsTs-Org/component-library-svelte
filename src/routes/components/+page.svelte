@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Textarea from "$lib/components/Textarea.svelte";
 	import { Dropzone } from "$lib/index.js";
 
 
@@ -28,6 +29,10 @@
         </div>
     </div>
 </Dropzone>     
+
+<Textarea label="Test Label" description="Some description that is quite long to see if it all fits in this">
+
+</Textarea>
 
 <style>
     .custom-style {
