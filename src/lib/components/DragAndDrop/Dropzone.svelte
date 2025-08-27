@@ -9,7 +9,7 @@
 	import type { HTMLAttributes } from "svelte/elements";
 
 	type Props = {
-        callback?: (dataset: DOMStringMap) => null;
+        callback?: (dataset: DOMStringMap) => void | Boolean;
 		children?: Snippet;
         group?: Number;
         identifier: String;
@@ -41,19 +41,13 @@
         const targetIndex = items.indexOf(target);
         const draggedItemIndex = items.indexOf(dragged_item as HTMLElement);
 
-        if(dragged_item_dropzone == undefined ||
-            event.target.dataset.dropzone_group == undefined ||
-            dragged_item_dropzone == event.target.dataset.dropzone_group 
-        ){
-            if (draggedItemIndex < targetIndex) {
-                self.insertBefore(dragged_item, target.nextSibling);
-            } else {
-                self.insertBefore(dragged_item, target);
-            }
-            dragged_item.dataset._dropzone_identifier = event.target.dataset._dropzone_identifier;
+        if (draggedItemIndex < targetIndex) {
+            self.insertBefore(dragged_item, target.nextSibling);
         } else {
-            // console.warn('Invalid dropzone:', dragged_item_dropzone, event.target.dataset.dropzone_group);
+            self.insertBefore(dragged_item, target);
         }
+        dragged_item.dataset._dropzone_identifier = self.dataset._dropzone_identifier;
+    
         
     }
     
@@ -70,8 +64,10 @@
         }
 
         const parent = e.target.parentElement;
-        dragged_item_dropzone = parent.dataset.dropzone_group;
-        dragged_item = e.target as HTMLElement;
+        if (parent.dataset.dropzone_group != undefined && parent.dataset.dropzone_group != "undefined") {
+            dragged_item_dropzone = parent.dataset.dropzone_group;
+            dragged_item = e.target as HTMLElement;
+        }
 
         setTimeout(() => {
             e.target.classList.add('DROPZONE-dragging');
