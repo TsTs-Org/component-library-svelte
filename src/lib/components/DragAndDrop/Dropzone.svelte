@@ -79,7 +79,29 @@
         callback(e.target.dataset);
     }
 
+    function addChildrenHandler() {
+        const children = self.children;
+            if(children) {
+                for (let i = 0; i < children.length; i++) {
+                    
+                    const child = children[i] as HTMLElement;
+                    if (child.dataset._index != undefined) {
+                        continue
+                    }
 
+                    child.dataset._index = i; 
+                    
+                    if (child.dataset.draggable !== 'false') {
+                        child.draggable = true;
+                        child.addEventListener('dragstart', handleDragStart);
+                        child.addEventListener('dragend', handleDragEnd);
+                        child.classList.add('DROPZONE-draggable');
+                        child.dataset._dropzone_identifier = self.dataset._dropzone_identifier;
+                    }
+                }
+            } 
+    }
+    
     onMount(() => {
         const new_self = self.getElementsByTagName('div')[0] as HTMLDivElement;
         if(new_self !== undefined) {
@@ -95,22 +117,34 @@
         self.dataset._dropzone_identifier = `${identifier}`;
         self.dataset.dropzone_group = `${group}`;
 
-        const children = self.children;
-        if(children) {
-            for (let i = 0; i < children.length; i++) {
-                const child = children[i] as HTMLElement;
-                child.dataset._index = i; 
+        addChildrenHandler()
 
-                if (child.dataset.draggable !== 'false') {
-                    child.draggable = true;
-                    child.addEventListener('dragstart', handleDragStart);
-                    child.addEventListener('dragend', handleDragEnd);
-                    child.classList.add('DROPZONE-draggable');
-                    child.dataset._dropzone_identifier = self.dataset._dropzone_identifier;
+        const observer = new MutationObserver((mutationList) => {
+            for (const mutation of mutationList) {
+                if (mutation.type === "childList") {
+                    addChildrenHandler()
                 }
             }
-        }
+        })
+        
+        observer.observe(self, { childList: true });
+        // const children = self.children;
+        // if(children) {
+        //     for (let i = 0; i < children.length; i++) {
+        //         const child = children[i] as HTMLElement;
+        //         child.dataset._index = i; 
+
+        //         if (child.dataset.draggable !== 'false') {
+        //             child.draggable = true;
+        //             child.addEventListener('dragstart', handleDragStart);
+        //             child.addEventListener('dragend', handleDragEnd);
+        //             child.classList.add('DROPZONE-draggable');
+        //             child.dataset._dropzone_identifier = self.dataset._dropzone_identifier;
+        //         }
+        //     }
+        // }
     });
+
     
     </script>
     

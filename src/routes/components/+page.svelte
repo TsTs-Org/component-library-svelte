@@ -1,8 +1,12 @@
 <script lang="ts">
 	import Textarea from "$lib/components/Textarea.svelte";
-	import { Dropzone } from "$lib/index.js";
+	import { Button, Dropzone } from "$lib/index.js";
 
-
+    const listOfElemetns = $state([
+        "test1",
+        "test2",
+        "test3"
+    ])
 </script>
 
 <Dropzone identifier="Zone1" group={2} callback={(e) => {console.log(e)}}>
@@ -16,23 +20,23 @@
     </div>
 </Dropzone>    
 <Dropzone identifier="Zone2" group={2} callback={(e) => {console.log(e)}}>
-    <div class="custom-style">
-        <div class="mock-elem">
-            <h2>Test3</h2>
-        </div>
-    </div>
+   <div class="custom-style">
+
+   </div> 
 </Dropzone>   
 <Dropzone identifier="Zone3" group={3} callback={(e) => {console.log(e)}}>
     <div class="custom-style">
-        <div class="mock-elem">
-            <h2>Test4</h2>
-        </div>
+   {#each listOfElemetns as el}
+       <div class="mock-elem">
+           <h2>{el}</h2>
+       </div>
+    {/each}
     </div>
 </Dropzone>     
 
-<Textarea label="Test Label" description="Some description that is quite long to see if it all fits in this">
-
-</Textarea>
+<Button onclick={() => listOfElemetns.push("addedtest")}>
+    Add thingy
+</Button>
 
 <style>
     .custom-style {
