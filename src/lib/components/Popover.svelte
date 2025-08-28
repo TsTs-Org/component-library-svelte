@@ -7,8 +7,13 @@
 
 	// TODO: add option to open page with already openend popover
 
-	type Props = { children: Snippet; popoverTrigger: Snippet<[() => void]>; title: Snippet };
-	let { children, popoverTrigger, title }: Props = $props();
+	type Props = { 
+		children: Snippet; 
+		popoverTrigger: Snippet<[() => void]>; 
+		title: Snippet,
+		minimumSize?: boolean
+	};
+	let { children, popoverTrigger, title, minimumSize = false }: Props = $props();
 
 	let open = $state(false);
 
@@ -109,7 +114,7 @@
 </script>
 
 <div
-	class="trigger-wrapper"
+	class:trigger-wrapper={minimumSize}
 	bind:this={triggerWrapperElement}
 >
 	{@render popoverTrigger?.(openTrigger)}

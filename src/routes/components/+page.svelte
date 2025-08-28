@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Textarea from "$lib/components/Textarea.svelte";
-	import { Button, Dropzone } from "$lib/index.js";
+	import { Button, Dropzone, Input, Popover } from "$lib/index.js";
+	import { onMount } from "svelte";
 
     const listOfElemetns = $state([
         "test1",
