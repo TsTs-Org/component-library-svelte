@@ -1,9 +1,9 @@
 SCRIPT_DIR=$(dirname "$0")
 
-LOCAL_VERSION=$(/bin/sh $SCRIPT_DIR/get_local_version.sh)
-UPSTREAM_VERSION=$(/bin/sh $SCRIPT_DIR/get_upstream_version.sh)
+LOCAL_VERSION=$(/bin/bash $SCRIPT_DIR/get_local_version.sh)
+UPSTREAM_VERSION=$(/bin/bash $SCRIPT_DIR/get_upstream_version.sh)
 
-BIGGER_VERSION_NUMBER=$(/bin/sh $SCRIPT_DIR/get_bigger_version_number.sh $LOCAL_VERSION $UPSTREAM_VERSION)
+BIGGER_VERSION_NUMBER=$(/bin/bash $SCRIPT_DIR/get_bigger_version_number.sh $LOCAL_VERSION $UPSTREAM_VERSION)
 
 if [[ "$LOCAL_VERSION" == "$UPSTREAM_VERSION" ]]; then
     npm version patch --git-tag-version false
