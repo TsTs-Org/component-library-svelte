@@ -23,6 +23,8 @@
 		>
 			{@render contentDisplay(con)}
 		</div>
+
+		<!-- There should be another approach where the width of the object can be any -> the whole container is rendered twice and moved -> -100% with animation duration as animation delay for the second container -->
 	{/each}
 </div>
 
