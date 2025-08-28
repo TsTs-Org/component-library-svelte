@@ -1,5 +1,6 @@
 SCRIPT_DIR=$(dirname "$0")
 
+# /bin/bash has to be used here as the default shell in ubuntu (which powers our actions) uses dash as default shell which is weird in its syntax
 LOCAL_VERSION=$(/bin/bash $SCRIPT_DIR/get_local_version.sh)
 UPSTREAM_VERSION=$(/bin/bash $SCRIPT_DIR/get_upstream_version.sh)
 
