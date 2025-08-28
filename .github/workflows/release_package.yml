@@ -29,11 +29,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Package library
-        run: npm run package
-
       - name: Set package version number
         run: ./scripts/set_upstream_version.sh
+
+      - name: Package library
+        run: npm run package
 
       - name: Publish libraray
         run: npm publish
