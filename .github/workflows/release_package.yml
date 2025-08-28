@@ -36,7 +36,7 @@ jobs:
         run: npm install
 
       - name: Set package version number
-        run: ./scripts/set_upstream_version.sh
+        run: bash ./scripts/set_upstream_version.sh
 
       - name: Package library
         run: npm run package
