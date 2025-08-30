@@ -187,6 +187,10 @@
 		overflow: hidden;
 	}
 
+	.children-opacity-changer {
+		height: 100%;
+	}
+
 	.background-dimmer {
 		position: fixed;
 		z-index: 1001;
