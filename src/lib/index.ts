@@ -1,4 +1,3 @@
-
 // ------ Export Components ------
 import Accordion from "./components/Accordion/Accordion.svelte";
 import AccordionItem from "./components/Accordion/AccordionItem.svelte";
@@ -45,53 +44,54 @@ import Seperator from "./components/Seperator.svelte";
 import Textarea from "./components/Textarea.svelte";
 import ThemeModeButton from "./components/ThemeModeButton.svelte";
 import Themify from "./components/Themify.svelte";
+import Calendar from "./components/Calendar/Calendar.svelte";
 
-export { 
-    Accordion,
-    AccordionItem,
-    BaseChart,
-    RoundChart,
-    Contextcontainer,
-    Contextmenu,
-    ContextmenuItem,
-    Dropdown,
-    Dropzone,
-    Layout,
-    Multiselect,
-    MultiselectItem,
-    Navigationbar,
-    NavigationbarItem,
-    Radiogroup,
-    RadioItem,
-    Select,
-    SelectItem,
-    Sidebar,
-    SidebarItem,
-    Table,
-    TableBody,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-    // AutoGenerateTriggers,
-    // TabContent,
-    // Tabs,
-    // TabTrigger,
-
-    Button,
-    Card,
-    Checkbox,
-    Icon,
-    Input,
-    Loader,
-    OverflowContainer,
-    Popover,
-    ScrollContainer,
-    Seperator,
-    Textarea,
-    ThemeModeButton,
-    Themify,
+export {
+	Accordion,
+	AccordionItem,
+	BaseChart,
+	RoundChart,
+	Contextcontainer,
+	Contextmenu,
+	ContextmenuItem,
+	Dropdown,
+	Dropzone,
+	Layout,
+	Multiselect,
+	MultiselectItem,
+	Navigationbar,
+	NavigationbarItem,
+	Radiogroup,
+	RadioItem,
+	Select,
+	SelectItem,
+	Sidebar,
+	SidebarItem,
+	Table,
+	TableBody,
+	TableCell,
+	TableFooter,
+	TableHead,
+	TableHeader,
+	TableRow,
+	// AutoGenerateTriggers,
+	// TabContent,
+	// Tabs,
+	// TabTrigger,
+	Calendar,
+	Button,
+	Card,
+	Checkbox,
+	Icon,
+	Input,
+	Loader,
+	OverflowContainer,
+	Popover,
+	ScrollContainer,
+	Seperator,
+	Textarea,
+	ThemeModeButton,
+	Themify,
 };
 
 // ----- Export Blocks ------
@@ -99,12 +99,7 @@ import SimpleLogin from "./blocks/Authentication/SimpleLogin.svelte";
 import LoginAndRegister from "./blocks/Authentication/LoginAndRegister.svelte";
 import ThemeSettings from "./blocks/ThemeSettings.svelte";
 
-
-export { 
-    SimpleLogin,
-    LoginAndRegister,
-    ThemeSettings,
-};
+export { SimpleLogin, LoginAndRegister, ThemeSettings };
 
 // ----- Export Utilities ------
 import { setGeneralTheme } from "./components/Themify.svelte";
