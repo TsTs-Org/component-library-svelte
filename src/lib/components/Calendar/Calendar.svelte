@@ -163,6 +163,7 @@
 						day={date.day}
 						isInTargetedMonth={date.month === targetedMonth}
 						onclick={() => onclick(date)}
+						isFocused={areDatesEqual(date, dateInMonth)}
 					></Day>
 				{:else}
 					<!-- using ! is fine, because {!!onclick, else} implies that CustomSnippet is used -->

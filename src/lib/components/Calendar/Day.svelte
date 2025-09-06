@@ -13,8 +13,9 @@
 		displayState: DisplayState;
 		isInTargetedMonth: boolean;
 		onclick: () => void; // the date gets passed in the Calendar Component through something like onclick = () => {onclick(date)}
+		isFocused: boolean;
 	};
-	let { day, displayState, isInTargetedMonth, onclick }: Props = $props();
+	let { day, displayState, isInTargetedMonth, isFocused, onclick }: Props = $props();
 
 	function getClassesFromState(state: DisplayState, isInMonth: boolean): String[] {
 		let classes: string[] = [];
@@ -36,6 +37,9 @@
 				classes = ["date-wrapper--next-selected", "date-wrapper--selected"];
 				break;
 			case "deselected":
+				if (!isInMonth) {
+					classes = ["date-wrapper--not-in-target-month"];
+				}
 				break;
 		}
 		return classes;
@@ -50,7 +54,7 @@
 		onkeyup={(e) => {
 			if (e.key === "Enter") onclick();
 		}}
-		class={["date"]}
+		class={["date", isFocused ? "date--focused" : ""]}
 	>
 		<span class="date__text">{day}</span>
 	</div>
@@ -95,6 +99,7 @@
 		}
 
 		&--not-in-target-month {
+			/* TODO: add more styling to differentiate even selected ones */
 			& > .date {
 				background-color: var(--background-color);
 			}
@@ -119,5 +124,9 @@
 		z-index: 1;
 
 		background-color: var(--foreground-color);
+
+		&--focused {
+			outline: 2px solid var(--text-color);
+		}
 	}
 </style>
