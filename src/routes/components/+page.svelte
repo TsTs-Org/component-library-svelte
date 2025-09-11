@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Textarea from "$lib/components/Textarea.svelte";
-	import { Button, Dropzone, Input, Popover } from "$lib/index.js";
+	import { Button, Dropzone, Icon, Input, Popover } from "$lib/index.js";
 	import { onMount } from "svelte";
 
     const listOfElemetns = $state([
@@ -9,6 +9,17 @@
         "test3"
     ])
 </script>
+<!-- 
+<i class="icon">home</i>
+<i class="icon">favorite</i>  
+<i class="icon">search</i>
+
+<i class="icon-filled">home</i>
+<i class="icon-filled">favorite</i>  
+<i class="icon-filled">search</i> -->
+
+<Icon iconName="swap_horiz"></Icon>
+
 
 <Dropzone identifier="Zone1" group={2} callback={(e) => {console.log(e)}}>
     <div class="custom-style">

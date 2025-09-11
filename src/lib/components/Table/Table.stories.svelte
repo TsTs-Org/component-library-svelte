@@ -30,8 +30,8 @@
             {#snippet icon()}
                 <Icon
                     size="s"
-                    iconName="plus"
-                    fill="inherit"
+                    iconName="add"
+                    color="inherit"
                 />
             {/snippet}
         </Button>

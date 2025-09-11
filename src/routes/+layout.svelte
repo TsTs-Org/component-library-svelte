@@ -32,7 +32,7 @@
 					onclick={() => (sidebarCollapsed = !sidebarCollapsed)}
 				>
 					{#snippet icon()}
-						<Icon iconName={sidebarCollapsed ? "burgerMenu" : "x"} />
+						<Icon iconName={sidebarCollapsed ? "menu" : "close"} />
 					{/snippet}
 				</Button>
 				<NavigationbarItem href="{base}/">Home</NavigationbarItem>
@@ -50,21 +50,23 @@
 			{sidebarCollapsed}
 		>
 			<SidebarItem href="{base}/">
-				{#snippet icon(size)}
+				{#snippet icon(size, filled)}
 					<Icon
 						iconName="home"
 						{size}
-						fill="inherit"
+						{filled}
+						color="inherit"
 					></Icon>
 				{/snippet}
 				Home
 			</SidebarItem>
 			<SidebarItem href="{base}/components">
-				{#snippet icon(size)}
+				{#snippet icon(size, filled)}
 					<Icon
 						iconName="folder"
 						{size}
-						fill="inherit"
+						{filled}
+						color="inherit"
 					></Icon>
 				{/snippet}
 				Components
@@ -77,11 +79,12 @@
 				onclick={() => (customActive = !customActive)}
 				active={customActive}
 			>
-				{#snippet icon(size)}
+				{#snippet icon(size, filled)}
 					<Icon
-						iconName="account"
+						iconName="account_circle"
 						{size}
-						fill="inherit"
+						{filled}
+						color="inherit"
 					></Icon>
 				{/snippet}
 				Projects
@@ -90,11 +93,12 @@
 			{#snippet sidebarFooter(collapsed)}
 				{#if collapsed() || !collapsed()}
 					<SidebarItem href="{base}/test">
-						{#snippet icon(size)}
+						{#snippet icon(size, filled)}
 							<Icon
 								iconName="settings"
 								{size}
-								fill="inherit"
+								{filled}
+								color="inherit"
 							></Icon>
 						{/snippet}
 						Settings

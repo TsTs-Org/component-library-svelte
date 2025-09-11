@@ -1,37 +1,41 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
+	import { onMount, type Snippet } from "svelte";
 	import type { SVGAttributes } from "svelte/elements";
-	import type { BuiltinIcon } from "$lib/utils/builtinIcons.ts";
-	import { getIcon } from "$lib/utils/builtinIcons.js";
 
 	type Size = "s" | "m" | "l";
 
 	type EitherChildrenOrBuiltinIcon =
-		| { children: Snippet; iconName?: never }
-		| { children?: never; iconName: BuiltinIcon };
-	type Props = { size?: Size; fill?: string } & EitherChildrenOrBuiltinIcon & SVGAttributes<any>;
+		| { children: Snippet; iconName?: never, }
+		| { children?: never; iconName: string };
+	type Props = { size?: Size; color?: string, filled?: boolean } & EitherChildrenOrBuiltinIcon & SVGAttributes<any>;
 
 	let {
 		size = "m",
-		fill = "var(--text-color)",
+		color = "var(--text-color)",
+		filled = false,
 		iconName,
 		children,
 		...restProps
 	}: Props = $props();
+
 </script>
 
+{#if !!children}
 <svg
-	style={`fill: ${fill}`}
+	style={`fill: ${color}`}
 	class={[size]}
 	{...restProps}
 	viewBox="0 -960 960 960"
 >
-	{#if !!children}
-		{@render children?.()}
-	{:else if !!iconName}
-		{@html getIcon(iconName)}
-	{/if}
+	{@render children?.()}
 </svg>
+{:else if !!iconName}
+	<i 
+		style={`color: ${color}`}
+		class={[filled ? "icon-filled" : "icon", size]}
+		{...restProps}
+	>{iconName}</i>
+{/if}
 
 <!--
 @component
@@ -64,4 +68,27 @@
 			width: var(--text-size-xl);
 		}
 	}
+
+	.icon, .icon-filled {
+		font-family: 'Material Icons Outlined';
+		font-weight: normal;
+		font-style: normal;
+		font-size: var(--text-size-l);  /* Adjust as needed */
+		display: inline-block;
+		line-height: 1;
+		text-transform: none;
+		letter-spacing: normal;
+		white-space: nowrap;
+		direction: ltr;
+		-webkit-font-feature-settings: 'liga';
+		-webkit-font-smoothing: antialiased;
+		width: var(--text-size-l);
+		height: var(--text-size-l);
+		overflow: hidden;
+	}
+
+	.icon-filled {
+		font-family: 'Material Icons Filled', "Material Icons Fallback";
+	}
+
 </style>

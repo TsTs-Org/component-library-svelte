@@ -11,7 +11,7 @@
 		active?: boolean;
 		href?: string;
 		size?: size;
-		icon?: Snippet<[size]>;
+		icon?: Snippet<[size, filled?: boolean]>;
 		children?: Snippet;
 	} & HTMLAnchorAttributes;
 
@@ -42,7 +42,10 @@
 		{href}
 		{...restProps}
 	>
-		{@render icon?.(sidebarCollapsed ? "l" : size)}
+		{@render icon?.(
+			sidebarCollapsed ? "l" : size,
+			active == undefined ? _active : active
+		)}
 		{#if !sidebarCollapsed}
 			<div class="content">
 				{@render children?.()}

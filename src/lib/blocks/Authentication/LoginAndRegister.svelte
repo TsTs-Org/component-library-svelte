@@ -101,7 +101,7 @@
 		>
 			<Icon
 				size="m"
-				iconName="swapHorizontal"
+				iconName="swap_horiz"
 			/>
 		</button>
 		<form

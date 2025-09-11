@@ -32,7 +32,7 @@
         {#snippet iconRight(size)}
             <Icon
                 {size}
-                iconName="x"
+                iconName="close"
             ></Icon>
         {/snippet}
     </Card>

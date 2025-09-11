@@ -37,8 +37,8 @@
         {#snippet icon()}
             <Icon
                 size="m"
-                fill="inherit"
-                iconName="moon"
+                color="inherit"
+                iconName="dark_mode"
             ></Icon>
         {/snippet}
     </Button>

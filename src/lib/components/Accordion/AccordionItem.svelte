@@ -38,7 +38,7 @@
 	>
 		<h4>{title}</h4>
 		<Icon
-			iconName={open ? "arrowUp" : "arrowDown"}
+			iconName={open ? "arrow_upward" : "arrow_downward"}
 			size="m"
 		/>
 	</button>

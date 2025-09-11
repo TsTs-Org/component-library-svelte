@@ -151,7 +151,7 @@
 							transition:changeOpacityAnimation
 						>
 							<Icon
-								iconName="x"
+								iconName="close"
 								{size}
 							></Icon>
 						</div>

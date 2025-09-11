@@ -73,3 +73,23 @@ table.docblock-argstable.sb-unstyled tbody tr td {
 table.docblock-argstable.sb-unstyled tbody {
 	filter: none;
 }
+
+@font-face {
+  font-family: 'Material Icons Outlined';
+  font-style: normal;
+  font-weight: 400;
+  src: url('$lib/styles/fonts/MaterialSymbolsRounded_36pt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons Filled';
+  font-style: normal;
+  font-weight: 400;
+  src: url('$lib/styles/fonts/MaterialSymbolsRounded_Filled_36pt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons Fallback';
+  src: local('Arial'); /* Any font you want */
+  unicode-range: U+0000; /* Only fallback for null character */
+}

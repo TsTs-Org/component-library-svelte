@@ -31,7 +31,7 @@
     {#snippet template(args)}
         <Input {...args}>
             {#snippet icon()}
-                <Icon iconName="account" fill="inherit" />
+                <Icon iconName="account_circle" color="inherit" />
             {/snippet}
         </Input>
     {/snippet}
@@ -41,7 +41,7 @@
     {#snippet template(args)}
     <Input {...args}>
         {#snippet icon()}
-            <Icon iconName="account" fill="inherit" />
+            <Icon iconName="account_circle" color="inherit" />
         {/snippet}
     </Input>
     {/snippet}

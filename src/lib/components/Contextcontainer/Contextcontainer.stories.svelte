@@ -21,7 +21,7 @@
                 {#snippet icon()}
                     <Icon
                         size="s"
-                        iconName="eyeOpen"
+                        iconName="visibility"
                     />
                 {/snippet}
                 Test
@@ -30,7 +30,7 @@
                 {#snippet icon()}
                     <Icon
                         size="s"
-                        iconName="eyeClosed"
+                        iconName="visibility_off"
                     />
                 {/snippet}
                 Test

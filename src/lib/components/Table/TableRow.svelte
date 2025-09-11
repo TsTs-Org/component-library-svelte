@@ -4,11 +4,11 @@
 	import Icon from "../Icon.svelte";
 	import Dropdown from "../Dropdown/Dropdown.svelte";
 	import ContextmenuItem from "../Contextcontainer/ContextmenuItem.svelte";
-	import type { BuiltinIcon } from "$lib/utils/builtinIcons.js";
+	// import type { BuiltinIcon } from "$lib/utils/builtinIcons.js";
 
 	type RowAction = {
 		title: string;
-		iconName?: BuiltinIcon;
+		iconName?: string;
 		callback: Function;
 	};
 
@@ -65,7 +65,7 @@
 			>
 				<Icon
 					size="m"
-					iconName="threeDots"
+					iconName="more_vert"
 				/>
 				<Dropdown
 					alignRight

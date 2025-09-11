@@ -60,7 +60,7 @@
 					>
 						<Icon
 							size="s"
-							iconName="x"
+							iconName="close"
 						></Icon>
 					</button>
 				{/snippet}
@@ -71,7 +71,7 @@
 		class="tab-navigation__add-button"
 		onclick={() => addTab()}
 	>
-		<Icon iconName="plus"></Icon>
+		<Icon iconName="add"></Icon>
 	</button>
 </div>
 

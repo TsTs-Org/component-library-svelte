@@ -78,8 +78,8 @@
 				onclick={swapPasswordDisplay}
 			>
 				<Icon
-					iconName={show_password ? "eyeOpen" : "eyeClosed"}
-					fill="inherit"
+					iconName={show_password ? "visibility" : "visibility_off"}
+					color="inherit"
 				/>
 			</span>
 		{/if}

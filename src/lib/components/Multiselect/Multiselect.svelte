@@ -80,7 +80,7 @@
 		<span style="color: var(--text-color)">{placeholder}</span>
 
 		<Icon
-			iconName={open ? "arrowUp" : "arrowDown"}
+			iconName={open ? "arrow_upward" : "arrow_downward"}
 			size="s"
 			style="fill: var(--text-color-muted)"
 		/>

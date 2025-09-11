@@ -12,6 +12,6 @@
 		})}
 >
 	{#snippet icon()}
-		<Icon iconName={$theme.lightMode ? "sun" : "moon"} />
+		<Icon iconName={$theme.lightMode ? "light_mode" : "dark_mode"} />
 	{/snippet}
 </Button>
