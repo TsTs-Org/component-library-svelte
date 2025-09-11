@@ -4,14 +4,16 @@
 	import Icon from "./Icon.svelte";
 	import { type AnimationConfig } from "svelte/animate";
 	import { linear } from "svelte/easing";
+	import { browser } from "$app/environment";
+	import { initAsyncCompiler } from "sass";
 
 	// TODO: add option to open page with already openend popover
 
-	type Props = { 
-		children: Snippet; 
-		popoverTrigger: Snippet<[() => void]>; 
-		title: Snippet,
-		minimumSize?: boolean
+	type Props = {
+		children: Snippet;
+		popoverTrigger: Snippet<[() => void]>;
+		title: Snippet;
+		minimumSize?: boolean;
 	};
 	let { children, popoverTrigger, title, minimumSize = false }: Props = $props();
 
@@ -24,11 +26,13 @@
 	let childrenWrapperElement: HTMLDivElement;
 	let triggerWrapperElement: HTMLDivElement;
 
+	// TODO: think about what happens when dynamic is needed
+	// or when the trigger element changes size because of window resize for example
 	const final = {
-		width: "80%",
-		height: "80%",
-		left: "50%",
-		top: "50%",
+		width: "80vw",
+		height: "80vh",
+		left: "50vw",
+		top: "50vh",
 		translateX: "-50%",
 		translateY: "-50%",
 	};
@@ -43,9 +47,9 @@
 		};
 	}
 
-	function growToPopoverAnimation(node: HTMLElement, params?: AnimationParams): AnimationConfig {
+	function getInitial() {
 		const boundingRect = triggerWrapperElement.getBoundingClientRect();
-		const initial = {
+		return {
 			width: boundingRect.width + "px",
 			height: boundingRect.height + "px",
 			left: boundingRect.left + "px",
@@ -53,17 +57,34 @@
 			translateX: "0" + "px",
 			translateY: "0" + "px",
 		};
+	}
+
+	function growToPopoverAnimation(node: HTMLElement, params?: AnimationParams): AnimationConfig {
+		console.log(defaultPartialAnimationConfigFromParams(params).easing?.name);
+
+		const boundingRect = triggerWrapperElement.getBoundingClientRect();
+		const initial = getInitial();
+
+		// FIXME: does not work when trigger element is shifted with left or translate (because trigger wrapper won't be shifted by that)
+
 		return {
 			...defaultPartialAnimationConfigFromParams(params),
 			css: (t, _) => {
 				return `
 					width: calc(${initial.width} + calc(${final.width} - ${initial.width}) * ${t});
-					height: calc(${initial.height} + calc(${final.height} - ${initial.height}) * ${t}) ;
-					left: calc(${initial.left} + calc(${final.left} - ${initial.left}) * ${t});
-					top: calc(${initial.top} + calc(${final.top} - ${initial.top}) * ${t});
-					translate: 
-						calc(${initial.translateX} + calc(${final.translateX} - ${initial.translateX}) * ${t}) 
-						calc(${initial.translateY} + calc(${final.translateY} - ${initial.translateY}) * ${t});
+					height: calc(${initial.height} + calc(${final.height} - ${initial.height}) * ${t});
+
+					translate:
+					calc(
+						calc(calc(${initial.left} + ${initial.translateX}) * ${1 - t}) +
+						calc(calc(${final.translateX} + ${final.left}) * ${t})
+
+					)
+					calc(
+						calc(calc(${initial.top} + ${initial.translateY}) * ${1 - t}) +
+						calc(calc(${final.translateY} + ${final.top}) * ${t})
+					);
+
 				`;
 			},
 		};
@@ -100,16 +121,18 @@
 	});
 
 	onDestroy(() => {
-		document.removeEventListener("keyup", handleEscKey);
-	})
+		if (browser) {
+			document.removeEventListener("keyup", handleEscKey);
+		}
+	});
 
 	function handleEscKey(ev: KeyboardEvent): void {
-		if (ev.key !== "Escape") return
+		if (ev.key !== "Escape") return;
 		closePopover();
 	}
 
 	export function closePopover(): void {
-		open = false
+		open = false;
 	}
 </script>
 
@@ -130,7 +153,7 @@
 	>
 		<div
 			class={"children-wrapper"}
-			style="width:{final.width}; height:{final.height}; left:{final.left}; top:{final.top}; translate:{final.translateX} {final.translateY}"
+			style="left: 0; top: 0; width:{final.width}; height:{final.height}; translate: calc({final.translateX} + {final.left}) calc({final.translateY} + {final.top});"
 			onclick={(ev) => {
 				// TODO: is there a cleaner way to do this?
 				// can you enrich an event with data? for example "inside-popover" to use in a higher eventhandler?
