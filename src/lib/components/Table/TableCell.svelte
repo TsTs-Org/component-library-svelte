@@ -19,8 +19,9 @@
 
 <style>
 	td {
-		padding: var(--padding-s);
-		font-size: var(--text-size-xs);
+		padding: var(--padding-s) var(--padding-m);
+		font-size: var(--text-size-s);
+		color: var(--text-color-muted);
 		display: none;
 	}
 </style>

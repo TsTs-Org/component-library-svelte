@@ -103,9 +103,11 @@
 <style lang="scss">
 	.InputWrapper {
 		width: 100%;
+		display:contents;
 	}
 	.Input {
 		position: relative;
+		display:contents;
 
 		&:has(.icon) input {
 			padding-left: 2.35rem;
@@ -160,7 +162,7 @@
 		outline: none;
 		width: 100%;
 		box-sizing: border-box;
-		height: min-content;
+		// height: min-content;
 		border: 1px solid var(--border-color);
 		border-radius: var(--border-radius-s);
 		margin-block: var(--padding-xs);

@@ -29,13 +29,15 @@
 		display: flex;
 		align-items: center;
 		gap: var(--padding-s);
-		padding: var(--padding-xs);
+		padding: var(--padding-xs) var(--padding-s);
+		border-radius: var(--border-radius-xs);
 		&:hover {
 			background-color: var(--hover-color);
 		}
 
 		.icon {
-			width: 1rem;
+			width: 1.1rem;
+			height: 1.1rem;
 		}
 	}
 </style>

@@ -1,80 +1,115 @@
 <script lang="ts">
 	import Textarea from "$lib/components/Textarea.svelte";
-	import { Button, Dropzone, Icon, Input, Popover } from "$lib/index.js";
+	import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "$lib/index.js";
 	import { onMount } from "svelte";
 
-	const listOfElemetns = $state(["test1", "test2", "test3"]);
+    const listOfElemetns = $state([
+        "test1",
+        "test2",
+        "test3"
+    ])
+
+    const display = [
+        {
+            ID: "2323232323",
+            CreatedAt: "09.11.20011:12:23:14",
+            Username: "Testuser",
+            IsActive: true,
+        },
+        {
+            ID: "2323232324",
+            CreatedAt: "09.11.20011:12:23:14",
+            Username: "Testuser2",
+            IsActive: true,
+        },
+        {
+            ID: "2323232325",
+            CreatedAt: "09.11.20011:12:23:14",
+            Username: "Testuser3",
+            IsActive: false,
+        },
+    ]
 </script>
-
+<Table initial={["ID", "CreatedAt", "Username", "IsActive", "Actions"]} searchbar bordered>
+    {#snippet headerAction()}
+        <Button size="s">
+            {#snippet icon()}
+                <Icon size="m" iconName="add" fill="inherit" />
+            {/snippet}
+            AddUser
+        </Button>
+    {/snippet}
+    <TableHeader>
+        <TableRow>
+            <TableHead>ID</TableHead>
+            <TableHead>CreatedAt</TableHead>
+            <TableHead>Username</TableHead>
+            <TableHead>IsActive</TableHead>
+            <TableHead>Actions</TableHead>
+        </TableRow>
+    </TableHeader>
+    <TableBody>
+        {#each display as user (user.ID)}
+            <TableRow
+                rowActions={[
+                    {
+                        iconName: 'logout',
+                        title: 'Logout User',
+                        callback: () => {
+                        }
+                    },
+                    {
+                        iconName: 'account_circle_off',
+                        title: 'Disable Account',
+                        callback: () => {
+                        }
+                    },
+                    {
+                        iconName: 'delete',
+                        title: 'Delete User',
+                        // callback: () => deleteImage(value.id)
+                        callback: () => {
+                        }
+                    }
+                ]}
+            >
+                <TableCell _for="id">{user.ID}</TableCell>
+                <TableCell _for="createdat">{user.CreatedAt}</TableCell>
+                <TableCell _for="username">{user.Username}</TableCell>
+                <TableCell _for="isactive">{user.IsActive}</TableCell>
+            </TableRow>
+        {/each}
+    </TableBody>
+</Table>
 <!-- 
-<i class="icon">home</i>
-<i class="icon">favorite</i>  
-<i class="icon">search</i>
+<Dropzone identifier="Zone1" group={2} callback={(e) => {console.log(e)}}>
+    <div class="custom-style">
+        <div class="mock-elem">
+            <h2>Test1</h2>
+        </div>
+        <div class="mock-elem">
+            <h2>Test2</h2>
+        </div>
+    </div>
+</Dropzone>    
+<Dropzone identifier="Zone2" group={2} callback={(e) => {console.log(e)}}>
+   <div class="custom-style">
 
-<i class="icon-filled">home</i>
-<i class="icon-filled">favorite</i>  
-<i class="icon-filled">search</i> -->
+   </div> 
+</Dropzone>   
+<Dropzone identifier="Zone3" group={3} callback={(e) => {console.log(e)}}>
+    <div class="custom-style">
+   {#each listOfElemetns as el}
+       <div class="mock-elem">
+           <h2>{el}</h2>
+       </div>
+    {/each}
+    </div>
+</Dropzone>     
 
-<div
-	style="display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh;"
->
-	<Popover>
-		{#snippet popoverTrigger(openPopover)}
-			<div style="width: 10rem; height: 10rem; left: 600px; position: relative;">
-				<Button onclick={openPopover}>open popover</Button>
-			</div>
-		{/snippet}
-		{#snippet title()}
-			test
-		{/snippet}
-		conent
-	</Popover>
-</div>
-
-<Icon iconName="swap_horiz"></Icon>
-
-<Dropzone
-	identifier="Zone1"
-	group={2}
-	callback={(e) => {
-		console.log(e);
-	}}
->
-	<div class="custom-style">
-		<div class="mock-elem">
-			<h2>Test1</h2>
-		</div>
-		<div class="mock-elem">
-			<h2>Test2</h2>
-		</div>
-	</div>
-</Dropzone>
-<Dropzone
-	identifier="Zone2"
-	group={2}
-	callback={(e) => {
-		console.log(e);
-	}}
->
-	<div class="custom-style"></div>
-</Dropzone>
-<Dropzone
-	identifier="Zone3"
-	group={3}
-	callback={(e) => {
-		console.log(e);
-	}}
->
-	<div class="custom-style">
-		{#each listOfElemetns as el}
-			<div class="mock-elem">
-				<h2>{el}</h2>
-			</div>
-		{/each}
-	</div>
-</Dropzone>
-
-<Button onclick={() => listOfElemetns.push("addedtest")}>Add thingy</Button>
+<Button onclick={() => listOfElemetns.push("addedtest")}>
+    Add thingy
+</Button> -->
 
 <style>
 	.custom-style {

@@ -108,5 +108,13 @@
 		</Sidebar>
 	{/snippet}
 
-	{@render children()}
+	<div class="page">
+		{@render children()}
+	</div>
 </Layout>
+
+<style>
+	.page {
+		padding: var(--padding-l);
+	}
+</style>

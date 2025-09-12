@@ -8,17 +8,17 @@
 	let { children }: Props = $props();
 </script>
 
-<th>
+<th style="width: min-content">
 	{@render children?.()}
 </th>
 
 <style>
 	th {
 		text-align: left;
-		padding: var(--padding-s);
-		font-weight: 600;
-		font-size: var(--text-size-xs);
-		color: var(--text-color-muted);
+		padding: var(--padding-m);
+		/* font-weight: 600; */
+		font-size: var(--text-size-s);
+		/* color: var(--text-color-muted); */
 		display: none;
 	}
 </style>

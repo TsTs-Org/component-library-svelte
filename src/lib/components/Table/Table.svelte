@@ -36,6 +36,8 @@
 		display
 			? activeColumns.push(columnIndex)
 			: (activeColumns = activeColumns.filter((curr) => curr != columnIndex));
+		
+		// autoSizeColumns()
 	}
 
 	function searchStringInCells(searchString: string) {
@@ -88,6 +90,51 @@
 		}
 	}
 
+	function autoSizeColumns() {
+		if (!table) return;
+
+		const rows = Array.from(table.rows);
+		if (rows.length === 0) return;
+
+		const colCount = rows[0].cells.length;
+		const maxWidths = new Array(colCount).fill(0);
+
+		// Measure all rows
+		for (const row of rows) {
+			for (let i = 0; i < row.cells.length; i++) {
+				const cell = row.cells[i];
+				const cellClone = cell.cloneNode(true) as HTMLElement;
+
+				// Apply minimal styles to measure accurately
+				cellClone.style.position = 'absolute';
+				cellClone.style.visibility = 'hidden';
+				cellClone.style.height = 'auto';
+				cellClone.style.width = 'auto';
+				cellClone.style.whiteSpace = 'nowrap';
+
+				document.body.appendChild(cellClone);
+				const width = cellClone.offsetWidth;
+				document.body.removeChild(cellClone);
+
+				if (width > maxWidths[i]) {
+					maxWidths[i] = width;
+				}
+			}
+		}
+
+		// Apply measured widths to the header row
+		const headerRow = table.tHead?.rows[0] || table.rows[0];
+		if (!headerRow) return;
+
+		for (let i = 0; i < maxWidths.length; i++) {
+			const cell = headerRow.cells[i];
+			if (cell) {
+				cell.style.width = `${maxWidths[i] - 16}px`; // Add padding buffer
+			}
+		}
+	}
+
+
 	$effect(() => {
 		searchStringInCells(searchValue);
 	});
@@ -95,6 +142,7 @@
 	onMount(() => {
 		properlyRoundCorners();
 		enableInitialColumns();
+		// autoSizeColumns();
 	});
 </script>
 
@@ -156,12 +204,16 @@
 				display: flex;
 				align-items: center;
 			}
+			input {
+				flex-grow: 1;
+				height: 100%;
+			}
 		}
 	}
 	._table {
 		&.bordered {
 			border: thin solid var(--border-color);
-			border-radius: var(--border-radius-s);
+			border-radius: var(--border-radius-m);
 		}
 	}
 	.emptyText {
@@ -172,5 +224,6 @@
 	table {
 		width: 100%;
 		border-collapse: collapse;
+		// table-layout: fixed;
 	}
 </style>

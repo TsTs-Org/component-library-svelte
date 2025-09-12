@@ -73,6 +73,7 @@
 		}
 
 		& .icon {
+			display: contents;
 			width: fit-content;
 			fill: var(--text-color-inverted);
 		}
@@ -83,17 +84,17 @@
 
 		&.s {
 			padding: var(--padding-s);
-			border-radius: var(--border-radius-s);
+			border-radius: var(--border-radius-xs);
 			gap: var(--padding-s);
 		}
 		&.m {
 			padding: var(--padding-m);
-			border-radius: var(--border-radius-m);
+			border-radius: var(--border-radius-s);
 			gap: var(--padding-m);
 		}
 		&.l {
 			padding: var(--padding-m);
-			border-radius: var(--border-radius-m);
+			border-radius: var(--border-radius-l);
 			gap: var(--padding-m);
 			font-size: var(--text-size-m);
 			font-weight: 600;

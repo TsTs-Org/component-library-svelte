@@ -76,7 +76,7 @@
 							<ContextmenuItem onclick={() => executeRowAction(action.callback)}>
 								{#snippet icon()}
 									<Icon
-										size="m"
+										size="s"
 										iconName={action.iconName!}
 									/>
 								{/snippet}

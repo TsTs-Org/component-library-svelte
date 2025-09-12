@@ -85,6 +85,27 @@
 		width: var(--text-size-l);
 		height: var(--text-size-l);
 		overflow: hidden;
+		&.s {
+			height: var(--text-size-m);
+			width: var(--text-size-m);
+			font-size: var(--text-size-m);
+		}
+
+		&.m {
+			height: calc(var(--text-size-l) * .85);
+			width: calc(var(--text-size-l) * .85);
+			font-size: calc(var(--text-size-l) * .85);
+		}
+		&.l {
+			height: var(--text-size-l);
+			width: var(--text-size-l);
+			font-size: var(--text-size-l);
+		}
+		&.xl {
+			height: var(--text-size-xl);
+			width: var(--text-size-xl);
+			font-size: var(--text-size-xl);
+		}
 	}
 
 	.icon-filled {
