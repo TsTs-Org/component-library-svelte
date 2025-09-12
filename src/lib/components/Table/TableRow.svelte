@@ -75,7 +75,10 @@
 			<button
 				class="actions"
 				bind:this={actions}
-				onclick={() => (open = !open)}
+				onclick={(e) => {
+					e.stopPropagation()
+					open = !open
+				}}
 			>
 				<Icon
 					size="m"
