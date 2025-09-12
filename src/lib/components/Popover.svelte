@@ -5,7 +5,6 @@
 	import { type AnimationConfig } from "svelte/animate";
 	import { linear } from "svelte/easing";
 	import { browser } from "$app/environment";
-	import { initAsyncCompiler } from "sass";
 
 	// TODO: add option to open page with already openend popover
 
