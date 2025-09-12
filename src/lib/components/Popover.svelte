@@ -131,6 +131,10 @@
 		closePopover();
 	}
 
+	export function openPopover(): void {
+		open = true;
+	}
+
 	export function closePopover(): void {
 		open = false;
 	}

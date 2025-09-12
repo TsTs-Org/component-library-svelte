@@ -1,13 +1,6 @@
 <script lang="ts">
-	import Textarea from "$lib/components/Textarea.svelte";
-	import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "$lib/index.js";
-	import { onMount } from "svelte";
-
-    const listOfElemetns = $state([
-        "test1",
-        "test2",
-        "test3"
-    ])
+	import Slider from "$lib/components/Slider.svelte";
+import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "$lib/index.js";
 
     const display = [
         {
@@ -29,7 +22,17 @@
             IsActive: false,
         },
     ]
+
+    function proxyOpen(info) {
+        slider.openSlider()
+    }
+
+    let slider: Slider;
+
 </script>
+
+<Slider bind:this={slider}></Slider>
+
 <Table initial={["ID", "CreatedAt", "Username", "IsActive", "Actions"]} searchbar bordered>
     {#snippet headerAction()}
         <Button size="s">
@@ -51,6 +54,7 @@
     <TableBody>
         {#each display as user (user.ID)}
             <TableRow
+                callback={() => {proxyOpen()}}
                 rowActions={[
                     {
                         iconName: 'logout',

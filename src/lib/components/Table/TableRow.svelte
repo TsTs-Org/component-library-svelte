@@ -4,7 +4,6 @@
 	import Icon from "../Icon.svelte";
 	import Dropdown from "../Dropdown/Dropdown.svelte";
 	import ContextmenuItem from "../Contextcontainer/ContextmenuItem.svelte";
-	// import type { BuiltinIcon } from "$lib/utils/builtinIcons.js";
 
 	type RowAction = {
 		title: string;
@@ -15,24 +14,31 @@
 	type Props = {
 		children: Snippet;
 		rowActions?: Array<RowAction>;
+		callback?: Function | undefined;
 	};
 
 	let self: HTMLTableRowElement;
 	let actions: HTMLButtonElement;
 	let open = $state(false);
-	let { children, rowActions }: Props = $props();
+	let { children, rowActions, callback = undefined }: Props = $props();
 
-	function executeRowAction(callback: Function) {
+	function getRowValues() {
 		let tdElements = self.querySelectorAll("td");
-		let values = {};
+		let values: { [key: string]: string | null } = {};
 		tdElements.forEach((td) => {
 			const key = td.getAttribute("data-for");
 			if (key && key != "_none") {
 				values[key] = td.textContent;
 			}
 		});
-		callback(values);
+		return values
 	}
+
+	function executeRowAction(callback: Function) {
+		callback(getRowValues());
+	}
+
+	let clickable = callback != undefined;
 
 	onMount(() => {
 		document.addEventListener("click", (event: MouseEvent) => {
@@ -51,7 +57,15 @@
 	});
 </script>
 
-<tr bind:this={self}>
+<tr 
+	bind:this={self}
+	onclick={() => { 
+		if(callback != undefined) {
+			callback(getRowValues())
+		}
+	}}
+	class:clickable
+>
 	{@render children?.()}
 	{#if !!rowActions}
 		<TableCell
@@ -108,5 +122,9 @@
 		display: flex;
 		flex-direction: column;
 		padding: var(--padding-xs);
+	}
+
+	.clickable {
+		cursor: pointer;
 	}
 </style>
