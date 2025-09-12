@@ -3,6 +3,29 @@
 	font-family: 'Courier New', Courier, monospace;
 }
 
+.__editable_element {
+	background-color: transparent;
+	color: var(--text-color);
+	cursor: text;
+	border: 1px solid transparent;
+	box-sizing: border-box;
+	width: 100%;
+	resize: none;
+}
+
+.__editable_element.empty {
+	color: var(--text-color-muted);
+	opacity: .5;
+}
+
+textarea.__editable_element, input.__editable_element {
+	border-bottom: 1px solid var(--primary-color);
+}
+
+textarea.__editable_element:focus, input.__editable_element:focus{
+	outline: none;
+}
+
 button {
 	background-color: transparent;
 	border: none;
