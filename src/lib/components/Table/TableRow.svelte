@@ -27,7 +27,7 @@
 		let values: { [key: string]: string | null } = {};
 		tdElements.forEach((td) => {
 			const key = td.getAttribute("data-for");
-			if (key && key != "_none") {
+			if (key && key != "__actions") {
 				values[key] = td.textContent;
 			}
 		});
@@ -69,7 +69,7 @@
 	{@render children?.()}
 	{#if !!rowActions}
 		<TableCell
-			_for="_none"
+			_for="__actions"
 			style="width: var(--text-size-m); text-align: right;"
 		>
 			<button

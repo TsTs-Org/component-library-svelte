@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { onMount, type Snippet } from "svelte";
+	import { onMount, setContext, type Snippet } from "svelte";
 	import Input from "../Input.svelte";
 	import Multiselect from "../Multiselect/Multiselect.svelte";
 	import MultiselectItem from "../Multiselect/MultiselectItem.svelte";
 	import TableBody from "./TableBody.svelte";
 	import TableCell from "./TableCell.svelte";
+	import { writable, type Writable } from "svelte/store";
 
 	type Props = {
 		children?: Snippet;
@@ -25,19 +26,28 @@
 	}: Props = $props();
 
 	let columns: Array<string> = $state([]);
+	let columnNames: Array<string> = $state([]);
 	let activeColumns: Array<number> = $state([]);
 	let searchValue: string = $state("");
 	let table: HTMLTableElement;
 
+	export type TableCtx = {
+		activeColumns: Writable<Array<String>>;
+	};
+
+	const ctx = {
+		activeColumns: writable([]) as Writable<Array<String>>,
+	}
+	setContext("TableCtx", ctx);
+
+	$effect(() => ctx.activeColumns.set(
+		activeColumns.map((i) => columns[i].toLowerCase())
+	))
+
 	function setColumnDisplay(columnIndex: number, display: boolean) {
-		for (let i = 0; i < table.rows.length; i++) {
-			table.rows[i].cells[columnIndex].style.display = display ? "table-cell" : "none";
-		}
 		display
 			? activeColumns.push(columnIndex)
 			: (activeColumns = activeColumns.filter((curr) => curr != columnIndex));
-		
-		// autoSizeColumns()
 	}
 
 	function searchStringInCells(searchString: string) {
@@ -61,28 +71,41 @@
 		}
 	}
 
-	function properlyRoundCorners() {
-		const firstRow = table.rows[0];
-		const lastRow = table.rows[table.rows.length - 1];
-		if (firstRow) {
-			firstRow.cells[0].style.borderTopLeftRadius = "var(--border-radius-s)";
-			firstRow.cells[firstRow.cells.length - 1].style.borderTopRightRadius = "var(--border-radius-s)";
-		}
-		if (lastRow) {
-			lastRow.cells[0].style.borderBottomLeftRadius = "var(--border-radius-s)";
-			lastRow.cells[lastRow.cells.length - 1].style.borderBottomRightRadius = "var(--border-radius-s)";
-			lastRow.style.borderBottom = "none"; // Remove bottom border for last row
-		}
-	}
+	// TODO fix this and make it work when pushing new entries
+	// function properlyRoundCorners() {
+	// 	const firstRow = table.rows[0];
+	// 	const lastRow = table.rows[table.rows.length - 1];
+
+	// 	// Reset all rows to remove any previously applied border radius styles
+	// 	for (let i = 0; i < table.rows.length; i++) {
+	// 		const row = table.rows[i];
+	// 		for (let j = 0; j < row.cells.length; j++) {
+	// 			const cell = row.cells[j];
+	// 			cell.style.borderTopLeftRadius = "";
+	// 			cell.style.borderTopRightRadius = "";
+	// 			cell.style.borderBottomLeftRadius = "";
+	// 			cell.style.borderBottomRightRadius = "";
+	// 		}
+	// 	}
+	// 	if (firstRow) {
+	// 		firstRow.cells[0].style.borderTopLeftRadius = "var(--border-radius-s)";
+	// 		firstRow.cells[firstRow.cells.length - 1].style.borderTopRightRadius = "var(--border-radius-s)";
+	// 	}
+	// 	if (lastRow) {
+	// 		lastRow.cells[0].style.borderBottomLeftRadius = "var(--border-radius-s)";
+	// 		lastRow.cells[lastRow.cells.length - 1].style.borderBottomRightRadius = "var(--border-radius-s)";
+	// 		// lastRow.style.borderBottom = "none"; // Remove bottom border for last row
+	// 	}
+	// }
 
 	function getAllColumns() {
 		const headers = table.querySelectorAll("th");
-		columns = Array.from(headers).map((header) => header.textContent) as Array<string>;
+		columns = Array.from(headers).map((header) => header.dataset.for) as Array<string>;
+		columnNames = Array.from(headers).map((header) => header.textContent);
 	}
 
 	function enableInitialColumns() {
 		getAllColumns();
-		// If no initial columns are provided, select all
 		if (initial.length == 0) { initial = columns; }
 		activeColumns = [];
 		for (let i = 0; i < columns.length; i++) {
@@ -90,59 +113,13 @@
 		}
 	}
 
-	function autoSizeColumns() {
-		if (!table) return;
-
-		const rows = Array.from(table.rows);
-		if (rows.length === 0) return;
-
-		const colCount = rows[0].cells.length;
-		const maxWidths = new Array(colCount).fill(0);
-
-		// Measure all rows
-		for (const row of rows) {
-			for (let i = 0; i < row.cells.length; i++) {
-				const cell = row.cells[i];
-				const cellClone = cell.cloneNode(true) as HTMLElement;
-
-				// Apply minimal styles to measure accurately
-				cellClone.style.position = 'absolute';
-				cellClone.style.visibility = 'hidden';
-				cellClone.style.height = 'auto';
-				cellClone.style.width = 'auto';
-				cellClone.style.whiteSpace = 'nowrap';
-
-				document.body.appendChild(cellClone);
-				const width = cellClone.offsetWidth;
-				document.body.removeChild(cellClone);
-
-				if (width > maxWidths[i]) {
-					maxWidths[i] = width;
-				}
-			}
-		}
-
-		// Apply measured widths to the header row
-		const headerRow = table.tHead?.rows[0] || table.rows[0];
-		if (!headerRow) return;
-
-		for (let i = 0; i < maxWidths.length; i++) {
-			const cell = headerRow.cells[i];
-			if (cell) {
-				cell.style.width = `${maxWidths[i] - 16}px`; // Add padding buffer
-			}
-		}
-	}
-
-
 	$effect(() => {
 		searchStringInCells(searchValue);
 	});
 
 	onMount(() => {
-		properlyRoundCorners();
+		// properlyRoundCorners();
 		enableInitialColumns();
-		// autoSizeColumns();
 	});
 </script>
 
@@ -151,17 +128,17 @@
 		<Multiselect
 			placeholder="Columns"
 			size="s"
-			{initial}
+			initial={ initial }
 		>
 			{#each columns as col, i}
 				{#if !ignoreColumns.includes(col)}
-				<MultiselectItem
-					value={col}
-					label={col}
-					onchange={(newVal) => {
-						setColumnDisplay(i, newVal as boolean);
-					}}
-				/>
+					<MultiselectItem
+						value={col}
+						label={columnNames[i]}
+						onchange={(newVal) => {
+							setColumnDisplay(i, newVal as boolean);
+						}}
+					/>
 				{/if}
 			{/each}
 		</Multiselect>
@@ -185,7 +162,7 @@
 			{@render children?.()}
 			{#if activeColumns.length == 0}
 				<TableBody>
-					<TableCell><p class="emptyText">No Columns Selected</p></TableCell>
+					<TableCell _for="_none"><p class="emptyText">No Columns Selected</p></TableCell>
 				</TableBody>
 			{/if}
 		</table>
@@ -226,4 +203,9 @@
 		border-collapse: collapse;
 		// table-layout: fixed;
 	}
+
+	.Table :global(tbody tr:last-child) {
+		border-bottom: none;
+	}
+
 </style>

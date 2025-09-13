@@ -8,7 +8,7 @@
 	import Slider from "$lib/components/Slider.svelte";
 import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "$lib/index.js";
 
-    const display = [
+    const display = $state([
         {
             ID: "2323232323",
             CreatedAt: "09.11.20011:12:23:14",
@@ -27,13 +27,22 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
             Username: "Testuser3",
             IsActive: false,
         },
-    ]
+    ])
 
     function proxyOpen(info) {
         slider.openSlider()
     }
 
     let slider: Slider;
+
+    function addUser() {
+        display.push({
+            ID: display.length + 1,
+            CreatedAt: "09.11.20011:12:23:14",
+            Username: "Test",
+            IsActive: true,
+        })
+    }
 
 </script>
 
@@ -48,9 +57,9 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
 
 </Slider>
 
-<Table initial={["ID", "CreatedAt", "Username", "IsActive", "Actions"]} searchbar bordered>
+<Table initial={["id", "created_at", "username", "isactive", "__actions"]} ignoreColumns={["__actions"]} searchbar bordered>
     {#snippet headerAction()}
-        <Button size="s">
+        <Button size="s" onclick={() => {addUser()}}>
             {#snippet icon()}
                 <Icon size="m" iconName="add" fill="inherit" />
             {/snippet}
@@ -59,11 +68,11 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
     {/snippet}
     <TableHeader>
         <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>CreatedAt</TableHead>
-            <TableHead>Username</TableHead>
-            <TableHead>IsActive</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead _for="id">ID</TableHead>
+            <TableHead _for="created_at">CreatedAt</TableHead>
+            <TableHead _for="username">Username</TableHead>
+            <TableHead _for="isactive">IsActive</TableHead>
+            <TableHead _for="__actions">Actions</TableHead>
         </TableRow>
     </TableHeader>
     <TableBody>
@@ -74,7 +83,8 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
                     {
                         iconName: 'logout',
                         title: 'Logout User',
-                        callback: () => {
+                        callback: (e) => {
+                            console.log(e)
                         }
                     },
                     {
@@ -93,7 +103,7 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
                 ]}
             >
                 <TableCell _for="id">{user.ID}</TableCell>
-                <TableCell _for="createdat">{user.CreatedAt}</TableCell>
+                <TableCell _for="created_at">{user.CreatedAt}</TableCell>
                 <TableCell _for="username">{user.Username}</TableCell>
                 <TableCell _for="isactive">{user.IsActive}</TableCell>
             </TableRow>

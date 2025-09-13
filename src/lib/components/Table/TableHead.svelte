@@ -1,14 +1,28 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
+	import { getContext, onMount, type Snippet } from "svelte";
+	import type { TableCtx } from "./Table.svelte";
 
 	type Props = {
+		_for: string;
 		children?: Snippet;
 	};
 
-	let { children }: Props = $props();
+	let { _for, children }: Props = $props();
+
+	let activeColumns = $state()
+	const ctx: TableCtx = getContext("TableCtx")
+	onMount(() => {
+		return ctx.activeColumns.subscribe((x) => {
+			activeColumns = x
+		})
+	})
 </script>
 
-<th style="width: min-content">
+<th 
+	style="width: min-content"
+	data-for={_for}
+	hidden={!activeColumns?.includes(_for)}
+>
 	{@render children?.()}
 </th>
 
@@ -20,5 +34,9 @@
 		font-size: var(--text-size-s);
 		/* color: var(--text-color-muted); */
 		display: none;
+	}
+
+	th:not([hidden]) {
+		display: table-cell;
 	}
 </style>
