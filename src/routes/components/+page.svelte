@@ -57,7 +57,7 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
 
 </Slider>
 
-<Table initial={["id", "created_at", "username", "isactive", "__actions"]} ignoreColumns={["__actions"]} searchbar bordered>
+<Table initial={["id", "createdAt", "username", "isActive", "__actions"]} ignoreColumns={["__actions"]} searchbar bordered>
     {#snippet headerAction()}
         <Button size="s" onclick={() => {addUser()}}>
             {#snippet icon()}
@@ -69,9 +69,9 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
     <TableHeader>
         <TableRow>
             <TableHead _for="id">ID</TableHead>
-            <TableHead _for="created_at">CreatedAt</TableHead>
+            <TableHead _for="createdAt">CreatedAt</TableHead>
             <TableHead _for="username">Username</TableHead>
-            <TableHead _for="isactive">IsActive</TableHead>
+            <TableHead _for="isActive">IsActive</TableHead>
             <TableHead _for="__actions">Actions</TableHead>
         </TableRow>
     </TableHeader>
@@ -103,9 +103,9 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
                 ]}
             >
                 <TableCell _for="id">{user.ID}</TableCell>
-                <TableCell _for="created_at">{user.CreatedAt}</TableCell>
+                <TableCell _for="createdAt">{user.CreatedAt}</TableCell>
                 <TableCell _for="username">{user.Username}</TableCell>
-                <TableCell _for="isactive">{user.IsActive}</TableCell>
+                <TableCell _for="isActive">{user.IsActive}</TableCell>
             </TableRow>
         {/each}
     </TableBody>

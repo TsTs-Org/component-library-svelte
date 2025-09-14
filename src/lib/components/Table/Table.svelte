@@ -41,7 +41,7 @@
 	setContext("TableCtx", ctx);
 
 	$effect(() => ctx.activeColumns.set(
-		activeColumns.map((i) => columns[i].toLowerCase())
+		activeColumns.map((i) => columns[i])
 	))
 
 	function setColumnDisplay(columnIndex: number, display: boolean) {
