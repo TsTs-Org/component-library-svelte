@@ -13,6 +13,7 @@
 		ignoreColumns?: Array<string>;
 		searchbar?: boolean;
 		bordered?: boolean;
+		columnSelector?: boolean;
 		headerAction?: Snippet;
 	};
 
@@ -22,6 +23,7 @@
 		ignoreColumns = [],
 		searchbar = false,
 		bordered = false,
+		columnSelector = false,
 		headerAction,
 	}: Props = $props();
 
@@ -62,9 +64,13 @@
 			let rowContainsString = false;
 	
 			activeColumns.forEach((j) => {
-				const cellText = tbody.rows[i].cells[j].textContent || tbody.rows[i].cells[j].innerText;
-				if (cellText.toLowerCase().includes(searchString.toLowerCase())) {
-					rowContainsString = true;
+				try {
+					const cellText = tbody.rows[i].cells[j].textContent || tbody.rows[i].cells[j].innerText;
+					if (cellText.toLowerCase().includes(searchString.toLowerCase())) {
+						rowContainsString = true;
+					}
+				} catch (error) {
+					
 				}
 			});
 			tbody.rows[i].style.display = rowContainsString ? "" : "none";
@@ -125,6 +131,7 @@
 
 <div class="Table">
 	<div class="header">
+		{#if columnSelector}
 		<Multiselect
 			placeholder="Columns"
 			size="s"
@@ -142,6 +149,7 @@
 				{/if}
 			{/each}
 		</Multiselect>
+		{/if}
 		{#if searchbar}
 			<Input
 				placeholder="Search"

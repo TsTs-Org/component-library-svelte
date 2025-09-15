@@ -4,11 +4,12 @@
 
 	type Props = {
 		_for: string;
+		_value?: any;
 		children?: Snippet;
 		style?: string;
 	};
 
-	let { _for, children, style }: Props = $props();
+	let { _for, _value, children, style }: Props = $props();
 
 	let activeColumns = $state()
 	const ctx: TableCtx = getContext("TableCtx")
@@ -23,6 +24,7 @@
 <td
 	{style}
 	hidden={!activeColumns?.includes(_for)}
+	data-value={_value}
 	data-for={_for}
 >
 	{@render children?.()}

@@ -6,6 +6,8 @@ import RoundChart from "./components/Chart/RoundChart.svelte";
 import Contextcontainer from "./components/Contextcontainer/Contextcontainer.svelte";
 import Contextmenu from "./components/Contextcontainer/Contextmenu.svelte";
 import ContextmenuItem from "./components/Contextcontainer/ContextmenuItem.svelte";
+import DataRow from "./components/Table/DataRow.svelte";
+import DataTable from "./components/Table/DataTable.svelte";
 import Dropdown from "./components/Dropdown/Dropdown.svelte";
 import Dropzone from "./components/DragAndDrop/Dropzone.svelte";
 import Layout from "./components/Layout/Layout.svelte";
@@ -61,6 +63,8 @@ export {
 	Contextcontainer,
 	Contextmenu,
 	ContextmenuItem,
+	DataRow,
+	DataTable,
 	Dropdown,
 	Dropzone,
 	Layout,

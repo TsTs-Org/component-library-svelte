@@ -10,33 +10,29 @@
 		iconName?: string;
 		callback: Function;
 	};
-
+	
 	type Props = {
-		children: Snippet;
+		data: object;
+		children?: Snippet;
 		rowActions?: Array<RowAction>;
 		callback?: Function | undefined;
+		styleOverrides?: Map<string, Snippet>;
+		columns?: string[];
 	};
 
-	let self: HTMLTableRowElement;
 	let actions: HTMLButtonElement;
 	let open = $state(false);
-	let { children, rowActions, callback = undefined }: Props = $props();
+	let { 
+		data, 
+		children, 
+		rowActions, 
+		callback = undefined,
+		styleOverrides,
+		columns,
+	}: Props = $props();
 
 	function getRowValues() {
-		let tdElements = self.querySelectorAll("td");
-		let values: { [key: string]: string | null } = {};
-		tdElements.forEach((td) => {
-			const key = td.getAttribute("data-for");
-			const value = td.getAttribute("data-value");
-			if (key && key != "__actions") {
-				if (value) {
-					values[key] = value;
-				}else {
-					values[key] = td.textContent;
-				}
-			}
-		});
-		return values
+		return data
 	}
 
 	function executeRowAction(callback: Function) {
@@ -60,10 +56,10 @@
 			}
 		});
 	});
+
 </script>
 
 <tr 
-	bind:this={self}
 	onclick={() => { 
 		if(callback != undefined) {
 			callback(getRowValues())
@@ -71,6 +67,15 @@
 	}}
 	class:clickable
 >
+	{#each columns ?? Object.keys(data) as key (key) }
+		<TableCell _for={key}>
+			{#if styleOverrides?.has(key)}
+				{@render styleOverrides.get(key)?.(data[key])}
+			{:else}
+				{data[key]}
+			{/if}
+		</TableCell>
+	{/each}
 	{@render children?.()}
 	{#if !!rowActions}
 		<TableCell

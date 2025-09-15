@@ -6,26 +6,29 @@
 	import EditableH4 from "$lib/components/EditableH4.svelte";
 	import EditableH5 from "$lib/components/EditableH5.svelte";
 	import Slider from "$lib/components/Slider.svelte";
-import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "$lib/index.js";
+	import DataRow from "$lib/components/Table/DataRow.svelte";
+	import DataTable from "$lib/components/Table/DataTable.svelte";
+    import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "$lib/index.js";
+	import type { Snippet } from "svelte";
 
     const display = $state([
         {
-            ID: "2323232323",
-            CreatedAt: "09.11.20011:12:23:14",
-            Username: "Testuser",
-            IsActive: true,
+            id: "2323232323",
+            createdAt: "09.11.20011:12:23:14",
+            username: "Testuser",
+            isActive: true,
         },
         {
-            ID: "2323232324",
-            CreatedAt: "09.11.20011:12:23:14",
-            Username: "Testuser2",
-            IsActive: true,
+            id: "2323232324",
+            createdAt: "09.11.20011:12:23:14",
+            username: "Testuser2",
+            isActive: true,
         },
         {
-            ID: "2323232325",
-            CreatedAt: "09.11.20011:12:23:14",
-            Username: "Testuser3",
-            IsActive: false,
+            id: "2323232325",
+            createdAt: "09.11.20011:12:23:14",
+            username: "Testuser3",
+            isActive: false,
         },
     ])
 
@@ -37,12 +40,16 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
 
     function addUser() {
         display.push({
-            ID: display.length + 1,
-            CreatedAt: "09.11.20011:12:23:14",
-            Username: "Test",
-            IsActive: true,
+            id: display.length + 1,
+            createdAt: "09.11.20011:12:23:14",
+            username: "Test",
+            isActive: true,
         })
     }
+
+    let tableOverrides = new Map([
+        ["isActive", isActiveCell as Snippet], 
+    ])
 
 </script>
 
@@ -56,6 +63,43 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
     <EditableH5 value="teste" placeholder="place"></EditableH5>
 
 </Slider>
+
+<DataTable
+    columnSelector
+    searchbar
+    styleOverrides={tableOverrides}
+    data={display}
+    columns={[
+        {key: "isActive", hideToggle: true, title: ""},
+        {key: "username"},
+        {key: "id"},
+        {key: "createdAt", initiallyHidden: true}
+    ]} 
+    rowActions={[
+        {
+            iconName: 'logout',
+            title: 'Logout User',
+            callback: (e) => {
+                console.log(e)
+            }
+        }
+    ]} 
+    rowCallback={(info) => {proxyOpen(info)}}
+>
+{#snippet headerAction()}
+    <Button size="s" onclick={() => {addUser()}}>
+        {#snippet icon()}
+            <Icon size="m" iconName="add" fill="inherit" />
+        {/snippet}
+        AddUser
+    </Button>
+{/snippet}
+
+</DataTable>
+
+{#snippet isActiveCell(data)}
+    <p>testo</p>
+{/snippet}
 
 <Table initial={["id", "createdAt", "username", "isActive", "__actions"]} ignoreColumns={["__actions"]} searchbar bordered>
     {#snippet headerAction()}
@@ -76,8 +120,10 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
         </TableRow>
     </TableHeader>
     <TableBody>
-        {#each display as user (user.ID)}
-            <TableRow
+        {#each display as user (user.id)}
+            <DataRow
+                styleOverrides={tableOverrides}
+                data={user}
                 callback={(info) => {proxyOpen(info)}}
                 rowActions={[
                     {
@@ -102,11 +148,11 @@ import { Button, Dropzone, Icon, Input, Popover, Table, TableBody, TableCell, Ta
                     }
                 ]}
             >
-                <TableCell _for="id">{user.ID}</TableCell>
-                <TableCell _for="createdAt">{user.CreatedAt}</TableCell>
-                <TableCell _for="username">{user.Username}</TableCell>
-                <TableCell _for="isActive">{user.IsActive}</TableCell>
-            </TableRow>
+                <!-- <TableCell _value={["test", "nothertest"]} _for="id">{user.id}</TableCell>
+                <TableCell _for="createdAt">{user.createdAt}</TableCell>
+                <TableCell _for="username">{user.username}</TableCell>
+                <TableCell _for="isActive">{user.isActive}</TableCell> -->
+            </DataRow>
         {/each}
     </TableBody>
 </Table>
