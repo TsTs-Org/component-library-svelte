@@ -127,6 +127,10 @@
 		flex-shrink: 1;
 	}
 
+	.main {
+		overflow: auto;
+	}
+
 	.background-dimmer {
 		position: fixed;
 		z-index: 1001;
