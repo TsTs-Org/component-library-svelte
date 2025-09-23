@@ -1,13 +1,17 @@
 <script lang="ts">
+	import { browser } from "$app/environment";
 	import { Icon } from "$lib/index.js";
-	import { onMount, type Snippet } from "svelte";
-	import type { ChangeEventHandler, HTMLInputAttributes } from "svelte/elements";
+	import { onDestroy, onMount, type Snippet } from "svelte";
+	import type { ChangeEventHandler, EventHandler, FocusEventHandler } from "svelte/elements";
 
 	type Variant = "ghost" | "bordered" | "colored";
-	type Size = "s" | "m" | "x";
+	type Size = "s" | "m" | "l";
 	type Props = {
 		onchange?: ChangeEventHandler<HTMLInputElement>;
-		value?: string;
+		onblur?: FocusEventHandler<HTMLInputElement> | undefined;
+		onsubmit?: Function;
+		oncancel?: Function;
+		value?: string | number;
 		placeholder?: string;
 		type?: string;
 		variant?: Variant;
@@ -20,6 +24,9 @@
 
 	let {
 		onchange = () => {},
+		onblur = undefined,
+		onsubmit,
+		oncancel,
 		value = $bindable(),
 		placeholder,
 		type = "text",
@@ -32,7 +39,7 @@
 		...restProps
 	}: Props = $props();
 
-	const initial_type = restProps.type;
+	const initial_type = type;
 	let self: HTMLInputElement;
 	let focused = $state(false);
 	let show_password = $state(false);
@@ -43,9 +50,31 @@
 		self.type = show_password ? "text" : "password";
 	}
 
-	onMount(() => {
+	function handleKey(ev: KeyboardEvent): void {
+		if (ev.key == "Escape" && oncancel) {
+			oncancel(value)
+		}else if (ev.key == "Enter" && onsubmit) {
+			onsubmit(value)
+		}
+	}
+
+	onMount(() => { 
 		self.type = initial_type;
+		document.addEventListener("keyup", handleKey)
 	});
+
+	onDestroy(() => {
+		if (browser) {document.removeEventListener("keyup", handleKey)}
+	})
+
+	function _onblur(e: any) {
+		if (onblur != undefined) {
+			onblur(e)
+		} else if (oncancel) {
+			oncancel(e)
+		}
+	}
+
 </script>
 
 <div class="InputWrapper">
@@ -59,6 +88,7 @@
 			bind:value
 			{placeholder}
 			{onchange}
+			onblur={_onblur}
 			class={[variant, size]}
 			{...restProps}
 		/>
