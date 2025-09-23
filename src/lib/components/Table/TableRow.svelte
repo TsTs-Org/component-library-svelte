@@ -113,7 +113,7 @@
 </tr>
 
 <style lang="scss">
-	tr {
+	tr:has(td) {
 		border-bottom: 1px solid var(--border-color);
 		&:hover {
 			background-color: var(--hover-color);
