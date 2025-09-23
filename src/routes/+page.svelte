@@ -11,13 +11,19 @@
 </Button>
 
 
-<Slider bind:this={slider}>
+<Slider width="medium" bind:this={slider}>
     
     {#snippet title()}
         <h2>Test</h2>
     {/snippet}
 
-    <h3>TestTwo</h3>
+    {#each { length: 250 } as _, i}
+        <h5>Test {i}</h5>
+    {/each}
+
+    {#snippet footer()}
+        <Button>Test</Button>
+    {/snippet}
 
 
 </Slider>

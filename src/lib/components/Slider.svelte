@@ -8,18 +8,18 @@
 		children?: Snippet;
 		title?: Snippet;
 		footer?: Snippet;
+		width?: "small" | "medium" | "large" | "full";
 	};
 	let { 
 		children,
 		title,
 		footer,
+		width = "medium",
 	}: Props = $props();
 
 	let open = $state(false);
 
-	onMount(() => {
-		document.addEventListener("keyup", handleEscKey);
-	});
+	onMount(() => { document.addEventListener("keyup", handleEscKey); });
 
 	onDestroy(() => {
 		if (browser) { document.removeEventListener("keyup", handleEscKey); }
@@ -66,7 +66,7 @@
 		role="none"
 	>
 		<div
-			class={"Slider"}
+			class={["Slider", width]}
 			onclick={(ev) => { ev.stopPropagation(); }}
 			role="none"
 			transition:slideFromRight
@@ -95,9 +95,6 @@
 		box-sizing: border-box;
 		position: relative;
 		overflow: hidden;
-		min-width: 400px;
-		width: 35%;
-		max-width: 600px;
 		height: 100%;
 		margin-left: auto;
 		background-color: var(--foreground-color);
@@ -106,6 +103,33 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr auto;
+
+		// Full screen for mobile
+		min-width: 100vw;
+		width: 100vw;
+		max-width: unset;
+	}
+
+	@media screen and (min-width: 560px) {
+		.Slider.small {
+			min-width: 400px;
+			max-width: 400px;
+		}
+		.Slider.medium {
+			min-width: 400px;
+			width: 35%;
+			max-width: 600px;
+		}
+		.Slider.large {
+			min-width: 600px;
+			width: 60%;
+			max-width: 1000px;
+		}
+		.Slider.full {
+			min-width: 100vw;
+			width: 100vw;
+			max-width: unset;
+		}
 	}
 
 	.header {

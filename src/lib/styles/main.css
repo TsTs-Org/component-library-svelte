@@ -3,6 +3,32 @@
 	font-family: 'Courier New', Courier, monospace;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  padding: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: var(--background-color);
+	margin-block: 30px;
+	margin-inline: 20px;
+  	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--hover-color);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
 .__editable_element {
 	background-color: transparent;
 	color: var(--text-color);
