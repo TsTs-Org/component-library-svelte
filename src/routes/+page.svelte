@@ -1,8 +1,10 @@
 <script lang="ts">
-	import Slider from "$lib/components/Slider.svelte";
+	import EditableH1 from "$lib/components/EditableHeading.svelte";
+import Slider from "$lib/components/Slider.svelte";
 	import { Button } from "$lib/index.js";
 
     let slider: Slider;
+    let editable = $state(false)
 
 </script>
 
@@ -10,6 +12,11 @@
     Open
 </Button>
 
+<Button onclick={() => editable = !editable}>
+    Swap editable
+</Button>
+
+<EditableH1 tag="h3" value="test" oncancel={(val) => {console.log(val)}}></EditableH1>
 
 <Slider width="medium" bind:this={slider}>
     

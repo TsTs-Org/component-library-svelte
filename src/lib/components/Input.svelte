@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { browser } from "$app/environment";
 	import { Icon } from "$lib/index.js";
-	import { onDestroy, onMount, type Snippet } from "svelte";
-	import type { ChangeEventHandler, EventHandler, FocusEventHandler } from "svelte/elements";
+	import { onMount, type Snippet } from "svelte";
+	import type { ChangeEventHandler, FocusEventHandler } from "svelte/elements";
 
 	type Variant = "ghost" | "bordered" | "colored";
 	type Size = "s" | "m" | "l";
@@ -25,8 +24,8 @@
 	let {
 		onchange = () => {},
 		onblur = undefined,
-		onsubmit,
-		oncancel,
+		onsubmit = undefined,
+		oncancel = undefined,
 		value = $bindable(),
 		placeholder,
 		type = "text",
@@ -42,36 +41,38 @@
 	const initial_type = type;
 	let self: HTMLInputElement;
 	let focused = $state(false);
-	let show_password = $state(false);
+	let showPassword = $state(false);
+	let skipBlur = $state(false);
 
 	function swapPasswordDisplay(e: Event) {
 		e.preventDefault();
-		show_password = !show_password;
-		self.type = show_password ? "text" : "password";
+		showPassword = !showPassword;
+		self.type = showPassword ? "text" : "password";
 	}
 
 	function handleKey(ev: KeyboardEvent): void {
 		if (ev.key == "Escape" && oncancel) {
+			skipBlur = true
 			oncancel(value)
 		}else if (ev.key == "Enter" && onsubmit) {
+			skipBlur = true
 			onsubmit(value)
 		}
 	}
 
 	onMount(() => { 
 		self.type = initial_type;
-		document.addEventListener("keyup", handleKey)
 	});
 
-	onDestroy(() => {
-		if (browser) {document.removeEventListener("keyup", handleKey)}
-	})
-
 	function _onblur(e: any) {
+		if (skipBlur) {
+			skipBlur = false;
+			return;
+		}
 		if (onblur != undefined) {
 			onblur(e)
 		} else if (oncancel) {
-			oncancel(e)
+			oncancel(value)
 		}
 	}
 
@@ -89,6 +90,7 @@
 			{placeholder}
 			{onchange}
 			onblur={_onblur}
+			onkeydown={handleKey}
 			class={[variant, size]}
 			{...restProps}
 		/>
@@ -108,7 +110,7 @@
 				onclick={swapPasswordDisplay}
 			>
 				<Icon
-					iconName={show_password ? "visibility" : "visibility_off"}
+					iconName={showPassword ? "visibility" : "visibility_off"}
 					color="inherit"
 				/>
 			</span>

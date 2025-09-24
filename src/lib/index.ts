@@ -37,11 +37,7 @@ import Button from "./components/Button.svelte";
 import Card from "./components/Card.svelte";
 import Checkbox from "./components/Checkbox.svelte";
 import Editable from "./components/Editable.svelte";
-import EditableH1 from "./components/EditableH1.svelte";
-import EditableH2 from "./components/EditableH2.svelte";
-import EditableH3 from "./components/EditableH3.svelte";
-import EditableH4 from "./components/EditableH4.svelte";
-import EditableH5 from "./components/EditableH5.svelte";
+import EditableH1 from "./components/EditableHeading.svelte";
 import Icon from "./components/Icon.svelte";
 import Input from "./components/Input.svelte";
 import Loader from "./components/Loader.svelte";
@@ -93,10 +89,6 @@ export {
 	Button,
 	Editable,
 	EditableH1,
-	EditableH2,
-	EditableH3,
-	EditableH4,
-	EditableH5,
 	Card,
 	Checkbox,
 	Icon,

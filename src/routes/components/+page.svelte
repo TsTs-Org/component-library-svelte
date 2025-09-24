@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Editable from "$lib/components/Editable.svelte";
-	import EditableH1 from "$lib/components/EditableH1.svelte";
+	import EditableH1 from "$lib/components/EditableHeading.svelte";
 	import EditableH2 from "$lib/components/EditableH2.svelte";
 	import EditableH3 from "$lib/components/EditableH3.svelte";
 	import EditableH4 from "$lib/components/EditableH4.svelte";
