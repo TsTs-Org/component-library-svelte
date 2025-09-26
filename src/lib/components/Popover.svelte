@@ -12,9 +12,20 @@
 		children: Snippet;
 		popoverTrigger: Snippet<[() => void]>;
 		title: Snippet;
+		closeStyle?: "close" | "back";
 		minimumSize?: boolean;
+		finalSizePercentage?: { x: number; y: number } | { general: number };
 	};
-	let { children, popoverTrigger, title, minimumSize = false }: Props = $props();
+	let {
+		children,
+		popoverTrigger,
+		title,
+		minimumSize = false,
+		closeStyle = "close",
+		finalSizePercentage = { general: 80 },
+	}: Props = $props();
+
+	type Size = "s" | "m" | "l";
 
 	let open = $state(false);
 
@@ -28,8 +39,8 @@
 	// TODO: think about what happens when dynamic is needed
 	// or when the trigger element changes size because of window resize for example
 	const final = {
-		width: "80vw",
-		height: "80vh",
+		width: `${"general" in finalSizePercentage ? finalSizePercentage.general : finalSizePercentage.x}vw`,
+		height: `${"general" in finalSizePercentage ? finalSizePercentage.general : finalSizePercentage.y}vh`,
 		left: "50vw",
 		top: "50vh",
 		translateX: "-50%",
@@ -146,6 +157,31 @@
 	{@render popoverTrigger?.(openTrigger)}
 </div>
 
+{#snippet closeButton(size: Size, iconName: string)}
+	<button
+		onclick={() => {
+			open = false;
+		}}
+		><div
+			class="children-opacity-changer"
+			transition:changeOpacityAnimation
+		>
+			<Icon
+				{iconName}
+				{size}
+			></Icon>
+		</div>
+	</button>
+{/snippet}
+
+{#snippet iconRight(size: Size)}
+	{@render closeButton(size, "close")}
+{/snippet}
+
+{#snippet iconLeft(size: Size)}
+	{@render closeButton(size, "chevron_left")}
+{/snippet}
+
 {#if open}
 	<div
 		class="background-dimmer"
@@ -166,23 +202,10 @@
 			bind:this={childrenWrapperElement}
 			transition:growToPopoverAnimation
 		>
-			<Card>
-				{#snippet iconRight(size)}
-					<button
-						onclick={() => {
-							open = false;
-						}}
-						><div
-							class="children-opacity-changer"
-							transition:changeOpacityAnimation
-						>
-							<Icon
-								iconName="close"
-								{size}
-							></Icon>
-						</div>
-					</button>
-				{/snippet}
+			<Card
+				iconRight={closeStyle === "close" ? iconRight : undefined}
+				iconLeft={closeStyle === "back" ? iconLeft : undefined}
+			>
 				{#snippet title()}
 					<div
 						class="children-opacity-changer"
