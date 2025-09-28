@@ -14,10 +14,10 @@
 	let el: Calendar;
 </script>
 
-<Story name="Selectable days">
+<Story name="Default">
 	{#snippet template(args)}
 		<Calendar
-			dateInMonth={(function () {
+			highlightedDate={(function () {
 				const today = new Date();
 				return {
 					year: today.getFullYear(),
@@ -27,7 +27,7 @@
 			})()}
 			bind:this={el}
 			onclick={(dateOfClickedDisplay: SimplifiedDate) => {
-				el.toggleDateSelection(dateOfClickedDisplay);
+				console.log($state.snapshot(dateOfClickedDisplay));
 			}}
 		></Calendar>
 	{/snippet}

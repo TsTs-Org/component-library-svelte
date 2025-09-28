@@ -42,6 +42,7 @@ import Icon from "./components/Icon.svelte";
 import Input from "./components/Input.svelte";
 import Loader from "./components/Loader.svelte";
 import OverflowContainer from "./components/OverflowContainer.svelte";
+import Day from "./components/Calendar/Day.svelte";
 import Popover from "./components/Popover.svelte";
 import ScrollContainer from "./components/ScrollContainer.svelte";
 import Seperator from "./components/Seperator.svelte";
@@ -50,6 +51,7 @@ import Textarea from "./components/Textarea.svelte";
 import ThemeModeButton from "./components/ThemeModeButton.svelte";
 import Themify from "./components/Themify.svelte";
 import Calendar from "./components/Calendar/Calendar.svelte";
+import CalendarSingleSelect from "./components/Calendar/CalendarSingleSelect.svelte";
 
 export {
 	Accordion,
@@ -86,6 +88,7 @@ export {
 	// Tabs,
 	// TabTrigger,
 	Calendar,
+	CalendarSingleSelect,
 	Button,
 	Editable,
 	EditableH1,
@@ -95,6 +98,7 @@ export {
 	Input,
 	Loader,
 	OverflowContainer,
+	Day,
 	Popover,
 	ScrollContainer,
 	Seperator,

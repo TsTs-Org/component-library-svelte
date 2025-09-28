@@ -11,11 +11,11 @@
 	type Props = {
 		day: DateNumber;
 		displayState: DisplayState;
-		isInTargetedMonth: boolean;
+		isInTargetTimeframe: boolean;
 		onclick: () => void; // the date gets passed in the Calendar Component through something like onclick = () => {onclick(date)}
 		isFocused: boolean;
 	};
-	let { day, displayState, isInTargetedMonth, isFocused, onclick }: Props = $props();
+	let { day, displayState, isInTargetTimeframe, isFocused, onclick }: Props = $props();
 
 	function getClassesFromState(state: DisplayState, isInMonth: boolean): String[] {
 		let classes: string[] = [];
@@ -46,7 +46,7 @@
 	}
 </script>
 
-<div class={["date-wrapper", ...getClassesFromState(displayState, isInTargetedMonth)]}>
+<div class={["date-wrapper", ...getClassesFromState(displayState, isInTargetTimeframe)]}>
 	<div
 		role="button"
 		tabindex="0"

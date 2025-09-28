@@ -1,43 +1,51 @@
 <script lang="ts">
 	import { onMount, type Snippet } from "svelte";
 	import Day, { type DisplayState } from "./Day.svelte";
-	import type { MonthNumber, SimplifiedDate } from "./types.js";
+	import type { SimplifiedDate } from "./types.js";
 	import WeekDayDisplay from "./WeekDayDisplay.svelte";
-	import { nextDay, previousDay, sanitizeDate } from "./weekUtils.js";
+	import {
+		areDatesEqual,
+		fromJsDate,
+		getDayOfTheWeek,
+		getFirstDayOfMonth,
+		sanitizeDate,
+	} from "./simplifiedDateUtils.js";
 
-	// TODO: when clicking the day, it the current year/month should be retrieved from a context created by the calendar and passed to the handle function
-	// how does this work for the dates outside of the selected month?
-
-	// TODO: the Calendar should take a snippet that is rendered for each day. it has (day, month, year) as input
-	// when no snipped is supplied, the number gets rendered in a standard way (-> this standard way could be exported as a snippet as well)
-	// Problem: than there has to be a different way to handle a click -> either handle click or custom snippet insertion
-
-	// TODO: does it make sense to use the european week-format (start week with monday) by default?
+	// TODO: add additional option for year & week overview -> year could serve as something like commit overview
 
 	type DefaultDisplay = {
 		onclick: (dateOfClickedDisplay: SimplifiedDate) => void;
 		dateDisplaySnippet?: never;
+		highlightedDate?: SimplifiedDate;
 	};
 
 	type CustomDisplay = {
+		highlightedDate?: never;
 		onclick?: never;
 		dateDisplaySnippet: Snippet<[simplifiedDate: SimplifiedDate]>;
 	};
 
 	type Props = {
-		dateInMonth: SimplifiedDate;
 		useAmericanWeekFormat?: boolean;
+		referenceDate?: SimplifiedDate;
+		getDisplayState?: (simplifiedDate: SimplifiedDate) => DisplayState;
 	} & (DefaultDisplay | CustomDisplay);
 
-	let { dateInMonth, onclick, dateDisplaySnippet, useAmericanWeekFormat = false }: Props = $props();
+	let {
+		highlightedDate,
+		onclick,
+		dateDisplaySnippet,
+		useAmericanWeekFormat = false,
 
-	function getFirstDayOfMonth(date: Date): Date {
-		return new Date(date.getFullYear(), date.getMonth(), 1);
-	}
+		getDisplayState = (_) => {
+			return "deselected";
+		},
+		referenceDate = fromJsDate(new Date()),
+	}: Props = $props();
 
-	function getMonthDateOffset(date: Date, useAmericanFormat: boolean): number {
-		let firstOfMonth = getFirstDayOfMonth(date);
-		let monthOffset = firstOfMonth.getDay();
+	function getMonthDateOffset(date: SimplifiedDate, useAmericanFormat: boolean): number {
+		const firstOfMonth = getFirstDayOfMonth(date);
+		let monthOffset = getDayOfTheWeek(firstOfMonth);
 		if (!useAmericanFormat) {
 			monthOffset = monthOffset - 1;
 		}
@@ -60,14 +68,11 @@
 
 	let weeks: Array<Array<SimplifiedDate>> = $state([]);
 
-	let currentDate = $state(new Date());
-	let targetedMonth = $state(currentDate.getMonth() as MonthNumber);
-
 	onMount(() => {
-		const currentMonth = currentDate.getMonth();
-		const currentYear = currentDate.getFullYear();
-		const firstDayOfMonth = getFirstDayOfMonth(currentDate).getDate();
-		const monthDateOffset = getMonthDateOffset(currentDate, useAmericanWeekFormat);
+		const currentMonth = referenceDate.month;
+		const currentYear = referenceDate.year;
+		const firstDayOfMonth = 1;
+		const monthDateOffset = getMonthDateOffset(referenceDate, useAmericanWeekFormat);
 
 		for (let i = 0; i < 6; i++) {
 			const day = firstDayOfMonth - monthDateOffset + 7 * i;
@@ -75,67 +80,6 @@
 			weeks.push(week);
 		}
 	});
-
-	// FIXME: this structure seems flawed. the lookup is awful, as it has to be done via filter, etc.
-	// would another system, eg. {year0: {month0: {day0: true}}, year1: ...} make sense? where only those dates are present which are actually selected (year0.month0.day1) could be unset
-
-	let selectedDates = $state<SimplifiedDate[]>([]); // is it possible to create a list of states? for each month? does this even make sense?
-	// a set can't be used here, as objects are compared via reference not value
-
-	export function toggleDateSelection(date: SimplifiedDate): void {
-		if (isDateSelected(date)) {
-			deselectDate(date);
-		} else {
-			selectDate(date);
-		}
-	}
-
-	function selectDate(date: SimplifiedDate): void {
-		if (!isDateSelected(date)) {
-			selectedDates.push(date);
-			selectedDates = selectedDates;
-		}
-	}
-
-	function deselectDate(date: SimplifiedDate): void {
-		selectedDates = selectedDates.filter((currentDate) => {
-			return !areDatesEqual(date, currentDate);
-		});
-	}
-
-	function isDateSelected(date: SimplifiedDate): boolean {
-		return (
-			selectedDates.find((currentDate) => {
-				return areDatesEqual(date, currentDate);
-			}) !== undefined
-		);
-	}
-
-	function areDatesEqual(firstDate: SimplifiedDate, secondDate: SimplifiedDate): boolean {
-		return (
-			firstDate.day === secondDate.day &&
-			firstDate.month === secondDate.month &&
-			firstDate.year === secondDate.year
-		);
-	}
-
-	function getDisplayState(date: SimplifiedDate): DisplayState {
-		if (!isDateSelected(date)) return "deselected";
-
-		const previousDate = previousDay(date);
-		const nextDate = nextDay(date);
-
-		const previousDateSelected = isDateSelected(previousDate);
-		const nextDateSelected = isDateSelected(nextDate);
-
-		if (previousDateSelected && nextDateSelected) {
-			return "connected-both";
-		} else if (previousDateSelected) {
-			return "connected-l";
-		} else if (nextDateSelected) {
-			return "connected-r";
-		} else return "disconnected";
-	}
 
 	/* TODO: use this method to conditionally exclude functions, depending on input. there seems to be no way to exclude exported fields from autocompletion.
     However when changing the type in index.ts and only importing it from there, this might be possible
@@ -161,9 +105,9 @@
 					<Day
 						displayState={getDisplayState(date)}
 						day={date.day}
-						isInTargetedMonth={date.month === targetedMonth}
+						isInTargetTimeframe={date.month === referenceDate.month}
 						onclick={() => onclick(date)}
-						isFocused={areDatesEqual(date, dateInMonth)}
+						isFocused={!!highlightedDate && areDatesEqual(date, highlightedDate)}
 					></Day>
 				{:else}
 					<!-- using ! is fine, because {!!onclick, else} implies that CustomSnippet is used -->
