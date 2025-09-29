@@ -119,3 +119,6 @@ export { SimpleLogin, LoginAndRegister, ThemeSettings };
 import { setGeneralTheme } from "./components/Themify.svelte";
 
 export { setGeneralTheme };
+
+export * from "./components/Calendar/simplifiedDateUtils.js";
+export type * from "./components/Calendar/types.js";

@@ -10,7 +10,7 @@ export function fromJsDate(date: Date): SimplifiedDate {
 	return simplifiedDate;
 }
 
-function toJsDate(simplifiedDate: SimplifiedDate): Date {
+export function toJsDate(simplifiedDate: SimplifiedDate): Date {
 	return new Date(simplifiedDate.year, simplifiedDate.month, simplifiedDate.day);
 }
 
