@@ -15,6 +15,10 @@
 		closeStyle?: "close" | "back";
 		minimumSize?: boolean;
 		finalSizePercentage?: { x: number; y: number } | { general: number };
+		/**
+		 * this should be applied for popovers that also use 100% height
+		 */
+		applySafeAreaInset?: boolean;
 	};
 	let {
 		children,
@@ -23,6 +27,7 @@
 		minimumSize = false,
 		closeStyle = "close",
 		finalSizePercentage = { general: 80 },
+		applySafeAreaInset = false,
 	}: Props = $props();
 
 	type Size = "s" | "m" | "l";
@@ -203,6 +208,7 @@
 			transition:growToPopoverAnimation
 		>
 			<Card
+				{applySafeAreaInset}
 				iconRight={closeStyle === "close" ? iconRight : undefined}
 				iconLeft={closeStyle === "back" ? iconLeft : undefined}
 			>

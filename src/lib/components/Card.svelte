@@ -11,6 +11,7 @@
 		iconRight?: Snippet<[Size]>;
 		children?: Snippet;
 		transparent?: boolean;
+		applySafeAreaInset?: boolean;
 	} & Omit<HTMLAttributes<any>, "title">;
 
 	let {
@@ -20,13 +21,14 @@
 		iconRight,
 		children,
 		transparent = false,
+		applySafeAreaInset = false,
 		...restProps
 	}: Props = $props();
 </script>
 
 <!-- TODO: min-width that is calculated from header-gap -->
 <div
-	class={["card", size]}
+	class={["card", size, applySafeAreaInset && "respect-safe-areas"]}
 	class:transparent
 	{...restProps}
 >
@@ -67,6 +69,13 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr auto; /* 3 because there could be a bottom bar */
+		border-radius: var(--card-border-radius);
+		padding: var(--card-padding);
+
+		&.respect-safe-areas {
+			padding-top: calc(env(safe-area-inset-top) + var(--card-padding));
+			padding-bottom: calc(env(safe-area-inset-bottom) + var(--card-padding));
+		}
 
 		&.transparent {
 			background-color: transparent;
@@ -75,39 +84,27 @@
 		/* TODO: xs variant */
 
 		&.s {
-			border-radius: var(--border-radius-s);
-			padding: var(--padding-s);
-			& > .header {
-				gap: var(--padding-xs);
-				margin-bottom: var(--padding-xs);
-				& > .title {
-					font-size: var(--text-size-s);
-				}
-			}
+			--card-border-radius: var(--border-radius-s);
+			--card-padding: var(--padding-s);
+			--card-header-gap: var(--padding-xs);
+			--card-header-margin-bottom: var(--padding-xs);
+			--card-header-title-font-size: var(--text-size-s);
 		}
 
 		&.m {
-			border-radius: var(--border-radius-m);
-			padding: var(--padding-m);
-			& > .header {
-				gap: var(--padding-s);
-				margin-bottom: var(--padding-s);
-				& > .title {
-					font-size: var(--text-size-m);
-				}
-			}
+			--card-border-radius: var(--border-radius-m);
+			--card-padding: var(--padding-m);
+			--card-header-gap: var(--padding-s);
+			--card-header-margin-bottom: var(--padding-s);
+			--card-header-title-font-size: var(--text-size-m);
 		}
 
 		&.l {
-			border-radius: var(--border-radius-l);
-			padding: var(--padding-l);
-			& > .header {
-				gap: var(--padding-m);
-				margin-bottom: var(--padding-m);
-				& > .title {
-					font-size: var(--text-size-l);
-				}
-			}
+			--card-border-radius: var(--border-radius-l);
+			--card-padding: var(--padding-l);
+			--card-header-gap: var(--padding-m);
+			--card-header-margin-bottom: var(--padding-m);
+			--card-header-title-font-size: var(--text-size-l);
 		}
 
 		& .header {
@@ -117,6 +114,8 @@
 			width: 100%;
 			height: fit-content;
 			min-width: 0;
+			gap: var(--card-header-gap);
+			margin-bottom: var(--card--header-margin-bottom);
 
 			& .title {
 				min-width: 0;
@@ -126,6 +125,7 @@
 				text-align: left;
 				flex-grow: 1;
 				flex-shrink: 1;
+				font-size: var(--card-header-title-font-size);
 			}
 		}
 
