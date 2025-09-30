@@ -189,9 +189,9 @@
 				display: flex;
 				align-items: center;
 			}
-			input {
+			:global(.Input) {
 				flex-grow: 1;
-				height: 100%;
+				// height: 100%;
 			}
 		}
 	}

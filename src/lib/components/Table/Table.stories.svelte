@@ -22,8 +22,11 @@
     {#snippet template(args)}
     <Table
     {...args}
-    initial={["", "Name", "Lastname", "Actions"]}
-    ignoreColumns={[""]}   
+    initial={["test", "name", "lastname", "__actions"]}
+    ignoreColumns={["test", "__actions"]}
+    searchbar
+    columnSelector
+    bordered
 >
     {#snippet headerAction()}
         <Button size="s">
@@ -38,11 +41,11 @@
     {/snippet}
     <TableHeader>
         <TableRow>
-            <TableHead></TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Middlename</TableHead>
-            <TableHead>Lastname</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead _for="test"></TableHead>
+            <TableHead _for="name">Name</TableHead>
+            <TableHead _for="middlename">Middlename</TableHead>
+            <TableHead _for="lastname">Lastname</TableHead>
+            <TableHead _for="__actions">Actions</TableHead>
         </TableRow>
     </TableHeader>
     <TableBody>
@@ -57,7 +60,7 @@
                 },
             ]}
         >
-            <TableCell _for="">O</TableCell>
+            <TableCell _for="test">O</TableCell>
             <TableCell _for="name">Kevien</TableCell>
             <TableCell _for="middlename">Matthias</TableCell>
             <TableCell _for="lastname">Flieger</TableCell>
@@ -72,7 +75,7 @@
                 },
             ]}
         >
-            <TableCell _for="">O</TableCell>
+            <TableCell _for="test">O</TableCell>
             <TableCell _for="name">Michael</TableCell>
             <TableCell _for="middlename">Matthias</TableCell>
             <TableCell _for="lastname">Kiehn</TableCell>
@@ -92,22 +95,12 @@
                 },
             }
         ]}>
-            <TableCell _for="">O</TableCell>
+            <TableCell _for="test">O</TableCell>
             <TableCell _for="name">Moritz</TableCell>
             <TableCell _for="middlename">Matthias</TableCell>
             <TableCell _for="lastname">Maier</TableCell>
         </TableRow>
     </TableBody>
-    <TableFooter>
-        <TableRow>
-
-            <TableCell _for="_none"></TableCell>
-            <TableCell _for="_none">Data</TableCell>
-            <TableCell _for="_none"></TableCell>
-            <TableCell _for="_none"></TableCell>
-            <TableCell _for="_none">100</TableCell>
-        </TableRow>
-    </TableFooter>
 </Table>
     {/snippet}
 </Story>

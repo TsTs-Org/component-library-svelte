@@ -5,19 +5,21 @@
 	import { blur, fade, slide } from "svelte/transition";
 
 	type Props = {
+		open?: boolean;
 		children?: Snippet;
 		title?: Snippet;
 		footer?: Snippet;
 		width?: "small" | "medium" | "large" | "full";
 	};
 	let { 
+		open = $bindable(false),
 		children,
 		title,
 		footer,
 		width = "medium",
 	}: Props = $props();
 
-	let open = $state(false);
+	// let open = $state(false);
 
 	onMount(() => { document.addEventListener("keyup", handleEscKey); });
 
