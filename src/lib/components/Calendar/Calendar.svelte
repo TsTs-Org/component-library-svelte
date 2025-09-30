@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, type Snippet } from "svelte";
+	import { type Snippet } from "svelte";
 	import Day, { type DisplayState } from "./Day.svelte";
 	import type { SimplifiedDate } from "./types.js";
 	import WeekDayDisplay from "./WeekDayDisplay.svelte";
@@ -68,7 +68,8 @@
 
 	let weeks: Array<Array<SimplifiedDate>> = $state([]);
 
-	onMount(() => {
+	function calculateWeeks(): SimplifiedDate[][] {
+		let weekList = [];
 		const currentMonth = referenceDate.month;
 		const currentYear = referenceDate.year;
 		const firstDayOfMonth = 1;
@@ -77,9 +78,10 @@
 		for (let i = 0; i < 6; i++) {
 			const day = firstDayOfMonth - monthDateOffset + 7 * i;
 			const week = weekDaysFromStartDay(currentYear, currentMonth, day);
-			weeks.push(week);
+			weekList.push(week);
 		}
-	});
+		return weekList;
+	}
 
 	/* TODO: use this method to conditionally exclude functions, depending on input. there seems to be no way to exclude exported fields from autocompletion.
     However when changing the type in index.ts and only importing it from there, this might be possible
@@ -98,7 +100,7 @@
 	<div class="week-wrapper">
 		<WeekDayDisplay {useAmericanWeekFormat}></WeekDayDisplay>
 	</div>
-	{#each weeks as week}
+	{#each calculateWeeks() as week}
 		<div class="week-wrapper">
 			{#each week as date}
 				{#if !!onclick}

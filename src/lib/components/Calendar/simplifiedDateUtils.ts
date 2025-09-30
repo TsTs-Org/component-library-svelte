@@ -24,6 +24,14 @@ export function getFirstDayOfMonth(date: SimplifiedDate): SimplifiedDate {
 	return { ...date, day: 1 };
 }
 
+export function getFirstDayOfNextMonth(dayInThisMonth: SimplifiedDate) {
+	return sanitizeDate(dayInThisMonth.year, dayInThisMonth.month + 1, 1);
+}
+
+export function getFirstDayOfPreviousMonth(dayInThisMonth: SimplifiedDate) {
+	return sanitizeDate(dayInThisMonth.year, dayInThisMonth.month - 1, 1);
+}
+
 export function sanitizeDate(year: number, monthLike: number, dayLike: number): SimplifiedDate {
 	const sanitizer = new Date(year, monthLike, dayLike);
 	return fromJsDate(sanitizer);
