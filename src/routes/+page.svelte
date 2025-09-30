@@ -1,40 +1,28 @@
 <script lang="ts">
-	import EditableH1 from "$lib/components/EditableHeading.svelte";
-import Slider from "$lib/components/Slider.svelte";
-	import { Button } from "$lib/index.js";
+	import Icon from "$lib/components/Icon.svelte";
+	import Input from "$lib/components/Input.svelte";
+	import { EditableHeading } from "$lib/index.js";
+    let test = $state(false);
 
-    let slider: Slider;
-    let editable = $state(false)
-
+    function submit(val: string) {
+        console.log(val)
+        test = false;
+    }
 </script>
+<Input
+    autofocus
+    onsubmit={submit}
+    oncancel={submit}
+>
+</Input>
 
-<Button onclick={() => slider.openSlider()}>
-    Open
-</Button>
-
-<Button onclick={() => editable = !editable}>
-    Swap editable
-</Button>
-
-<EditableH1 tag="h3" value="test" oncancel={(val) => {console.log(val)}}></EditableH1>
-
-<Slider width="medium" bind:this={slider}>
-    
-    {#snippet title()}
-        <h2>Test</h2>
-    {/snippet}
-
-    {#each { length: 250 } as _, i}
-        <h5>Test {i}</h5>
-    {/each}
-
-    {#snippet footer()}
-        <Button>Test</Button>
-    {/snippet}
-
-
-</Slider>
-
-<style lang="scss">
-
-</style>
+{#if test}
+<Input
+    autofocus
+    onsubmit={submit}
+    oncancel={submit}
+>
+</Input>
+{:else}
+<button onclick={() => test = true}>test</button>
+{/if}

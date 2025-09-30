@@ -19,6 +19,7 @@
 		label?: string;
 		description?: string;
 		icon?: Snippet;
+		autofocus?: boolean;
 	};
 
 	let {
@@ -35,6 +36,7 @@
 		label,
 		description,
 		icon,
+		autofocus = false,
 		...restProps
 	}: Props = $props();
 
@@ -62,19 +64,11 @@
 
 	onMount(() => { 
 		self.type = initial_type;
+		if(autofocus){
+			focused = true;
+			self.focus();
+		}
 	});
-
-	function _onblur(e: any) {
-		if (skipBlur) {
-			skipBlur = false;
-			return;
-		}
-		if (onblur != undefined) {
-			onblur(e)
-		} else if (oncancel) {
-			oncancel(value)
-		}
-	}
 
 </script>
 
@@ -82,17 +76,23 @@
 	{#if label}
 		<h5 class:focused>{label}</h5>
 	{/if}
-	<div class="Input">
+	<div class={["Input", size]} class:focused onclick={() => self.focus()}>
 		<input
 			bind:this={self}
-			bind:focused
 			bind:value
 			{placeholder}
 			{onchange}
-			onblur={_onblur}
+			onblur={(e: any) => {
+				focused = false;
+				if (!skipBlur){
+					if (oncancel) { oncancel(value) }
+				} else {
+					skipBlur = false;
+				}
+			}}
 			onkeydown={handleKey}
-			class={[variant, size]}
-			{...restProps}
+			onclick={() => focused = true}
+			class={[variant]}
 		/>
 		{#if !!icon}
 			<div
@@ -138,11 +138,30 @@
 		display:contents;
 	}
 	.Input {
-		position: relative;
+		// position: relative;
+		cursor:text;
 		display:contents;
+		display: flex;
+		flex-direction: row-reverse;
+		border: 1px solid var(--border-color);
+		border-radius: var(--border-radius-s);
+		margin-block: var(--padding-xs);
+		&.s {
+			padding: var(--padding-xs);
+		}
+		&.m {
+			padding: var(--padding-s);
+		}
+		&.l {
+			padding: var(--padding-m);
+		}
+
+		&.focused {
+			border-color: var(--text-color);
+		}
 
 		&:has(.icon) input {
-			padding-left: 2.35rem;
+			padding-left: .5rem;
 		}
 
 		.password-btn {
@@ -159,9 +178,9 @@
 
 		.icon,
 		.password-btn {
-			position: absolute;
-			top: 12.5%;
-			height: 75%;
+			// position: absolute;
+			// top: 12.5%;
+			// height: 75%;
 			width: 2.5rem;
 			align-items: center;
 			justify-content: center;
@@ -194,19 +213,8 @@
 		outline: none;
 		width: 100%;
 		box-sizing: border-box;
+		border: none;
 		// height: min-content;
-		border: 1px solid var(--border-color);
-		border-radius: var(--border-radius-s);
-		margin-block: var(--padding-xs);
-		&.s {
-			padding: var(--padding-s);
-		}
-		&.m {
-			padding: var(--padding-m);
-		}
-		&.l {
-			padding: var(--padding-l);
-		}
 	}
 	input:focus {
 		border-color: var(--text-color);

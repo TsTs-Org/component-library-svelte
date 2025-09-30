@@ -6,6 +6,7 @@
 	type Variant = "ghost" | "bordered" | "colored";
 	type Size = "s" | "m" | "x";
 	type Props = {
+		this?: HTMLTextAreaElement;
 		onchange?: ChangeEventHandler<HTMLTextAreaElement>;
 		value?: string;
 		placeholder?: string;
@@ -19,6 +20,7 @@
 	let {
 		onchange = () => {},
 		value = $bindable(),
+		this: _this = $bindable(),
 		placeholder,
 		variant = "ghost",
 		size = "m",
@@ -37,6 +39,7 @@
 		<h5 class:focused>{label}</h5>
 	{/if}
 	<textarea
+		bind:this={_this}
 		bind:focused
 		bind:value
 		{placeholder}

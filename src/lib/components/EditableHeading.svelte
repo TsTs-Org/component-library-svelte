@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-
+	import { createEventDispatcher, onMount } from "svelte";
 
 	type Props = {
         tag: "h1" | "h2" | "h3" | "h4" | "h5",
@@ -9,6 +8,7 @@
         editing?: boolean | undefined;
         oncancel?: Function;
         onsubmit?: Function;
+        globalClasses?: string[];
 	};
 
 	let {
@@ -18,10 +18,11 @@
         editing = $bindable(undefined),
         oncancel = undefined,
         onsubmit = undefined,
+        globalClasses = [],
 		...restProps
 	}: Props = $props();
 
-
+    let self: HTMLInputElement;
     let skipBlur = $state(false);
     let editableManagedExternal = false;
     onMount(() => {
@@ -46,12 +47,18 @@
         } 
     }
 
+    $effect(() => {
+        if (editing) {
+            self.focus();
+        }
+    })
+
 </script>
 
 {#if editing}
     <input 
-        class={["__editable_element", tag]}
-        autofocus 
+        bind:this={self}
+        class={["__editable_element", tag, ...globalClasses]}
         onkeydown={(e: KeyboardEvent) => {
             handleKey(e)
         }}
@@ -68,7 +75,7 @@
 {:else}
     <svelte:element
         this={tag}
-        class="__editable_element"
+        class={["__editable_element", ...globalClasses]}
         class:empty={value == ""}
         onclick={() =>{
             setEditable(true)

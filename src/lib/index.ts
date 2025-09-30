@@ -37,7 +37,7 @@ import Button from "./components/Button.svelte";
 import Card from "./components/Card.svelte";
 import Checkbox from "./components/Checkbox.svelte";
 import Editable from "./components/Editable.svelte";
-import EditableH1 from "./components/EditableHeading.svelte";
+import EditableHeading from "./components/EditableHeading.svelte";
 import Icon from "./components/Icon.svelte";
 import Input from "./components/Input.svelte";
 import Loader from "./components/Loader.svelte";
@@ -91,7 +91,7 @@ export {
 	CalendarSingleSelect,
 	Button,
 	Editable,
-	EditableH1,
+	EditableHeading,
 	Card,
 	Checkbox,
 	Icon,
