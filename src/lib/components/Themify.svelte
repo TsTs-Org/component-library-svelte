@@ -75,7 +75,10 @@
 	export const theme = writable(defaults);
 
 	function applyTheme(themeObj: any) {
-		const values = themeObj.lightMode ? themeObj.lightValues : themeObj.darkValues;
+		let values = themeObj.lightMode ? themeObj.lightValues : themeObj.darkValues;
+		if (values == undefined) {
+			values = themeObj.lightMode ? modeValues.lightValues : modeValues.darkValues;
+		}
 
 		themeValues.forEach((key) => {
 			const cssVar = `--${key.replaceAll("_", "-")}`;
