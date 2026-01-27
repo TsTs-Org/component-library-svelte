@@ -13,6 +13,7 @@
 		children?: Snippet;
         group?: Number;
         identifier: String;
+        dontHandleMove?: boolean;
     } & HTMLAttributes<any>;
 
 	let {
@@ -20,6 +21,7 @@
 		children,
         group,
         identifier,
+        dontHandleMove = false,
 		...restProps
 	}: Props = $props();
 
