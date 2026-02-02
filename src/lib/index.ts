@@ -52,6 +52,10 @@ import ThemeModeButton from "./components/ThemeModeButton.svelte";
 import Themify from "./components/Themify.svelte";
 import Calendar from "./components/Calendar/Calendar.svelte";
 import CalendarSingleSelect from "./components/Calendar/CalendarSingleSelect.svelte";
+import AutoGenerateTriggers from "./components/Tabs/AutoGenerateTriggers.svelte";
+import TabContent from "./components/Tabs/TabContent.svelte";
+import TabTrigger from "./components/Tabs/TabTrigger.svelte";
+import Tabs from "./components/Tabs/Tabs.svelte";
 
 export {
 	Accordion,
@@ -83,10 +87,10 @@ export {
 	TableHead,
 	TableHeader,
 	TableRow,
-	// AutoGenerateTriggers,
-	// TabContent,
-	// Tabs,
-	// TabTrigger,
+	AutoGenerateTriggers,
+	TabContent,
+	Tabs,
+	TabTrigger,
 	Calendar,
 	CalendarSingleSelect,
 	Button,

@@ -16,7 +16,7 @@
 	}
 
 	function isSelected(): boolean {
-		return tabState.visibleTabs.has(tabIdentifier);
+		return tabState.isVisible(tabIdentifier);
 	}
 </script>
 

@@ -26,6 +26,10 @@
 			this.registeredTabs = this.registeredTabs.filter((tab) => tab !== tabIdentifierToRemove);
 		}
 
+		isVisible(tabIdentifier: string): boolean {
+			return this.visibleTabs.has(tabIdentifier);
+		}
+
 		setVisibility(tabIdentifier: string, state: boolean): void {
 			// TODO: this could be the place to hook into for multiple tabs at once
 
