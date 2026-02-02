@@ -2,9 +2,15 @@
 
 # Use the library
 
+## Documentation
+
+For documentation of components take a look at the [storybook](https://tsts-org.github.io/component-library-svelte/).
+
+## Installing
+
 Add this to your `~/.npmrc`:
 
-```
+```.npmrc
 @tsts-org:registry=https://npm.pkg.github.com/
 //npm.pkg.github.com/:_authToken=
 ```
@@ -14,7 +20,7 @@ This makes npm use the github package registry for every package from the `@tsts
 
 Afterwards install the package via
 
-```
+```sh
 npm install @tsts-org/component-library-svelte
 ```
 
@@ -30,3 +36,7 @@ Please remember to clean it up and don't commit changes you've made to this path
 
 `npm run storybook`
 displays storybook in the way the repository will be deployed to github pages later on.
+
+## Adding new components
+
+make sure to add newly created components to the `src/lib/index.ts` file to make them available.
