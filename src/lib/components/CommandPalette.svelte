@@ -41,7 +41,6 @@
 	function runCommand(command: [string, CommandValue]) {
 		command[1].commandFunction();
 		searchTerm = "";
-		// open = false;
 		paletteState.open = false;
 	}
 

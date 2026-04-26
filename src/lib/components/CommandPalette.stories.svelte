@@ -42,6 +42,7 @@
 	let lastCommand: string | null = $state(null);
 </script>
 
+<!-- FIXME: initial command of storybook isn't passed here. this is because this made the function changing the "lastCommand"-state stop working. Therefore the "handle" in the storybook ui doesn't actually do anything -->
 <Story
 	name="Default"
 	args={{ initialCommands }}
@@ -56,9 +57,9 @@
 			or using the default shortcut
 			<kbd>Ctrl</kbd>+<kbd>P</kbd></span
 		>
-		<!-- {#if lastCommand != null} -->
-		<div>command ran: {lastCommand}</div>
-		<!-- {/if} -->
+		{#if lastCommand != null}
+			<div>command ran: {lastCommand}</div>
+		{/if}
 		<CommandPalette {initialCommands}></CommandPalette>
 	{/snippet}
 </Story>
