@@ -56,6 +56,7 @@ import AutoGenerateTriggers from "./components/Tabs/AutoGenerateTriggers.svelte"
 import TabContent from "./components/Tabs/TabContent.svelte";
 import TabTrigger from "./components/Tabs/TabTrigger.svelte";
 import Tabs from "./components/Tabs/Tabs.svelte";
+import CommandPalette from "./components/CommandPalette.svelte";
 
 export {
 	Accordion,
@@ -110,6 +111,7 @@ export {
 	Textarea,
 	ThemeModeButton,
 	Themify,
+	CommandPalette,
 };
 
 // ----- Export Blocks ------
